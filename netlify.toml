@@ -6,21 +6,18 @@
   from = "https://www.merritts-auto-recycling.com/*"
   to = "https://merritts-auto-recycling.com/:splat"
   status = 301
-  force = true
 
 # Also handle non-HTTPS www version
 [[redirects]]
   from = "http://www.merritts-auto-recycling.com/*"
   to = "https://merritts-auto-recycling.com/:splat"
   status = 301
-  force = true
 
-# Force HTTPS for the canonical domain
+# Force HTTPS for the canonical domain (only for non-HTTPS requests)
 [[redirects]]
   from = "http://merritts-auto-recycling.com/*"
   to = "https://merritts-auto-recycling.com/:splat"
   status = 301
-  force = true
 
 [[headers]]
   for = "/*"
