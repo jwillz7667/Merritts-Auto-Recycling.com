@@ -1,10 +1,26 @@
 [build]
   publish = "/"
   
+# Domain redirects - redirect www version to non-www
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "https://www.merritts-auto-recycling.com/*"
+  to = "https://merritts-auto-recycling.com/:splat"
+  status = 301
+  force = true
+
+# Also handle non-HTTPS www version
+[[redirects]]
+  from = "http://www.merritts-auto-recycling.com/*"
+  to = "https://merritts-auto-recycling.com/:splat"
+  status = 301
+  force = true
+
+# Force HTTPS for the canonical domain
+[[redirects]]
+  from = "http://merritts-auto-recycling.com/*"
+  to = "https://merritts-auto-recycling.com/:splat"
+  status = 301
+  force = true
 
 [[headers]]
   for = "/*"
