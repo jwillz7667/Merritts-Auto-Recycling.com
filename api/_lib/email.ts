@@ -46,6 +46,61 @@ const SITE_URL = 'https://merritts-auto-recycling.com';
 const PHONE_DISPLAY = '763-533-2775';
 const PHONE_TEL = '+17635332775';
 
+/**
+ * Email client dark-mode handling.
+ *
+ * Why: iOS Mail and Gmail (Android, iOS app, web) auto-invert or auto-tint
+ * white text in dark mode. White text on our intentionally-dark header
+ * (gradient charcoal → charcoalMid) gets darkened to ~#777, making it
+ * unreadable. Saturated colors (lime `#a9e200`) survive untouched.
+ *
+ * Strategy:
+ *  1. Declare `color-scheme: light dark` so modern clients (Apple Mail,
+ *     iOS Mail 13+, Outlook 2021+) know we explicitly support both modes
+ *     and stop applying their own transformations.
+ *  2. `@media (prefers-color-scheme: dark)` rules with `!important` win
+ *     against inline styles in Apple Mail / iOS Mail.
+ *  3. Gmail's dark mode ignores `prefers-color-scheme` but exposes the
+ *     proprietary `[data-ogsc]` (foreground) and `[data-ogsb]` (background)
+ *     attribute hooks. Class targets `.dm-light-text` / `.dm-muted-text`
+ *     are referenced from both media queries and `[data-ogsc]` rules.
+ *  4. The "u + .body" prefix is the established Gmail-specific selector
+ *     trick — `<u>` only exists in Gmail's rendered shadow DOM, so the
+ *     rule scopes purely to Gmail without affecting other clients.
+ */
+const DARK_MODE_STYLE = `<style type="text/css">
+  :root { color-scheme: light dark; supported-color-schemes: light dark; }
+
+  @media (prefers-color-scheme: dark) {
+    .dm-light-text { color: #ffffff !important; }
+    .dm-muted-text { color: #d1d5db !important; }
+    .dm-accent-text { color: ${BRAND.lime} !important; }
+    .dm-dark-bg { background-color: ${BRAND.charcoal} !important; }
+  }
+
+  u + .body .dm-light-text,
+  [data-ogsc] .dm-light-text { color: #ffffff !important; }
+  u + .body .dm-muted-text,
+  [data-ogsc] .dm-muted-text { color: #d1d5db !important; }
+  u + .body .dm-accent-text,
+  [data-ogsc] .dm-accent-text { color: ${BRAND.lime} !important; }
+</style>`;
+
+const COLOR_SCHEME_META = `<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">`;
+
+/**
+ * Logo block. PNG over WebP/AVIF — older Outlook and Apple Mail still don't
+ * render WebP. 720×456 source at /images/optimized/logo-green.png, displayed
+ * at 180×114. Explicit dimensions prevent CLS while the image loads.
+ *
+ * `display:block` + `border:0` + `outline:none` is the standard Outlook
+ * defense — without it, Outlook adds a 1px border and underline link styling
+ * when the logo is wrapped in an anchor.
+ */
+const LOGO_URL = `${SITE_URL}/images/optimized/logo-green.png`;
+const LOGO_IMG = `<img src="${LOGO_URL}" alt="Merritt's Auto Recycling" width="180" height="114" style="display:block;border:0;outline:none;text-decoration:none;max-width:180px;height:auto;margin:0 auto;" border="0">`;
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, '&amp;')
@@ -93,13 +148,17 @@ function renderHtml(ctx: EmailContext): string {
   const title = FORM_TITLES[ctx.formType];
 
   return `<!doctype html>
-<html><head><meta charset="utf-8"><title>${escapeHtml(title)}</title></head>
-<body style="margin:0;padding:24px;background:#f9fafb;">
+<html><head><meta charset="utf-8"><title>${escapeHtml(title)}</title>
+${COLOR_SCHEME_META}
+${DARK_MODE_STYLE}
+</head>
+<body class="body" style="margin:0;padding:24px;background:#f9fafb;">
   <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid ${BRAND.border};">
     <tr>
-      <td style="padding:24px;background:${BRAND.charcoal};color:#fff;font-family:system-ui,sans-serif;">
-        <h1 style="margin:0;font-size:18px;color:${BRAND.lime};">${escapeHtml(title)}</h1>
-        <p style="margin:6px 0 0 0;font-size:14px;opacity:0.9;">Merritt's Auto Recycling — website</p>
+      <td class="dm-dark-bg" style="padding:24px;background:${BRAND.charcoal};color:#ffffff;font-family:system-ui,sans-serif;">
+        <a href="${SITE_URL}" style="text-decoration:none;display:inline-block;">${LOGO_IMG}</a>
+        <h1 class="dm-accent-text" style="margin:16px 0 0 0;font-size:18px;color:${BRAND.lime};">${escapeHtml(title)}</h1>
+        <p class="dm-light-text" style="margin:6px 0 0 0;font-size:14px;color:#ffffff;opacity:0.9;">Merritt's Auto Recycling — website</p>
       </td>
     </tr>
     <tr>
@@ -208,14 +267,18 @@ function renderLeadHtml(ctx: CallbackEmailContext): string {
           .join('');
 
   return `<!doctype html>
-<html><head><meta charset="utf-8"><title>New Cash-Calculator Callback Request</title></head>
-<body style="margin:0;padding:24px;background:#f9fafb;">
+<html><head><meta charset="utf-8"><title>New Cash-Calculator Callback Request</title>
+${COLOR_SCHEME_META}
+${DARK_MODE_STYLE}
+</head>
+<body class="body" style="margin:0;padding:24px;background:#f9fafb;">
   <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:680px;margin:0 auto;background:#ffffff;border-radius:10px;overflow:hidden;border:1px solid ${BRAND.border};">
     <tr>
-      <td style="padding:24px;background:linear-gradient(135deg,${BRAND.charcoal} 0%,${BRAND.charcoalMid} 100%);color:#fff;font-family:system-ui,sans-serif;">
-        <p style="margin:0 0 6px 0;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:${BRAND.lime};font-weight:600;">Callback request</p>
-        <h1 style="margin:0;font-size:22px;color:#fff;font-weight:700;">${escapeHtml(customer.name)} wants a direct quote</h1>
-        <p style="margin:8px 0 0 0;font-size:14px;color:#d1d5db;">Preliminary range from the on-site calculator: <strong style="color:${BRAND.lime};">${escapeHtml(quote.display)}</strong></p>
+      <td class="dm-dark-bg" style="padding:24px;background:linear-gradient(135deg,${BRAND.charcoal} 0%,${BRAND.charcoalMid} 100%);color:#ffffff;font-family:system-ui,sans-serif;">
+        <a href="${SITE_URL}" style="text-decoration:none;display:inline-block;margin-bottom:14px;">${LOGO_IMG}</a>
+        <p class="dm-accent-text" style="margin:0 0 6px 0;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:${BRAND.lime};font-weight:600;">Callback request</p>
+        <h1 class="dm-light-text" style="margin:0;font-size:22px;color:#ffffff;font-weight:700;">${escapeHtml(customer.name)} wants a direct quote</h1>
+        <p class="dm-muted-text" style="margin:8px 0 0 0;font-size:14px;color:#d1d5db;">Preliminary range from the on-site calculator: <strong class="dm-accent-text" style="color:${BRAND.lime};">${escapeHtml(quote.display)}</strong></p>
       </td>
     </tr>
 
@@ -378,14 +441,18 @@ Referer:   ${ctx.referer ?? 'unknown'}
 function renderConfirmationHtml(ctx: CallbackEmailContext): string {
   const { customer, vehicle, quote } = ctx;
   return `<!doctype html>
-<html><head><meta charset="utf-8"><title>We received your callback request — Merritt's Auto Recycling</title></head>
-<body style="margin:0;padding:24px;background:#f9fafb;">
+<html><head><meta charset="utf-8"><title>We received your callback request — Merritt's Auto Recycling</title>
+${COLOR_SCHEME_META}
+${DARK_MODE_STYLE}
+</head>
+<body class="body" style="margin:0;padding:24px;background:#f9fafb;">
   <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:10px;overflow:hidden;border:1px solid ${BRAND.border};">
     <tr>
-      <td style="padding:32px 24px;background:linear-gradient(135deg,${BRAND.charcoal} 0%,${BRAND.charcoalMid} 100%);color:#fff;font-family:system-ui,sans-serif;text-align:center;">
-        <p style="margin:0 0 8px 0;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:${BRAND.lime};font-weight:700;">We got your request</p>
-        <h1 style="margin:0;font-size:26px;color:#fff;font-weight:700;line-height:1.2;">Thanks, ${escapeHtml(customer.name.split(' ')[0] ?? customer.name)} — we'll call you shortly.</h1>
-        <p style="margin:14px 0 0 0;font-size:15px;color:#d1d5db;line-height:1.5;">Brad or someone on the team will reach out to ${escapeHtml(customer.phone)} to confirm pickup and lock in your final cash offer.</p>
+      <td class="dm-dark-bg" style="padding:32px 24px;background:linear-gradient(135deg,${BRAND.charcoal} 0%,${BRAND.charcoalMid} 100%);color:#ffffff;font-family:system-ui,sans-serif;text-align:center;">
+        <a href="${SITE_URL}" style="text-decoration:none;display:inline-block;margin-bottom:18px;">${LOGO_IMG}</a>
+        <p class="dm-accent-text" style="margin:0 0 8px 0;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:${BRAND.lime};font-weight:700;">We got your request</p>
+        <h1 class="dm-light-text" style="margin:0;font-size:26px;color:#ffffff;font-weight:700;line-height:1.2;">Thanks, ${escapeHtml(customer.name.split(' ')[0] ?? customer.name)} — we'll call you shortly.</h1>
+        <p class="dm-muted-text" style="margin:14px 0 0 0;font-size:15px;color:#d1d5db;line-height:1.5;">Brad or someone on the team will reach out to ${escapeHtml(customer.phone)} to confirm pickup and lock in your final cash offer.</p>
       </td>
     </tr>
 
