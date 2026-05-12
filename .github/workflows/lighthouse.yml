@@ -1,0 +1,50 @@
+name: Lighthouse
+
+# Performance gate. Runs on demand and weekly against production. Each
+# representative page (homepage, contact, faq, testimonials, a placemark,
+# a blog post) must clear the budgets in scripts/lighthouse-check.mts.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 11 * * 1' # Mondays 11:00 UTC
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '20.19.0'
+
+jobs:
+  lighthouse:
+    name: Lighthouse CI gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Run Lighthouse
+        env:
+          LIGHTHOUSE_BASE_URL: https://merritts-auto-recycling.com
+        run: npm run lighthouse
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: lighthouse-reports/
+          retention-days: 14

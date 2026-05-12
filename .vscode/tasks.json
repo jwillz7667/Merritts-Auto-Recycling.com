@@ -1,0 +1,103 @@
+{
+  // Workspace tasks — Cmd-Shift-B picks the default build task. Anything
+  // long-running (vercel dev, lighthouse) is marked as a background problem
+  // matcher so VS Code doesn't hang waiting for completion.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build: all",
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": [],
+      "group": { "kind": "build", "isDefault": true },
+      "detail": "Run the full content + asset pipeline."
+    },
+    {
+      "label": "build: placemarks",
+      "type": "npm",
+      "script": "build:placemarks",
+      "problemMatcher": [],
+      "group": "build",
+      "detail": "Inject city-specific content + JSON-LD into 53 placemarks."
+    },
+    {
+      "label": "build: shared",
+      "type": "npm",
+      "script": "build:shared",
+      "problemMatcher": [],
+      "group": "build",
+      "detail": "Re-synchronize header/footer/scripts across all pages."
+    },
+    {
+      "label": "build: blog",
+      "type": "npm",
+      "script": "build:blog",
+      "problemMatcher": [],
+      "group": "build",
+      "detail": "Refresh blog hub + post pages from data/blog-posts.json."
+    },
+    {
+      "label": "build: sitemap",
+      "type": "npm",
+      "script": "build:sitemap",
+      "problemMatcher": [],
+      "group": "build",
+      "detail": "Regenerate sitemap.xml from disk + git lastmod."
+    },
+    {
+      "label": "build: llms",
+      "type": "npm",
+      "script": "build:llms",
+      "problemMatcher": [],
+      "group": "build",
+      "detail": "Regenerate llms.txt + llms-full.txt."
+    },
+    {
+      "label": "validate: schema",
+      "type": "npm",
+      "script": "validate",
+      "problemMatcher": [],
+      "group": { "kind": "test", "isDefault": true },
+      "detail": "Validate every JSON-LD block across all HTML pages."
+    },
+    {
+      "label": "typecheck",
+      "type": "npm",
+      "script": "typecheck",
+      "problemMatcher": ["$tsc"],
+      "group": "test",
+      "detail": "tsc --noEmit"
+    },
+    {
+      "label": "lint",
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": ["$eslint-stylish"],
+      "group": "test"
+    },
+    {
+      "label": "format",
+      "type": "npm",
+      "script": "format",
+      "problemMatcher": [],
+      "detail": "Prettier --write across the workspace."
+    },
+    {
+      "label": "lighthouse",
+      "type": "npm",
+      "script": "lighthouse",
+      "problemMatcher": [],
+      "group": "test",
+      "detail": "Lighthouse CI gate against the local server."
+    },
+    {
+      "label": "dev: vercel",
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "detail": "vercel dev — serverless functions + static site on localhost."
+    }
+  ]
+}

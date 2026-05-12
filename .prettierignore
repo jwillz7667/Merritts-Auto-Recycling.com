@@ -1,0 +1,13 @@
+node_modules
+.vercel
+dist
+build
+coverage
+images
+iconfont
+css/plugins
+js/plugins
+*.min.js
+*.min.css
+placemarks
+sitemap.xml

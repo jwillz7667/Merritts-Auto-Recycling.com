@@ -1,0 +1,103 @@
+{
+  // Format on save, with Prettier as the formatter and ESLint as a fixer.
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+
+  // EditorConfig governs indentation — VS Code should defer to it.
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+
+  // Per-language overrides — HTML and CSS use tabs to match the legacy
+  // markup in this repo.
+  "[html]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
+  },
+
+  // TypeScript — use the workspace version so everyone is on the same tsc.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+
+  // ESLint — validate all script extensions used in this project.
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+
+  // Files explorer — hide derived assets to reduce noise.
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.vercel": true,
+    "**/.eslintcache": true,
+    "**/*.tsbuildinfo": true
+  },
+
+  // Search — exclude vendored and generated artifacts so cmd-shift-F is useful.
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/package-lock.json": true,
+    "**/.vercel": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/images/optimized": true,
+    "**/css/plugins": true,
+    "**/js/plugins": true,
+    "**/iconfont": true,
+    "**/llms-full.txt": true,
+    "sitemap.xml": true
+  },
+
+  // Spell-check (cspell) — ignore generated and vendored.
+  "cSpell.enableFiletypes": ["html", "typescript", "javascript", "markdown"],
+
+  // Tailwind off — this project uses Bootstrap 3.
+  "tailwindCSS.includeLanguages": {},
+
+  // Git — clean working tree feedback in the gutter.
+  "git.autofetch": true,
+  "git.enableSmartCommit": false,
+  "git.confirmSync": false,
+
+  // Render meaningful whitespace and indentation guides.
+  "editor.renderWhitespace": "boundary",
+  "editor.guides.bracketPairs": "active",
+  "editor.bracketPairColorization.enabled": true,
+
+  // Prettier — point at the workspace config.
+  "prettier.configPath": ".prettierrc",
+  "prettier.requireConfig": true
+}

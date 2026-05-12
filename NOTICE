@@ -1,0 +1,131 @@
+Merritt's Auto Recycling Website
+Copyright (c) 2026 Viral Ventures LLC. All rights reserved.
+
+This product is licensed under the terms of the PROPRIETARY SOFTWARE
+LICENSE AGREEMENT contained in the file LICENSE in the root of this
+repository. See LICENSE for the full terms and conditions.
+
+================================================================================
+THIRD-PARTY COMPONENTS
+================================================================================
+
+This product incorporates the following third-party open-source software,
+each of which is governed by its own license. Inclusion of these components
+in this product does not affect the proprietary status of the rest of the
+Software, which remains the exclusive property of Viral Ventures LLC.
+
+--------------------------------------------------------------------------------
+Bootstrap (front-end framework)
+  License: MIT
+  https://github.com/twbs/bootstrap
+
+jQuery (DOM library)
+  License: MIT
+  https://github.com/jquery/jquery
+
+Slick Carousel (slider plugin)
+  License: MIT
+  https://github.com/kenwheeler/slick
+
+jQuery Validate (form validation plugin)
+  License: MIT
+  https://github.com/jquery-validation/jquery-validation
+
+Magnific Popup (lightbox plugin)
+  License: MIT
+  https://github.com/dimsemenov/Magnific-Popup
+
+Waypoints (scroll trigger library)
+  License: MIT
+  https://github.com/imakewebthings/waypoints
+
+jQuery countTo (counter animation plugin)
+  License: MIT
+  https://github.com/mhuggins/jquery-countTo
+
+Moment.js (date utility)
+  License: MIT
+  https://github.com/moment/moment
+
+Bootstrap Datetimepicker
+  License: MIT
+  https://github.com/Eonasdan/tempus-dominus
+
+Animate.css
+  License: MIT (Hunter Heaps / Daniel Eden)
+  https://github.com/animate-css/animate.css
+
+Bootstrap Submenu
+  License: MIT
+  https://github.com/vsn4ik/bootstrap-submenu
+
+--------------------------------------------------------------------------------
+Build & runtime dependencies (Node packages)
+
+Resend SDK
+  License: MIT
+  https://github.com/resend/resend-node
+
+Zod (schema validation)
+  License: MIT
+  https://github.com/colinhacks/zod
+
+Sharp (image processing)
+  License: Apache-2.0
+  https://github.com/lovell/sharp
+
+TypeScript
+  License: Apache-2.0
+  https://github.com/microsoft/TypeScript
+
+ESLint
+  License: MIT
+  https://github.com/eslint/eslint
+
+Prettier
+  License: MIT
+  https://github.com/prettier/prettier
+
+tsx (TypeScript execute)
+  License: MIT
+  https://github.com/privatenumber/tsx
+
+Lighthouse (performance auditor)
+  License: Apache-2.0
+  https://github.com/GoogleChrome/lighthouse
+
+Cheerio (server-side HTML parsing)
+  License: MIT
+  https://github.com/cheeriojs/cheerio
+
+Husky (git hooks)
+  License: MIT
+  https://github.com/typicode/husky
+
+Vercel CLI
+  License: Apache-2.0
+  https://github.com/vercel/vercel
+
+--------------------------------------------------------------------------------
+Fonts
+
+Muli (typeface, self-hosted subset)
+  License: SIL Open Font License 1.1
+  https://fonts.google.com/specimen/Muli
+
+--------------------------------------------------------------------------------
+Services consumed at runtime (no source code redistributed)
+
+  Vercel hosting platform
+  Cloudflare Turnstile (CAPTCHA)
+  Resend transactional email
+  Google Tag Manager / Google Analytics
+  Google Maps Platform
+  IndexNow (Bing / Yandex)
+
+--------------------------------------------------------------------------------
+For attribution questions or to report a missing entry, contact:
+
+    Viral Ventures LLC
+    Maple Grove, Minnesota
+    United States of America

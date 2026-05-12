@@ -1,0 +1,47 @@
+{
+  "_meta": {
+    "note": "Source of truth for testimonials.html reviews. Each entry becomes a schema.org Review with itemReviewed pointing at the canonical #business @id."
+  },
+  "reviews": [
+    {
+      "author": "Mary K.",
+      "rating": 5,
+      "body": "My daughter's car was involved in a collision on I-35. It was taken to a repair shop in Brooklyn Park. I contacted Merritt's Auto Recycling, and they promptly arrived, paid me for the vehicle, and towed it away. Much appreciated!"
+    },
+    {
+      "author": "Terry W.",
+      "rating": 5,
+      "body": "I highly recommend Merritt's Auto Recycling to anyone looking to recycle their vehicle. When my SUV broke down, Brad arrived that same day, paid me in cash, and took it off my hands."
+    },
+    {
+      "author": "Mona F.",
+      "rating": 5,
+      "body": "I had an old car sitting in my garage in Bloomington, MN, that I just didn't know what to do with. I called Merritt's Auto Recycling, and they came out the next day. Not only did they tow it away for free, but they also gave me cash on the spot. The whole experience was fast and hassle-free."
+    },
+    {
+      "author": "Carie M.",
+      "rating": 5,
+      "body": "Fast and friendly service. Thanks for coming out so fast!"
+    },
+    {
+      "author": "Tom O.",
+      "rating": 5,
+      "body": "My car broke down at a grocery store in Coon Rapids, and Merritt's Auto Recycling was a lifesaver. They showed up promptly, handled all the details, and gave me a fair price for the car. It couldn't have been easier—I'd absolutely use their service again!"
+    },
+    {
+      "author": "T. Anderson",
+      "rating": 5,
+      "body": "I was in a rush to clear out my old car before the winter hit in Anoka. Merritt's Auto Recycling was quick to respond, picked it up the same day, and handed me cash on the spot. Their service was outstanding, and I'll be using them again in the future!"
+    },
+    {
+      "author": "Isaac B.",
+      "rating": 5,
+      "body": "I needed my junk car picked up in Maple Grove. They arrived on time, paid me the exact amount they had quoted, and made the whole process quick and easy."
+    },
+    {
+      "author": "Mark & Amy E.",
+      "rating": 5,
+      "body": "Our daughter's car broke down in Rogers and wasn't worth fixing. Merritt's Auto Recycling picked up the car within an hour! Could have been a stressful situation but, thankfully, the driver made it a pleasant experience. Couldn't be happier!"
+    }
+  ]
+}

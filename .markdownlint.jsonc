@@ -1,0 +1,15 @@
+{
+  // Sensible defaults — lenient on line length (long URLs are common) and
+  // permissive on heading style so README.md, CLAUDE.md, CONTRIBUTING.md
+  // can all coexist without churn.
+  "default": true,
+  "MD003": { "style": "atx" },
+  "MD007": { "indent": 2 },
+  "MD013": false,
+  "MD024": { "siblings_only": true },
+  "MD025": { "front_matter_title": "" },
+  "MD033": false,
+  "MD034": false,
+  "MD041": false,
+  "MD046": { "style": "fenced" },
+}

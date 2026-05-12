@@ -1,0 +1,16 @@
+{
+  "_doc": "Default alt text per image basename. Consumed by scripts/apply-images.mts as a fallback when a source <img> has an empty or missing alt attribute. Keys are the manifest key (relative path under images/ without extension variant), values are descriptive alt text.",
+  "alts": {
+    "logo-green": "Merritt's Auto Recycling logo",
+    "footer-tow-truck": "Merritt's Auto Recycling flatbed tow truck",
+    "banner-key": "Car keys and cash — sell your junk car for cash",
+    "img-car-move": "Tow truck hauling a junk car for free pickup",
+    "how-works-img-1": "Step 1: Contact Merritt's Auto Recycling for a quote",
+    "how-works-img-2": "Step 2: Receive an instant quote for your junk car",
+    "how-works-img-3": "Step 3: Schedule a free same-day pickup appointment",
+    "how-works-img-4": "Step 4: Get paid cash on the spot when we tow your car",
+    "slider/slide1": "Cash for junk cars in the Twin Cities — free same-day towing",
+    "slider/slide2": "Brad Emholtz, owner of Merritt's Auto Recycling",
+    "slider/slide3": "Junk car pickup and recycling in Minnesota"
+  }
+}

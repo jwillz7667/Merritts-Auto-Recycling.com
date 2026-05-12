@@ -1,0 +1,11 @@
+{
+  "{api,scripts}/**/*.{ts,mts,tsx}": ["prettier --write", "eslint --fix --max-warnings 0"],
+  "*.{ts,mts,tsx,mjs,cjs,js}": ["prettier --write"],
+  "*.{json,jsonc,yml,yaml,md}": ["prettier --write"],
+  "*.{html,htm}": ["prettier --write"],
+  "*.{css,scss}": ["prettier --write"],
+  "data/*.json": [
+    "prettier --write",
+    "node --experimental-vm-modules -e \"JSON.parse(require('fs').readFileSync(process.argv[1],'utf8'))\""
+  ]
+}

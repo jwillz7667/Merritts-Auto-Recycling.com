@@ -1,0 +1,57 @@
+version: 2
+
+# Dependency hygiene. npm gets a weekly bundled PR (security updates are
+# always immediate); GitHub Actions get a weekly bump as well so workflows
+# don't fall behind. Keep ignore list short and explicit.
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '11:00'
+      timezone: America/Chicago
+    open-pull-requests-limit: 10
+    versioning-strategy: increase
+    commit-message:
+      prefix: build
+      prefix-development: build
+      include: scope
+    labels:
+      - dependencies
+      - npm
+    groups:
+      eslint:
+        patterns:
+          - 'eslint*'
+          - '@typescript-eslint/*'
+      typescript:
+        patterns:
+          - 'typescript'
+          - 'tsx'
+      prettier:
+        patterns:
+          - 'prettier*'
+      commitlint:
+        patterns:
+          - '@commitlint/*'
+    ignore:
+      # Bootstrap 3 is intentionally pinned — site theme is built on it.
+      - dependency-name: bootstrap
+        versions: ['>=4.0.0']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '11:00'
+      timezone: America/Chicago
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: ci
+      include: scope
+    labels:
+      - dependencies
+      - github-actions

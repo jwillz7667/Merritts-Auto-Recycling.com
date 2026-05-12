@@ -1,0 +1,78 @@
+{
+  "global": [
+    {
+      "question": "How much cash will I get for my junk car?",
+      "answer": "The cash value depends on your vehicle's year, make, model, weight, condition, completeness, and current scrap-metal pricing. We pay top dollar based on current market rates and offer instant quotes by phone at 763-533-2775. Most junk cars in the Twin Cities range from $200 to $600+, with newer, heavier, or more complete vehicles fetching significantly more."
+    },
+    {
+      "question": "Do you really pay cash on the spot?",
+      "answer": "Yes. We pay cash directly to you at the time of pickup — no checks, no waiting periods, no holding fees. You hand over the keys, we hand over the cash."
+    },
+    {
+      "question": "Is towing really free?",
+      "answer": "Yes. When we buy your junk car, we tow it away for free anywhere in our Twin Cities service area. We never deduct towing costs from your cash payment."
+    },
+    {
+      "question": "Do I need a title to sell my junk car in Minnesota?",
+      "answer": "Generally yes, but we can often work with situations where a title is missing or damaged. Call 763-533-2775 and we'll walk through your specific situation. In Minnesota, you may need to apply for a bonded title or duplicate title for a clean sale, and we can guide you through the process."
+    },
+    {
+      "question": "Will you buy my car if it's not running?",
+      "answer": "Absolutely. Non-running, wrecked, flood-damaged, and inoperable vehicles are exactly what we specialize in. The car does not need to start or drive — we tow it away for free."
+    },
+    {
+      "question": "How fast can you pick up my junk car?",
+      "answer": "In most cases we can pick up the same day you call. Pickup typically happens within hours of confirming your quote, depending on your location in the Twin Cities and time of day."
+    },
+    {
+      "question": "What areas do you serve?",
+      "answer": "We serve the entire Twin Cities metro and outer suburbs including Hennepin, Anoka, Sherburne, Wright, Mille Lacs, Stearns, Benton, and Ramsey counties — over 50 cities including Minneapolis, Brooklyn Park, Maple Grove, Plymouth, Blaine, Coon Rapids, Anoka, Elk River, St. Cloud, and beyond."
+    },
+    {
+      "question": "Do I need to remove personal items or license plates before pickup?",
+      "answer": "Yes, please remove all personal belongings before our driver arrives, and remove your license plates (Minnesota requires plates be removed before transfer)."
+    },
+    {
+      "question": "What happens to my car after you pick it up?",
+      "answer": "We salvage usable parts for resale, then recycle the metal and dispose of fluids, batteries, and tires according to MPCA environmental standards. Roughly 80% of every vehicle we purchase is recycled."
+    },
+    {
+      "question": "Are you licensed and insured?",
+      "answer": "Yes. Merritt's Auto Recycling has been a licensed Minnesota auto recycler since 1988 and is fully insured for towing and salvage operations."
+    }
+  ],
+  "perCity": [
+    {
+      "id": "buy-junk-cars",
+      "question": "Do you buy junk cars in {city}, MN?",
+      "answer": "Yes — Merritt's Auto Recycling buys junk cars throughout {city} and all of {county}. We pay cash on the spot and tow your vehicle away for free, usually the same day you call. Call 763-533-2775 for an instant quote."
+    },
+    {
+      "id": "drive-time",
+      "question": "How fast can you pick up my junk car in {city}, MN?",
+      "answer": "Our yard sits roughly {miles} miles from {city}, so pickup typically happens within a few hours of your call — same-day in most cases. Call 763-533-2775 and we'll confirm a pickup window."
+    },
+    {
+      "id": "title",
+      "question": "Do I need a title to sell my junk car in {city}, Minnesota?",
+      "answer": "In most cases, yes — Minnesota generally requires a title to transfer ownership of a vehicle. If you've lost yours, we can walk you through getting a duplicate or bonded title at the DMV. Some non-titled situations can still be handled — call 763-533-2775 to discuss yours."
+    },
+    {
+      "id": "value",
+      "question": "How much is my junk car worth in {city}, MN?",
+      "answer": "Junk car values in {city} typically range from $200 to $600+, depending on the year, make, model, weight, completeness, and current scrap-metal pricing. Heavier vehicles, newer model years, and cars with intact catalytic converters bring higher offers. Call 763-533-2775 for a free instant quote on your specific vehicle."
+    }
+  ],
+  "perCounty": [
+    {
+      "id": "service-area",
+      "question": "What cities in {county} do you serve?",
+      "answer": "We service every city in {county}, MN — large and small. Call 763-533-2775 with your location and we'll confirm same-day pickup availability."
+    },
+    {
+      "id": "tow-fee",
+      "question": "Is there a towing fee for pickups in {county}?",
+      "answer": "No. Towing is always free throughout {county} — our quoted price is what you receive in cash, no deductions."
+    }
+  ]
+}

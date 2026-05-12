@@ -1,0 +1,674 @@
+{
+  "banner-bg.png": {
+    "source": "banner-bg.png",
+    "width": 100,
+    "height": 100,
+    "variants": [
+      {
+        "type": "image/png",
+        "path": "images/optimized/banner-bg.png",
+        "width": 100,
+        "height": 100,
+        "bytes": 4859
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/banner-bg.webp",
+        "width": 100,
+        "height": 100,
+        "bytes": 116
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/banner-bg.avif",
+        "width": 100,
+        "height": 100,
+        "bytes": 303
+      }
+    ]
+  },
+  "banner-key.png": {
+    "source": "banner-key.png",
+    "width": 370,
+    "height": 250,
+    "variants": [
+      {
+        "type": "image/png",
+        "path": "images/optimized/banner-key.png",
+        "width": 370,
+        "height": 250,
+        "bytes": 28441
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/banner-key.webp",
+        "width": 370,
+        "height": 250,
+        "bytes": 12930
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/banner-key.avif",
+        "width": 370,
+        "height": 250,
+        "bytes": 7431
+      }
+    ]
+  },
+  "block-bg-1.jpg": {
+    "source": "block-bg-1.jpg",
+    "width": 1920,
+    "height": 1000,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/block-bg-1.jpg",
+        "width": 1920,
+        "height": 1000,
+        "bytes": 94467
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/block-bg-1.webp",
+        "width": 1920,
+        "height": 1000,
+        "bytes": 57378
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/block-bg-1.avif",
+        "width": 1920,
+        "height": 1000,
+        "bytes": 31635
+      }
+    ]
+  },
+  "block-bg-2.jpg": {
+    "source": "block-bg-2.jpg",
+    "width": 1920,
+    "height": 1000,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/block-bg-2.jpg",
+        "width": 1920,
+        "height": 1000,
+        "bytes": 17551
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/block-bg-2.webp",
+        "width": 1920,
+        "height": 1000,
+        "bytes": 8938
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/block-bg-2.avif",
+        "width": 1920,
+        "height": 1000,
+        "bytes": 3452
+      }
+    ]
+  },
+  "border-hor.png": {
+    "source": "border-hor.png",
+    "width": 20,
+    "height": 2,
+    "variants": [
+      {
+        "type": "image/png",
+        "path": "images/optimized/border-hor.png",
+        "width": 20,
+        "height": 2,
+        "bytes": 149
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/border-hor.webp",
+        "width": 20,
+        "height": 2,
+        "bytes": 66
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/border-hor.avif",
+        "width": 20,
+        "height": 2,
+        "bytes": 303
+      }
+    ]
+  },
+  "border-vert.png": {
+    "source": "border-vert.png",
+    "width": 2,
+    "height": 20,
+    "variants": [
+      {
+        "type": "image/png",
+        "path": "images/optimized/border-vert.png",
+        "width": 2,
+        "height": 20,
+        "bytes": 148
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/border-vert.webp",
+        "width": 2,
+        "height": 20,
+        "bytes": 64
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/border-vert.avif",
+        "width": 2,
+        "height": 20,
+        "bytes": 303
+      }
+    ]
+  },
+  "coupon-bg.jpg": {
+    "source": "coupon-bg.jpg",
+    "width": 670,
+    "height": 190,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/coupon-bg.jpg",
+        "width": 670,
+        "height": 190,
+        "bytes": 4596
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/coupon-bg.webp",
+        "width": 670,
+        "height": 190,
+        "bytes": 2090
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/coupon-bg.avif",
+        "width": 670,
+        "height": 190,
+        "bytes": 1053
+      }
+    ]
+  },
+  "coupon-bg.png": {
+    "source": "coupon-bg.png",
+    "width": 198,
+    "height": 238,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/coupon-bg.jpg",
+        "width": 198,
+        "height": 238,
+        "bytes": 4596
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/coupon-bg.webp",
+        "width": 198,
+        "height": 238,
+        "bytes": 2090
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/coupon-bg.avif",
+        "width": 198,
+        "height": 238,
+        "bytes": 1053
+      }
+    ]
+  },
+  "footer-tow-truck.jpg": {
+    "source": "footer-tow-truck.jpg",
+    "width": 1600,
+    "height": 1070,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/footer-tow-truck.jpg",
+        "width": 1600,
+        "height": 1070,
+        "bytes": 272082
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/footer-tow-truck.webp",
+        "width": 1600,
+        "height": 1070,
+        "bytes": 282532
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/footer-tow-truck.avif",
+        "width": 1600,
+        "height": 1070,
+        "bytes": 205485
+      }
+    ]
+  },
+  "grey-bg-1.png": {
+    "source": "grey-bg-1.png",
+    "width": 100,
+    "height": 100,
+    "variants": [
+      {
+        "type": "image/png",
+        "path": "images/optimized/grey-bg-1.png",
+        "width": 100,
+        "height": 100,
+        "bytes": 4846
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/grey-bg-1.webp",
+        "width": 100,
+        "height": 100,
+        "bytes": 122
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/grey-bg-1.avif",
+        "width": 100,
+        "height": 100,
+        "bytes": 305
+      }
+    ]
+  },
+  "grey-bg.png": {
+    "source": "grey-bg.png",
+    "width": 60,
+    "height": 60,
+    "variants": [
+      {
+        "type": "image/png",
+        "path": "images/optimized/grey-bg.png",
+        "width": 60,
+        "height": 60,
+        "bytes": 1407
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/grey-bg.webp",
+        "width": 60,
+        "height": 60,
+        "bytes": 66
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/grey-bg.avif",
+        "width": 60,
+        "height": 60,
+        "bytes": 295
+      }
+    ]
+  },
+  "header-photo-bg.jpg": {
+    "source": "header-photo-bg.jpg",
+    "width": 1920,
+    "height": 341,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/header-photo-bg.jpg",
+        "width": 1920,
+        "height": 341,
+        "bytes": 17889
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/header-photo-bg.webp",
+        "width": 1920,
+        "height": 341,
+        "bytes": 9268
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/header-photo-bg.avif",
+        "width": 1920,
+        "height": 341,
+        "bytes": 4064
+      }
+    ]
+  },
+  "how-works-img-1.jpg": {
+    "source": "how-works-img-1.jpg",
+    "width": 270,
+    "height": 270,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/how-works-img-1.jpg",
+        "width": 270,
+        "height": 270,
+        "bytes": 9922
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/how-works-img-1.webp",
+        "width": 270,
+        "height": 270,
+        "bytes": 7992
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/how-works-img-1.avif",
+        "width": 270,
+        "height": 270,
+        "bytes": 7081
+      }
+    ]
+  },
+  "how-works-img-2.jpg": {
+    "source": "how-works-img-2.jpg",
+    "width": 270,
+    "height": 270,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/how-works-img-2.jpg",
+        "width": 270,
+        "height": 270,
+        "bytes": 9666
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/how-works-img-2.webp",
+        "width": 270,
+        "height": 270,
+        "bytes": 6756
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/how-works-img-2.avif",
+        "width": 270,
+        "height": 270,
+        "bytes": 5192
+      }
+    ]
+  },
+  "how-works-img-3.jpg": {
+    "source": "how-works-img-3.jpg",
+    "width": 270,
+    "height": 270,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/how-works-img-3.jpg",
+        "width": 270,
+        "height": 270,
+        "bytes": 10083
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/how-works-img-3.webp",
+        "width": 270,
+        "height": 270,
+        "bytes": 6434
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/how-works-img-3.avif",
+        "width": 270,
+        "height": 270,
+        "bytes": 4869
+      }
+    ]
+  },
+  "how-works-img-4.jpg": {
+    "source": "how-works-img-4.jpg",
+    "width": 270,
+    "height": 270,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/how-works-img-4.jpg",
+        "width": 270,
+        "height": 270,
+        "bytes": 15660
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/how-works-img-4.webp",
+        "width": 270,
+        "height": 270,
+        "bytes": 13082
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/how-works-img-4.avif",
+        "width": 270,
+        "height": 270,
+        "bytes": 11904
+      }
+    ]
+  },
+  "img-car-move.png": {
+    "source": "img-car-move.png",
+    "width": 745,
+    "height": 253,
+    "variants": [
+      {
+        "type": "image/png",
+        "path": "images/optimized/img-car-move.png",
+        "width": 745,
+        "height": 253,
+        "bytes": 63327
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/img-car-move.webp",
+        "width": 745,
+        "height": 253,
+        "bytes": 26560
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/img-car-move.avif",
+        "width": 745,
+        "height": 253,
+        "bytes": 14831
+      }
+    ]
+  },
+  "logo-green.png": {
+    "source": "logo-green.png",
+    "width": 720,
+    "height": 456,
+    "variants": [
+      {
+        "type": "image/png",
+        "path": "images/optimized/logo-green.png",
+        "width": 720,
+        "height": 456,
+        "bytes": 31601
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/logo-green.webp",
+        "width": 720,
+        "height": 456,
+        "bytes": 57912
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/logo-green.avif",
+        "width": 720,
+        "height": 456,
+        "bytes": 45377
+      }
+    ]
+  },
+  "slider/slide1.jpg": {
+    "source": "slider/slide1.jpg",
+    "width": 1920,
+    "height": 865,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/slider/slide1.jpg",
+        "width": 1920,
+        "height": 865,
+        "bytes": 77538
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/slider/slide1.webp",
+        "width": 1920,
+        "height": 865,
+        "bytes": 51048
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/slider/slide1.avif",
+        "width": 1920,
+        "height": 865,
+        "bytes": 35682
+      }
+    ]
+  },
+  "slider/slide2.jpg": {
+    "source": "slider/slide2.jpg",
+    "width": 1920,
+    "height": 865,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/slider/slide2.jpg",
+        "width": 1920,
+        "height": 865,
+        "bytes": 101584
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/slider/slide2.webp",
+        "width": 1920,
+        "height": 865,
+        "bytes": 59248
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/slider/slide2.avif",
+        "width": 1920,
+        "height": 865,
+        "bytes": 30123
+      }
+    ]
+  },
+  "slider/slide3.jpg": {
+    "source": "slider/slide3.jpg",
+    "width": 1920,
+    "height": 865,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/slider/slide3.jpg",
+        "width": 1920,
+        "height": 865,
+        "bytes": 136155
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/slider/slide3.webp",
+        "width": 1920,
+        "height": 865,
+        "bytes": 92278
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/slider/slide3.avif",
+        "width": 1920,
+        "height": 865,
+        "bytes": 65673
+      }
+    ]
+  },
+  "tabform-bg.jpg": {
+    "source": "tabform-bg.jpg",
+    "width": 460,
+    "height": 610,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/tabform-bg.jpg",
+        "width": 460,
+        "height": 610,
+        "bytes": 14979
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/tabform-bg.webp",
+        "width": 460,
+        "height": 610,
+        "bytes": 10722
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/tabform-bg.avif",
+        "width": 460,
+        "height": 610,
+        "bytes": 6793
+      }
+    ]
+  },
+  "testimonial-bg-1.jpg": {
+    "source": "testimonial-bg-1.jpg",
+    "width": 960,
+    "height": 345,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/testimonial-bg-1.jpg",
+        "width": 960,
+        "height": 345,
+        "bytes": 20896
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/testimonial-bg-1.webp",
+        "width": 960,
+        "height": 345,
+        "bytes": 16462
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/testimonial-bg-1.avif",
+        "width": 960,
+        "height": 345,
+        "bytes": 10330
+      }
+    ]
+  },
+  "testimonial-bg-2.jpg": {
+    "source": "testimonial-bg-2.jpg",
+    "width": 960,
+    "height": 345,
+    "variants": [
+      {
+        "type": "image/jpeg",
+        "path": "images/optimized/testimonial-bg-2.jpg",
+        "width": 960,
+        "height": 345,
+        "bytes": 8151
+      },
+      {
+        "type": "image/webp",
+        "path": "images/optimized/testimonial-bg-2.webp",
+        "width": 960,
+        "height": 345,
+        "bytes": 4638
+      },
+      {
+        "type": "image/avif",
+        "path": "images/optimized/testimonial-bg-2.avif",
+        "width": 960,
+        "height": 345,
+        "bytes": 2357
+      }
+    ]
+  }
+}
