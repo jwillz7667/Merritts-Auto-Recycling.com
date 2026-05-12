@@ -7,7 +7,20 @@ images
 iconfont
 css/plugins
 js/plugins
+css/fonts
 *.min.js
 *.min.css
 placemarks
 sitemap.xml
+
+# Vendored legacy theme code — pre-existing tabs/style, do not reformat.
+js/custom.js
+js/jquery.js
+js/plugins/**
+
+# Project root README — historical content, not maintained on prettier rules.
+readme.md
+README.md
+
+# Package-lock and lockfiles
+package-lock.json
