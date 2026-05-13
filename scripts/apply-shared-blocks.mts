@@ -292,7 +292,7 @@ async function main(): Promise<void> {
             : `/${page.slug}`,
     );
     html = activateSmsLinks(html);
-    html = addStickyMobileCall(html, business.phoneDisplay, business.phoneDisplay);
+    html = addStickyMobileCall(html, business.phoneDisplay, business.smsPhoneDisplay);
 
     html = replaceTitle(html, page.title);
     html = replaceMetaDescription(html, page.description);

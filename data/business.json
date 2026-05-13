@@ -11,6 +11,8 @@
   "reviewCount": 8,
   "phone": "+1-763-533-2775",
   "phoneDisplay": "763-533-2775",
+  "smsPhone": "+1-763-438-2116",
+  "smsPhoneDisplay": "763-438-2116",
   "smsEnabled": true,
   "email": "merrittsautorecycling@gmail.com",
   "address": {
@@ -27,13 +29,13 @@
   },
   "openingHours": [
     {
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
       "opens": "09:00",
       "closes": "18:00"
     }
   ],
-  "openingHoursDisplay": "Monday–Saturday 9:00 AM – 6:00 PM",
-  "closedDays": ["Sunday"],
+  "openingHoursDisplay": "Open Daily 9:00 AM – 6:00 PM",
+  "closedDays": [],
   "priceRange": "$$",
   "paymentAccepted": ["Cash"],
   "currenciesAccepted": "USD",

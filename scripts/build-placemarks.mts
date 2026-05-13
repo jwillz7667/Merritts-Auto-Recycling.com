@@ -124,7 +124,7 @@ async function main(): Promise<void> {
     next = insertQuoteCalculatorNavLink(next, 'relative');
     next = replaceAppointmentButtonWithQuoteCta(next, 'relative');
     next = activateSmsLinks(next);
-    next = addStickyMobileCall(next, business.phoneDisplay, business.phoneDisplay);
+    next = addStickyMobileCall(next, business.phoneDisplay, business.smsPhoneDisplay);
 
     next = replaceTitle(next, title);
     next = replaceMetaDescription(next, meta);

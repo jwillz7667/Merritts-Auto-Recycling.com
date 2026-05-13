@@ -483,7 +483,7 @@ ${DARK_MODE_STYLE}
       <td style="padding:0 24px 24px 24px;font-family:system-ui,sans-serif;text-align:center;">
         <p style="margin:0 0 12px 0;font-size:14px;color:${BRAND.muted};">Need to talk to us first?</p>
         <a href="tel:${PHONE_TEL}" style="display:inline-block;padding:14px 28px;background:${BRAND.lime};color:${BRAND.charcoal};text-decoration:none;border-radius:6px;font-weight:700;font-size:16px;letter-spacing:0.3px;">Call ${PHONE_DISPLAY}</a>
-        <p style="margin:12px 0 0 0;font-size:12px;color:${BRAND.muted};">Open Mon&ndash;Sat, 9 AM &ndash; 6 PM CT</p>
+        <p style="margin:12px 0 0 0;font-size:12px;color:${BRAND.muted};">Open daily, 9 AM &ndash; 6 PM CT</p>
       </td>
     </tr>
 
@@ -516,7 +516,7 @@ What happens next:
   3. We lock in the final cash offer and schedule pickup — usually same day or next business day.
   4. Our driver shows up with the tow truck and pays cash on the spot. Free towing, always.
 
-Need to talk to us first? Call ${PHONE_DISPLAY} — Mon-Sat, 9 AM - 6 PM CT.
+Need to talk to us first? Call ${PHONE_DISPLAY} — open daily, 9 AM - 6 PM CT.
 
 —
 Merritt's Auto Recycling

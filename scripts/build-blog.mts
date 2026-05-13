@@ -139,7 +139,7 @@ function renderHeader(): string {
 \t\t\t\t\t<div class="header-right">
 \t\t\t\t\t\t<button type="button" class="navbar-toggle"><i class="icon icon-lines-menu"></i></button>
 \t\t\t\t\t\t<div class="header-right-top">
-\t\t\t\t\t\t\t<div class="address">Monday-Saturday <span class="custom-color">9:00AM - 6:00PM</span></div>
+\t\t\t\t\t\t\t<div class="address">Open Daily <span class="custom-color">9:00AM - 6:00PM</span></div>
 \t\t\t\t\t\t\t<div class="appointment"><i class="icon-shape icon"></i><span>Appointment</span></div>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t\t<div class="header-right-bottom">
@@ -176,7 +176,7 @@ function renderFooter(): string {
 \t\t\t\t\t\t<h2 class="h-phone visible-xs">Call: <a class="number" style="text-decoration:none;" href="tel:+1-763-533-2775">763-533-2775</a></h2>
 \t\t\t\t\t</div>
 \t\t\t\t\t<div class="contact-info"><i class="icon icon-locate"></i>Mailing Address:<br>Merritt's Auto Recycling<br>3106 68th Ave N<br>Brooklyn Center, MN 55429<br><br><a class="color" href="tel:+1-763-533-2775">Call For Instant Vehicle Quote Now!</a></div>
-\t\t\t\t\t<div class="contact-info"><i class="icon icon-clock"></i>Monday-Saturday <span class="color">9:00AM - 6:00PM</span><br>Sunday Closed</div>
+\t\t\t\t\t<div class="contact-info"><i class="icon icon-clock"></i>Open Daily <span class="color">9:00AM - 6:00PM</span></div>
 \t\t\t\t\t<div class="contact-info visible-xs"><a class="color" href="/faq">FAQ</a> | <a class="color" href="/testimonials">Testimonials</a></div>
 \t\t\t\t\t<div class="social-links"><ul><li><a class="icon icon-facebook-logo" href="https://www.facebook.com/profile.php?id=61565403974405&sk=about/" target="_blank" rel="noopener"></a></li><li><a class="icon icon-interface-logo" href="/contact"></a></li></ul></div>
 \t\t\t\t</div>

@@ -59,6 +59,8 @@ export type Business = {
   reviewCount: number;
   phone: string;
   phoneDisplay: string;
+  smsPhone: string;
+  smsPhoneDisplay: string;
   smsEnabled: boolean;
   email: string;
   address: Address;

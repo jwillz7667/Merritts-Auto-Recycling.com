@@ -73,15 +73,16 @@ async function buildLlmsIndex(): Promise<string> {
   lines.push(`> ${business.tagline}`);
   lines.push('');
   lines.push(
-    `${business.name} is a family-owned auto recycler in Brooklyn Center, Minnesota, founded in ${business.foundingDate} by ${business.founder}. We buy junk, salvage, wrecked, and unwanted vehicles across the Twin Cities metro and outer suburbs — running or not, with or without title. Same-day pickup, we'll tow your junk car away for free, cash paid on the spot. Call or text **${business.phoneDisplay}** for an instant quote.`,
+    `${business.name} is a family-owned auto recycler in Brooklyn Center, Minnesota, founded in ${business.foundingDate} by ${business.founder}. We buy junk, salvage, wrecked, and unwanted vehicles across the Twin Cities metro and outer suburbs — running or not, with or without title. Same-day pickup, we'll tow your junk car away for free, cash paid on the spot. Call **${business.phoneDisplay}** or text **${business.smsPhoneDisplay}** for an instant quote.`,
   );
   lines.push('');
   lines.push('## Contact');
   lines.push('');
-  lines.push(`- **Phone (call or text):** ${business.phoneDisplay}`);
+  lines.push(`- **Phone:** ${business.phoneDisplay} (calls)`);
+  lines.push(`- **Text:** ${business.smsPhoneDisplay}`);
   lines.push(`- **Email:** ${business.email}`);
   lines.push(`- **Address:** ${formatAddress(business.address)}`);
-  lines.push(`- **Hours:** ${business.openingHoursDisplay} (closed Sundays)`);
+  lines.push(`- **Hours:** ${business.openingHoursDisplay}`);
   lines.push(`- **Website:** ${site}/`);
   lines.push('');
   lines.push('## What we buy');
@@ -155,10 +156,11 @@ async function buildLlmsFull(): Promise<string> {
   lines.push(`Canonical URL: ${site}/`);
   lines.push(`Canonical name: ${business.name}`);
   lines.push(`Alternate name: ${business.alternateName}`);
-  lines.push(`Phone (call or text): ${business.phoneDisplay}`);
+  lines.push(`Phone (calls): ${business.phoneDisplay}`);
+  lines.push(`Text:          ${business.smsPhoneDisplay}`);
   lines.push(`Email: ${business.email}`);
   lines.push(`Address: ${formatAddress(business.address)}`);
-  lines.push(`Hours: ${business.openingHoursDisplay} (closed Sundays)`);
+  lines.push(`Hours: ${business.openingHoursDisplay}`);
   lines.push(`Founded: ${business.foundingDate} by ${business.founder}`);
   lines.push(`Rating: ${business.ratingValue}/5 from ${business.reviewCount} reviews`);
   lines.push(`Payment: cash on the spot at pickup, no checks, no waiting`);
