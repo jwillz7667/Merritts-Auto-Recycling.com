@@ -493,81 +493,56 @@ export function dedupeBlogNavLinks(html: string): string {
 }
 
 /**
- * Insert "Cash Calculator" as a primary nav link if it is missing. Idempotent. We insert it
- * directly after Home so it earns top-of-fold visibility; the page itself is the highest-intent
- * surface on the site.
+ * Removes every "Cash Calculator" primary-nav `<li>` from the navbar. The calculator page has
+ * been deprecated; this transform cleans up the link that earlier runs of
+ * `insertQuoteCalculatorNavLink` inserted across all 70 pages.
  */
-export function insertQuoteCalculatorNavLink(
-  html: string,
-  hrefStyle: 'absolute' | 'relative',
-): string {
-  if (
-    /<a[^>]*href="(?:\/|\.\.\/)?quote-calculator(?:\.html)?"[^>]*>\s*<span>\s*Cash\s+Calculator\s*<\/span>/i.test(
-      html,
-    )
-  ) {
-    return html;
-  }
-  const href = hrefStyle === 'absolute' ? '/quote-calculator' : '../quote-calculator.html';
-  const newLi = `<li><a href="${href}"><span>Cash Calculator</span></a></li>`;
-  return html.replace(
-    /(<ul class="nav navbar-nav">\s*<li\b[^>]*><a href="(?:\.\.\/)?(?:index\.html)?\/?"[^>]*><span>Home<\/span><\/a><\/li>)/i,
-    (_match, opening: string) => `${opening}\n\t\t\t\t\t\t\t\t\t${newLi}`,
-  );
-}
-
-/**
- * Removes any duplicate "Cash Calculator" <li> nav entries that may have been inserted by an
- * earlier run before the guard regex matched the new href form.
- */
-export function dedupeQuoteCalculatorNavLinks(html: string): string {
+export function removeQuoteCalculatorNavLink(html: string): string {
   const navMatch = html.match(/(<ul class="nav navbar-nav">[\s\S]*?<\/ul>)/);
   if (!navMatch) return html;
   const navBlock = navMatch[1]!;
   const liRegex =
-    /<li(?:\s+class="active")?[^>]*>\s*<a [^>]*href="(?:\/|\.\.\/)?quote-calculator(?:\.html)?"[^>]*(?:\s+aria-current="page")?>\s*<span>\s*Cash\s+Calculator\s*<\/span>\s*<\/a>\s*<\/li>/gi;
-  const matches = navBlock.match(liRegex) ?? [];
-  if (matches.length <= 1) return html;
-  const hasActive = matches.some((s) => /class="active"|aria-current="page"/.test(s));
-  let kept = false;
-  const newNav = navBlock.replace(liRegex, () => {
-    if (kept) return '';
-    kept = true;
-    return hasActive
-      ? matches[0]!.replace(/<li(?:\s+class="active")?/, '<li class="active"')
-      : matches[0]!;
-  });
+    /\s*<li(?:\s+class="active")?[^>]*>\s*<a [^>]*href="(?:\/|\.\.\/)?quote-calculator(?:\.html)?"[^>]*(?:\s+aria-current="page")?>\s*<span>\s*Cash\s+Calculator\s*<\/span>\s*<\/a>\s*<\/li>/gi;
+  if (!liRegex.test(navBlock)) return html;
+  liRegex.lastIndex = 0;
+  const newNav = navBlock.replace(liRegex, '');
   return html.replace(navBlock, newNav);
 }
 
 /**
- * Replace the decorative `.header-right-top` Appointment element with a clickable anchor that
- * routes to `/quote-calculator`. The original is a non-interactive `<div class="appointment">`
- * (or, on `index.html`, a `tel:` link wrapper) and is the highest-visibility CTA slot in the
- * header. Repurposing it for the calculator drives the highest-intent conversion surface.
+ * Repoint the header CTA at `/contact`. The button originally routed to `/quote-calculator`;
+ * after deprecating the calculator we send the highest-visibility header slot to the contact
+ * form (the next-highest-intent surface). Also handles legacy `<div class="appointment">…
+ * Appointment…</div>` markup on pages the calculator transform never touched.
  *
- * Idempotent: skips when the element is already an anchor pointing at the calculator. Does NOT
- * touch the modal-header `<a class="appointment" data-toggle="modal">` element (different
- * structure — that one is a direct `<a>` with `data-toggle`, while this transform targets the
- * `<div class="appointment">` wrapper only).
+ * Idempotent: leaves the anchor untouched when it already points at `/contact`.
  */
-export function replaceAppointmentButtonWithQuoteCta(
+export function pointAppointmentButtonAtContact(
   html: string,
   hrefStyle: 'absolute' | 'relative',
 ): string {
-  const href = hrefStyle === 'absolute' ? '/quote-calculator' : '../quote-calculator.html';
-  const replacement = `<a class="appointment appointment-cta" href="${href}" aria-label="Get an instant cash quote for your junk car"><i class="icon-shape icon" aria-hidden="true"></i><span>Get Cash Quote</span></a>`;
+  const href = hrefStyle === 'absolute' ? '/contact' : '../contact.html';
+  const replacement = `<a class="appointment appointment-cta" href="${href}" aria-label="Request a cash quote — contact Merritt's Auto Recycling"><i class="icon-shape icon" aria-hidden="true"></i><span>Get Cash Quote</span></a>`;
 
-  // Match the entire `<div class="appointment">…</div>` block in the header. Allows for an
-  // inner `<a href="tel:…">` wrapper (the index.html variant). The dotAll-like body spans only
-  // until the next `</div>` so we never over-consume into the surrounding `.header-right-top`.
+  let next = html;
+
+  // Repoint any existing calculator anchor at /contact. The opening-tag match uses `[^>]*?` so it
+  // stays within a single `<a …>` and cannot span across an earlier unrelated `<a>` (e.g. the
+  // skip-link). Closing tag accepts both the inline and prettier-multiline (`</a\n>`) forms.
+  const calcAnchorRe =
+    /<a[^>]*?class="appointment appointment-cta"[^>]*?href="(?:\/|\.\.\/)?quote-calculator(?:\.html)?"[^>]*?>\s*<i\s+class="icon-shape icon"[^>]*>\s*<\/i>\s*<span>[^<]*<\/span>\s*<\/a\s*>/i;
+  if (calcAnchorRe.test(next)) {
+    next = literalReplace(next, calcAnchorRe, replacement);
+  }
+
+  // Legacy decorative `<div class="appointment">…Appointment…</div>` markup.
   const headerDivRe =
     /<div\s+class="appointment">\s*(?:<a\s+href="tel:[^"]*">)?\s*<i\s+class="icon-shape icon"[^>]*>\s*<\/i>\s*<span>\s*Appointment\s*<\/span>\s*(?:<\/a>\s*)?<\/div>/i;
-
-  if (!headerDivRe.test(html)) {
-    return html;
+  if (headerDivRe.test(next)) {
+    next = literalReplace(next, headerDivRe, replacement);
   }
-  return literalReplace(html, headerDivRe, replacement);
+
+  return next;
 }
 
 /**

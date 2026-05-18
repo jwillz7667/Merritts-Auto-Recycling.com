@@ -11,12 +11,6 @@ const EnvSchema = z.object({
   RESEND_API_KEY: z.string().min(1, 'RESEND_API_KEY required'),
   RESEND_FROM_EMAIL: z.string().email('RESEND_FROM_EMAIL must be a valid email'),
   RECIPIENT_EMAIL: z.string().email('RECIPIENT_EMAIL must be a valid email'),
-  /**
-   * Override recipient for cash-calculator callback leads. Falls back to RECIPIENT_EMAIL so
-   * existing deployments keep working without a new env var. Set in production so Brad gets
-   * quote leads on a dedicated thread, e.g. brad@merritts-auto-recycling.com.
-   */
-  QUOTE_RECIPIENT_EMAIL: z.string().email('QUOTE_RECIPIENT_EMAIL must be a valid email').optional(),
   TURNSTILE_SECRET_KEY: z.string().min(1, 'TURNSTILE_SECRET_KEY required'),
   ALLOWED_ORIGIN: z.string().url().optional(),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('production'),

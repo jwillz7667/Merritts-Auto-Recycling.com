@@ -53,11 +53,10 @@ import {
   injectBeforeMainContent,
   dedupeAboutBradNavLinks,
   dedupeBlogNavLinks,
-  dedupeQuoteCalculatorNavLinks,
   insertAboutBradNavLink,
   insertBlogNavLink,
-  insertQuoteCalculatorNavLink,
-  replaceAppointmentButtonWithQuoteCta,
+  removeQuoteCalculatorNavLink,
+  pointAppointmentButtonAtContact,
   removeDeadMapsScript,
   removeGoogleFontsLink,
   removeLegacyJsonLd,
@@ -120,9 +119,8 @@ async function main(): Promise<void> {
     next = insertAboutBradNavLink(next, 'relative');
     next = dedupeBlogNavLinks(next);
     next = insertBlogNavLink(next, 'relative');
-    next = dedupeQuoteCalculatorNavLinks(next);
-    next = insertQuoteCalculatorNavLink(next, 'relative');
-    next = replaceAppointmentButtonWithQuoteCta(next, 'relative');
+    next = removeQuoteCalculatorNavLink(next);
+    next = pointAppointmentButtonAtContact(next, 'relative');
     next = activateSmsLinks(next);
     next = addStickyMobileCall(next, business.phoneDisplay, business.smsPhoneDisplay);
 

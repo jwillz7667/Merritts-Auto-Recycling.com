@@ -63,9 +63,8 @@ import {
   injectBeforeMainContent,
   insertAboutBradNavLink,
   insertBlogNavLink,
-  insertQuoteCalculatorNavLink,
-  dedupeQuoteCalculatorNavLinks,
-  replaceAppointmentButtonWithQuoteCta,
+  removeQuoteCalculatorNavLink,
+  pointAppointmentButtonAtContact,
   removeDeadMapsScript,
   removeGoogleFontsLink,
   removeLegacyJsonLd,
@@ -223,6 +222,23 @@ async function main(): Promise<void> {
       extraJsonLd: (biz) => [renderReviewsJsonLd(biz, testimonials.reviews)],
     },
     {
+      file: 'quote-calculator.html',
+      slug: 'quote-calculator',
+      title: 'Get a Cash Quote — Tell Us About Your Junk Car | Merritt’s Auto Recycling',
+      description:
+        'Get a fast, no-obligation cash offer on your junk car. Tell us year, make, model and city — Brad responds with a quote and free same-day pickup window. Call 763-533-2775.',
+      url: `${SITE}/quote-calculator`,
+      breadcrumbs: [
+        { name: 'Home', url: `${SITE}/` },
+        { name: 'Get Cash Quote', url: `${SITE}/quote-calculator` },
+      ],
+      hero: {
+        heading: 'Get a Cash Quote for Your Junk Car',
+        subheading:
+          'Tell us about your vehicle — year, make, model, and city. Brad replies with a no-obligation cash offer and a free same-day pickup window. Call or text 763-533-2775 for immediate service.',
+      },
+    },
+    {
       file: 'about-brad.html',
       slug: 'about-brad',
       title: 'About Brad Emholtz — Owner, Merritt’s Auto Recycling | Twin Cities Junk Car Buyer',
@@ -234,24 +250,6 @@ async function main(): Promise<void> {
         { name: 'About Brad', url: `${SITE}/about-brad` },
       ],
       extraJsonLd: (biz) => [renderPersonJsonLd(biz)],
-    },
-    {
-      file: 'quote-calculator.html',
-      slug: 'quote-calculator',
-      title:
-        'Junk Car Cash Calculator — Instant Estimate for Your Vehicle | Merritt’s Auto Recycling',
-      description:
-        'Get a no-obligation cash estimate for your junk car in 30 seconds. Pick your vehicle, year, and condition — we’ll show your preliminary range based on real Minnesota scrap pricing. Request a callback for your final on-the-spot offer.',
-      url: `${SITE}/quote-calculator`,
-      breadcrumbs: [
-        { name: 'Home', url: `${SITE}/` },
-        { name: 'Cash Calculator', url: `${SITE}/quote-calculator` },
-      ],
-      hero: {
-        heading: 'How much is my junk car worth?',
-        subheading:
-          'Get an instant preliminary cash estimate based on your vehicle’s scrap weight, year, and condition — then request a callback for your final on-the-spot offer.',
-      },
     },
     ...blogPages,
   ];
@@ -278,18 +276,11 @@ async function main(): Promise<void> {
     html = insertAboutBradNavLink(html, 'absolute');
     html = dedupeBlogNavLinks(html);
     html = insertBlogNavLink(html, 'absolute');
-    html = dedupeQuoteCalculatorNavLinks(html);
-    html = insertQuoteCalculatorNavLink(html, 'absolute');
-    html = replaceAppointmentButtonWithQuoteCta(html, 'absolute');
+    html = removeQuoteCalculatorNavLink(html);
+    html = pointAppointmentButtonAtContact(html, 'absolute');
     html = addAriaCurrentToNav(
       html,
-      page.slug === 'home'
-        ? '/'
-        : page.slug === 'blog'
-          ? '/blog/'
-          : page.slug === 'quote-calculator'
-            ? '/quote-calculator'
-            : `/${page.slug}`,
+      page.slug === 'home' ? '/' : page.slug === 'blog' ? '/blog/' : `/${page.slug}`,
     );
     html = activateSmsLinks(html);
     html = addStickyMobileCall(html, business.phoneDisplay, business.smsPhoneDisplay);

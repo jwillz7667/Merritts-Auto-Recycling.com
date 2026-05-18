@@ -35,15 +35,6 @@ export const ContactSchema = z.object({
 });
 export type ContactPayload = z.infer<typeof ContactSchema>;
 
-export const QuoteSchema = z.object({
-  name: Name,
-  email: Email,
-  phone: Phone.optional().or(z.literal('').transform(() => undefined)),
-  message: Message,
-  ...BotShield,
-});
-export type QuotePayload = z.infer<typeof QuoteSchema>;
-
 const ShortText = z.string().trim().max(200, 'value too long');
 const Year = z
   .string()
@@ -51,6 +42,33 @@ const Year = z
   .regex(/^\d{4}$|^Other$/i, 'invalid year')
   .optional()
   .or(z.literal('').transform(() => undefined));
+
+/**
+ * Quick "tell us about your junk car" lead form — name, contact, and vehicle basics. Dual-send
+ * pattern: lead to Brad + branded confirmation back to the customer at the email they provided.
+ */
+const VehiclePart = z.string().trim().min(1, 'required').max(60, 'too long');
+const QuoteYear = z
+  .string()
+  .trim()
+  .regex(/^(19|20)\d{2}$/, 'enter a 4-digit year between 1900 and 2099');
+export const QuoteSchema = z.object({
+  name: Name,
+  email: Email,
+  phone: Phone,
+  city: ShortText.min(2, 'city required').max(80, 'city too long'),
+  year: QuoteYear,
+  make: VehiclePart,
+  model: VehiclePart,
+  notes: z
+    .string()
+    .trim()
+    .max(2000, 'notes too long')
+    .optional()
+    .or(z.literal('').transform(() => undefined)),
+  ...BotShield,
+});
+export type QuotePayload = z.infer<typeof QuoteSchema>;
 
 export const AppointmentSchema = z.object({
   name: Name,
@@ -71,60 +89,3 @@ export const AppointmentSchema = z.object({
   ...BotShield,
 });
 export type AppointmentPayload = z.infer<typeof AppointmentSchema>;
-
-/**
- * Callback request from the cash calculator. The vehicle inputs mirror `CalculatorInputSchema`
- * but live here so the server can recompute the quote authoritatively from the same payload that
- * the form sends. Contact info follows the lighter standard used elsewhere.
- *
- * `email` is optional — many callers prefer SMS/phone follow-up and shouldn't be forced to type
- * an address. When provided we send them a branded confirmation email; when omitted we skip it.
- */
-const BooleanFlag = z.preprocess((v) => {
-  if (typeof v === 'boolean') return v;
-  if (typeof v === 'number') return v !== 0;
-  if (typeof v === 'string') {
-    const s = v.trim().toLowerCase();
-    if (['true', '1', 'on', 'yes'].includes(s)) return true;
-    if (['false', '0', 'off', 'no', ''].includes(s)) return false;
-  }
-  return false;
-}, z.boolean());
-
-const YearInt = z.preprocess(
-  (v) => (typeof v === 'string' ? Number.parseInt(v, 10) : v),
-  z
-    .number()
-    .int()
-    .min(1950, 'year too old')
-    .max(new Date().getFullYear() + 1, 'year too new'),
-);
-
-const VehicleClassKey = z.string().trim().min(1).max(40);
-
-export const CallbackSchema = z.object({
-  name: Name,
-  phone: Phone,
-  email: Email.optional().or(z.literal('').transform(() => undefined)),
-  preferredContactTime: ShortText.optional().or(z.literal('').transform(() => undefined)),
-  notes: z
-    .string()
-    .trim()
-    .max(2000, 'notes too long')
-    .optional()
-    .or(z.literal('').transform(() => undefined)),
-  zip: z
-    .string()
-    .trim()
-    .regex(/^\d{5}$/, 'ZIP must be 5 digits')
-    .optional()
-    .or(z.literal('').transform(() => undefined)),
-  vehicleClass: VehicleClassKey,
-  year: YearInt,
-  running: BooleanFlag,
-  catalyticConverter: BooleanFlag,
-  completeDrivetrain: BooleanFlag,
-  wheelsAndTires: BooleanFlag,
-  ...BotShield,
-});
-export type CallbackPayload = z.infer<typeof CallbackSchema>;

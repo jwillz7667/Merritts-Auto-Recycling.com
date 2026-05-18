@@ -64,12 +64,11 @@ export type HandlerRequestMeta = {
 
 export function createFormHandler<S extends ZodSchema>(opts: {
   schema: S;
-  formType: 'contact' | 'quote' | 'appointment' | 'callback';
+  formType: 'contact' | 'appointment' | 'quote';
   /**
    * Optional override for the "what to do with the validated payload" step. When provided, this
-   * runs INSTEAD of `sendFormEmail` so endpoints with bespoke email semantics (e.g. the cash
-   * calculator's dual-send to Brad + user confirmation) can reuse the rate-limit / origin /
-   * Turnstile / validation pipeline without duplicating it.
+   * runs INSTEAD of `sendFormEmail` so endpoints with bespoke email semantics can reuse the
+   * rate-limit / origin / Turnstile / validation pipeline without duplicating it.
    *
    * The handler still owns response codes: throwing here yields a 502 to the client, matching
    * the existing failure mode for email sends.

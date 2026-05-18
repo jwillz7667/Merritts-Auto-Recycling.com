@@ -115,6 +115,7 @@ async function buildLlmsIndex(): Promise<string> {
   lines.push('');
   lines.push(`- [Home](${site}/)`);
   lines.push(`- [Contact](${site}/contact)`);
+  lines.push(`- [Get a Cash Quote](${site}/quote-calculator)`);
   lines.push(`- [FAQ](${site}/faq)`);
   lines.push(`- [Testimonials](${site}/testimonials)`);
   lines.push(`- [About Brad Emholtz (owner)](${site}/about-brad)`);
@@ -244,6 +245,7 @@ async function buildLlmsFull(): Promise<string> {
   lines.push('');
   lines.push(`Home: ${site}/`);
   lines.push(`Contact: ${site}/contact`);
+  lines.push(`Get a Cash Quote: ${site}/quote-calculator`);
   lines.push(`FAQ: ${site}/faq`);
   lines.push(`Testimonials: ${site}/testimonials`);
   lines.push(`About Brad Emholtz (owner): ${site}/about-brad`);
