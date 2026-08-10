@@ -37,7 +37,7 @@
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@commitlint/types": "^19.5.0",
-    "@types/cheerio": "^0.22.35",
+    "@types/cheerio": "^1.0.0",
     "@types/node": "^20.14.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
