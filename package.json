@@ -30,7 +30,7 @@
     "prepare": "test -d node_modules/husky && husky install || true"
   },
   "dependencies": {
-    "resend": "^4.0.1",
+    "resend": "^6.12.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {
