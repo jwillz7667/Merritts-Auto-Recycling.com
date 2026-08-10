@@ -204,21 +204,34 @@ export function removeGoogleFontsLink(html: string): string {
 }
 
 /**
- * Defer-load Muli with `font-display: swap` and only the weights actually used (400/600/700).
+ * Defer-load Muli with `font-display: optional` and only the weights actually used (400/600/700).
  * The async pattern (`media="print"` flip on load) eliminates the render-blocking CSS request
- * for the font without dropping FOUC mitigation on browsers that respect the swap.
+ * while `optional` prevents a late font swap from moving the entire content column.
  */
 export function injectFontStylesheet(html: string): string {
   const block = `<!-- BEGIN auto:fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Muli:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Muli:wght@400;600;700&display=swap" media="print" onload="this.media='all';this.onload=null;">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Muli:wght@400;600;700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Muli:wght@400;600;700&display=optional">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Muli:wght@400;600;700&display=optional" media="print" onload="this.media='all';this.onload=null;">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Muli:wght@400;600;700&display=optional"></noscript>
 <!-- END auto:fonts -->`;
   if (html.includes('<!-- BEGIN auto:fonts -->')) {
     return literalReplace(html, /<!-- BEGIN auto:fonts -->[\s\S]*?<!-- END auto:fonts -->/, block);
   }
   return literalReplace(html, /<\/head>/i, `${block}\n</head>`);
+}
+
+/** Start the small local icon font before icon pseudo-elements enter the render tree. */
+export function preloadIconFont(html: string): string {
+  const block = `<!-- BEGIN auto:icon-font-preload -->
+<link rel="preload" href="/iconfont/fonts/autob073.woff?usbo9z" as="font" type="font/woff" crossorigin>
+<!-- END auto:icon-font-preload -->`;
+  if (html.includes('<!-- BEGIN auto:icon-font-preload -->')) return html;
+  return literalReplace(
+    html,
+    /(<link\b[^>]*href=["'][^"']*iconfont\/style\.css["'][^>]*>)/i,
+    `$1\n${block}`,
+  );
 }
 
 /**
@@ -251,6 +264,75 @@ export function deferLocalScripts(html: string): string {
       return `<script${before} defer${after}>`;
     },
   );
+}
+
+/**
+ * Keep the legacy jQuery/plugin stack off the home page's critical path. The
+ * first hero remains complete and readable without JavaScript; interaction,
+ * scrolling, or a conservative fallback starts the enhancement bundle in its
+ * original order. Secondary hero images are discovered only when that bundle
+ * starts instead of competing with the first paint.
+ */
+export function deferHomeRuntime(html: string): string {
+  if (!html.includes('id="mainSlider"')) return html;
+  if (html.includes('<!-- BEGIN auto:home-runtime -->')) return html;
+
+  const region = html.match(
+    /<!-- External JavaScripts -->[\s\S]*?(?=<!-- BEGIN auto:sticky-call -->)/i,
+  );
+  if (!region) return html;
+
+  const sources = [...region[0].matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>\s*<\/script>/gi)].map(
+    (match) => match[1],
+  );
+  if (sources.length === 0) return html;
+
+  const block = `<!-- External JavaScripts (progressively enhanced) -->
+<!-- BEGIN auto:home-runtime -->
+<script>
+  (function (w, d) {
+    var sources = ${JSON.stringify(sources)};
+    var bootPromise;
+    var ready = false;
+    function appendScript(source) {
+      return new Promise(function (resolve) {
+        var script = d.createElement('script');
+        script.src = source;
+        script.onload = resolve;
+        script.onerror = resolve;
+        d.body.appendChild(script);
+      });
+    }
+    function boot() {
+      if (bootPromise) return bootPromise;
+      bootPromise = sources.reduce(function (chain, source) {
+        return chain.then(function () { return appendScript(source); });
+      }, Promise.resolve()).then(function () { ready = true; });
+      return bootPromise;
+    }
+    ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (eventName) {
+      w.addEventListener(eventName, boot, { once: true, passive: true });
+    });
+    d.addEventListener('click', function (event) {
+      var target = event.target;
+      var toggle = target && target.closest ? target.closest('.navbar-toggle') : null;
+      if (!toggle || ready) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      boot().then(function () { toggle.click(); });
+    }, true);
+    w.addEventListener('load', function () { w.setTimeout(boot, 15000); }, { once: true });
+  })(window, document);
+</script>
+<!-- END auto:home-runtime -->
+`;
+
+  let next = literalReplace(html, region[0], block);
+  next = next.replace(
+    /\s+style="[^"]*\/slider\/slide([23])\.(?:jpe?g|webp|avif)[^"]*"/gi,
+    (_style, slide: string) => ` data-bg="/images/optimized/slider/slide${slide}.jpg"`,
+  );
+  return next;
 }
 
 /**

@@ -2,11 +2,12 @@
   font-family: 'auto';
   src:  url('fonts/autob073.eot?usbo9z');
   src:  url('fonts/autob073.eot?usbo9z#iefix') format('embedded-opentype'),
-    url('fonts/autob073.ttf?usbo9z') format('truetype'),
     url('fonts/autob073.woff?usbo9z') format('woff'),
+    url('fonts/autob073.ttf?usbo9z') format('truetype'),
     url('fonts/autob073.svg?usbo9z#auto') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 
 [class^="icon-"], [class*=" icon-"] {
@@ -174,4 +175,3 @@
 .icon-interface-logo:before {
   content: "\e90d";
 }
-

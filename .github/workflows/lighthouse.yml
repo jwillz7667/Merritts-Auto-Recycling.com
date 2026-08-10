@@ -14,6 +14,8 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - 'css/**'
+      - 'iconfont/**'
+      - 'images/optimized/**'
       - 'js/**'
       - 'scripts/_lib/transform.mts'
       - 'scripts/apply-env.mts'

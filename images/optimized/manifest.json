@@ -477,29 +477,29 @@
   },
   "logo-green.png": {
     "source": "logo-green.png",
-    "width": 720,
-    "height": 456,
+    "width": 360,
+    "height": 228,
     "variants": [
       {
         "type": "image/png",
         "path": "images/optimized/logo-green.png",
-        "width": 720,
-        "height": 456,
-        "bytes": 31601
+        "width": 360,
+        "height": 228,
+        "bytes": 15751
       },
       {
         "type": "image/webp",
         "path": "images/optimized/logo-green.webp",
-        "width": 720,
-        "height": 456,
-        "bytes": 57912
+        "width": 360,
+        "height": 228,
+        "bytes": 27916
       },
       {
         "type": "image/avif",
         "path": "images/optimized/logo-green.avif",
-        "width": 720,
-        "height": 456,
-        "bytes": 45377
+        "width": 360,
+        "height": 228,
+        "bytes": 20883
       }
     ]
   },

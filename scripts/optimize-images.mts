@@ -33,10 +33,10 @@ const ROLES: Role[] = [
   { pattern: /\/footer-tow-truck\.(jpe?g|png)$/i, maxWidth: 1600, jpegQuality: 78 },
   {
     pattern: /\/logo-green\.png$/i,
-    maxWidth: 720,
+    maxWidth: 360,
     jpegQuality: 85,
     webpQuality: 90,
-    avifQuality: 70,
+    avifQuality: 60,
   },
   {
     pattern: /\/(testimonial|block-bg|header-photo-bg|tabform-bg|coupon-bg)/i,

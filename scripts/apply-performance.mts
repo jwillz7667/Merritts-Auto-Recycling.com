@@ -2,9 +2,9 @@
 /**
  * Apply Phase 3 performance transforms to every page:
  *   - Remove the full-fat Google Fonts <link> (loads 7 weights × italic) and replace with a
- *     defer-loaded `display=swap` stylesheet for the 3 weights actually used.
+ *     defer-loaded `display=optional` stylesheet for the 3 weights actually used.
  *   - Inject LCP preload tags for the hero slider's first slide.
- *   - Defer every local plugin/custom script (jQuery stays sync — plugins depend on $).
+ *   - Defer every local plugin/custom script and progressively enhance the home page runtime.
  *   - Strip the legacy `#loader-wrapper` splash and its body.loaded gate.
  *
  * Idempotent.
@@ -16,10 +16,12 @@ import { resolve } from 'node:path';
 import { repoRoot } from './_lib/data.mts';
 import {
   deferLocalScripts,
+  deferHomeRuntime,
   deferGoogleTagManager,
   improveLegacyAccessibility,
   injectFontStylesheet,
   injectLcpPreload,
+  preloadIconFont,
   lazyLoadMapIframes,
   lazyLoadTurnstile,
   pruneUnusedPageAssets,
@@ -56,11 +58,13 @@ async function main(): Promise<void> {
     next = lazyLoadTurnstile(next);
     next = removeGoogleFontsLink(next);
     next = injectFontStylesheet(next);
+    next = preloadIconFont(next);
     next = injectLcpPreload(next);
     next = lazyLoadMapIframes(next);
     next = improveLegacyAccessibility(next);
     next = pruneUnusedPageAssets(next);
     next = deferLocalScripts(next);
+    next = deferHomeRuntime(next);
     next = removeLoaderSplash(next);
 
     if (next !== original) {
