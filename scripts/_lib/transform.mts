@@ -254,14 +254,185 @@ export function deferLocalScripts(html: string): string {
 }
 
 /**
+ * Keep analytics off the critical rendering path. Interaction starts GTM
+ * immediately; otherwise it loads after a conservative post-load delay so
+ * navigation and conversions are still measured without competing with LCP.
+ */
+export function deferGoogleTagManager(html: string): string {
+  const block = `<!-- Google Tag Manager -->
+<script>
+  (function (w, d) {
+    w.dataLayer = w.dataLayer || [];
+    var loaded = false;
+    function loadGtm() {
+      if (loaded) return;
+      loaded = true;
+      w.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var script = d.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-WDZ8L9TN';
+      d.head.appendChild(script);
+    }
+    ['pointerdown', 'keydown', 'touchstart'].forEach(function (eventName) {
+      w.addEventListener(eventName, loadGtm, { once: true, passive: true });
+    });
+    w.addEventListener('load', function () { w.setTimeout(loadGtm, 10000); }, { once: true });
+  })(window, document);
+</script>
+<!-- End Google Tag Manager -->`;
+  return literalReplace(
+    html,
+    /<!-- Google Tag Manager -->[\s\S]*?<!-- End Google Tag Manager -->/i,
+    block,
+  );
+}
+
+/** Load Turnstile only when its live form approaches the viewport or receives focus. */
+export function lazyLoadTurnstile(html: string): string {
+  if (!html.includes('<!-- BEGIN auto:turnstile -->')) return html;
+  const block = `<!-- BEGIN auto:turnstile -->
+<script>
+  (function (w, d) {
+    function prepare() {
+      var widget = d.querySelector('.cf-turnstile');
+      if (!widget) return;
+      var loaded = false;
+      function loadTurnstile() {
+        if (loaded) return;
+        loaded = true;
+        var script = d.createElement('script');
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+        script.async = true;
+        script.defer = true;
+        d.head.appendChild(script);
+      }
+      var form = widget.closest('form');
+      if (form) {
+        form.addEventListener('focusin', loadTurnstile, { once: true });
+        form.addEventListener('pointerdown', loadTurnstile, { once: true, passive: true });
+      }
+      if ('IntersectionObserver' in w) {
+        var observer = new IntersectionObserver(function (entries) {
+          if (entries.some(function (entry) { return entry.isIntersecting; })) {
+            observer.disconnect();
+            loadTurnstile();
+          }
+        }, { rootMargin: '200px' });
+        observer.observe(widget);
+      }
+    }
+    if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', prepare, { once: true });
+    else prepare();
+  })(window, document);
+</script>
+<!-- END auto:turnstile -->`;
+  return literalReplace(
+    html,
+    /<!-- BEGIN auto:turnstile -->[\s\S]*?<!-- END auto:turnstile -->/i,
+    block,
+  );
+}
+
+/** Defer map embeds until they actually enter the viewport. */
+export function lazyLoadMapIframes(html: string): string {
+  return html.replace(/<iframe\b[^>]*>/gi, (tag) => {
+    const source = tag.match(
+      /\bsrc=(['"])([^'"]*(?:google\.com\/maps|maps\.google\.com)[^'"]*)\1/i,
+    );
+    if (!source?.[2] || /\bdata-map-src=/.test(tag)) return tag;
+    let next = tag.replace(source[0], `src="about:blank" data-map-src="${source[2]}"`);
+    if (!/\btitle=/.test(next)) {
+      next = next.replace('<iframe', '<iframe title="Merritt’s Auto Recycling service area map"');
+    }
+    return next;
+  });
+}
+
+/** Add names/levels to repeated legacy controls without changing their visual design. */
+export function improveLegacyAccessibility(html: string): string {
+  let next = html.replace(
+    /<button\b([^>]*\bclass="[^"]*navbar-toggle[^"]*"[^>]*)>/gi,
+    (tag, attrs: string) => {
+      if (/\baria-label=/.test(tag)) return tag;
+      return `<button${attrs} aria-label="Open navigation" aria-controls="slidemenu" aria-expanded="false">`;
+    },
+  );
+  next = next.replace(
+    /<a\b([^>]*\bclass="[^"]*icon-facebook-logo[^"]*"[^>]*)>/gi,
+    (tag, attrs: string) =>
+      /\baria-label=/.test(tag)
+        ? tag
+        : `<a${attrs} aria-label="Merritt’s Auto Recycling on Facebook">`,
+  );
+  next = next.replace(
+    /<a\b([^>]*\bclass="[^"]*icon-interface-logo[^"]*"[^>]*)>/gi,
+    (tag, attrs: string) =>
+      /\baria-label=/.test(tag) ? tag : `<a${attrs} aria-label="Contact Merritt’s Auto Recycling">`,
+  );
+  return next.replace(/<h5\b([^>]*)>/gi, (tag, attrs: string) =>
+    /\baria-level=/.test(tag) ? tag : `<h5${attrs} aria-level="3">`,
+  );
+}
+
+/** Remove form/date bundles from pages that have no live matching controls. */
+export function pruneUnusedPageAssets(html: string): string {
+  // The legacy appointment modal is commented out with a comment that also contains
+  // ordinary HTML comments. Remove that whole block first so its form controls do not
+  // make date/form bundles look live on every page.
+  const visible = html
+    .replace(/<!--<div\b[^>]*class="[^"]*modal fade[^"]*"[\s\S]*?<\/div>-->/gi, '')
+    .replace(/<!--[\s\S]*?-->/g, '');
+  const hasForm = /<form\b/i.test(visible);
+  const hasDatePicker =
+    /<(?:input|select)\b[^>]*(?:class=["'][^"']*(?:datetimepicker|timepicker)|name=["'](?:date|time)["'])/i.test(
+      visible,
+    );
+  const removeScript = (source: string, fragment: string): string =>
+    source.replace(
+      new RegExp(
+        `<script\\b[^>]*src=["'][^"']*${escapeRegex(fragment)}[^"']*["'][^>]*>\\s*<\\/script>\\s*`,
+        'gi',
+      ),
+      '',
+    );
+  const removeStylesheet = (source: string, fragment: string): string =>
+    source.replace(
+      new RegExp(`<link\\b[^>]*href=["'][^"']*${escapeRegex(fragment)}[^"']*["'][^>]*>\\s*`, 'gi'),
+      '',
+    );
+
+  let next = html.replace(
+    /src="((?:\.\.\/)?js)\/plugins\/jquery\.min\.js"/gi,
+    'src="$1/jquery.js"',
+  );
+  if (!hasForm) {
+    for (const asset of ['jquery.form.js', 'jquery.validate.min.js', 'forms.js']) {
+      next = removeScript(next, asset);
+    }
+  }
+  if (!hasDatePicker) {
+    for (const asset of ['moment.js', 'bootstrap-datetimepicker.min.js']) {
+      next = removeScript(next, asset);
+    }
+    next = removeStylesheet(next, 'bootstrap-datetimepicker.css');
+  }
+  return next;
+}
+
+/**
  * LCP preload for the first slider slide (the hero LCP candidate on every page).
  * Targets AVIF first with `type` so unsupported browsers don't race-download it; WebP comes
  * as a fallback preload with the same imagesrcset behavior.
  */
 export function injectLcpPreload(html: string): string {
+  const href = html.includes('id="mainSlider"')
+    ? '/images/optimized/slider/slide1.avif'
+    : html.includes('id="pageTitle"')
+      ? '/images/optimized/header-photo-bg.avif'
+      : null;
+  if (!href) return html;
   const block = `<!-- BEGIN auto:lcp-preload -->
-<link rel="preload" as="image" type="image/avif" href="/images/optimized/slider/slide1.avif" fetchpriority="high">
-<link rel="preload" as="image" type="image/webp" href="/images/optimized/slider/slide1.webp">
+<link rel="preload" as="image" type="image/avif" href="${href}" fetchpriority="high">
 <!-- END auto:lcp-preload -->`;
   if (html.includes('<!-- BEGIN auto:lcp-preload -->')) {
     return literalReplace(

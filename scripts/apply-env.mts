@@ -103,6 +103,17 @@ async function main(): Promise<void> {
   }
 
   await writeIndexNowKey();
+  await writeDeploymentSha();
+}
+
+async function writeDeploymentSha(): Promise<void> {
+  const sha = process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.GITHUB_SHA;
+  if (!sha || !/^[a-f0-9]{40}$/i.test(sha)) {
+    console.log('apply-env: deployment commit SHA unavailable — skipping deployment marker.');
+    return;
+  }
+  await writeFile(resolve(repoRoot, 'deployment-sha.txt'), sha, 'utf8');
+  console.log('apply-env: wrote deployment-sha.txt');
 }
 
 /**

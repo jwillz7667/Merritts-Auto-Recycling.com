@@ -16,8 +16,13 @@ import { resolve } from 'node:path';
 import { repoRoot } from './_lib/data.mts';
 import {
   deferLocalScripts,
+  deferGoogleTagManager,
+  improveLegacyAccessibility,
   injectFontStylesheet,
   injectLcpPreload,
+  lazyLoadMapIframes,
+  lazyLoadTurnstile,
+  pruneUnusedPageAssets,
   removeGoogleFontsLink,
   removeLoaderSplash,
 } from './_lib/transform.mts';
@@ -32,6 +37,10 @@ async function listHtml(): Promise<string[]> {
   for (const e of placemarks) {
     if (e.isFile() && e.name.endsWith('.html')) out.push(`placemarks/${e.name}`);
   }
+  const blog = await readdir(resolve(repoRoot, 'blog'), { withFileTypes: true });
+  for (const e of blog) {
+    if (e.isFile() && e.name.endsWith('.html')) out.push(`blog/${e.name}`);
+  }
   return out;
 }
 
@@ -43,9 +52,14 @@ async function main(): Promise<void> {
     const original = await readFile(fullPath, 'utf8');
 
     let next = original;
+    next = deferGoogleTagManager(next);
+    next = lazyLoadTurnstile(next);
     next = removeGoogleFontsLink(next);
     next = injectFontStylesheet(next);
     next = injectLcpPreload(next);
+    next = lazyLoadMapIframes(next);
+    next = improveLegacyAccessibility(next);
+    next = pruneUnusedPageAssets(next);
     next = deferLocalScripts(next);
     next = removeLoaderSplash(next);
 

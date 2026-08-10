@@ -45,6 +45,49 @@
 		var windowWidth = window.innerWidth || $window.width();
 		var windowH = $window.height();
 
+		// Normalize repeated legacy controls before assistive-technology audits.
+		$navbarToggle.attr({
+			'aria-label': 'Open navigation',
+			'aria-controls': 'slidemenu',
+			'aria-expanded': 'false'
+		});
+		$('.social-links a.icon-facebook-logo').attr('aria-label', 'Merritt’s Auto Recycling on Facebook');
+		$('.social-links a.icon-interface-logo').attr('aria-label', 'Contact Merritt’s Auto Recycling');
+
+		function normalizeSlickDots($slider) {
+			var $dots = $slider.find('.slick-dots');
+			$dots.find('li').removeAttr('aria-hidden');
+			$dots.find('button').each(function (index) {
+				$(this).attr('aria-label', 'Go to slide ' + (index + 1));
+			});
+		}
+
+		var $accessibleSliders = $('#mainSlider, .text-icon-carousel, .testimonials-carousel, .person-carousel, .category-carousel, .post-carousel, .prd-carousel');
+		$accessibleSliders.on('init reInit afterChange', function () {
+			normalizeSlickDots($(this));
+		});
+
+		$('iframe[data-map-src]').each(function () {
+			var frame = this;
+			var loadMap = function () {
+				var source = frame.getAttribute('data-map-src');
+				if (!source) return;
+				frame.setAttribute('src', source);
+				frame.removeAttribute('data-map-src');
+			};
+			if ('IntersectionObserver' in window) {
+				var observer = new IntersectionObserver(function (entries) {
+					if (entries.some(function (entry) { return entry.isIntersecting; })) {
+						observer.disconnect();
+						loadMap();
+					}
+				});
+				observer.observe(frame);
+			} else {
+				loadMap();
+			}
+		});
+
 		// print coupons
 		printThis('.print-link', '.coupon-print');
 		
@@ -188,11 +231,13 @@
 				var $this = $(this);
 				$heightCol.toggleClass('slide-active');
 				$this.toggleClass('slide-active');
+				$this.attr('aria-expanded', $this.hasClass('slide-active') ? 'true' : 'false');
 				$shiftMenu.toggleClass('slide-active');
 			});
 			$closeNav.on("click", function (e) {
 				$heightCol.toggleClass('slide-active');
 				$shiftMenu.toggleClass('slide-active');
+				$navbarToggle.removeClass('slide-active').attr('aria-expanded', 'false');
 			});
 		}
 

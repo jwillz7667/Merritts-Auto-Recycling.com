@@ -13,6 +13,11 @@ on:
       - '.github/workflows/lighthouse.yml'
       - 'package.json'
       - 'package-lock.json'
+      - 'css/**'
+      - 'js/**'
+      - 'scripts/_lib/transform.mts'
+      - 'scripts/apply-env.mts'
+      - 'scripts/apply-performance.mts'
       - 'scripts/lighthouse-check.mts'
   schedule:
     - cron: '0 11 * * 1' # Mondays 11:00 UTC
@@ -27,7 +32,7 @@ jobs:
   lighthouse:
     name: Lighthouse CI gate
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -43,6 +48,22 @@ jobs:
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
+
+      - name: Wait for this commit to reach production
+        env:
+          DEPLOYMENT_MARKER: https://merritts-auto-recycling.com/deployment-sha.txt
+        run: |
+          for attempt in $(seq 1 60); do
+            deployed_sha=$(curl --fail --silent --show-error "${DEPLOYMENT_MARKER}?run=${GITHUB_RUN_ID}" || true)
+            if [ "$deployed_sha" = "$GITHUB_SHA" ]; then
+              echo "Production is serving $GITHUB_SHA"
+              exit 0
+            fi
+            echo "Waiting for production deployment ($attempt/60)..."
+            sleep 10
+          done
+          echo "Production did not reach $GITHUB_SHA within 10 minutes" >&2
+          exit 1
 
       - name: Run Lighthouse
         env:

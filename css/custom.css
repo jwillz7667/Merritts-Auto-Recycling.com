@@ -1580,6 +1580,10 @@ html {
 .block.bg-2,
 .block.bg-3 {
   background: url(../images/block-bg-1.jpg) no-repeat fixed center center;
+  background-image: image-set(
+    url(../images/optimized/block-bg-1.avif) type('image/avif'),
+    url(../images/block-bg-1.jpg) type('image/jpeg')
+  );
   background-size: cover;
   padding: 75px 0 60px;
 }
@@ -1683,6 +1687,10 @@ html {
 }
 body:not(.home) {
   background: url(../images/header-photo-bg.jpg) repeat-y center 0;
+  background-image: image-set(
+    url(../images/optimized/header-photo-bg.avif) type('image/avif'),
+    url(../images/header-photo-bg.jpg) type('image/jpeg')
+  );
 }
 body:not(.home) #pageContent {
   padding-top: 100px;
@@ -1723,6 +1731,10 @@ body:not(.home) #pageContent {
 @media (max-width: 991px) {
   #pageTitle {
     background: url(../images/header-photo-bg.jpg) repeat 0;
+    background-image: image-set(
+      url(../images/optimized/header-photo-bg.avif) type('image/avif'),
+      url(../images/header-photo-bg.jpg) type('image/jpeg')
+    );
   }
 }
 .row-grey {
@@ -1773,6 +1785,10 @@ header.page-header:before {
 }
 header .header-row {
   background: url(../images/grey-bg.png) repeat;
+  background-image: image-set(
+    url(../images/optimized/grey-bg.avif) type('image/avif'),
+    url(../images/grey-bg.png) type('image/png')
+  );
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
@@ -4370,6 +4386,10 @@ h2 + .testimonials {
 /*-----  3.10 Banner Under Slider--------*/
 .banner-under-slider {
   background: url(../images/banner-bg.png);
+  background-image: image-set(
+    url(../images/optimized/banner-bg.avif) type('image/avif'),
+    url(../images/banner-bg.png) type('image/png')
+  );
   color: #fff;
   padding: 50px 0 47px;
   margin-bottom: 110px;
@@ -7540,4 +7560,65 @@ a.appointment.appointment-cta:focus-visible {
 }
 a.appointment.appointment-cta:active {
   transform: translateY(1px);
+}
+
+/* Lighthouse follow-up: retain the bright brand green on dark surfaces while
+   using an AA-safe shade for emphasized headings on the white content canvas. */
+#pageContent h1 .color,
+#pageContent h2 .color,
+#pageContent h3 .color,
+#pageContent h4 .color,
+#pageContent h5 .color {
+  color: #5c7f00 !important;
+}
+#pageContent .bg-1 .color,
+#pageContent .bg-2 .color,
+#pageContent .bg-3 .color,
+#pageContent .appointment-banner .color {
+  color: #a9e200 !important;
+}
+
+/* Reserve the first hero's space before Slick initializes. Without this, all
+   three raw slides stack and then collapse into one, producing a large CLS. */
+#mainSlider:not(.slick-initialized) .slide:not(:first-child) {
+  display: none;
+}
+@media (max-width: 991px) {
+  #mainSliderWrapper {
+    min-height: 520px;
+  }
+}
+@media (max-width: 767px) {
+  #mainSliderWrapper {
+    min-height: 420px;
+  }
+}
+@media (max-width: 479px) {
+  #mainSliderWrapper {
+    min-height: 360px;
+  }
+}
+
+/* Keep the visual 8px carousel dot while exposing a 28px touch target. */
+.slick-dots li button,
+.slick-dots li button:hover,
+.slick-dots li button:focus,
+.slick-dots li.slick-active button,
+.slick-dots li.slick-active button:hover {
+  width: 28px;
+  height: 28px;
+  margin: 0 2px;
+  background: transparent !important;
+}
+.slick-dots li button::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #767676;
+  inset: 10px;
+}
+.slick-dots li.slick-active button::before {
+  background: #5c7f00;
 }
