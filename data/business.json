@@ -29,15 +29,25 @@
   },
   "openingHours": [
     {
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "09:00",
-      "closes": "18:00"
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "08:00",
+      "closes": "20:00"
     }
   ],
-  "openingHoursDisplay": "Open Daily 9:00 AM – 6:00 PM",
+  "openingHoursDisplay": "Open Every Day 8:00 AM – 8:00 PM",
   "closedDays": [],
   "priceRange": "$$",
-  "paymentAccepted": ["Cash"],
+  "paymentAccepted": [
+    "Cash"
+  ],
   "currenciesAccepted": "USD",
   "areaServedCounties": [
     "Hennepin County, MN",
@@ -52,7 +62,10 @@
   "gbpCid": "10346311406139911893",
   "gbpUrl": "https://share.google/V9RTL8Y2wxrYL6PS8",
   "hasMap": "https://www.google.com/maps?cid=10346311406139911893",
-  "sameAs": ["https://www.facebook.com/profile.php?id=61565403974405", "https://share.google/V9RTL8Y2wxrYL6PS8"],
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=61565403974405",
+    "https://share.google/V9RTL8Y2wxrYL6PS8"
+  ],
   "social": {
     "facebook": "https://www.facebook.com/profile.php?id=61565403974405",
     "googleBusinessProfile": "https://share.google/V9RTL8Y2wxrYL6PS8"
