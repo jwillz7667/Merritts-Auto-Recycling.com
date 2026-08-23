@@ -130,10 +130,8 @@
   "regions": [
     "iad1"
   ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api/maintenance"
-    }
-  ]
+  "proxy": {
+    "entrypoint": "maintenance-proxy.ts",
+    "matcher": "/(.*)"
+  }
 }
