@@ -39,6 +39,41 @@
       "source": "/placemarks/:slug.html",
       "destination": "/placemarks/:slug",
       "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/faq",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/testimonials",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/about-brad",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/quote-calculator",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/placemarks/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "headers": [
@@ -129,9 +164,5 @@
   },
   "regions": [
     "iad1"
-  ],
-  "proxy": {
-    "entrypoint": "maintenance-proxy.ts",
-    "matcher": "/(.*)"
-  }
+  ]
 }
