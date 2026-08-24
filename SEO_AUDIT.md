@@ -6,37 +6,37 @@ Legacy baseline commit: `94010ccf1dd88c5bb8d0b4145a5767fe84f80958`
 
 ## Executive summary
 
-The legacy site had useful entity information and a working static deployment model, but its acquisition strategy depended on duplicated location pages, repeated high-risk claims, and a brittle generated-HTML workflow. The rebuild moves to a typed Astro content system, keeps one canonical local entity, reduces the service-area footprint to pages supported by current facts, and places the cash-offer path at the center of the site.
+The legacy site had useful entity information and a working static deployment model, but its acquisition strategy depended on duplicated location pages, repeated high-risk claims, and a brittle generated-HTML workflow. The rebuild moves to a typed Astro content system, keeps one canonical local entity, reduces the service-area footprint to pages supported by current facts, and places direct call and text actions at the center of the cash-for-cars journey.
 
 The production domain should stay on its maintenance page until the owner has completed the verification queue and a Vercel Preview has passed form-delivery testing.
 
 ## Legacy baseline
 
-| Area              | Legacy finding                                                                                                                                                                      | Impact                                                | Rebuild response                                                                 |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Rendering         | Hand-authored and script-mutated static HTML using Bootstrap 3, jQuery, Slick, and regex transforms                                                                                 | High maintenance risk; content and metadata can drift | Astro components and typed source data                                           |
-| Crawl surface     | More than 70 HTML pages, including 53 city/county placemark pages                                                                                                                   | Thin/duplicated content and doorway-page risk         | 20 indexable routes; only two detailed service-area pages                        |
-| Home page         | Literal `$1` artifact visible above the main interface                                                                                                                              | Severe trust and quality defect                       | Eliminated; build test forbids `$1`                                              |
-| Heading structure | No clear visible H1 on the audited home page                                                                                                                                        | Weak primary topic and accessibility signal           | Exactly one H1 required on every HTML page                                       |
-| Primary intent    | Cash-for-cars intent competed with towing/repair-like language and large keyword blocks                                                                                             | Ambiguous conversion path                             | Cash-offer request, call, and acquisition-related removal are explicit           |
-| Claims            | “Top dollar,” fixed price ranges, same-day pickup, free towing, no-title acceptance, licensing, insurance, recycling percentages, and “Rated #1” appeared without supplied evidence | Legal, trust, and spam risk                           | Claims removed or qualified pending owner evidence                               |
-| Reviews           | Eight testimonials and aggregate rating markup were stored in repository data without supplied source records                                                                       | Review-policy and structured-data risk                | Links to live Google profile; no quotes or aggregateRating                       |
-| Local entity      | Correct NAP existed, but broad areaServed and location pages extended well beyond verified proof                                                                                    | Entity dilution and local doorway risk                | One canonical business at the real Brooklyn Center address                       |
-| Hours             | Legacy source said 9 AM–6 PM daily                                                                                                                                                  | Incorrect business information                        | Owner-corrected 8 AM–8 PM daily across UI and schema                             |
-| Content           | Multiple posts used volatile price figures, broad legal statements, and dated year keywords                                                                                         | Staleness and accuracy risk                           | Five evergreen guides with conservative wording and agency links                 |
-| Forms             | Zod, Resend, and Turnstile existed, but quote confirmation failure returned an error after the lead had already arrived                                                             | Duplicate-lead risk and confusing user experience     | Internal delivery first; customer confirmation best-effort; provider idempotency |
-| Performance       | Large legacy framework/plugin CSS and JS; externally hosted fonts                                                                                                                   | Additional request and execution cost                 | One 19.2 KB CSS asset, no external fonts, no framework runtime                   |
-| Redirects         | Only a small group of extension redirects existed                                                                                                                                   | Migration risk                                        | Complete primary/blog/form mapping and placemark fallback                        |
+| Area              | Legacy finding                                                                                                                                                                      | Impact                                                | Rebuild response                                                                |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Rendering         | Hand-authored and script-mutated static HTML using Bootstrap 3, jQuery, Slick, and regex transforms                                                                                 | High maintenance risk; content and metadata can drift | Astro components and typed source data                                          |
+| Crawl surface     | More than 70 HTML pages, including 53 city/county placemark pages                                                                                                                   | Thin/duplicated content and doorway-page risk         | 19 indexable routes; only two detailed service-area pages                       |
+| Home page         | Literal `$1` artifact visible above the main interface                                                                                                                              | Severe trust and quality defect                       | Eliminated; build test forbids `$1`                                             |
+| Heading structure | No clear visible H1 on the audited home page                                                                                                                                        | Weak primary topic and accessibility signal           | Exactly one H1 required on every HTML page                                      |
+| Primary intent    | Cash-for-cars intent competed with towing/repair-like language and large keyword blocks                                                                                             | Ambiguous conversion path                             | Cash-for-cars, direct contact, and acquisition-related removal are explicit     |
+| Claims            | “Top dollar,” fixed price ranges, same-day pickup, free towing, no-title acceptance, licensing, insurance, recycling percentages, and “Rated #1” appeared without supplied evidence | Legal, trust, and spam risk                           | Claims removed or qualified pending owner evidence                              |
+| Reviews           | Eight testimonials and aggregate rating markup were stored in repository data without supplied source records                                                                       | Review-policy and structured-data risk                | Links to live Google profile; no quotes or aggregateRating                      |
+| Local entity      | Correct NAP existed, but broad areaServed and location pages extended well beyond verified proof                                                                                    | Entity dilution and local doorway risk                | One canonical business at the real Brooklyn Center address                      |
+| Hours             | Legacy source said 9 AM–6 PM daily                                                                                                                                                  | Incorrect business information                        | Owner-corrected 8 AM–8 PM daily across UI and schema                            |
+| Content           | Multiple posts used volatile price figures, broad legal statements, and dated year keywords                                                                                         | Staleness and accuracy risk                           | Five evergreen guides with conservative wording and agency links                |
+| Forms             | Multiple acquisition and appointment forms complicated the conversion path                                                                                                          | Duplicate-lead risk and confusing user experience     | Offer and appointment forms retired; one protected general-inquiry form remains |
+| Performance       | Large legacy framework/plugin CSS and JS; externally hosted fonts                                                                                                                   | Additional request and execution cost                 | One 19.2 KB CSS asset, no external fonts, no framework runtime                  |
+| Redirects         | Only a small group of extension redirects existed                                                                                                                                   | Migration risk                                        | Complete primary/blog/form mapping and placemark fallback                       |
 
 ## New crawl and index model
 
-- 20 indexable canonical URLs in `sitemap.xml`
+- 19 indexable canonical URLs in `sitemap.xml`
 - one noindex `/thank-you` route
 - one noindex custom 404 page
 - one canonical origin with a permanent `www` redirect
 - clean URLs and no trailing slash
 - permanent mappings for primary legacy pages, blog posts, forms, and placemarks
-- `robots.txt` permits public content and blocks `/thank-you`
+- `robots.txt` permits crawling; `/thank-you` and 404 use page-level `noindex`
 
 ## On-page system
 
@@ -46,7 +46,7 @@ Every indexable page includes:
 - absolute canonical URL
 - one visible H1
 - descriptive section headings
-- prominent call and offer-request actions
+- prominent call and text actions
 - consistent NAP and corrected hours in the footer
 - Open Graph and Twitter card fields
 - one shared LocalBusiness/WebSite graph plus page-specific schema where appropriate
@@ -105,18 +105,23 @@ Implemented:
 - XML sitemap generated from the typed route set
 - preserved 308 redirects for legacy value transfer
 - one canonical local entity and consistent IDs
+- explicit indexable-page robots controls with large image previews and unrestricted eligible snippets
+- automatic breadcrumb structured data for interior pages that do not already define it
+- no AI-only markup or `llms.txt`; current Google guidance requires the same crawl, snippet, content, and page-experience fundamentals used for standard Search
+
+The implementation-to-guidance mapping is maintained in `SEO_2026_COMPLIANCE.md`.
 
 ## Remaining launch blockers
 
-| Priority | Blocker                                                              | Owner action                                                |
-| -------- | -------------------------------------------------------------------- | ----------------------------------------------------------- |
-| P0       | Operational claims are not yet evidenced                             | Review `CONTENT_VERIFICATION_REQUIRED.md`                   |
-| P0       | Forms have not been tested with production Vercel environment values | Complete Preview quote and contact submissions              |
-| P0       | Photo rights have not been documented                                | Approve the five selected legacy derivatives                |
-| P1       | Google Business Profile hours may still differ                       | Update GBP to 8 AM–8 PM daily before launch                 |
-| P1       | Analytics container and consent decision are unconfirmed             | Approve measurement setup or launch without analytics       |
-| P1       | Search Console/Bing access is unconfirmed                            | Verify properties and submit sitemap after launch           |
-| P2       | Additional service areas may be valid but lack proof                 | Add only after owner confirmation and unique local evidence |
+| Priority | Blocker                                                                    | Owner action                                                |
+| -------- | -------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| P0       | Operational claims are not yet evidenced                                   | Review `CONTENT_VERIFICATION_REQUIRED.md`                   |
+| P0       | Contact form has not been tested with production Vercel environment values | Complete a Preview contact submission                       |
+| P0       | Photo rights have not been documented                                      | Approve the five selected legacy derivatives                |
+| P1       | Google Business Profile hours may still differ                             | Update GBP to 8 AM–8 PM daily before launch                 |
+| P1       | Analytics container and consent decision are unconfirmed                   | Approve measurement setup or launch without analytics       |
+| P1       | Search Console/Bing access is unconfirmed                                  | Verify properties and submit sitemap after launch           |
+| P2       | Additional service areas may be valid but lack proof                       | Add only after owner confirmation and unique local evidence |
 
 ## Expected outcome
 

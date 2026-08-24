@@ -38,17 +38,51 @@ const forbiddenText = [
   'paid cash on the spot',
   'Most junk cars in the Twin Cities range',
   'aggregateRating',
+  '/get-cash-offer',
 ];
+const titles = new Map();
+const descriptions = new Map();
 
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8');
   const label = relative(rootPath, file);
   if (count(html, /<h1(?:\s|>)/gi) !== 1) fail(`${label} must contain exactly one H1.`);
-  if (!/<title>[^<]{10,}<\/title>/i.test(html)) fail(`${label} is missing a useful title.`);
-  if (!/<meta name="description" content="[^"]{40,}"/i.test(html))
-    fail(`${label} is missing a useful description.`);
+  const title = html.match(/<title>([^<]{10,})<\/title>/i)?.[1];
+  if (!title) fail(`${label} is missing a useful title.`);
+  const description = html.match(/<meta name="description" content="([^"]{40,})"/i)?.[1];
+  if (!description) fail(`${label} is missing a useful description.`);
   if (!/<link rel="canonical" href="https:\/\/merritts-auto-recycling\.com\//i.test(html)) {
     fail(`${label} is missing a canonical URL.`);
+  }
+  if (/<meta name="keywords"/i.test(html)) fail(`${label} contains an obsolete keywords tag.`);
+
+  const robots = html.match(/<meta name="robots" content="([^"]+)"/i)?.[1] ?? '';
+  const noindex = robots.includes('noindex');
+  if (!noindex && !robots.includes('max-image-preview:large')) {
+    fail(`${label} does not allow large search image previews.`);
+  }
+  if (!noindex) {
+    const priorTitle = titles.get(title);
+    if (priorTitle) fail(`${label} duplicates the title used by ${priorTitle}.`);
+    titles.set(title, label);
+    const priorDescription = descriptions.get(description);
+    if (priorDescription) fail(`${label} duplicates the description used by ${priorDescription}.`);
+    descriptions.set(description, label);
+  }
+
+  for (const property of ['og:title', 'og:description', 'og:url', 'og:image']) {
+    if (!html.includes(`property="${property}"`)) fail(`${label} is missing ${property}.`);
+  }
+  for (const name of ['twitter:card', 'twitter:title', 'twitter:description', 'twitter:image']) {
+    if (!html.includes(`name="${name}"`)) fail(`${label} is missing ${name}.`);
+  }
+
+  const jsonLd = html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/i)?.[1];
+  if (!jsonLd) fail(`${label} is missing JSON-LD.`);
+  try {
+    JSON.parse(jsonLd);
+  } catch {
+    fail(`${label} contains invalid JSON-LD.`);
   }
   for (const value of requiredText) {
     if (!html.includes(value)) fail(`${label} is missing required business text: ${value}`);
@@ -94,6 +128,7 @@ for (const asset of files.filter((file) => /\.(css|js)$/.test(file))) {
 const sitemap = readFileSync(join(rootPath, 'sitemap.xml'), 'utf8');
 if (sitemap.includes('/thank-you') || sitemap.includes('/404'))
   fail('sitemap includes a noindex route.');
+if (sitemap.includes('/get-cash-offer')) fail('sitemap includes the retired cash-offer form.');
 if (
   !sitemap.includes('/service-areas/brooklyn-center') ||
   !sitemap.includes('/service-areas/minneapolis')
@@ -101,6 +136,11 @@ if (
   fail('sitemap is missing a published service area.');
 }
 if (!existsSync(join(rootPath, 'robots.txt'))) fail('robots.txt is missing.');
+const robotsText = readFileSync(join(rootPath, 'robots.txt'), 'utf8');
+if (!robotsText.includes('Allow: /')) fail('robots.txt does not allow public crawling.');
+if (robotsText.includes('Disallow: /thank-you')) {
+  fail('robots.txt blocks crawlers from seeing the thank-you page noindex directive.');
+}
 
 console.log(
   `Validated ${htmlFiles.length} HTML pages, ${files.length} built files, internal links, approved image paths, metadata, crawl controls, and asset budgets.`,

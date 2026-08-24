@@ -15,7 +15,7 @@ describe('legacy redirect map', () => {
     );
     expect(redirects.get('/about-brad.html')).toBe('/about');
     expect(redirects.get('/testimonials.html')).toBe('/reviews');
-    expect(redirects.get('/quote-calculator.html')).toBe('/get-cash-offer');
+    expect(redirects.get('/quote-calculator.html')).toBe('/cash-for-junk-cars');
     expect(redirects.get('/blog/index.html')).toBe('/guides');
   });
 

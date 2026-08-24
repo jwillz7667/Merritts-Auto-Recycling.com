@@ -78,7 +78,9 @@ const isCurrent = (href: string) =>
   <div class="mobile-nav-actions">
     <a class="button" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call</a
     >
-    <a class="button button--dark" href="/get-cash-offer">Request offer</a>
+    <a class="button button--dark" href={business.textUri} data-track="text_click"
+      ><Icon name="message" /> Text</a
+    >
   </div>
 </nav>
 

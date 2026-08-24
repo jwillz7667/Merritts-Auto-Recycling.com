@@ -11,9 +11,9 @@ const schema = [
     '@type': 'WebPage',
     '@id': `${business.siteUrl}/#webpage`,
     url: `${business.siteUrl}/`,
-    name: "Cash Offers for Junk Cars | Merritt's Auto Recycling",
+    name: "Cash for Junk Cars in Minneapolis | Merritt's Auto Recycling",
     description:
-      "Request a cash offer for an unwanted vehicle from Merritt's Auto Recycling in Brooklyn Center. Call daily from 8 AM to 8 PM.",
+      "Call Merritt's Auto Recycling to discuss cash for an unwanted vehicle in Brooklyn Center or Minneapolis. Open daily from 8 AM to 8 PM.",
     isPartOf: { '@id': `${business.siteUrl}/#website` },
     about: { '@id': `${business.siteUrl}/#business` },
   },
@@ -29,8 +29,8 @@ const schema = [
 ---
 
 <BaseLayout
-  title="Cash Offers for Junk Cars | Merritt's Auto Recycling"
-  description="Request a cash offer for an unwanted vehicle from Merritt's Auto Recycling in Brooklyn Center. Call every day from 8:00 AM to 8:00 PM."
+  title="Cash for Junk Cars in Minneapolis | Merritt's Auto Recycling"
+  description="Call Merritt's Auto Recycling about cash for an unwanted car, truck, van, or SUV in Brooklyn Center or Minneapolis. Open daily, 8:00 AM–8:00 PM."
   path="/"
   schema={schema}
 >
@@ -38,17 +38,17 @@ const schema = [
     <div class="hero-grid">
       <div class="hero-copy">
         <p class="eyebrow eyebrow--light">Brooklyn Center · Serving vehicle owners since 1988</p>
-        <h1 id="home-heading">Turn an unwanted vehicle into a clear next step.</h1>
+        <h1 id="home-heading">Cash for your unwanted vehicle—without the guesswork.</h1>
         <p class="lede lede--light">
-          Tell Merritt’s about the car, truck, van, or SUV. We’ll review the details, explain the
-          process, and confirm any offer and removal terms before you decide.
+          Call with the year, make, model, condition, and location. Merritt’s reviews the details,
+          explains the process, and confirms every offer and pickup term directly.
         </p>
         <div class="button-row">
           <a class="button" href={business.phoneUri} data-track="call_click">
             <Icon name="phone" /> Call {business.phone}
           </a>
-          <a class="button button--outline-light" href="/get-cash-offer">
-            Request an offer <Icon name="arrow" />
+          <a class="button button--outline-light" href={business.textUri} data-track="text_click">
+            <Icon name="message" /> Text {business.textPhone}
           </a>
         </div>
         <ul class="trust-list" aria-label="Business facts">
@@ -68,6 +68,11 @@ const schema = [
           loading="eager"
           fetchpriority="high"
         />
+        <div class="hero-proof" aria-label="Local business information">
+          <span>Local and established</span>
+          <strong>Brooklyn Center, Minnesota</strong>
+          <small>Serving vehicle owners since 1988</small>
+        </div>
       </div>
     </div>
   </section>
@@ -111,7 +116,8 @@ const schema = [
           <h2 id="steps-heading">Three steps, with confirmation before pickup</h2>
         </div>
         <p class="lede lede--light">
-          The website starts the conversation. Merritt’s confirms the real-world details directly.
+          A direct conversation keeps the process accurate. Merritt’s confirms the real-world
+          details before anything is scheduled.
         </p>
       </div>
       <ol class="steps">
@@ -137,8 +143,8 @@ const schema = [
         <p class="eyebrow">Start with an honest description</p>
         <h2 id="vehicles-heading">Ask about many vehicle conditions</h2>
         <p class="lede">
-          Merritt’s reviews each request individually. Acceptance and removal availability depend on
-          the actual vehicle and location.
+          Merritt’s reviews each vehicle individually. Acceptance and removal availability depend on
+          the actual condition, location, and access.
         </p>
         <ul class="vehicle-grid" aria-label="Vehicle examples">
           <li>Non-running cars</li>

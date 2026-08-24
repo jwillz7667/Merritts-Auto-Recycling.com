@@ -5,8 +5,8 @@
 Primary business outcomes:
 
 1. qualified phone calls about an unwanted vehicle
-2. successfully delivered vehicle offer requests
-3. qualified text-message starts
+2. qualified text-message starts
+3. successfully delivered general inquiries
 
 Secondary outcomes:
 
@@ -29,15 +29,15 @@ Before enabling Google Tag Manager:
 
 ## Implemented data-layer events
 
-| Event                        | Trigger                                 | Parameters               | Conversion role                                     |
-| ---------------------------- | --------------------------------------- | ------------------------ | --------------------------------------------------- |
-| `site_page_view`             | Every rendered page                     | `page_path`              | Context only                                        |
-| `call_click`                 | Any tracked `tel:` action               | `link_url`, `page_path`  | Primary click proxy                                 |
-| `text_click`                 | Any tracked `sms:` action               | `link_url`, `page_path`  | Secondary click proxy                               |
-| `lead_form_start`            | First focus inside a quote/contact form | `form_type`, `page_path` | Funnel diagnostic                                   |
-| `lead_form_validation_error` | Browser validation blocks submission    | `form_type`, `page_path` | UX diagnostic                                       |
-| `lead_form_success`          | API confirms internal delivery          | `form_type`, `page_path` | Primary conversion for quote; secondary for contact |
-| `lead_form_error`            | Submission fails after client attempt   | `form_type`, `page_path` | Reliability alert/diagnostic                        |
+| Event                        | Trigger                               | Parameters               | Conversion role              |
+| ---------------------------- | ------------------------------------- | ------------------------ | ---------------------------- |
+| `site_page_view`             | Every rendered page                   | `page_path`              | Context only                 |
+| `call_click`                 | Any tracked `tel:` action             | `link_url`, `page_path`  | Primary click proxy          |
+| `text_click`                 | Any tracked `sms:` action             | `link_url`, `page_path`  | Secondary click proxy        |
+| `lead_form_start`            | First focus inside the contact form   | `form_type`, `page_path` | Funnel diagnostic            |
+| `lead_form_validation_error` | Browser validation blocks submission  | `form_type`, `page_path` | UX diagnostic                |
+| `lead_form_success`          | API confirms internal delivery        | `form_type`, `page_path` | Secondary contact conversion |
+| `lead_form_error`            | Submission fails after client attempt | `form_type`, `page_path` | Reliability alert/diagnostic |
 
 No customer name, email, phone, VIN, city, vehicle make/model, message, title status, or Turnstile token is placed in the data layer.
 
@@ -47,7 +47,6 @@ No customer name, email, phone, VIN, city, vehicle make/model, message, title st
 | ----------------------------------------- | --------------------------------------------- | ---------------------------------------- |
 | `call_click`                              | `generate_lead` with `lead_type=phone_click`  | Secondary until call quality is verified |
 | `text_click`                              | `generate_lead` with `lead_type=text_click`   | Secondary                                |
-| `lead_form_success` + `form_type=quote`   | `generate_lead` with `lead_type=quote_form`   | Primary web conversion                   |
 | `lead_form_success` + `form_type=contact` | `generate_lead` with `lead_type=contact_form` | Secondary                                |
 | validation/error events                   | custom diagnostic events                      | Never a conversion                       |
 
@@ -67,7 +66,7 @@ A `tel:` click is not proof of a connected or qualified call. Preferred progress
 Track outside analytics, in a privacy-appropriate lead log or CRM:
 
 - source/medium/campaign when legitimately available
-- quote or contact form
+- phone, text, or contact form
 - serviceable location: yes/no
 - vehicle accepted for review: yes/no
 - reached owner: yes/no
@@ -94,7 +93,7 @@ Before launch:
 - verify the site has no network request to GTM when `PUBLIC_GTM_ID` is absent
 - verify the approved container loads only on intended environments
 - use GTM Preview and GA4 DebugView to confirm every event once
-- submit test quote and contact forms and confirm only successful internal delivery fires `lead_form_success`
+- submit the contact form and confirm only successful internal delivery fires `lead_form_success`
 - verify form errors never fire a conversion
 - check mobile call and text actions
 - confirm no PII appears in dataLayer, network payloads, page URL, or analytics reports

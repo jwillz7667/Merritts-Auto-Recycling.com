@@ -19,8 +19,16 @@
     { "source": "/faq.html", "destination": "/faq", "permanent": true },
     { "source": "/testimonials.html", "destination": "/reviews", "permanent": true },
     { "source": "/testimonials", "destination": "/reviews", "permanent": true },
-    { "source": "/quote-calculator.html", "destination": "/get-cash-offer", "permanent": true },
-    { "source": "/quote-calculator", "destination": "/get-cash-offer", "permanent": true },
+    {
+      "source": "/quote-calculator.html",
+      "destination": "/cash-for-junk-cars",
+      "permanent": true
+    },
+    {
+      "source": "/quote-calculator",
+      "destination": "/cash-for-junk-cars",
+      "permanent": true
+    },
     { "source": "/blog/index.html", "destination": "/guides", "permanent": true },
     { "source": "/blog", "destination": "/guides", "permanent": true },
     {

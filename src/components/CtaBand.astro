@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = 'Ready to tell us about the vehicle?',
-  text = 'Call for the fastest response, or send the details through the secure offer-request form.',
+  title = 'Ready to talk through the vehicle?',
+  text = 'Call for the fastest response or send a text during daily business hours.',
 } = Astro.props;
 ---
 
@@ -23,8 +23,8 @@ const {
       <a class="button button--dark" href={business.phoneUri} data-track="call_click">
         <Icon name="phone" /> Call {business.phone}
       </a>
-      <a class="button button--light" href="/get-cash-offer"
-        >Request an offer <Icon name="arrow" /></a
+      <a class="button button--light" href={business.textUri} data-track="text_click"
+        ><Icon name="message" /> Text {business.textPhone}</a
       >
     </div>
   </div>

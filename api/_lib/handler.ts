@@ -3,13 +3,12 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import type { ZodType } from 'zod';
 import { ZodError } from 'zod';
 
-import { sendLeadEmail, sendQuoteConfirmation, type RequestMeta } from './email.js';
+import { sendLeadEmail, type RequestMeta } from './email.js';
 import { getEnv } from './env.js';
-import type { ContactPayload, QuotePayload } from './schemas.js';
+import type { ContactPayload } from './schemas.js';
 import { verifyTurnstile } from './turnstile.js';
 
-type FormType = 'contact' | 'quote';
-type LeadPayload = ContactPayload | QuotePayload;
+type LeadPayload = ContactPayload;
 type DeliveryResult = { confirmation: 'not_applicable' | 'sent' | 'failed' };
 
 const MAX_BODY_BYTES = 20_000;
@@ -93,7 +92,6 @@ function cleanupCompleted(now: number): void {
 
 async function deliverOnce(
   key: string,
-  formType: FormType,
   payload: LeadPayload,
   meta: RequestMeta,
 ): Promise<{ result: DeliveryResult; duplicate: boolean }> {
@@ -106,17 +104,8 @@ async function deliverOnce(
   if (existing) return { result: await existing, duplicate: true };
 
   const task = (async (): Promise<DeliveryResult> => {
-    await sendLeadEmail(formType, payload, meta, key);
-    if (formType !== 'quote') return { confirmation: 'not_applicable' };
-    try {
-      await sendQuoteConfirmation(payload as QuotePayload, key);
-      return { confirmation: 'sent' };
-    } catch (error) {
-      console.error('quote.confirmation.failed', {
-        message: error instanceof Error ? error.message : 'unknown',
-      });
-      return { confirmation: 'failed' };
-    }
+    await sendLeadEmail(payload, meta, key);
+    return { confirmation: 'not_applicable' };
   })();
 
   inFlight.set(key, task);
@@ -129,10 +118,7 @@ async function deliverOnce(
   }
 }
 
-export function createFormHandler<T extends LeadPayload>(options: {
-  formType: FormType;
-  schema: ZodType<T>;
-}) {
+export function createFormHandler<T extends LeadPayload>(options: { schema: ZodType<T> }) {
   return async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
     res.setHeader('Cache-Control', 'no-store');
     res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -193,7 +179,7 @@ export function createFormHandler<T extends LeadPayload>(options: {
       return;
     }
 
-    const idempotencyKey = `${options.formType}-${readIdempotencyKey(req)}`;
+    const idempotencyKey = `contact-${readIdempotencyKey(req)}`;
     const meta: RequestMeta = {
       ip,
       userAgent: req.headers['user-agent'],
@@ -202,7 +188,7 @@ export function createFormHandler<T extends LeadPayload>(options: {
     };
 
     try {
-      const delivery = await deliverOnce(idempotencyKey, options.formType, payload, meta);
+      const delivery = await deliverOnce(idempotencyKey, payload, meta);
       res.status(200).json({
         ok: true,
         duplicate: delivery.duplicate,
@@ -210,7 +196,7 @@ export function createFormHandler<T extends LeadPayload>(options: {
       });
     } catch (error) {
       console.error('lead.delivery.failed', {
-        formType: options.formType,
+        formType: 'contact',
         message: error instanceof Error ? error.message : 'unknown',
       });
       res.status(502).json({ ok: false, error: 'send_failed' });

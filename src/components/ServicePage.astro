@@ -52,6 +52,7 @@ const schema = [
   path={path}
   schema={schema}
   ogImage={service.image}
+  ogImageAlt={service.imageAlt}
 >
   <PageHero
     eyebrow={service.eyebrow}
@@ -63,8 +64,8 @@ const schema = [
       <a class="button" href={business.phoneUri} data-track="call_click">
         <Icon name="phone" /> Call {business.phone}
       </a>
-      <a class="button button--outline-light" href="/get-cash-offer"
-        >Request an offer <Icon name="arrow" /></a
+      <a class="button button--outline-light" href={business.textUri} data-track="text_click"
+        ><Icon name="message" /> Text {business.textPhone}</a
       >
     </div>
     <ul class="highlight-list" aria-label="Service highlights">
@@ -80,7 +81,7 @@ const schema = [
         <p class="lede">{service.summary}</p>
         <div class="notice">
           <p>
-            An online request is not a guaranteed price or scheduled pickup. Merritt’s confirms the
+            A call or text is not a guaranteed price or scheduled pickup. Merritt’s confirms the
             details and terms directly with the vehicle owner.
           </p>
         </div>

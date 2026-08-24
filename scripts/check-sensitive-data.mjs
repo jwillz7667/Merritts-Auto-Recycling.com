@@ -18,7 +18,6 @@ const skippedFiles = new Set(['.npmrc']);
 const allowedEmails = new Set([
   'merrittsautorecycling@gmail.com',
   'noreply@merritts-auto-recycling.com',
-  'jamie@example.com',
   'taylor@example.com',
 ]);
 const allowedPhoneDigits = new Set([
@@ -26,7 +25,6 @@ const allowedPhoneDigits = new Set([
   '17634382116',
   '7635332775',
   '7634382116',
-  '7635550100',
   '7635550199',
 ]);
 

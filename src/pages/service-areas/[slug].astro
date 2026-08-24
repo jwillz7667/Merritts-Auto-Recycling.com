@@ -22,7 +22,7 @@ const schema = [
   {
     '@type': 'Service',
     '@id': `${business.siteUrl}${path}#service`,
-    name: `Unwanted vehicle offer requests in ${area.city}, MN`,
+    name: `Cash offers for unwanted vehicles in ${area.city}, MN`,
     description: area.description,
     url: `${business.siteUrl}${path}`,
     provider: { '@id': `${business.siteUrl}/#business` },
@@ -64,8 +64,8 @@ const schema = [
       <a class="button" href={business.phoneUri} data-track="call_click"
         ><Icon name="phone" /> Call {business.phone}</a
       >
-      <a class="button button--outline-light" href="/get-cash-offer"
-        >Request an offer <Icon name="arrow" /></a
+      <a class="button button--outline-light" href={business.textUri} data-track="text_click"
+        ><Icon name="message" /> Text {business.textPhone}</a
       >
     </div>
   </PageHero>

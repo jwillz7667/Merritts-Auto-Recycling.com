@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="520" height="112" viewBox="0 0 520 112" role="img" aria-labelledby="title desc">
   <title id="title">Merritt's Auto Recycling</title>
   <desc id="desc">A navy and orange M emblem beside the Merritt's Auto Recycling wordmark</desc>
-  <path fill="#F26A21" d="M10 10h92v92H10z"/>
-  <path fill="#0B1F33" d="M25 80V31h14l17 24 17-24h14v49H72V54L56 76 40 54v26z"/>
-  <path fill="#0B1F33" d="M124 17h377v8H124z"/>
-  <text x="124" y="66" fill="#0B1F33" font-family="Arial,Helvetica,sans-serif" font-size="43" font-weight="800" letter-spacing="1">MERRITT'S</text>
-  <text x="126" y="94" fill="#617080" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" letter-spacing="4.3">AUTO RECYCLING</text>
+  <path fill="#FF6B24" d="M10 10h92v92H10z"/>
+  <path fill="#0A1C2D" d="M25 80V31h14l17 24 17-24h14v49H72V54L56 76 40 54v26z"/>
+  <path fill="#0A1C2D" d="M124 17h377v8H124z"/>
+  <text x="124" y="66" fill="#0A1C2D" font-family="Arial,Helvetica,sans-serif" font-size="43" font-weight="800" letter-spacing="1">MERRITT'S</text>
+  <text x="126" y="94" fill="#627180" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" letter-spacing="4.3">AUTO RECYCLING</text>
 </svg>

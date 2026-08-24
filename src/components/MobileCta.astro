@@ -5,5 +5,5 @@ import Icon from './Icon.astro';
 
 <div class="mobile-cta" aria-label="Quick contact actions">
   <a href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call now</a>
-  <a href="/get-cash-offer"><Icon name="message" /> Request offer</a>
+  <a href={business.textUri} data-track="text_click"><Icon name="message" /> Text now</a>
 </div>

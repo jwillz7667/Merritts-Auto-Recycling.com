@@ -21,7 +21,7 @@ export default defineConfig({
   ],
   webServer: {
     command:
-      'TURNSTILE_SITE_KEY=1x00000000000000000000AA npm run build && TURNSTILE_SITE_KEY=1x00000000000000000000AA npm run preview -- --host 127.0.0.1 --port 4321',
+      'TURNSTILE_SITE_KEY=1x00000000000000000000AA npm run build && python3 -m http.server 4321 --bind 127.0.0.1 --directory dist',
     url: 'http://127.0.0.1:4321',
     reuseExistingServer: true,
     timeout: 120_000,

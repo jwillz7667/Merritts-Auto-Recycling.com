@@ -12,6 +12,7 @@ interface Props {
   noindex?: boolean;
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   ogImage?: string;
+  ogImageAlt?: string;
 }
 
 const {
@@ -21,11 +22,47 @@ const {
   noindex = false,
   schema = [],
   ogImage = '/images/legacy/merritts-tow-truck.jpg',
+  ogImageAlt = "Merritt's Auto Recycling truck carrying a vehicle",
 } = Astro.props;
 
 const canonical = new URL(path, business.siteUrl).toString();
 const absoluteImage = new URL(ogImage, business.siteUrl).toString();
 const pageSchemas = Array.isArray(schema) ? schema : [schema];
+const breadcrumbLabels: Record<string, string> = {
+  about: 'About',
+  'auto-recycling': 'Auto recycling',
+  'cash-for-junk-cars': 'Cash for junk cars',
+  contact: 'Contact',
+  faq: 'FAQ',
+  guides: 'Guides',
+  'junk-car-removal': 'Junk car removal',
+  'junk-car-towing': 'Junk car towing',
+  privacy: 'Privacy',
+  reviews: 'Reviews',
+  'service-areas': 'Service areas',
+};
+const pathSegments = path.split('/').filter(Boolean);
+const hasBreadcrumbSchema = pageSchemas.some((item) => item['@type'] === 'BreadcrumbList');
+const automaticBreadcrumb =
+  !noindex && path !== '/' && !hasBreadcrumbSchema
+    ? {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${business.siteUrl}/` },
+          ...pathSegments.map((segment, index) => {
+            const itemPath = `/${pathSegments.slice(0, index + 1).join('/')}`;
+            return {
+              '@type': 'ListItem',
+              position: index + 2,
+              name:
+                breadcrumbLabels[segment] ??
+                segment.replaceAll('-', ' ').replace(/^./, (letter) => letter.toUpperCase()),
+              item: new URL(itemPath, business.siteUrl).toString(),
+            };
+          }),
+        ],
+      }
+    : null;
 const analyticsId = import.meta.env.PUBLIC_GTM_ID || '';
 const gtmId = /^GTM-[A-Z0-9]+$/.test(analyticsId) ? analyticsId : '';
 const gtmBootstrap = gtmId
@@ -38,10 +75,20 @@ const localBusinessSchema = {
   name: business.name,
   legalName: business.legalName,
   url: `${business.siteUrl}/`,
-  logo: `${business.siteUrl}/brand/logo.svg`,
+  logo: `${business.siteUrl}/brand/mark.svg`,
   image: `${business.siteUrl}/images/legacy/merritts-tow-truck.jpg`,
+  description:
+    'Brooklyn Center auto recycling business discussing cash offers and acquisition-related removal for unwanted vehicles.',
   telephone: '+1-763-533-2775',
   email: business.email,
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+1-763-533-2775',
+      contactType: 'customer service',
+      availableLanguage: ['English'],
+    },
+  ],
   address: {
     '@type': 'PostalAddress',
     streetAddress: business.address.street,
@@ -82,7 +129,12 @@ const webSiteSchema = {
 
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
-  '@graph': [localBusinessSchema, webSiteSchema, ...pageSchemas],
+  '@graph': [
+    localBusinessSchema,
+    webSiteSchema,
+    ...pageSchemas,
+    ...(automaticBreadcrumb ? [automaticBreadcrumb] : []),
+  ],
 }).replaceAll('<', '\\u003c');
 ---
 
@@ -95,7 +147,12 @@ const jsonLd = JSON.stringify({
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, nofollow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={business.name} />
@@ -104,15 +161,17 @@ const jsonLd = JSON.stringify({
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={absoluteImage} />
-    <meta property="og:image:alt" content="Merritt's Auto Recycling truck carrying a vehicle" />
+    <meta property="og:image:secure_url" content={absoluteImage} />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <link rel="icon" href="/brand/mark.svg" type="image/svg+xml" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#0B1F33" />
+    <meta name="theme-color" content="#0A1C2D" />
     <script is:inline type="application/ld+json" set:html={jsonLd} />
     {gtmBootstrap && <script is:inline set:html={gtmBootstrap} />}
     <slot name="head" />

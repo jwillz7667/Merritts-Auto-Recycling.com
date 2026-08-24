@@ -12,7 +12,7 @@ function track(event: string, details: Record<string, unknown> = {}): void {
 
 function readErrorMessage(data: unknown): string {
   if (!data || typeof data !== 'object')
-    return 'We could not send the request. Please call instead.';
+    return 'We could not send the message. Please call instead.';
   const body = data as { error?: string; fields?: Record<string, string> };
   if (body.fields) {
     const first = Object.entries(body.fields)[0];
@@ -22,11 +22,11 @@ function readErrorMessage(data: unknown): string {
     rate_limited: 'Too many requests were sent. Wait a minute or call instead.',
     turnstile_failed: 'The security check expired. Please try it again.',
     validation_failed: 'Please review the required fields and try again.',
-    send_failed: 'We could not deliver the request. Please call instead.',
+    send_failed: 'We could not deliver the message. Please call instead.',
   };
   return body.error
-    ? (messages[body.error] ?? 'We could not send the request. Please call instead.')
-    : 'We could not send the request. Please call instead.';
+    ? (messages[body.error] ?? 'We could not send the message. Please call instead.')
+    : 'We could not send the message. Please call instead.';
 }
 
 function enhanceForm(form: HTMLFormElement): void {
@@ -72,7 +72,7 @@ function enhanceForm(form: HTMLFormElement): void {
     }
     if (status) {
       status.dataset.state = '';
-      status.textContent = 'Sending your request securely…';
+      status.textContent = 'Sending your message securely…';
     }
 
     const formData = new FormData(form);
@@ -96,7 +96,7 @@ function enhanceForm(form: HTMLFormElement): void {
       succeeded = true;
       if (status) {
         status.dataset.state = 'success';
-        status.textContent = 'Request sent. Redirecting…';
+        status.textContent = 'Message sent. Redirecting…';
       }
       idempotencyKey = crypto.randomUUID();
       window.setTimeout(() => {

@@ -60,8 +60,8 @@ This checklist includes work outside the codebase. None of these actions guarant
 
 ## Post-launch checks
 
-- [ ] Day 0: confirm production canonical, robots, sitemap, schema, forms, headers, and primary redirects.
-- [ ] Day 2–3: check form delivery, Vercel errors, Search Console live tests, and GBP website link.
+- [ ] Day 0: confirm production canonical, robots, sitemap, schema, contact form, headers, and primary redirects.
+- [ ] Day 2–3: check contact-form delivery, Vercel errors, Search Console live tests, and GBP website link.
 - [ ] Week 1: review crawl/index changes and redirect requests.
-- [ ] Week 2–4: compare qualified calls and successful forms to baseline, not raw traffic alone.
-- [ ] Monthly: verify hours, categories, photos, citations, form delivery, and review links.
+- [ ] Week 2–4: compare qualified calls, text starts, and successful inquiries to baseline, not raw traffic alone.
+- [ ] Monthly: verify hours, categories, photos, citations, contact-form delivery, and review links.

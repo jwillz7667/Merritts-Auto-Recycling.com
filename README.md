@@ -6,17 +6,17 @@ The production domain currently remains on a dedicated maintenance page. This re
 
 ## What is included
 
-- Astro 7 static site with 20 indexable routes, plus noindex thank-you and 404 pages
-- conversion-led cash-offer flow with prominent call and text actions
-- Zod-validated Vercel functions for quote and contact submissions
+- Astro 7 static site with 19 indexable routes, plus noindex thank-you and 404 pages
+- conversion-led cash-for-cars flow centered on prominent call and text actions
+- Zod-validated Vercel function for general contact submissions
 - Cloudflare Turnstile, honeypot, origin checks, body limits, warm-instance rate limiting, and Resend idempotency keys
-- internal lead delivery before a best-effort quote confirmation to the customer
+- secure internal lead delivery with provider idempotency
 - one canonical LocalBusiness entity using the real Brooklyn Center address
 - focused service-area pages for Brooklyn Center and Minneapolis only
 - five evergreen guides with Minnesota agency sources where legal or environmental facts are discussed
 - XML sitemap, robots controls, canonical metadata, Open Graph metadata, security headers, and permanent legacy redirects
 - Vitest, build validation, Playwright, and axe accessibility checks
-- a full audit, keyword map, redirect map, verification queue, measurement plan, local SEO launch checklist, and performance report
+- a full audit, 2026 SEO compliance record, keyword map, redirect map, verification queue, measurement plan, local SEO launch checklist, and performance report
 
 ## Immutable business information
 
@@ -52,23 +52,24 @@ Astro serves the local site at `http://localhost:4321` by default.
 
 Create an untracked `.env.local` for local development using the variable names below. Configure the same values directly in Vercel for Preview and Production; never commit their values.
 
-| Variable               |    Required | Purpose                                             |
-| ---------------------- | ----------: | --------------------------------------------------- |
-| `RESEND_API_KEY`       |         Yes | Sends internal lead and customer-confirmation email |
-| `RESEND_FROM_EMAIL`    |         Yes | Verified sender address                             |
-| `RECIPIENT_EMAIL`      |         Yes | Internal lead destination                           |
-| `TURNSTILE_SECRET_KEY` |         Yes | Server-side Turnstile verification                  |
-| `TURNSTILE_SITE_KEY`   |         Yes | Public widget key rendered at build time            |
-| `ALLOWED_ORIGIN`       | Recommended | Canonical production origin                         |
-| `PUBLIC_GTM_ID`        |          No | Reserved for an owner-approved analytics container  |
+| Variable               |    Required | Purpose                                            |
+| ---------------------- | ----------: | -------------------------------------------------- |
+| `RESEND_API_KEY`       |         Yes | Sends the internal contact-inquiry email           |
+| `RESEND_FROM_EMAIL`    |         Yes | Verified sender address                            |
+| `RECIPIENT_EMAIL`      |         Yes | Internal lead destination                          |
+| `TURNSTILE_SECRET_KEY` |         Yes | Server-side Turnstile verification                 |
+| `TURNSTILE_SITE_KEY`   |         Yes | Public widget key rendered at build time           |
+| `ALLOWED_ORIGIN`       | Recommended | Canonical production origin                        |
+| `PUBLIC_GTM_ID`        |          No | Reserved for an owner-approved analytics container |
 
-Forms are deliberately disabled in previews where the public Turnstile site key is absent. The call action remains available.
+The general inquiry form is deliberately disabled in previews where the public Turnstile site key is absent. Call and text actions remain available.
 
 ## Commands
 
 ```bash
 npm run check          # Astro and TypeScript diagnostics
 npm run lint           # ESLint
+npm run security:scan  # prevent credentials and private data from entering the publish set
 npm run test           # Vitest unit and policy tests
 npm run build          # typecheck, static build, and output validation
 npm run test:e2e       # Playwright and axe checks
@@ -91,7 +92,7 @@ The build validator checks:
 
 ```text
 src/
-  components/          shared UI, forms, navigation, structured content
+  components/          shared UI, contact form, navigation, structured content
   data/                typed business, service, area, FAQ, and guide content
   layouts/             canonical metadata and entity graph
   pages/               static Astro routes and sitemap endpoint
@@ -99,7 +100,7 @@ src/
 api/
   _lib/                validation, abuse prevention, email, and handler pipeline
   contact.ts           general inquiry function
-  quote.ts             vehicle offer-request function
+  quote.ts             retired legacy endpoint returning HTTP 410
 public/
   brand/               new SVG logo system
   images/legacy/       selected images copied from the old site only
@@ -108,13 +109,12 @@ tests/                 unit, redirect, browser, responsive, and accessibility ch
 
 All marketing pages are prerendered. The only runtime code is under `/api`.
 
-## Form reliability model
+## Contact-form reliability model
 
 1. Browser performs native constraint validation.
 2. Server enforces request method, size, origin, rate limit, honeypot, Zod schema, and Turnstile.
 3. The internal lead email is sent with a 24-hour Resend idempotency key.
-4. Only after internal delivery succeeds does the quote function attempt a customer confirmation.
-5. Customer confirmation failure is logged but does not discard or falsely report failure for an already-delivered lead.
+4. A successful browser response is returned only after the internal inquiry is accepted by the email provider.
 
 Warm-instance rate limiting is defense in depth; Turnstile and provider idempotency remain effective across function instances. If abuse volume warrants durable distributed rate limiting, add a managed store after owner approval.
 
@@ -134,7 +134,7 @@ Do not merge this rebuild into the production branch or remove the maintenance p
 
 1. `CONTENT_VERIFICATION_REQUIRED.md` is reviewed by the owner.
 2. Resend and Turnstile variables are verified in a Vercel Preview deployment.
-3. Form submissions reach the intended inbox and customer confirmation behaves as documented.
+3. General contact submissions reach the intended inbox.
 4. Analytics and consent decisions are approved.
 5. Redirects are sampled in Preview.
 6. The owner explicitly approves production launch.

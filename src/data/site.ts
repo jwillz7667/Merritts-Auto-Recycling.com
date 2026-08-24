@@ -49,9 +49,9 @@ export const globalFaqs: Faq[] = [
       'The year, make, model, general condition, vehicle location, and whether you have the keys and title are the most useful details. If you are unsure about any item, say so—Merritt’s can ask follow-up questions.',
   },
   {
-    question: 'Is an online request a final offer?',
+    question: 'Does a phone conversation guarantee an offer or pickup?',
     answer:
-      'No. An online request starts the conversation. Merritt’s reviews the vehicle details and confirms any offer and removal terms directly with you before you decide whether to proceed.',
+      'No. Merritt’s reviews the vehicle details and confirms any offer, removal terms, and pickup window directly with you before you decide whether to proceed.',
   },
   {
     question: 'Can I ask about a vehicle that does not run?',
@@ -105,17 +105,17 @@ export const services: Service[] = [
   {
     slug: 'cash-for-junk-cars',
     name: 'Cash for junk cars',
-    eyebrow: 'Start with the vehicle details',
-    title: 'Request a cash offer for an unwanted vehicle',
+    eyebrow: 'Call with the vehicle details',
+    title: 'Get a straightforward cash offer for an unwanted vehicle',
     description:
-      "Tell Merritt's Auto Recycling about your unwanted car, truck, van, or SUV and request a no-obligation cash offer in the Twin Cities area.",
+      "Call Merritt's Auto Recycling about an unwanted car, truck, van, or SUV and discuss a cash offer in the Twin Cities area.",
     summary:
-      'Share the basics by phone, text, or the secure request form. Merritt’s will review the details, ask any necessary questions, and explain the next step before you make a decision.',
+      'Share the basics by phone or text. Merritt’s will review the details, ask any necessary questions, and explain the next step before you make a decision.',
     image: '/images/legacy/merritts-tow-truck.jpg',
     imageAlt: "A Merritt's Auto Recycling truck carrying a vehicle",
     highlights: [
-      'No-obligation request',
-      'Clear vehicle-detail checklist',
+      'Direct phone conversation',
+      'Vehicle details reviewed',
       'Offer and terms confirmed directly',
     ],
     sections: [
@@ -138,7 +138,7 @@ export const services: Service[] = [
         ],
       },
       {
-        heading: 'No pressure and no hidden web estimate',
+        heading: 'No pressure and no made-up web estimate',
         paragraphs: [
           'The website does not display a made-up instant price. Merritt’s reviews the actual vehicle information and confirms an offer directly. You choose whether to proceed after the terms are clear.',
         ],
@@ -183,7 +183,7 @@ export const services: Service[] = [
       {
         heading: 'Terms come before scheduling',
         paragraphs: [
-          'An online form is not a pickup appointment. Merritt’s confirms the vehicle, any offer, removal terms, and a pickup window directly with you before dispatch.',
+          'A call or text is not a pickup appointment. Merritt’s confirms the vehicle, any offer, removal terms, and a pickup window directly with you before dispatch.',
         ],
       },
     ],
@@ -221,7 +221,7 @@ export const services: Service[] = [
       {
         heading: 'Start with a direct conversation',
         paragraphs: [
-          'Call or submit the vehicle details. Merritt’s will confirm whether it can move forward and what documents, access, and scheduling information are required.',
+          'Call or text the vehicle details. Merritt’s will confirm whether it can move forward and what documents, access, and scheduling information are required.',
         ],
       },
     ],
@@ -281,9 +281,9 @@ export const serviceAreas: ServiceArea[] = [
   {
     slug: 'brooklyn-center',
     city: 'Brooklyn Center',
-    title: 'Cash-offer requests in Brooklyn Center, MN',
+    title: 'Cash offers for junk cars in Brooklyn Center, MN',
     description:
-      "Merritt's Auto Recycling is based in Brooklyn Center. Call with your vehicle details or request a cash offer online.",
+      "Merritt's Auto Recycling is based in Brooklyn Center. Call with your vehicle details to discuss a cash offer and pickup availability.",
     intro:
       'Merritt’s real business address is in Brooklyn Center, making this the company’s home location—not a virtual office or doorway page.',
     proof: 'Business address: 3106 68th Ave N, Brooklyn Center, MN 55429.',
@@ -296,7 +296,7 @@ export const serviceAreas: ServiceArea[] = [
   {
     slug: 'minneapolis',
     city: 'Minneapolis',
-    title: 'Cash-offer requests in Minneapolis, MN',
+    title: 'Cash offers for junk cars in Minneapolis, MN',
     description:
       "Contact Merritt's Auto Recycling about an unwanted vehicle in Minneapolis and confirm current pickup availability for your exact address.",
     intro:
@@ -314,7 +314,6 @@ export const serviceAreas: ServiceArea[] = [
 export const publishedRoutes = [
   '/',
   ...services.map((service) => `/${service.slug}`),
-  '/get-cash-offer',
   '/service-areas',
   ...serviceAreas.map((area) => `/service-areas/${area.slug}`),
   '/about',

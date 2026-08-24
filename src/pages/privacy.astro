@@ -8,7 +8,7 @@ const path = '/privacy';
 
 <BaseLayout
   title="Privacy Notice | Merritt's Auto Recycling"
-  description="How Merritt's Auto Recycling handles information submitted through its website forms and contact links."
+  description="How Merritt's Auto Recycling handles information submitted through its contact form and direct contact links."
   path={path}
 >
   <PageHero
@@ -23,26 +23,25 @@ const path = '/privacy';
       <section class="content-section">
         <h2>Information you provide</h2>
         <p>
-          The offer and contact forms can collect your name, phone number, email address, vehicle
-          information, vehicle location, title-status selection, preferred reply method, and any
-          message you enter. Do not submit Social Security numbers, payment-card numbers, photo IDs,
-          or other unnecessary sensitive data.
+          The contact form can collect your name, phone number, email address, selected subject, and
+          the message you enter. Do not submit Social Security numbers, payment-card numbers, photo
+          IDs, or other unnecessary sensitive data.
         </p>
       </section>
       <section class="content-section">
         <h2>How the information is used</h2>
         <p>
-          Merritt’s uses form information to review and respond to your inquiry, discuss a possible
-          vehicle transaction, prevent abuse, troubleshoot delivery, and maintain business records.
-          Submission does not create a sale or pickup appointment.
+          Merritt’s uses form information to respond to your inquiry, discuss a possible vehicle
+          transaction when relevant, prevent abuse, troubleshoot delivery, and maintain ordinary
+          business records. Submission does not create a sale or pickup appointment.
         </p>
       </section>
       <section class="content-section">
         <h2>Service providers</h2>
         <p>
           The website is hosted on Vercel. Cloudflare Turnstile helps detect automated abuse. Resend
-          delivers form emails. Those providers may process technical data needed to provide their
-          services under their own terms and privacy policies.
+          delivers the form email. Those providers may process technical data needed to provide
+          their services under their own terms and privacy policies.
         </p>
       </section>
       <section class="content-section">
@@ -57,7 +56,7 @@ const path = '/privacy';
       <section class="content-section">
         <h2>Your choices</h2>
         <p>
-          You can call instead of using a form. To ask about a website submission, email
+          You can call or text instead of using the form. To ask about a website submission, email
           <a href={`mailto:${business.email}`}>{business.email}</a> or call
           <a href={business.phoneUri} data-track="call_click">{business.phone}</a>.
         </p>

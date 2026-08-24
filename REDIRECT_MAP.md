@@ -4,24 +4,24 @@ Vercel uses `permanent: true`, which emits a method-preserving permanent redirec
 
 ## Primary pages
 
-| Legacy source            | Destination       | Reason                        |
-| ------------------------ | ----------------- | ----------------------------- |
-| `/index.html`            | `/`               | Canonical home                |
-| `/about-brad.html`       | `/about`          | Closest branded entity page   |
-| `/about-brad`            | `/about`          | Old clean canonical variant   |
-| `/contact.html`          | `/contact`        | Direct replacement            |
-| `/faq.html`              | `/faq`            | Direct replacement            |
-| `/testimonials.html`     | `/reviews`        | Live-profile review policy    |
-| `/testimonials`          | `/reviews`        | Clean variant                 |
-| `/quote-calculator.html` | `/get-cash-offer` | Direct conversion replacement |
-| `/quote-calculator`      | `/get-cash-offer` | Clean variant                 |
+| Legacy source            | Destination           | Reason                      |
+| ------------------------ | --------------------- | --------------------------- |
+| `/index.html`            | `/`                   | Canonical home              |
+| `/about-brad.html`       | `/about`              | Closest branded entity page |
+| `/about-brad`            | `/about`              | Old clean canonical variant |
+| `/contact.html`          | `/contact`            | Direct replacement          |
+| `/faq.html`              | `/faq`                | Direct replacement          |
+| `/testimonials.html`     | `/reviews`            | Live-profile review policy  |
+| `/testimonials`          | `/reviews`            | Clean variant               |
+| `/quote-calculator.html` | `/cash-for-junk-cars` | Closest service replacement |
+| `/quote-calculator`      | `/cash-for-junk-cars` | Clean variant               |
 
 ## Legacy form processors
 
 | Legacy source                   | Destination        | Notes                                                                     |
 | ------------------------------- | ------------------ | ------------------------------------------------------------------------- |
 | `/form/process-contact.php`     | `/api/contact`     | Preserves method and endpoint; current validation and consent rules apply |
-| `/form/process-quote.php`       | `/api/quote`       | Preserves method and endpoint; current validation and consent rules apply |
+| `/form/process-quote.php`       | `/api/quote`       | Returns 410; the online cash-offer form is retired                        |
 | `/form/process-appointment.php` | `/api/appointment` | Returns 410; appointment booking is retired until confirmed               |
 
 ## Blog migration
@@ -128,7 +128,7 @@ Before production launch, test at least:
 - one fallback city page
 - one fallback county page
 - each mapped blog topic
-- both legacy form processor redirects, confirming current validation remains enforced
+- all legacy form processor redirects, confirming retired endpoints return 410
 - canonical `www` behavior
 
 Confirm one hop, correct final status, preserved query parameters, and no redirect loop.

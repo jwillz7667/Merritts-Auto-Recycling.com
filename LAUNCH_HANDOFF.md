@@ -29,7 +29,7 @@ Do not replace it automatically. The full rebuild requires explicit owner approv
 
 ### 3. Functional validation
 
-- [ ] Submit a quote with safe test data.
+- [ ] Submit the general contact form with safe test data.
 - [ ] Confirm exactly one internal lead email arrives.
 - [ ] Confirm customer acknowledgement arrives or logs a best-effort failure without losing the lead.
 - [ ] Retry the same request/idempotency key and confirm no duplicate email.
@@ -48,7 +48,7 @@ Do not replace it automatically. The full rebuild requires explicit owner approv
 - [ ] Review tablet at 768 × 1024.
 - [ ] Review mobile at 390 × 844 and 320 × 720.
 - [ ] Confirm no horizontal overflow, clipped navigation, or sticky-CTA overlap.
-- [ ] Run Lighthouse on home, offer form, one area page, and one guide.
+- [ ] Run Lighthouse on home, cash-for-cars, contact, one area page, and one guide.
 
 ### 5. SEO migration
 
@@ -65,7 +65,7 @@ Do not replace it automatically. The full rebuild requires explicit owner approv
 - [ ] Confirm the exact branch Vercel production tracks.
 - [ ] Merge/push the approved refactor to that branch.
 - [ ] Watch the Vercel deployment to completion.
-- [ ] Verify the production home, offer form, contact form, headers, schema, sitemap, robots, and redirect samples.
+- [ ] Verify the production home, call/text actions, contact form, headers, schema, sitemap, robots, and redirect samples.
 - [ ] Keep the final maintenance commit available for immediate rollback.
 
 ## Rollback

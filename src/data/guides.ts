@@ -161,7 +161,7 @@ export const guides: Guide[] = [
       {
         heading: 'Current market conditions',
         paragraphs: [
-          'Demand for parts, metals, and complete vehicles changes. That is why old blog posts that publish a fixed dollar range can be misleading. Request a current offer for the actual vehicle instead.',
+          'Demand for parts, metals, and complete vehicles changes. That is why old blog posts that publish a fixed dollar range can be misleading. Call to discuss the actual vehicle instead.',
         ],
       },
     ],

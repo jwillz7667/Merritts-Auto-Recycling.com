@@ -6,7 +6,6 @@ const primaryRoutes = [
   '/cash-for-junk-cars',
   '/junk-car-removal',
   '/auto-recycling',
-  '/get-cash-offer',
   '/service-areas',
   '/service-areas/brooklyn-center',
   '/service-areas/minneapolis',
@@ -84,19 +83,20 @@ test('approved imagery is local and no aggregate rating is emitted', async ({ pa
   expect(jsonLd).toContain('20:00');
 });
 
-test('offer form exposes labels and native validation feedback', async ({ page }) => {
-  await page.goto('/get-cash-offer');
-  await expect(page.getByLabel('Name', { exact: true })).toBeVisible();
-  await expect(page.getByLabel('Vehicle condition', { exact: true })).toBeVisible();
-  await expect(page.getByLabel('Title status', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Send vehicle details' }).click();
-  await expect(page.locator('[data-form-status]')).toHaveText(
-    'Please complete the required fields.',
+test('cash-for-cars page uses direct phone and text actions', async ({ page }) => {
+  await page.goto('/cash-for-junk-cars');
+  await expect(page.getByRole('link', { name: /Call 763-533-2775/ }).first()).toHaveAttribute(
+    'href',
+    'tel:+1-763-533-2775',
+  );
+  await expect(page.getByRole('link', { name: /Text 763-438-2116/ }).first()).toHaveAttribute(
+    'href',
+    'sms:+1-763-438-2116',
   );
 });
 
 test('key pages have no serious or critical axe violations', async ({ page }) => {
-  for (const route of ['/', '/get-cash-offer', '/contact', '/service-areas/brooklyn-center']) {
+  for (const route of ['/', '/cash-for-junk-cars', '/contact', '/service-areas/brooklyn-center']) {
     await page.goto(route);
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])

@@ -6,16 +6,16 @@ Measured locally on August 23, 2026 using the production Astro build.
 
 | Metric                   |                                        Result |
 | ------------------------ | --------------------------------------------: |
-| Astro static pages built |                                 22 HTML pages |
-| Indexable sitemap URLs   |                                            20 |
-| Total built files        |                                            34 |
-| Total `dist` size        |                                        1.6 MB |
-| Shared CSS               |                              19,202 bytes raw |
-| Shared CSS gzip          |                          approximately 5.2 KB |
+| Astro static pages built |                                 21 HTML pages |
+| Indexable sitemap URLs   |                                            19 |
+| Total built files        |                                            33 |
+| Total `dist` size        |                                        1.8 MB |
+| Shared CSS               |                              21,824 bytes raw |
+| Shared CSS gzip          |                          approximately 5.8 KB |
 | External web fonts       |                                             0 |
 | Client framework runtime |                                             0 |
 | Legacy photo set         | approximately 1.1 MB across five format files |
-| Production build time    |     approximately 1.1 seconds after typecheck |
+| Production build time    |     approximately 0.7 seconds after typecheck |
 
 The home hero selects a 205 KB AVIF when supported, with WebP and JPEG fallbacks. Below-the-fold images use native lazy loading. Width and height are set on every photographic image to reserve layout space.
 
@@ -51,7 +51,7 @@ These are design expectations, not a field-data result. Network, Vercel edge beh
 Run Lighthouse and WebPageTest against a Vercel Preview and again after production launch. Test at minimum:
 
 - home on mobile throttling
-- `/get-cash-offer`
+- `/cash-for-junk-cars`
 - `/service-areas/brooklyn-center`
 - one guide
 
