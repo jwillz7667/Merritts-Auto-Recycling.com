@@ -1,0 +1,71 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Icon from '@/components/Icon.astro';
+import PageHero from '@/components/PageHero.astro';
+import { guides } from '@/data/guides';
+import { business } from '@/data/site';
+
+const path = '/guides';
+const schema = {
+  '@type': 'CollectionPage',
+  '@id': `${business.siteUrl}${path}#webpage`,
+  url: `${business.siteUrl}${path}`,
+  name: "Junk Car Guides | Merritt's Auto Recycling",
+  hasPart: guides.map((guide) => ({
+    '@type': 'Article',
+    headline: guide.title,
+    url: `${business.siteUrl}/guides/${guide.slug}`,
+  })),
+};
+---
+
+<BaseLayout
+  title="Junk Car Guides | Merritt's Auto Recycling"
+  description="Practical guides about vehicle documents, offer factors, non-running vehicle access, pickup preparation, and auto recycling in Minnesota."
+  path={path}
+  schema={schema}
+>
+  <PageHero
+    eyebrow="Practical, source-aware information"
+    title="Guides for an unwanted vehicle decision"
+    description="Use these checklists to prepare better questions. Legal and environmental topics link to current Minnesota agency resources where available."
+    crumbs={[{ label: 'Home', href: '/' }, { label: 'Guides' }]}
+  />
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="card-grid">
+        {
+          guides.map((guide, index) => (
+            <article class="card service-card">
+              <div class="card-number" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <p class="area-tag">{guide.readingTime}</p>
+              <h2>{guide.shortTitle}</h2>
+              <p>{guide.description}</p>
+              <a class="text-link" href={`/guides/${guide.slug}`}>
+                Read guide <Icon name="arrow" />
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container--narrow flow">
+      <p class="eyebrow">Important limitation</p>
+      <h2>Guidance is not a vehicle-specific decision</h2>
+      <p class="lede">
+        Documentation, access, vehicle condition, and local rules can vary. Merritt’s confirms its
+        own transaction requirements directly; Minnesota agencies remain the authority for state
+        title and environmental rules.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

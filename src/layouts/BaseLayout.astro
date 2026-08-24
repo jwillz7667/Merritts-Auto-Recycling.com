@@ -1,0 +1,217 @@
+---
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+import MobileCta from '@/components/MobileCta.astro';
+import { business } from '@/data/site';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+  ogImage?: string;
+  ogImageAlt?: string;
+}
+
+const {
+  title,
+  description,
+  path = Astro.url.pathname,
+  noindex = false,
+  schema = [],
+  ogImage = '/images/legacy/merritts-tow-truck.jpg',
+  ogImageAlt = "Merritt's Auto Recycling truck carrying a vehicle",
+} = Astro.props;
+
+const canonical = new URL(path, business.siteUrl).toString();
+const absoluteImage = new URL(ogImage, business.siteUrl).toString();
+const pageSchemas = Array.isArray(schema) ? schema : [schema];
+const breadcrumbLabels: Record<string, string> = {
+  about: 'About',
+  'auto-recycling': 'Auto recycling',
+  'cash-for-junk-cars': 'Cash for junk cars',
+  contact: 'Contact',
+  faq: 'FAQ',
+  guides: 'Guides',
+  'junk-car-removal': 'Junk car removal',
+  'junk-car-towing': 'Junk car towing',
+  privacy: 'Privacy',
+  reviews: 'Reviews',
+  'service-areas': 'Service areas',
+};
+const pathSegments = path.split('/').filter(Boolean);
+const hasBreadcrumbSchema = pageSchemas.some((item) => item['@type'] === 'BreadcrumbList');
+const automaticBreadcrumb =
+  !noindex && path !== '/' && !hasBreadcrumbSchema
+    ? {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${business.siteUrl}/` },
+          ...pathSegments.map((segment, index) => {
+            const itemPath = `/${pathSegments.slice(0, index + 1).join('/')}`;
+            return {
+              '@type': 'ListItem',
+              position: index + 2,
+              name:
+                breadcrumbLabels[segment] ??
+                segment.replaceAll('-', ' ').replace(/^./, (letter) => letter.toUpperCase()),
+              item: new URL(itemPath, business.siteUrl).toString(),
+            };
+          }),
+        ],
+      }
+    : null;
+const analyticsId = import.meta.env.PUBLIC_GTM_ID || '';
+const gtmId = /^GTM-[A-Z0-9]+$/.test(analyticsId) ? analyticsId : '';
+const gtmBootstrap = gtmId
+  ? `window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});const firstScript=document.getElementsByTagName('script')[0];const gtmScript=document.createElement('script');gtmScript.async=true;gtmScript.src='https://www.googletagmanager.com/gtm.js?id=${gtmId}';firstScript?.parentNode?.insertBefore(gtmScript,firstScript);`
+  : '';
+
+const localBusinessSchema = {
+  '@type': 'LocalBusiness',
+  '@id': `${business.siteUrl}/#business`,
+  name: business.name,
+  legalName: business.legalName,
+  url: `${business.siteUrl}/`,
+  logo: `${business.siteUrl}/brand/mark.svg`,
+  image: `${business.siteUrl}/images/legacy/merritts-tow-truck.jpg`,
+  description:
+    'Brooklyn Center auto recycling business discussing cash offers and acquisition-related removal for unwanted vehicles.',
+  telephone: '+1-763-533-2775',
+  email: business.email,
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+1-763-533-2775',
+      contactType: 'customer service',
+      availableLanguage: ['English'],
+    },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: business.address.street,
+    addressLocality: business.address.city,
+    addressRegion: business.address.region,
+    postalCode: business.address.postalCode,
+    addressCountry: business.address.country,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: business.openingHours.days.map((day) => `https://schema.org/${day}`),
+      opens: business.openingHours.opens,
+      closes: business.openingHours.closes,
+    },
+  ],
+  founder: {
+    '@type': 'Person',
+    name: business.founder,
+  },
+  foundingDate: business.foundingDate,
+  areaServed: [
+    { '@type': 'City', name: 'Brooklyn Center, Minnesota' },
+    { '@type': 'City', name: 'Minneapolis, Minnesota' },
+  ],
+  sameAs: [business.googleBusinessProfile, business.facebook],
+  hasMap: business.googleMaps,
+};
+
+const webSiteSchema = {
+  '@type': 'WebSite',
+  '@id': `${business.siteUrl}/#website`,
+  url: `${business.siteUrl}/`,
+  name: business.name,
+  publisher: { '@id': `${business.siteUrl}/#business` },
+  inLanguage: 'en-US',
+};
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    localBusinessSchema,
+    webSiteSchema,
+    ...pageSchemas,
+    ...(automaticBreadcrumb ? [automaticBreadcrumb] : []),
+  ],
+}).replaceAll('<', '\\u003c');
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=yes" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, nofollow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:image:secure_url" content={absoluteImage} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0A1C2D" />
+    <script is:inline type="application/ld+json" set:html={jsonLd} />
+    {gtmBootstrap && <script is:inline set:html={gtmBootstrap} />}
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <Header currentPath={Astro.url.pathname} />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <MobileCta />
+
+    <script>
+      import '@/scripts/forms';
+
+      type DataLayerWindow = Window & { dataLayer?: Array<Record<string, unknown>> };
+      const analyticsWindow = window as DataLayerWindow;
+      analyticsWindow.dataLayer ??= [];
+      analyticsWindow.dataLayer.push({
+        event: 'site_page_view',
+        page_path: window.location.pathname,
+      });
+
+      document.addEventListener('click', (event) => {
+        const target =
+          event.target instanceof Element
+            ? event.target.closest<HTMLElement>('[data-track]')
+            : null;
+        if (!target) return;
+        analyticsWindow.dataLayer?.push({
+          event: target.dataset.track,
+          link_url: target instanceof HTMLAnchorElement ? target.href : undefined,
+          page_path: window.location.pathname,
+        });
+      });
+    </script>
+  </body>
+</html>

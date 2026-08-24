@@ -1,48 +1,38 @@
-import { env } from './env.js';
+import { getEnv } from './env.js';
 
-/**
- * Verify a Turnstile token against Cloudflare's siteverify endpoint.
- *
- * Returns `true` only when Cloudflare returns `success: true`. Logs (without echoing the token)
- * so deployments can be debugged via Vercel logs without leaking secrets.
- */
-
-const VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-
-type SiteverifyResponse = {
+type TurnstileResponse = {
   success: boolean;
-  challenge_ts?: string;
   hostname?: string;
-  'error-codes'?: string[];
   action?: string;
-  cdata?: string;
+  'error-codes'?: string[];
 };
 
-export async function verifyTurnstile(
-  token: string,
-  remoteIp: string | undefined,
-): Promise<boolean> {
-  const body = new URLSearchParams();
-  body.set('secret', env.TURNSTILE_SECRET_KEY);
-  body.set('response', token);
+export async function verifyTurnstile(token: string, remoteIp?: string): Promise<boolean> {
+  const env = getEnv();
+  const body = new URLSearchParams({
+    secret: env.TURNSTILE_SECRET_KEY,
+    response: token,
+  });
   if (remoteIp) body.set('remoteip', remoteIp);
 
-  let result: SiteverifyResponse;
   try {
-    const res = await fetch(VERIFY_URL, {
+    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      body: body.toString(),
+      body,
+      signal: AbortSignal.timeout(7000),
     });
-    result = (await res.json()) as SiteverifyResponse;
-  } catch (err) {
-    console.error('turnstile.verify.network_error', (err as Error).message);
+    if (!response.ok) return false;
+    const result = (await response.json()) as TurnstileResponse;
+    if (!result.success) {
+      console.warn('turnstile.rejected', { codes: result['error-codes'] ?? [] });
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error('turnstile.failed', {
+      message: error instanceof Error ? error.message : 'unknown',
+    });
     return false;
   }
-
-  if (!result.success) {
-    console.warn('turnstile.verify.rejected', { codes: result['error-codes'] ?? [] });
-    return false;
-  }
-  return true;
 }

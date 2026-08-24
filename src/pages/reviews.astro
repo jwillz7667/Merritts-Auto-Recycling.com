@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Icon from '@/components/Icon.astro';
+import PageHero from '@/components/PageHero.astro';
+import { business } from '@/data/site';
+
+const path = '/reviews';
+---
+
+<BaseLayout
+  title="Customer Reviews | Merritt's Auto Recycling"
+  description="Visit Merritt's verified Google Business Profile to read current customer feedback or leave a review after working with the business."
+  path={path}
+>
+  <PageHero
+    eyebrow="Feedback from the source"
+    title="Read current reviews on Google"
+    description="This website does not republish unattributed or unverified testimonials. Use the linked Google Business Profile to see feedback in its original context."
+    crumbs={[{ label: 'Home', href: '/' }, { label: 'Reviews' }]}
+  />
+
+  <section class="section section--paper">
+    <div class="container--narrow flow">
+      <p class="eyebrow">Transparent review policy</p>
+      <h2>No copied quotes and no self-published rating score</h2>
+      <p class="lede">
+        Review counts and ratings can change. Merritt’s therefore links to the live business profile
+        instead of hard-coding an aggregate rating or placing unverified quotes into structured
+        data.
+      </p>
+      <div class="card">
+        <h3>Google Business Profile</h3>
+        <p>
+          Read the latest available customer feedback, check profile details, or leave a review.
+        </p>
+        <a
+          class="button button--dark"
+          href={business.googleBusinessProfile}
+          rel="noopener noreferrer"
+        >
+          Open the Google profile <Icon name="arrow" />
+        </a>
+      </div>
+      <p class="notice">
+        If owner-approved review excerpts are added later, each quote should retain source, date,
+        permission, and a link back to the original review when possible.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

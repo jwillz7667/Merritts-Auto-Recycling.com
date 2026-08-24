@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/Icon.astro';
+import { business } from '@/data/site';
+---
+
+<BaseLayout
+  title="Message Received | Merritt's Auto Recycling"
+  description="Merritt's Auto Recycling received your website message."
+  path="/thank-you"
+  noindex
+>
+  <section class="error-page">
+    <div class="container--narrow flow">
+      <p class="eyebrow">Message received</p>
+      <h1>Thanks—your message was sent.</h1>
+      <p class="lede">
+        Merritt’s will review the information and respond using the contact details you provided.
+        For an immediate vehicle conversation, call during daily business hours.
+      </p>
+      <div class="button-row" style="justify-content: center;">
+        <a class="button button--dark" href={business.phoneUri} data-track="call_click"
+          ><Icon name="phone" /> Call {business.phone}</a
+        >
+        <a class="button button--outline" href="/">Return home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,79 +1,114 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
-  "outputDirectory": ".",
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.merritts-auto-recycling.com"
-        }
-      ],
+      "has": [{ "type": "host", "value": "www.merritts-auto-recycling.com" }],
       "destination": "https://merritts-auto-recycling.com/$1",
       "permanent": true
     },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/about-brad.html", "destination": "/about", "permanent": true },
+    { "source": "/about-brad", "destination": "/about", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact", "permanent": true },
+    { "source": "/faq.html", "destination": "/faq", "permanent": true },
+    { "source": "/testimonials.html", "destination": "/reviews", "permanent": true },
+    { "source": "/testimonials", "destination": "/reviews", "permanent": true },
     {
-      "source": "/form/process-contact.php",
-      "destination": "/api/contact",
+      "source": "/quote-calculator.html",
+      "destination": "/cash-for-junk-cars",
       "permanent": true
     },
     {
-      "source": "/form/process-quote.php",
-      "destination": "/api/quote",
+      "source": "/quote-calculator",
+      "destination": "/cash-for-junk-cars",
       "permanent": true
     },
+    { "source": "/blog/index.html", "destination": "/guides", "permanent": true },
+    { "source": "/blog", "destination": "/guides", "permanent": true },
+    {
+      "source": "/blog/auto-recycling-environmental-impact-twin-cities.html",
+      "destination": "/guides/what-happens-after-junk-car-pickup",
+      "permanent": true
+    },
+    {
+      "source": "/blog/what-happens-to-car-after-pickup.html",
+      "destination": "/guides/what-happens-after-junk-car-pickup",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-much-is-my-junk-car-worth-minnesota-2026.html",
+      "destination": "/guides/what-affects-a-junk-car-offer",
+      "permanent": true
+    },
+    {
+      "source": "/blog/running-vs-non-running-junk-car-prices.html",
+      "destination": "/guides/what-affects-a-junk-car-offer",
+      "permanent": true
+    },
+    {
+      "source": "/blog/scrap-value-by-weight-minnesota-guide.html",
+      "destination": "/guides/what-affects-a-junk-car-offer",
+      "permanent": true
+    },
+    {
+      "source": "/blog/minnesota-junk-car-title-requirements.html",
+      "destination": "/guides/minnesota-junk-car-documents",
+      "permanent": true
+    },
+    {
+      "source": "/blog/mn-license-plates-before-junking.html",
+      "destination": "/guides/minnesota-junk-car-documents",
+      "permanent": true
+    },
+    {
+      "source": "/blog/free-junk-car-removal-minneapolis-mn.html",
+      "destination": "/junk-car-removal",
+      "permanent": true
+    },
+    {
+      "source": "/blog/junk-vs-tradein-vs-private-sale.html",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/blog/top-10-most-junked-cars-minnesota.html",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/placemarks/brooklyn-center-mn.html",
+      "destination": "/service-areas/brooklyn-center",
+      "permanent": true
+    },
+    {
+      "source": "/placemarks/brooklyn-center-mn",
+      "destination": "/service-areas/brooklyn-center",
+      "permanent": true
+    },
+    {
+      "source": "/placemarks/minneapolis-mn.html",
+      "destination": "/service-areas/minneapolis",
+      "permanent": true
+    },
+    {
+      "source": "/placemarks/minneapolis-mn",
+      "destination": "/service-areas/minneapolis",
+      "permanent": true
+    },
+    { "source": "/placemarks/:slug.html", "destination": "/service-areas", "permanent": true },
+    { "source": "/placemarks/:slug", "destination": "/service-areas", "permanent": true },
+    { "source": "/form/process-contact.php", "destination": "/api/contact", "permanent": true },
+    { "source": "/form/process-quote.php", "destination": "/api/quote", "permanent": true },
     {
       "source": "/form/process-appointment.php",
       "destination": "/api/appointment",
       "permanent": true
-    },
-    {
-      "source": "/index.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/placemarks/:slug.html",
-      "destination": "/placemarks/:slug",
-      "permanent": true
-    },
-    {
-      "source": "/contact",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/faq",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/testimonials",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/about-brad",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/quote-calculator",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/placemarks/:path*",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/blog/:path*",
-      "destination": "/",
-      "permanent": false
     }
   ],
   "headers": [
@@ -84,85 +119,34 @@
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
         },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         {
           "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=(self), interest-cohort=(), payment=(), usb=()"
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
         },
-        {
-          "key": "Cross-Origin-Opener-Policy",
-          "value": "same-origin"
-        },
-        {
-          "key": "X-DNS-Prefetch-Control",
-          "value": "on"
-        },
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://maps.googleapis.com https://maps.gstatic.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com https://www.google.com https://maps.google.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://maps.googleapis.com https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; font-src 'self'; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com https://www.google-analytics.com https://*.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
         }
       ]
     },
     {
-      "source": "/(.*)\\.html",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
+      "source": "/(brand|images|_astro)/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     },
     {
-      "source": "/(images|css|js|iconfont)/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(sitemap\\.xml|robots\\.txt|llms\\.txt|llms-full\\.txt)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=3600"
-        },
-        {
-          "key": "Content-Type",
-          "value": "text/plain; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/sitemap\\.xml",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/xml; charset=utf-8"
-        }
-      ]
+      "source": "/(sitemap.xml|robots.txt)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=3600" }]
     }
   ],
   "functions": {
     "api/*.ts": {
-      "runtime": "@vercel/node@5.1.0",
       "maxDuration": 10,
       "memory": 256
     }
   },
-  "regions": [
-    "iad1"
-  ]
+  "regions": ["iad1"]
 }

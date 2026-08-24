@@ -1,0 +1,247 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import FaqList from '@/components/FaqList.astro';
+import Icon from '@/components/Icon.astro';
+import Picture from '@/components/Picture.astro';
+import { business, globalFaqs, serviceAreas, services } from '@/data/site';
+
+const schema = [
+  {
+    '@type': 'WebPage',
+    '@id': `${business.siteUrl}/#webpage`,
+    url: `${business.siteUrl}/`,
+    name: "Cash for Junk Cars in Minneapolis | Merritt's Auto Recycling",
+    description:
+      "Call Merritt's Auto Recycling to discuss cash for an unwanted vehicle in Brooklyn Center or Minneapolis. Open daily from 8 AM to 8 PM.",
+    isPartOf: { '@id': `${business.siteUrl}/#website` },
+    about: { '@id': `${business.siteUrl}/#business` },
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: globalFaqs.slice(0, 6).map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="Cash for Junk Cars in Minneapolis | Merritt's Auto Recycling"
+  description="Call Merritt's Auto Recycling about cash for an unwanted car, truck, van, or SUV in Brooklyn Center or Minneapolis. Open daily, 8:00 AM–8:00 PM."
+  path="/"
+  schema={schema}
+>
+  <section class="hero" aria-labelledby="home-heading">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow eyebrow--light">Brooklyn Center · Serving vehicle owners since 1988</p>
+        <h1 id="home-heading">Cash for your unwanted vehicle—without the guesswork.</h1>
+        <p class="lede lede--light">
+          Call with the year, make, model, condition, and location. Merritt’s reviews the details,
+          explains the process, and confirms every offer and pickup term directly.
+        </p>
+        <div class="button-row">
+          <a class="button" href={business.phoneUri} data-track="call_click">
+            <Icon name="phone" /> Call {business.phone}
+          </a>
+          <a class="button button--outline-light" href={business.textUri} data-track="text_click">
+            <Icon name="message" /> Text {business.textPhone}
+          </a>
+        </div>
+        <ul class="trust-list" aria-label="Business facts">
+          <li><strong>Since 1988</strong><span>Established local business</span></li>
+          <li><strong>Daily hours</strong><span>8:00 AM–8:00 PM</span></li>
+          <li><strong>Real location</strong><span>Brooklyn Center, Minnesota</span></li>
+        </ul>
+      </div>
+      <div class="hero-media">
+        <Picture
+          src="/images/legacy/merritts-tow-truck.jpg"
+          avif="/images/legacy/merritts-tow-truck.avif"
+          webp="/images/legacy/merritts-tow-truck.webp"
+          alt="A Merritt's Auto Recycling truck carrying a red vehicle"
+          width={1600}
+          height={1070}
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="hero-proof" aria-label="Local business information">
+          <span>Local and established</span>
+          <strong>Brooklyn Center, Minnesota</strong>
+          <small>Serving vehicle owners since 1988</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="services-heading">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">What Merritt’s handles</p>
+          <h2 id="services-heading">One focused path for unwanted vehicles</h2>
+        </div>
+        <p class="lede">
+          No repair-shop language and no generic roadside-towing promises—just vehicle evaluation,
+          acquisition-related removal, and auto-recycling information.
+        </p>
+      </div>
+      <div class="card-grid">
+        {
+          services.slice(0, 3).map((service, index) => (
+            <article class="card service-card">
+              <div class="card-number" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <h3>{service.name}</h3>
+              <p>{service.description}</p>
+              <a class="text-link" href={`/${service.slug}`}>
+                Learn more <Icon name="arrow" />
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy" aria-labelledby="steps-heading">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow eyebrow--light">How it works</p>
+          <h2 id="steps-heading">Three steps, with confirmation before pickup</h2>
+        </div>
+        <p class="lede lede--light">
+          A direct conversation keeps the process accurate. Merritt’s confirms the real-world
+          details before anything is scheduled.
+        </p>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <h3>Share the vehicle details</h3>
+          <p>Provide the year, make, model, condition, location, access, and title status.</p>
+        </li>
+        <li class="step">
+          <h3>Review the terms</h3>
+          <p>Merritt’s asks follow-up questions and confirms any offer and removal terms.</p>
+        </li>
+        <li class="step">
+          <h3>Confirm a pickup window</h3>
+          <p>If both sides agree, Merritt’s confirms the documents, access, and schedule.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="vehicles-heading">
+    <div class="container split">
+      <div class="flow">
+        <p class="eyebrow">Start with an honest description</p>
+        <h2 id="vehicles-heading">Ask about many vehicle conditions</h2>
+        <p class="lede">
+          Merritt’s reviews each vehicle individually. Acceptance and removal availability depend on
+          the actual condition, location, and access.
+        </p>
+        <ul class="vehicle-grid" aria-label="Vehicle examples">
+          <li>Non-running cars</li>
+          <li>Damaged vehicles</li>
+          <li>Older trucks</li>
+          <li>Unwanted SUVs</li>
+          <li>Cars with flat tires</li>
+          <li>Incomplete vehicles</li>
+          <li>Vans</li>
+          <li>Vehicles with access issues</li>
+        </ul>
+        <p class="notice">
+          Missing title or keys? Say so up front. Merritt’s will explain whether the situation can
+          move forward; no-title acceptance is not guaranteed.
+        </p>
+      </div>
+      <div class="media-frame">
+        <Picture
+          src="/images/legacy/junk-car-removal.jpg"
+          alt="A vehicle secured on a flatbed tow truck"
+          width={1920}
+          height={865}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="areas-heading">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Published service information</p>
+          <h2 id="areas-heading">A real address and a focused area model</h2>
+        </div>
+        <p class="lede">
+          We publish only the locations supported by current business information. Call to confirm
+          availability for any other vehicle address.
+        </p>
+      </div>
+      <div class="area-grid">
+        {
+          serviceAreas.map((area) => (
+            <article class="card area-card">
+              <div class="area-card-content">
+                <span class="area-tag">Minnesota service area</span>
+                <h3>{area.city}</h3>
+                <p>{area.intro}</p>
+                <a class="text-link" href={`/service-areas/${area.slug}`}>
+                  View {area.city} details <Icon name="arrow" />
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <p class="notice" style="margin-top: 1.25rem;">
+        Vehicle outside these pages? Call {business.phone} with the exact city and ZIP code. This site
+        does not claim blanket coverage for dozens of unverified locations.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="recycling-heading">
+    <div class="container split split--reverse">
+      <div class="flow">
+        <p class="eyebrow">Auto recycling, without inflated claims</p>
+        <h2 id="recycling-heading">A responsible conversation about end-of-life vehicles</h2>
+        <p class="lede">
+          Vehicles can contain reusable materials and regulated fluids or components. Our guide
+          links directly to Minnesota Pollution Control Agency information rather than inventing a
+          universal recycling percentage.
+        </p>
+        <a class="button button--dark" href="/guides/what-happens-after-junk-car-pickup">
+          Read the recycling guide <Icon name="arrow" />
+        </a>
+      </div>
+      <div class="media-frame">
+        <Picture
+          src="/images/legacy/auto-recycling-yard.jpg"
+          alt="Rows of end-of-life vehicles at an auto recycling yard"
+          width={1920}
+          height={865}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="faq-heading">
+    <div class="container--narrow">
+      <p class="eyebrow">Straight answers</p>
+      <h2 id="faq-heading">Frequently asked questions</h2>
+      <FaqList faqs={globalFaqs.slice(0, 6)} />
+      <p style="margin-top: 1.5rem;">
+        <a class="text-link" href="/faq">View all questions <Icon name="arrow" /></a>
+      </p>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

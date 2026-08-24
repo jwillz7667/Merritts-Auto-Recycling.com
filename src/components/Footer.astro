@@ -1,0 +1,69 @@
+---
+import { business, primaryNavigation } from '@/data/site';
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="/brand/logo-reversed.svg" alt="Merritt's Auto Recycling" width="520" height="112" />
+      <p>
+        A Brooklyn Center business helping vehicle owners discuss unwanted cars, understand the
+        terms, and plan the next step before removal.
+      </p>
+    </div>
+
+    <div>
+      <h2>Services</h2>
+      <ul>
+        <li><a href="/cash-for-junk-cars">Cash for junk cars</a></li>
+        <li><a href="/junk-car-removal">Vehicle removal</a></li>
+        <li><a href="/auto-recycling">Auto recycling</a></li>
+        <li><a href="/junk-car-towing">Acquisition towing</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Explore</h2>
+      <ul>
+        {
+          primaryNavigation.slice(3).map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+        <li><a href="/reviews">Reviews</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Contact</h2>
+      <ul>
+        <li><a href={business.phoneUri} data-track="call_click">{business.phone}</a></li>
+        <li><a href={business.textUri} data-track="text_click">Text {business.textPhone}</a></li>
+        <li><a href={`mailto:${business.email}`}>{business.email}</a></li>
+        <li>
+          <a href={business.googleMaps} rel="noopener noreferrer">
+            {business.address.street}<br />{business.address.city}, {business.address.region}
+            {business.address.postalCode}
+          </a>
+        </li>
+        <li>{business.hoursDisplay}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Merritt's Auto Recycling. All rights reserved.</p>
+      <p>
+        <a href="/privacy">Privacy</a> · <a
+          href={business.googleBusinessProfile}
+          rel="noopener noreferrer">Google Business Profile</a
+        >
+      </p>
+    </div>
+  </div>
+</footer>

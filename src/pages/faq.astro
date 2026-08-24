@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import FaqList from '@/components/FaqList.astro';
+import PageHero from '@/components/PageHero.astro';
+import { business, globalFaqs } from '@/data/site';
+
+const path = '/faq';
+const schema = {
+  '@type': 'FAQPage',
+  '@id': `${business.siteUrl}${path}#webpage`,
+  mainEntity: globalFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+---
+
+<BaseLayout
+  title="Junk Car Questions | Merritt's Auto Recycling FAQ"
+  description="Straight answers about vehicle details, cash offers, documentation, removal timing, towing scope, service areas, and daily business hours."
+  path={path}
+  schema={schema}
+>
+  <PageHero
+    eyebrow="Frequently asked questions"
+    title="Clear answers before you decide"
+    description="These answers avoid blanket promises. The actual vehicle, ownership documents, location, access, terms, and schedule are confirmed directly."
+    crumbs={[{ label: 'Home', href: '/' }, { label: 'FAQ' }]}
+  />
+
+  <section class="section section--paper">
+    <div class="container--narrow">
+      <FaqList faqs={globalFaqs} />
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

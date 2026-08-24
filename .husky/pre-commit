@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# Run lint-staged: prettier + eslint on staged TS/JS/JSON files, plus a fast
-# schema-block sanity check on staged HTML. Heavier validation (full
-# `npm run validate` and `tsc --noEmit`) runs in CI — the goal here is to
-# stay under ~5s on local commits so the hook never gets bypassed.
-npx --no-install lint-staged

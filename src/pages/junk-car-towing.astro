@@ -1,0 +1,9 @@
+---
+import ServicePage from '@/components/ServicePage.astro';
+import { services } from '@/data/site';
+
+const service = services.find((item) => item.slug === 'junk-car-towing');
+if (!service) throw new Error('Junk-car-towing content is missing.');
+---
+
+<ServicePage service={service} />

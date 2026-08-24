@@ -1,0 +1,133 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { business, type Service } from '@/data/site';
+import CtaBand from './CtaBand.astro';
+import FaqList from './FaqList.astro';
+import Icon from './Icon.astro';
+import PageHero from './PageHero.astro';
+import Picture from './Picture.astro';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const path = `/${service.slug}`;
+const imageIsTruck = service.image === '/images/legacy/merritts-tow-truck.jpg';
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${business.siteUrl}${path}#service`,
+    name: service.name,
+    serviceType: service.name,
+    description: service.description,
+    url: `${business.siteUrl}${path}`,
+    provider: { '@id': `${business.siteUrl}/#business` },
+    areaServed: [
+      { '@type': 'City', name: 'Brooklyn Center, Minnesota' },
+      { '@type': 'City', name: 'Minneapolis, Minnesota' },
+    ],
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${business.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: service.name, item: `${business.siteUrl}${path}` },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: service.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={`${service.title} | Merritt's Auto Recycling`}
+  description={service.description}
+  path={path}
+  schema={schema}
+  ogImage={service.image}
+  ogImageAlt={service.imageAlt}
+>
+  <PageHero
+    eyebrow={service.eyebrow}
+    title={service.title}
+    description={service.summary}
+    crumbs={[{ label: 'Home', href: '/' }, { label: service.name }]}
+  >
+    <div class="button-row">
+      <a class="button" href={business.phoneUri} data-track="call_click">
+        <Icon name="phone" /> Call {business.phone}
+      </a>
+      <a class="button button--outline-light" href={business.textUri} data-track="text_click"
+        ><Icon name="message" /> Text {business.textPhone}</a
+      >
+    </div>
+    <ul class="highlight-list" aria-label="Service highlights">
+      {service.highlights.map((highlight) => <li>{highlight}</li>)}
+    </ul>
+  </PageHero>
+
+  <section class="section section--paper">
+    <div class="container split">
+      <div class="flow">
+        <p class="eyebrow">Clear expectations first</p>
+        <h2>Know the process before you decide</h2>
+        <p class="lede">{service.summary}</p>
+        <div class="notice">
+          <p>
+            A call or text is not a guaranteed price or scheduled pickup. Merritt’s confirms the
+            details and terms directly with the vehicle owner.
+          </p>
+        </div>
+      </div>
+      <div class="media-frame">
+        <Picture
+          src={service.image}
+          avif={imageIsTruck ? '/images/legacy/merritts-tow-truck.avif' : undefined}
+          webp={imageIsTruck ? '/images/legacy/merritts-tow-truck.webp' : undefined}
+          alt={service.imageAlt}
+          width={imageIsTruck ? 1600 : 1920}
+          height={imageIsTruck ? 1070 : 865}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container content-sections">
+      {
+        service.sections.map((section) => (
+          <article class="content-section">
+            <h2>{section.heading}</h2>
+            {section.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+            {section.items && (
+              <ul>
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="service-faq-heading">
+    <div class="container--narrow">
+      <p class="eyebrow">Common questions</p>
+      <h2 id="service-faq-heading">Before you contact Merritt’s</h2>
+      <FaqList faqs={service.faqs} />
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

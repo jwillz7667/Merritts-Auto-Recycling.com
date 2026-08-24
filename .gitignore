@@ -1,68 +1,48 @@
-# Dependencies
-node_modules/
-.pnpm-store/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Build artifacts
-dist/
-build/
-.cache/
-.turbo/
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# Vercel
-.vercel/
+# testing
+/coverage
 
-# Environment
-.env
-.env.local
-.env.*.local
-!.env.example
+# build output
+/dist/
+.astro/
 
-# Logs
-*.log
+# misc
+.DS_Store
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+.npmrc
+.netrc
+credentials.json
+service-account*.json
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
+.pnpm-debug.log*
 
-# OS
-.DS_Store
-.AppleDouble
-.LSOverride
-Thumbs.db
-ehthumbs.db
-Desktop.ini
+# env files (can opt-in for committing if needed)
+.env*
+!.env.example
 
-# Editor — commit team baseline, ignore personal overrides
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
-!.vscode/launch.json
-!.vscode/tasks.json
-.idea/
-*.swp
-*.swo
-*~
-.project
-.settings/
+# vercel
+.vercel
 
-# TypeScript
-*.tsbuildinfo
-
-# Testing
-coverage/
-.nyc_output/
-
-# Image optimization intermediates
-images/optimized/.cache/
-
-# Lighthouse reports
-lighthouse-reports/
-*.report.html
-*.report.json
-
-# IndexNow key file — generated at build time from $INDEXNOW_KEY env var
-/indexnow-key-*.txt
-
-# Misc
-.history/
-.eslintcache
+# local tooling
+/.sites-runtime/
+/playwright-report/
+/test-results/

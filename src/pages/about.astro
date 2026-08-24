@@ -1,0 +1,87 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import PageHero from '@/components/PageHero.astro';
+import Picture from '@/components/Picture.astro';
+import { business } from '@/data/site';
+
+const path = '/about';
+const schema = {
+  '@type': 'AboutPage',
+  '@id': `${business.siteUrl}${path}#webpage`,
+  url: `${business.siteUrl}${path}`,
+  name: "About Merritt's Auto Recycling",
+  about: { '@id': `${business.siteUrl}/#business` },
+};
+---
+
+<BaseLayout
+  title="About Merritt's Auto Recycling | Brooklyn Center, MN"
+  description="Merritt's Auto Recycling was founded in 1988 and is based at 3106 68th Ave N in Brooklyn Center, Minnesota."
+  path={path}
+  schema={schema}
+>
+  <PageHero
+    eyebrow="Established in 1988"
+    title="A focused local business, presented without the hype"
+    description="Merritt’s Auto Recycling was founded by Brad Emholtz and is based at a real Brooklyn Center address. The rebuilt site keeps the story tied to facts that can be verified."
+    crumbs={[{ label: 'Home', href: '/' }, { label: 'About' }]}
+  />
+
+  <section class="section section--paper">
+    <div class="container split">
+      <div class="flow">
+        <p class="eyebrow">The facts we can stand behind</p>
+        <h2>Serving vehicle owners since 1988</h2>
+        <p class="lede">
+          Merritt’s Auto Recycling was founded in 1988 by Brad Emholtz. The business address is
+          {
+            ` ${business.address.street}, ${business.address.city}, ${business.address.region} ${business.address.postalCode}`
+          }.
+        </p>
+        <p>
+          The company’s website is built around one primary job: helping an owner share the right
+          vehicle details, understand what happens next, and contact Merritt’s directly.
+        </p>
+        <p>
+          The site keeps the public story simple: current contact information, a documented founding
+          year, a real address, and a process that is confirmed directly for each vehicle.
+        </p>
+      </div>
+      <div class="media-frame">
+        <Picture
+          src="/images/legacy/merritts-tow-truck.jpg"
+          avif="/images/legacy/merritts-tow-truck.avif"
+          webp="/images/legacy/merritts-tow-truck.webp"
+          alt="A Merritt's Auto Recycling truck carrying a vehicle"
+          width={1600}
+          height={1070}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="card-grid">
+        <article class="card">
+          <p class="eyebrow">Founded</p><h2>1988</h2><p>
+            The founding year supplied as immutable business information.
+          </p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Founder</p><h2>Brad Emholtz</h2><p>
+            The named founder in the current business record.
+          </p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Home base</p><h2>Brooklyn Center</h2><p>
+            The canonical location used for the business entity across the site.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

@@ -1,159 +1,205 @@
+import { randomUUID } from 'node:crypto';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { ZodError, type ZodSchema } from 'zod';
+import type { ZodType } from 'zod';
+import { ZodError } from 'zod';
 
-import { sendFormEmail } from './email.js';
-import { env } from './env.js';
+import { sendLeadEmail, type RequestMeta } from './email.js';
+import { getEnv } from './env.js';
+import type { ContactPayload } from './schemas.js';
 import { verifyTurnstile } from './turnstile.js';
 
-/**
- * Per-IP token bucket. NOT durable — serverless cold starts reset state. With Turnstile this
- * is acceptable belt-and-braces: it stops a single warm instance from being hammered.
- */
+type LeadPayload = ContactPayload;
+type DeliveryResult = { confirmation: 'not_applicable' | 'sent' | 'failed' };
+
+const MAX_BODY_BYTES = 20_000;
 const MAX_TOKENS = 6;
 const REFILL_PER_SECOND = MAX_TOKENS / 60;
 const buckets = new Map<string, { tokens: number; updatedAt: number }>();
+const inFlight = new Map<string, Promise<DeliveryResult>>();
+const completed = new Map<string, { result: DeliveryResult; expiresAt: number }>();
+
+function clientIp(req: VercelRequest): string {
+  const forwarded = req.headers['x-forwarded-for'];
+  const value = Array.isArray(forwarded) ? forwarded[0] : forwarded;
+  return value?.split(',')[0]?.trim() || req.socket.remoteAddress || 'unknown';
+}
 
 function takeToken(ip: string): boolean {
   const now = Date.now();
-  const prev = buckets.get(ip) ?? { tokens: MAX_TOKENS, updatedAt: now };
-  const elapsed = (now - prev.updatedAt) / 1000;
-  const refilled = Math.min(MAX_TOKENS, prev.tokens + elapsed * REFILL_PER_SECOND);
-  if (refilled < 1) {
-    buckets.set(ip, { tokens: refilled, updatedAt: now });
+  if (buckets.size > 1_000) {
+    for (const [key, entry] of buckets) {
+      if (now - entry.updatedAt > 600_000) buckets.delete(key);
+    }
+  }
+  const previous = buckets.get(ip) ?? { tokens: MAX_TOKENS, updatedAt: now };
+  const elapsed = (now - previous.updatedAt) / 1000;
+  const tokens = Math.min(MAX_TOKENS, previous.tokens + elapsed * REFILL_PER_SECOND);
+  if (tokens < 1) {
+    buckets.set(ip, { tokens, updatedAt: now });
     return false;
   }
-  buckets.set(ip, { tokens: refilled - 1, updatedAt: now });
+  buckets.set(ip, { tokens: tokens - 1, updatedAt: now });
   return true;
 }
 
-function originAllowed(req: VercelRequest): boolean {
-  if (env.NODE_ENV !== 'production') return true;
-  const origin = req.headers.origin ?? '';
-  const allowed = env.ALLOWED_ORIGIN ?? 'https://merritts-auto-recycling.com';
-  // Same-origin requests sent via fetch with credentials="same-origin" usually omit Origin
-  // for same-doc XHR; treat missing-origin as same-origin (browser policy) and accept.
+function allowedOrigin(req: VercelRequest): boolean {
+  const origin = req.headers.origin;
   if (!origin) return true;
-  return origin === allowed;
-}
-
-function readClientIp(req: VercelRequest): string {
-  const xfwd = req.headers['x-forwarded-for'];
-  if (Array.isArray(xfwd)) return (xfwd[0] ?? '').split(',')[0]!.trim();
-  if (typeof xfwd === 'string') return xfwd.split(',')[0]!.trim();
-  return req.socket?.remoteAddress ?? 'unknown';
+  try {
+    const originUrl = new URL(origin);
+    const requestHost = String(req.headers['x-forwarded-host'] ?? req.headers.host ?? '')
+      .split(',')[0]
+      ?.trim();
+    const configured = getEnv().ALLOWED_ORIGIN;
+    return (
+      originUrl.host === requestHost ||
+      origin === configured ||
+      origin === 'https://merritts-auto-recycling.com'
+    );
+  } catch {
+    return false;
+  }
 }
 
 function readBody(req: VercelRequest): Record<string, unknown> {
   if (req.body && typeof req.body === 'object') return req.body as Record<string, unknown>;
-  if (typeof req.body === 'string') {
-    const ct = String(req.headers['content-type'] ?? '');
-    if (ct.includes('application/json')) return JSON.parse(req.body) as Record<string, unknown>;
-    if (ct.includes('application/x-www-form-urlencoded')) {
-      return Object.fromEntries(new URLSearchParams(req.body));
-    }
+  if (typeof req.body !== 'string') return {};
+  const contentType = String(req.headers['content-type'] ?? '');
+  if (contentType.includes('application/json'))
+    return JSON.parse(req.body) as Record<string, unknown>;
+  if (contentType.includes('application/x-www-form-urlencoded')) {
+    return Object.fromEntries(new URLSearchParams(req.body));
   }
   return {};
 }
 
-export type HandlerRequestMeta = {
-  ip: string;
-  userAgent: string | undefined;
-  referer: string | undefined;
-  receivedAt: Date;
-};
+function readIdempotencyKey(req: VercelRequest): string {
+  const raw = req.headers['idempotency-key'];
+  const value = Array.isArray(raw) ? raw[0] : raw;
+  return value && /^[A-Za-z0-9:_-]{8,200}$/.test(value) ? value : randomUUID();
+}
 
-export function createFormHandler<S extends ZodSchema>(opts: {
-  schema: S;
-  formType: 'contact' | 'appointment' | 'quote';
-  /**
-   * Optional override for the "what to do with the validated payload" step. When provided, this
-   * runs INSTEAD of `sendFormEmail` so endpoints with bespoke email semantics can reuse the
-   * rate-limit / origin / Turnstile / validation pipeline without duplicating it.
-   *
-   * The handler still owns response codes: throwing here yields a 502 to the client, matching
-   * the existing failure mode for email sends.
-   */
-  onValidPayload?: (payload: ReturnType<S['parse']>, meta: HandlerRequestMeta) => Promise<void>;
-}) {
+function cleanupCompleted(now: number): void {
+  for (const [key, entry] of completed) {
+    if (entry.expiresAt <= now) completed.delete(key);
+  }
+  while (completed.size > 1_000) {
+    const oldestKey = completed.keys().next().value;
+    if (typeof oldestKey !== 'string') break;
+    completed.delete(oldestKey);
+  }
+}
+
+async function deliverOnce(
+  key: string,
+  payload: LeadPayload,
+  meta: RequestMeta,
+): Promise<{ result: DeliveryResult; duplicate: boolean }> {
+  const now = Date.now();
+  cleanupCompleted(now);
+  const prior = completed.get(key);
+  if (prior) return { result: prior.result, duplicate: true };
+
+  const existing = inFlight.get(key);
+  if (existing) return { result: await existing, duplicate: true };
+
+  const task = (async (): Promise<DeliveryResult> => {
+    await sendLeadEmail(payload, meta, key);
+    return { confirmation: 'not_applicable' };
+  })();
+
+  inFlight.set(key, task);
+  try {
+    const result = await task;
+    completed.set(key, { result, expiresAt: now + 86_400_000 });
+    return { result, duplicate: false };
+  } finally {
+    inFlight.delete(key);
+  }
+}
+
+export function createFormHandler<T extends LeadPayload>(options: { schema: ZodType<T> }) {
   return async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+
     if (req.method !== 'POST') {
       res.setHeader('Allow', 'POST');
       res.status(405).json({ ok: false, error: 'method_not_allowed' });
       return;
     }
-    if (!originAllowed(req)) {
+
+    const declaredLength = Number(req.headers['content-length'] ?? 0);
+    if (declaredLength > MAX_BODY_BYTES) {
+      res.status(413).json({ ok: false, error: 'body_too_large' });
+      return;
+    }
+
+    try {
+      getEnv();
+    } catch (error) {
+      console.error('environment.invalid', {
+        message: error instanceof Error ? error.message : 'unknown',
+      });
+      res.status(503).json({ ok: false, error: 'service_unavailable' });
+      return;
+    }
+
+    if (!allowedOrigin(req)) {
       res.status(403).json({ ok: false, error: 'forbidden_origin' });
       return;
     }
 
-    const ip = readClientIp(req);
+    const ip = clientIp(req);
     if (!takeToken(ip)) {
       res.status(429).json({ ok: false, error: 'rate_limited' });
       return;
     }
 
-    let raw: Record<string, unknown>;
+    let payload: T;
     try {
-      raw = readBody(req);
-    } catch {
+      payload = options.schema.parse(readBody(req));
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const fields: Record<string, string> = {};
+        for (const issue of error.issues) {
+          const field = issue.path.join('.') || 'form';
+          fields[field] ??= issue.message;
+        }
+        res.status(400).json({ ok: false, error: 'validation_failed', fields });
+        return;
+      }
       res.status(400).json({ ok: false, error: 'invalid_body' });
       return;
     }
 
-    let payload: ReturnType<S['parse']>;
-    try {
-      payload = opts.schema.parse(raw) as ReturnType<S['parse']>;
-    } catch (err) {
-      if (err instanceof ZodError) {
-        const fieldErrors: Record<string, string> = {};
-        for (const issue of err.issues) {
-          const key = issue.path.join('.') || '_';
-          if (!fieldErrors[key]) fieldErrors[key] = issue.message;
-        }
-        res.status(400).json({ ok: false, error: 'validation_failed', fields: fieldErrors });
-        return;
-      }
-      throw err;
-    }
-
-    const turnstileToken = (payload as Record<string, unknown>)['cf-turnstile-response'] as string;
-    const turnstileOk = await verifyTurnstile(turnstileToken, ip === 'unknown' ? undefined : ip);
-    if (!turnstileOk) {
+    const token = payload['cf-turnstile-response'];
+    if (!(await verifyTurnstile(token, ip === 'unknown' ? undefined : ip))) {
       res.status(403).json({ ok: false, error: 'turnstile_failed' });
       return;
     }
 
-    const meta: HandlerRequestMeta = {
+    const idempotencyKey = `contact-${readIdempotencyKey(req)}`;
+    const meta: RequestMeta = {
       ip,
-      userAgent: req.headers['user-agent'] ?? undefined,
-      referer: req.headers.referer ?? undefined,
+      userAgent: req.headers['user-agent'],
+      referer: req.headers.referer,
       receivedAt: new Date(),
     };
 
     try {
-      if (opts.onValidPayload) {
-        await opts.onValidPayload(payload, meta);
-      } else {
-        const fields: Record<string, string | undefined> = {};
-        for (const [k, v] of Object.entries(payload as Record<string, unknown>)) {
-          if (k === 'honeypot' || k === 'cf-turnstile-response') continue;
-          fields[k] = v === null || v === undefined ? undefined : String(v);
-        }
-        await sendFormEmail({
-          formType: opts.formType,
-          fields,
-          ip: meta.ip,
-          userAgent: meta.userAgent,
-          referer: meta.referer,
-          receivedAt: meta.receivedAt,
-        });
-      }
-    } catch (err) {
-      console.error('handler.send.failed', (err as Error).message);
+      const delivery = await deliverOnce(idempotencyKey, payload, meta);
+      res.status(200).json({
+        ok: true,
+        duplicate: delivery.duplicate,
+        confirmation: delivery.result.confirmation,
+      });
+    } catch (error) {
+      console.error('lead.delivery.failed', {
+        formType: 'contact',
+        message: error instanceof Error ? error.message : 'unknown',
+      });
       res.status(502).json({ ok: false, error: 'send_failed' });
-      return;
     }
-
-    res.status(200).json({ ok: true });
   };
 }
