@@ -1,0 +1,111 @@
+---
+import { business, primaryNavigation } from '@/data/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const isCurrent = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
+---
+
+<div class="utility-bar">
+  <div class="container utility-inner">
+    <p>Serving vehicle owners since 1988 · {business.hoursShort}</p>
+    <p><a href={business.textUri} data-track="text_click">Text {business.textPhone}</a></p>
+  </div>
+</div>
+
+<header class="site-header" data-site-header>
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Merritt's Auto Recycling home">
+      <img src="/brand/logo.svg" alt="Merritt's Auto Recycling" width="520" height="112" />
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <ul>
+        {
+          primaryNavigation.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="button button--dark" href={business.phoneUri} data-track="call_click">
+        <Icon name="phone" /> Call {business.phone}
+      </a>
+    </nav>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-navigation"
+      aria-label="Open navigation menu"
+      data-nav-toggle
+    >
+      <span data-menu-icon><Icon name="menu" /></span>
+      <span data-close-icon hidden><Icon name="close" /></span>
+    </button>
+  </div>
+</header>
+
+<nav
+  class="mobile-nav"
+  id="mobile-navigation"
+  aria-label="Mobile navigation"
+  data-mobile-nav
+  data-open="false"
+>
+  <ul>
+    {
+      primaryNavigation.map((item) => (
+        <li>
+          <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            {item.label} <span aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))
+    }
+    <li><a href="/faq">Frequently asked questions <span aria-hidden="true">→</span></a></li>
+    <li><a href="/contact">Contact <span aria-hidden="true">→</span></a></li>
+  </ul>
+  <div class="mobile-nav-actions">
+    <a class="button" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call</a
+    >
+    <a class="button button--dark" href="/get-cash-offer">Request offer</a>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const mobileNav = document.querySelector<HTMLElement>('[data-mobile-nav]');
+  const menuIcon = toggle?.querySelector<HTMLElement>('[data-menu-icon]');
+  const closeIcon = toggle?.querySelector<HTMLElement>('[data-close-icon]');
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !mobileNav) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    mobileNav.dataset.open = String(open);
+    if (menuIcon) menuIcon.hidden = open;
+    if (closeIcon) closeIcon.hidden = !open;
+    document.body.classList.toggle('nav-open', open);
+  };
+
+  toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  mobileNav
+    ?.querySelectorAll('a')
+    .forEach((link) => link.addEventListener('click', () => setOpen(false)));
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setOpen(false);
+  });
+  window.matchMedia('(min-width: 67.001rem)').addEventListener('change', (event) => {
+    if (event.matches) setOpen(false);
+  });
+</script>

@@ -1,0 +1,31 @@
+---
+import { business } from '@/data/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'Ready to tell us about the vehicle?',
+  text = 'Call for the fastest response, or send the details through the secure offer-request form.',
+} = Astro.props;
+---
+
+<section class="cta-band" aria-labelledby="cta-heading">
+  <div class="container cta-band-inner">
+    <div>
+      <h2 id="cta-heading">{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="button-row">
+      <a class="button button--dark" href={business.phoneUri} data-track="call_click">
+        <Icon name="phone" /> Call {business.phone}
+      </a>
+      <a class="button button--light" href="/get-cash-offer"
+        >Request an offer <Icon name="arrow" /></a
+      >
+    </div>
+  </div>
+</section>

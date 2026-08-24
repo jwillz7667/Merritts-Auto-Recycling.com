@@ -1,0 +1,77 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ContactForm from '@/components/ContactForm.astro';
+import Icon from '@/components/Icon.astro';
+import PageHero from '@/components/PageHero.astro';
+import { business } from '@/data/site';
+
+const path = '/contact';
+const schema = {
+  '@type': 'ContactPage',
+  '@id': `${business.siteUrl}${path}#webpage`,
+  url: `${business.siteUrl}${path}`,
+  name: "Contact Merritt's Auto Recycling",
+  about: { '@id': `${business.siteUrl}/#business` },
+};
+---
+
+<BaseLayout
+  title="Contact Merritt's Auto Recycling | Brooklyn Center, MN"
+  description="Call Merritt's Auto Recycling at 763-533-2775, text 763-438-2116, or send a secure inquiry. Open every day from 8:00 AM to 8:00 PM."
+  path={path}
+  schema={schema}
+>
+  <PageHero
+    eyebrow="Call, text, or send an inquiry"
+    title="Contact Merritt’s Auto Recycling"
+    description="For the fastest response about a vehicle, call during daily business hours. Use the general form for other questions."
+    crumbs={[{ label: 'Home', href: '/' }, { label: 'Contact' }]}
+  >
+    <div class="button-row">
+      <a class="button" href={business.phoneUri} data-track="call_click"
+        ><Icon name="phone" /> Call {business.phone}</a
+      >
+      <a class="button button--outline-light" href={business.textUri} data-track="text_click"
+        ><Icon name="message" /> Text {business.textPhone}</a
+      >
+    </div>
+  </PageHero>
+
+  <section class="section section--soft">
+    <div class="container contact-grid">
+      <aside class="flow" aria-labelledby="contact-details-heading">
+        <p class="eyebrow">Business details</p>
+        <h2 id="contact-details-heading">Reach the right place</h2>
+        <ul class="contact-list">
+          <li>
+            <small>Call</small><a href={business.phoneUri} data-track="call_click"
+              >{business.phone}</a
+            >
+          </li>
+          <li>
+            <small>Text</small><a href={business.textUri} data-track="text_click"
+              >{business.textPhone}</a
+            >
+          </li>
+          <li><small>Email</small><a href={`mailto:${business.email}`}>{business.email}</a></li>
+          <li><small>Hours</small><strong>{business.hoursDisplay}</strong></li>
+          <li>
+            <small>Address</small>
+            <a href={business.googleMaps} rel="noopener noreferrer">
+              {business.address.street}<br />{business.address.city}, {business.address.region}
+              {business.address.postalCode}
+            </a>
+          </li>
+        </ul>
+        <a class="button button--outline" href={business.googleMaps} rel="noopener noreferrer"
+          ><Icon name="map" /> Open directions</a
+        >
+        <p class="notice">
+          This website does not offer emergency roadside dispatch. For a breakdown or collision
+          emergency, contact an appropriate roadside or emergency provider.
+        </p>
+      </aside>
+      <ContactForm />
+    </div>
+  </section>
+</BaseLayout>

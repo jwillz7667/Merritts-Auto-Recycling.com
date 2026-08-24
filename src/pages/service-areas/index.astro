@@ -1,0 +1,77 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Icon from '@/components/Icon.astro';
+import PageHero from '@/components/PageHero.astro';
+import { business, serviceAreas } from '@/data/site';
+
+const path = '/service-areas';
+const schema = {
+  '@type': 'CollectionPage',
+  '@id': `${business.siteUrl}${path}#webpage`,
+  url: `${business.siteUrl}${path}`,
+  name: "Service Areas | Merritt's Auto Recycling",
+  about: { '@id': `${business.siteUrl}/#business` },
+};
+---
+
+<BaseLayout
+  title="Service Areas | Merritt's Auto Recycling"
+  description="Merritt's is based in Brooklyn Center and publishes vehicle-offer information for Brooklyn Center and Minneapolis. Call to confirm other locations."
+  path={path}
+  schema={schema}
+>
+  <PageHero
+    eyebrow="Focused local coverage"
+    title="Service-area information grounded in real business details"
+    description="Merritt’s publishes only the locations supported by current information. Availability for every vehicle still depends on the exact address, condition, and access."
+    crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas' }]}
+  />
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="area-grid">
+        {
+          serviceAreas.map((area) => (
+            <article class="card area-card">
+              <div class="area-card-content">
+                <span class="area-tag">Verified page</span>
+                <h2>{area.city}, Minnesota</h2>
+                <p>{area.intro}</p>
+                <p>
+                  <strong>{area.proof}</strong>
+                </p>
+                <a class="button button--dark" href={`/service-areas/${area.slug}`}>
+                  View {area.city} details <Icon name="arrow" />
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container--narrow flow">
+      <p class="eyebrow">A city page is not a pickup promise</p>
+      <h2>Call with the exact vehicle location</h2>
+      <p class="lede">
+        Merritt’s confirms current availability case by case. If the vehicle is outside Brooklyn
+        Center or Minneapolis, call {business.phone} with the city, ZIP code, vehicle condition, and access
+        details.
+      </p>
+      <div class="notice">
+        <p>
+          The location list stays focused so a city name never implies guaranteed acceptance or a
+          guaranteed pickup time. Merritt’s confirms every request directly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Need to check another location?"
+    text="Call with the vehicle city and ZIP code. Merritt’s will tell you whether the request can be reviewed."
+  />
+</BaseLayout>

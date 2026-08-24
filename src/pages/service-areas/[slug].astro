@@ -1,0 +1,116 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Icon from '@/components/Icon.astro';
+import PageHero from '@/components/PageHero.astro';
+import { business, serviceAreas, type ServiceArea } from '@/data/site';
+
+export const getStaticPaths = (() =>
+  serviceAreas.map((area) => ({
+    params: { slug: area.slug },
+    props: { area },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  area: ServiceArea;
+}
+
+const { area } = Astro.props;
+const path = `/service-areas/${area.slug}`;
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${business.siteUrl}${path}#service`,
+    name: `Unwanted vehicle offer requests in ${area.city}, MN`,
+    description: area.description,
+    url: `${business.siteUrl}${path}`,
+    provider: { '@id': `${business.siteUrl}/#business` },
+    areaServed: { '@type': 'City', name: `${area.city}, Minnesota` },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${business.siteUrl}/` },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Service areas',
+        item: `${business.siteUrl}/service-areas`,
+      },
+      { '@type': 'ListItem', position: 3, name: area.city, item: `${business.siteUrl}${path}` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${area.title} | Merritt's Auto Recycling`}
+  description={area.description}
+  path={path}
+  schema={schema}
+>
+  <PageHero
+    eyebrow={`${area.city}, Minnesota`}
+    title={area.title}
+    description={area.intro}
+    crumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Service areas', href: '/service-areas' },
+      { label: area.city },
+    ]}
+  >
+    <div class="button-row">
+      <a class="button" href={business.phoneUri} data-track="call_click"
+        ><Icon name="phone" /> Call {business.phone}</a
+      >
+      <a class="button button--outline-light" href="/get-cash-offer"
+        >Request an offer <Icon name="arrow" /></a
+      >
+    </div>
+  </PageHero>
+
+  <section class="section section--paper">
+    <div class="container split">
+      <div class="flow">
+        <p class="eyebrow">Local context</p>
+        <h2>What this page can confirm</h2>
+        <p class="lede">{area.proof}</p>
+        <ul class="check-list">
+          {area.details.map((detail) => <li>{detail}</li>)}
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Have these details ready</h2>
+        <ul>
+          <li>Vehicle year, make, and model</li>
+          <li>Exact city and pickup setting</li>
+          <li>Whether it starts, rolls, and steers</li>
+          <li>Major damage or missing components</li>
+          <li>Title, lien, and key status</li>
+        </ul>
+        <p class="notice">
+          A published area page does not guarantee vehicle acceptance, a specific offer, or a pickup
+          time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container--narrow flow">
+      <p class="eyebrow">Three confirmations</p>
+      <h2>Vehicle, terms, and schedule</h2>
+      <p>
+        Merritt’s first confirms that it can consider the actual vehicle. Next, it confirms any
+        offer and removal terms. A pickup window is discussed only after those details are clear.
+      </p>
+      <p>
+        For title questions, use current guidance from Minnesota Driver and Vehicle Services. Do not
+        rely on a generic “no title needed” statement.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand title={`Ask about a vehicle in ${area.city}`} />
+</BaseLayout>

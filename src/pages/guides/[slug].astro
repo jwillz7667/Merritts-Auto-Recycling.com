@@ -1,0 +1,120 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import PageHero from '@/components/PageHero.astro';
+import { guides, type Guide } from '@/data/guides';
+import { business } from '@/data/site';
+
+export const getStaticPaths = (() =>
+  guides.map((guide) => ({
+    params: { slug: guide.slug },
+    props: { guide },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  guide: Guide;
+}
+
+const { guide } = Astro.props;
+const path = `/guides/${guide.slug}`;
+const schema = [
+  {
+    '@type': 'Article',
+    '@id': `${business.siteUrl}${path}#article`,
+    headline: guide.title,
+    description: guide.description,
+    mainEntityOfPage: `${business.siteUrl}${path}`,
+    dateModified: '2026-08-23',
+    datePublished: '2026-08-23',
+    author: { '@id': `${business.siteUrl}/#business` },
+    publisher: { '@id': `${business.siteUrl}/#business` },
+    inLanguage: 'en-US',
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${business.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: `${business.siteUrl}/guides` },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: guide.shortTitle,
+        item: `${business.siteUrl}${path}`,
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${guide.title} | Merritt's Auto Recycling`}
+  description={guide.description}
+  path={path}
+  schema={schema}
+>
+  <PageHero
+    eyebrow="Merritt’s guide"
+    title={guide.title}
+    description={guide.summary}
+    crumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Guides', href: '/guides' },
+      { label: guide.shortTitle },
+    ]}
+  >
+    <ul class="guide-meta" aria-label="Article information">
+      <li>Updated {guide.updated}</li>
+      <li>{guide.readingTime}</li>
+      <li>Reviewed for unsupported claims</li>
+    </ul>
+  </PageHero>
+
+  <article class="section section--paper">
+    <div class="container article-layout">
+      <div class="article-body">
+        {
+          guide.sections.map((section) => (
+            <section>
+              <h2>{section.heading}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {section.items && (
+                <ul>
+                  {section.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))
+        }
+      </div>
+      <aside class="article-aside" aria-labelledby="sources-heading">
+        <h2 id="sources-heading">Sources and next steps</h2>
+        {
+          guide.sources.length > 0 ? (
+            <ul class="source-list">
+              {guide.sources.map((source) => (
+                <li>
+                  <a href={source.href} rel="noopener noreferrer">
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>This operational checklist does not make a state-law claim.</p>
+          )
+        }
+        <p style="margin-top: 1rem;">
+          Call <a href={business.phoneUri} data-track="call_click">{business.phone}</a> for a vehicle-specific
+          conversation.
+        </p>
+      </aside>
+    </div>
+  </article>
+
+  <CtaBand />
+</BaseLayout>

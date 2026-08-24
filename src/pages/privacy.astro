@@ -1,0 +1,71 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { business } from '@/data/site';
+
+const path = '/privacy';
+---
+
+<BaseLayout
+  title="Privacy Notice | Merritt's Auto Recycling"
+  description="How Merritt's Auto Recycling handles information submitted through its website forms and contact links."
+  path={path}
+>
+  <PageHero
+    eyebrow="Privacy notice"
+    title="How website information is handled"
+    description="This notice covers information sent through this website. It does not replace the terms of third-party services you choose to use."
+    crumbs={[{ label: 'Home', href: '/' }, { label: 'Privacy' }]}
+  />
+
+  <section class="section section--paper">
+    <div class="container--narrow content-sections">
+      <section class="content-section">
+        <h2>Information you provide</h2>
+        <p>
+          The offer and contact forms can collect your name, phone number, email address, vehicle
+          information, vehicle location, title-status selection, preferred reply method, and any
+          message you enter. Do not submit Social Security numbers, payment-card numbers, photo IDs,
+          or other unnecessary sensitive data.
+        </p>
+      </section>
+      <section class="content-section">
+        <h2>How the information is used</h2>
+        <p>
+          Merritt’s uses form information to review and respond to your inquiry, discuss a possible
+          vehicle transaction, prevent abuse, troubleshoot delivery, and maintain business records.
+          Submission does not create a sale or pickup appointment.
+        </p>
+      </section>
+      <section class="content-section">
+        <h2>Service providers</h2>
+        <p>
+          The website is hosted on Vercel. Cloudflare Turnstile helps detect automated abuse. Resend
+          delivers form emails. Those providers may process technical data needed to provide their
+          services under their own terms and privacy policies.
+        </p>
+      </section>
+      <section class="content-section">
+        <h2>Retention and sharing</h2>
+        <p>
+          Inquiry records are retained only as reasonably needed for follow-up, fraud prevention,
+          legal obligations, and ordinary business records. Merritt’s does not state that it sells
+          website lead information. Information may be disclosed when required by law or needed to
+          protect rights and systems.
+        </p>
+      </section>
+      <section class="content-section">
+        <h2>Your choices</h2>
+        <p>
+          You can call instead of using a form. To ask about a website submission, email
+          <a href={`mailto:${business.email}`}>{business.email}</a> or call
+          <a href={business.phoneUri} data-track="call_click">{business.phone}</a>.
+        </p>
+      </section>
+      <section class="content-section">
+        <h2>Updates</h2>
+        <p>Effective and last updated August 23, 2026. Material changes should update this date.</p>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

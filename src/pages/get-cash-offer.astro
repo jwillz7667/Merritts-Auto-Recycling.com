@@ -1,0 +1,60 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import QuoteForm from '@/components/QuoteForm.astro';
+import Icon from '@/components/Icon.astro';
+import { business } from '@/data/site';
+
+const path = '/get-cash-offer';
+const schema = {
+  '@type': 'WebPage',
+  '@id': `${business.siteUrl}${path}#webpage`,
+  url: `${business.siteUrl}${path}`,
+  name: "Request a Cash Offer | Merritt's Auto Recycling",
+  description: 'Securely send vehicle details to Merritt’s Auto Recycling for review.',
+  about: { '@id': `${business.siteUrl}/#business` },
+};
+---
+
+<BaseLayout
+  title="Request a Cash Offer | Merritt's Auto Recycling"
+  description="Send the year, make, model, condition, and location of an unwanted vehicle to Merritt's Auto Recycling for a no-obligation review."
+  path={path}
+  schema={schema}
+>
+  <PageHero
+    eyebrow="Secure vehicle request"
+    title="Tell us about the vehicle"
+    description="The form starts a review—not an automated price or pickup appointment. Merritt’s will confirm the details and terms directly."
+    crumbs={[{ label: 'Home', href: '/' }, { label: 'Request an offer' }]}
+  >
+    <div class="button-row">
+      <a class="button" href={business.phoneUri} data-track="call_click"
+        ><Icon name="phone" /> Prefer to call? {business.phone}</a
+      >
+    </div>
+  </PageHero>
+
+  <section class="section section--soft">
+    <div class="container contact-grid">
+      <aside class="flow" aria-labelledby="before-form-heading">
+        <p class="eyebrow">Before you start</p>
+        <h2 id="before-form-heading">Accurate details make the review easier</h2>
+        <ul class="check-list">
+          <li>Use the vehicle’s actual year, make, and model.</li>
+          <li>Describe major damage and missing parts.</li>
+          <li>Explain whether it starts, rolls, and steers.</li>
+          <li>Mention garages, gates, soft ground, or blocked access.</li>
+          <li>Be clear about title, lien, and key status.</li>
+        </ul>
+        <div class="notice">
+          <p>
+            Do not submit sensitive identifiers or upload documents here. Merritt’s will explain any
+            document process through a direct follow-up.
+          </p>
+        </div>
+      </aside>
+      <QuoteForm />
+    </div>
+  </section>
+</BaseLayout>

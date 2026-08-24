@@ -1,0 +1,128 @@
+---
+const siteKey =
+  import.meta.env.TURNSTILE_SITE_KEY || import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+---
+
+<div class="form-shell" data-form-shell>
+  <h2>Send a general inquiry</h2>
+  <p class="form-intro">
+    For a vehicle offer, use the dedicated offer form so Merritt’s receives the necessary details.
+  </p>
+
+  <form
+    class="lead-form"
+    method="post"
+    action="/api/contact"
+    data-lead-form="contact"
+    data-success-url="/thank-you?form=contact"
+    novalidate
+  >
+    <div class="form-grid">
+      <div class="field">
+        <label for="contact-name">Name <span class="required" aria-hidden="true">*</span></label>
+        <input
+          id="contact-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          minlength="2"
+          maxlength="100"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="contact-phone">Phone <span class="required" aria-hidden="true">*</span></label>
+        <input
+          id="contact-phone"
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          inputmode="tel"
+          minlength="7"
+          maxlength="30"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="contact-email">Email <span class="required" aria-hidden="true">*</span></label>
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          maxlength="200"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="contact-subject"
+          >Subject <span class="required" aria-hidden="true">*</span></label
+        >
+        <select id="contact-subject" name="subject" required>
+          <option value="">Choose one</option>
+          <option value="vehicle-question">Vehicle question</option>
+          <option value="pickup-question">Confirmed pickup question</option>
+          <option value="document-question">Title or document question</option>
+          <option value="website-question">Website or privacy question</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="field field--full">
+        <label for="contact-message"
+          >Message <span class="required" aria-hidden="true">*</span></label
+        >
+        <textarea id="contact-message" name="message" minlength="10" maxlength="4000" required
+        ></textarea>
+        <p class="field-hint">
+          Do not send a Social Security number, payment-card number, or photo ID.
+        </p>
+      </div>
+      <div class="field field--full honeypot" aria-hidden="true">
+        <label for="contact-company">Company website</label>
+        <input
+          id="contact-company"
+          name="companyWebsite"
+          type="text"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
+      <div class="field field--full checkbox">
+        <input id="contact-consent" name="contactConsent" type="checkbox" value="true" required />
+        <label for="contact-consent">
+          I agree Merritt’s may use this information to respond by phone, text, or email. Message
+          and data rates may apply.
+        </label>
+      </div>
+    </div>
+
+    {
+      siteKey ? (
+        <div class="turnstile-wrap">
+          <div
+            class="cf-turnstile"
+            data-sitekey={siteKey}
+            data-theme="light"
+            data-size="flexible"
+          />
+        </div>
+      ) : (
+        <p class="form-unavailable">
+          Secure form verification is not configured in this preview. Please call instead.
+        </p>
+      )
+    }
+
+    <div class="form-actions">
+      <button class="button button--dark" type="submit" disabled={!siteKey}>Send inquiry</button>
+      <span class="field-hint">Required fields are marked with an asterisk.</span>
+    </div>
+    <p class="form-status" role="status" aria-live="polite" tabindex="-1" data-form-status></p>
+  </form>
+</div>
+
+{
+  siteKey && (
+    <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+  )
+}

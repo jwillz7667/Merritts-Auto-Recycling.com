@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/Icon.astro';
+import { business } from '@/data/site';
+---
+
+<BaseLayout
+  title="Page Not Found | Merritt's Auto Recycling"
+  description="The requested Merritt's Auto Recycling page could not be found. Return home or call the business for help."
+  path="/404"
+  noindex
+>
+  <section class="error-page">
+    <div class="container--narrow flow">
+      <p class="error-code" aria-hidden="true">404</p>
+      <h1>That page is not here.</h1>
+      <p class="lede">
+        Use the links below to return home, request an offer, or call Merritt’s during daily
+        business hours.
+      </p>
+      <div class="button-row" style="justify-content: center;">
+        <a class="button button--dark" href="/">Return home</a>
+        <a class="button button--outline" href={business.phoneUri} data-track="call_click"
+          ><Icon name="phone" /> Call {business.phone}</a
+        >
+      </div>
+    </div>
+  </section>
+</BaseLayout>
