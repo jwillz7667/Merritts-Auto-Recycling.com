@@ -30,6 +30,19 @@ const files = walk(rootPath);
 const htmlFiles = files.filter((file) => file.endsWith('.html'));
 if (htmlFiles.length < 20) fail(`expected at least 20 HTML pages, found ${htmlFiles.length}.`);
 
+const requiredBrandIcons = [
+  'favicon.svg',
+  'favicon-32x32.png',
+  'favicon-16x16.png',
+  'favicon.ico',
+  'apple-touch-icon.png',
+  'icons/icon-192.png',
+  'icons/icon-512.png',
+];
+for (const icon of requiredBrandIcons) {
+  if (!existsSync(join(rootPath, icon))) fail(`brand icon is missing: ${icon}.`);
+}
+
 const requiredText = ['763-533-2775', '8:00 AM–8:00 PM'];
 const forbiddenText = [
   '$1',
@@ -53,6 +66,12 @@ for (const file of htmlFiles) {
   if (!description) fail(`${label} is missing a useful description.`);
   if (!/<link rel="canonical" href="https:\/\/merritts-auto-recycling\.com\//i.test(html)) {
     fail(`${label} is missing a canonical URL.`);
+  }
+  if (!html.includes('rel="icon" href="/favicon.svg"')) {
+    fail(`${label} is missing the branded SVG favicon.`);
+  }
+  if (!html.includes('rel="apple-touch-icon" href="/apple-touch-icon.png"')) {
+    fail(`${label} is missing the branded Apple touch icon.`);
   }
   if (/<meta name="keywords"/i.test(html)) fail(`${label} contains an obsolete keywords tag.`);
 
