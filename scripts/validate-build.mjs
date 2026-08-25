@@ -181,15 +181,27 @@ const vercelConfig = JSON.parse(readFileSync(new URL('../vercel.json', import.me
 const redirects = new Map(
   vercelConfig.redirects.map((redirect) => [redirect.source, redirect.destination]),
 );
-for (const redirect of vercelConfig.redirects.filter(
-  (item) =>
-    item.source.startsWith('/blog/') &&
-    item.source.endsWith('.html') &&
-    item.source !== '/blog/index.html',
-)) {
-  const cleanSource = redirect.source.slice(0, -'.html'.length);
-  if (redirects.get(cleanSource) !== redirect.destination) {
-    fail(`${redirect.source} is missing its clean-URL redirect equivalent.`);
+const cleanBlogRedirects = new Map([
+  [
+    '/blog/auto-recycling-environmental-impact-twin-cities',
+    '/guides/what-happens-after-junk-car-pickup',
+  ],
+  ['/blog/what-happens-to-car-after-pickup', '/guides/what-happens-after-junk-car-pickup'],
+  ['/blog/how-much-is-my-junk-car-worth-minnesota-2026', '/guides/what-affects-a-junk-car-offer'],
+  ['/blog/running-vs-non-running-junk-car-prices', '/guides/what-affects-a-junk-car-offer'],
+  ['/blog/scrap-value-by-weight-minnesota-guide', '/guides/what-affects-a-junk-car-offer'],
+  ['/blog/minnesota-junk-car-title-requirements', '/guides/minnesota-junk-car-documents'],
+  ['/blog/mn-license-plates-before-junking', '/guides/minnesota-junk-car-documents'],
+  ['/blog/free-junk-car-removal-minneapolis-mn', '/junk-car-removal'],
+  ['/blog/junk-vs-tradein-vs-private-sale', '/guides'],
+  ['/blog/top-10-most-junked-cars-minnesota', '/guides'],
+]);
+for (const [source, destination] of cleanBlogRedirects) {
+  if (redirects.get(source) !== destination) {
+    fail(`${source} is missing its clean-URL migration redirect.`);
+  }
+  if (redirects.has(`${source}.html`)) {
+    fail(`${source}.html must be extensionless when Vercel cleanUrls is enabled.`);
   }
 }
 

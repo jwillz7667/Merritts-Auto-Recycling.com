@@ -12,7 +12,7 @@ This handoff separates completed website work from steps that require access to 
 - Every public route has a unique title, meta description, canonical, one H1, crawlable internal links, social metadata, and valid JSON-LD.
 - `/thank-you` and the custom 404 use `noindex` and are excluded from the sitemap.
 - HTTPS and non-`www` are canonical; legacy URLs permanently redirect to their closest replacements.
-- Legacy blog redirects cover both `.html` and extensionless forms to work with Vercel clean URLs.
+- Vercel normalizes incoming legacy `.html` blog URLs to extensionless paths, and those normalized paths have permanent migration redirects.
 - Structured data uses verified business details only. Visible FAQs remain on the site without Google's retired `FAQPage` rich-result markup.
 - The favicon, touch icon, web app icons, and social preview image use the current brand assets.
 

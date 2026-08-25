@@ -36,7 +36,7 @@ The rebuilt site is live on the production domain. Post-launch validation confir
 - one canonical origin with a permanent `www` redirect
 - clean URLs and no trailing slash
 - permanent mappings for primary legacy pages, blog posts, forms, and placemarks
-- `.html` and extensionless mappings for migrated blog routes, preventing Vercel clean-URL normalization from producing 404s
+- extensionless migration mappings for legacy blog routes, matching Vercel's required `cleanUrls` behavior and preventing normalized paths from producing 404s
 - `robots.txt` permits crawling; `/thank-you` and 404 use page-level `noindex`
 
 ## On-page system
@@ -105,7 +105,7 @@ Implemented:
 - internal-link and metadata build validation
 - XML sitemap generated from the typed route set
 - preserved 308 redirects for legacy value transfer
-- clean-URL redirect parity checks for every migrated legacy blog article
+- normalized clean-URL redirect checks for every migrated legacy blog article
 - one canonical local entity and consistent IDs
 - explicit indexable-page robots controls with large image previews and unrestricted eligible snippets
 - automatic breadcrumb structured data for interior pages that do not already define it

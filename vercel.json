@@ -32,17 +32,7 @@
     { "source": "/blog/index.html", "destination": "/guides", "permanent": true },
     { "source": "/blog", "destination": "/guides", "permanent": true },
     {
-      "source": "/blog/auto-recycling-environmental-impact-twin-cities.html",
-      "destination": "/guides/what-happens-after-junk-car-pickup",
-      "permanent": true
-    },
-    {
       "source": "/blog/auto-recycling-environmental-impact-twin-cities",
-      "destination": "/guides/what-happens-after-junk-car-pickup",
-      "permanent": true
-    },
-    {
-      "source": "/blog/what-happens-to-car-after-pickup.html",
       "destination": "/guides/what-happens-after-junk-car-pickup",
       "permanent": true
     },
@@ -52,17 +42,7 @@
       "permanent": true
     },
     {
-      "source": "/blog/how-much-is-my-junk-car-worth-minnesota-2026.html",
-      "destination": "/guides/what-affects-a-junk-car-offer",
-      "permanent": true
-    },
-    {
       "source": "/blog/how-much-is-my-junk-car-worth-minnesota-2026",
-      "destination": "/guides/what-affects-a-junk-car-offer",
-      "permanent": true
-    },
-    {
-      "source": "/blog/running-vs-non-running-junk-car-prices.html",
       "destination": "/guides/what-affects-a-junk-car-offer",
       "permanent": true
     },
@@ -72,27 +52,12 @@
       "permanent": true
     },
     {
-      "source": "/blog/scrap-value-by-weight-minnesota-guide.html",
-      "destination": "/guides/what-affects-a-junk-car-offer",
-      "permanent": true
-    },
-    {
       "source": "/blog/scrap-value-by-weight-minnesota-guide",
       "destination": "/guides/what-affects-a-junk-car-offer",
       "permanent": true
     },
     {
-      "source": "/blog/minnesota-junk-car-title-requirements.html",
-      "destination": "/guides/minnesota-junk-car-documents",
-      "permanent": true
-    },
-    {
       "source": "/blog/minnesota-junk-car-title-requirements",
-      "destination": "/guides/minnesota-junk-car-documents",
-      "permanent": true
-    },
-    {
-      "source": "/blog/mn-license-plates-before-junking.html",
       "destination": "/guides/minnesota-junk-car-documents",
       "permanent": true
     },
@@ -102,27 +67,12 @@
       "permanent": true
     },
     {
-      "source": "/blog/free-junk-car-removal-minneapolis-mn.html",
-      "destination": "/junk-car-removal",
-      "permanent": true
-    },
-    {
       "source": "/blog/free-junk-car-removal-minneapolis-mn",
       "destination": "/junk-car-removal",
       "permanent": true
     },
     {
-      "source": "/blog/junk-vs-tradein-vs-private-sale.html",
-      "destination": "/guides",
-      "permanent": true
-    },
-    {
       "source": "/blog/junk-vs-tradein-vs-private-sale",
-      "destination": "/guides",
-      "permanent": true
-    },
-    {
-      "source": "/blog/top-10-most-junked-cars-minnesota.html",
       "destination": "/guides",
       "permanent": true
     },

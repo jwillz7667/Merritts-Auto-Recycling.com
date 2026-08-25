@@ -15,7 +15,7 @@ This record maps the rebuilt site to current official Google Search guidance. It
 - `/thank-you` and the custom 404 remain crawlable but carry page-level `noindex`, allowing crawlers to see the directive.
 - The canonical host is HTTPS without `www`; the alternate host permanently redirects in one hop.
 - Removed legacy pages permanently redirect to the closest useful replacement instead of a generic home-page redirect.
-- Legacy blog routes include both `.html` and extensionless variants so Vercel clean-URL normalization cannot bypass migration redirects.
+- Legacy blog migration rules use extensionless sources, as Vercel requires when `cleanUrls` is enabled; incoming `.html` requests are normalized before the migration redirect is applied.
 
 Official basis: [Google's developer SEO guide](https://developers.google.com/search/docs/fundamentals/get-started-developers) and [robots meta specifications](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag).
 

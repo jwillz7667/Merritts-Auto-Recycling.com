@@ -39,22 +39,33 @@ describe('legacy redirect map', () => {
     expect(config.redirects.every((redirect) => redirect.permanent)).toBe(true);
   });
 
-  it('preserves blog migrations after Vercel clean-URL normalization', () => {
+  it('uses normalized blog sources with Vercel clean URLs', () => {
     expect(config.cleanUrls).toBe(true);
     const redirects = new Map(
       config.redirects.map((redirect) => [redirect.source, redirect.destination]),
     );
-    const blogHtmlRedirects = config.redirects.filter(
-      (redirect) =>
-        redirect.source.startsWith('/blog/') &&
-        redirect.source.endsWith('.html') &&
-        redirect.source !== '/blog/index.html',
-    );
+    const expected = new Map([
+      [
+        '/blog/auto-recycling-environmental-impact-twin-cities',
+        '/guides/what-happens-after-junk-car-pickup',
+      ],
+      [
+        '/blog/what-happens-to-car-after-pickup',
+        '/guides/what-happens-after-junk-car-pickup',
+      ],
+      ['/blog/how-much-is-my-junk-car-worth-minnesota-2026', '/guides/what-affects-a-junk-car-offer'],
+      ['/blog/running-vs-non-running-junk-car-prices', '/guides/what-affects-a-junk-car-offer'],
+      ['/blog/scrap-value-by-weight-minnesota-guide', '/guides/what-affects-a-junk-car-offer'],
+      ['/blog/minnesota-junk-car-title-requirements', '/guides/minnesota-junk-car-documents'],
+      ['/blog/mn-license-plates-before-junking', '/guides/minnesota-junk-car-documents'],
+      ['/blog/free-junk-car-removal-minneapolis-mn', '/junk-car-removal'],
+      ['/blog/junk-vs-tradein-vs-private-sale', '/guides'],
+      ['/blog/top-10-most-junked-cars-minnesota', '/guides'],
+    ]);
 
-    expect(blogHtmlRedirects).toHaveLength(10);
-    for (const redirect of blogHtmlRedirects) {
-      const cleanSource = redirect.source.slice(0, -'.html'.length);
-      expect(redirects.get(cleanSource)).toBe(redirect.destination);
+    for (const [source, destination] of expected) {
+      expect(redirects.get(source)).toBe(destination);
+      expect(redirects.has(`${source}.html`)).toBe(false);
     }
   });
 

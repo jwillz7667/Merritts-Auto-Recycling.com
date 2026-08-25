@@ -85,7 +85,7 @@ The build validator checks:
 - content-image provenance paths
 - sitemap and robots behavior
 - absence of retired FAQ rich-result markup
-- clean-URL parity for legacy blog redirects
+- extensionless legacy blog redirects required by Vercel clean URLs
 - CSS and JavaScript file budgets
 
 ## Architecture
