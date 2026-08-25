@@ -46,6 +46,19 @@ describe('content policy', () => {
     }
   });
 
+  it('keeps core service titles descriptive and distinct', () => {
+    expect(services.map((service) => service.seoTitle)).toEqual([
+      "Cash for Junk Cars in Brooklyn Center | Merritt's",
+      "Junk Car Removal in Minneapolis | Merritt's",
+      "Auto Recycling in Brooklyn Center, MN | Merritt's",
+      "Junk Car Towing in Minneapolis | Merritt's",
+    ]);
+    for (const service of services) {
+      expect(service.seoTitle.length).toBeLessThanOrEqual(60);
+      expect(service.title.length).toBeGreaterThan(30);
+    }
+  });
+
   it('does not contain disallowed marketing claims', () => {
     const content = JSON.stringify({ services, serviceAreas, guides });
     expect(content).not.toMatch(/top dollar|rated #1|best price|paid cash on the spot/i);

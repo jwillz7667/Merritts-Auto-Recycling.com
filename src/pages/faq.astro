@@ -7,13 +7,13 @@ import { business, globalFaqs } from '@/data/site';
 
 const path = '/faq';
 const schema = {
-  '@type': 'FAQPage',
+  '@type': 'CollectionPage',
   '@id': `${business.siteUrl}${path}#webpage`,
-  mainEntity: globalFaqs.map((faq) => ({
-    '@type': 'Question',
-    name: faq.question,
-    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-  })),
+  url: `${business.siteUrl}${path}`,
+  name: "Junk Car Questions | Merritt's Auto Recycling FAQ",
+  description:
+    'Answers about vehicle details, ownership documents, removal timing, towing scope, service areas, and business hours.',
+  about: { '@id': `${business.siteUrl}/#business` },
 };
 ---
 

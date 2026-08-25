@@ -19,6 +19,15 @@ function count(haystack, pattern) {
   return [...haystack.matchAll(pattern)].length;
 }
 
+function decodeHtmlText(value) {
+  return value
+    .replaceAll('&amp;', '&')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#39;', "'")
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>');
+}
+
 function routeFile(pathname) {
   if (pathname === '/') return join(rootPath, 'index.html');
   if (extname(pathname)) return join(rootPath, pathname.slice(1));
@@ -51,10 +60,39 @@ const forbiddenText = [
   'paid cash on the spot',
   'Most junk cars in the Twin Cities range',
   'aggregateRating',
+  'FAQPage',
   '/get-cash-offer',
 ];
 const titles = new Map();
 const descriptions = new Map();
+
+const primaryPageSignals = [
+  {
+    path: '/',
+    title: "Cash for Junk Cars in Minneapolis | Merritt's Auto Recycling",
+    h1: 'Cash for junk cars in Minneapolis and Brooklyn Center',
+  },
+  {
+    path: '/cash-for-junk-cars',
+    title: "Cash for Junk Cars in Brooklyn Center | Merritt's",
+    h1: 'Cash for junk cars in Brooklyn Center and Minneapolis',
+  },
+  {
+    path: '/junk-car-removal',
+    title: "Junk Car Removal in Minneapolis | Merritt's",
+    h1: 'Junk car removal in Brooklyn Center and Minneapolis',
+  },
+  {
+    path: '/auto-recycling',
+    title: "Auto Recycling in Brooklyn Center, MN | Merritt's",
+    h1: 'Auto recycling in Brooklyn Center, Minnesota',
+  },
+  {
+    path: '/junk-car-towing',
+    title: "Junk Car Towing in Minneapolis | Merritt's",
+    h1: 'Junk car towing for vehicles Merritt’s agrees to acquire',
+  },
+];
 
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8');
@@ -135,6 +173,46 @@ for (const file of htmlFiles) {
     }
     const pathname = new URL(href, 'https://merritts-auto-recycling.com').pathname;
     if (!existsSync(routeFile(pathname))) fail(`${label} has a broken internal link to ${href}.`);
+  }
+}
+
+for (const signal of primaryPageSignals) {
+  const html = readFileSync(routeFile(signal.path), 'utf8');
+  const builtTitle = decodeHtmlText(html.match(/<title>([^<]+)<\/title>/i)?.[1] ?? '');
+  if (builtTitle !== signal.title) {
+    fail(`${signal.path} does not use the approved search title.`);
+  }
+  const builtH1 = decodeHtmlText(html.match(/<h1(?:\s[^>]*)?>([^<]+)<\/h1>/i)?.[1] ?? '');
+  if (builtH1 !== signal.h1) {
+    fail(`${signal.path} does not use the approved visible H1.`);
+  }
+}
+
+const vercelConfig = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
+const redirects = new Map(
+  vercelConfig.redirects.map((redirect) => [redirect.source, redirect.destination]),
+);
+const cleanBlogRedirects = new Map([
+  [
+    '/blog/auto-recycling-environmental-impact-twin-cities',
+    '/guides/what-happens-after-junk-car-pickup',
+  ],
+  ['/blog/what-happens-to-car-after-pickup', '/guides/what-happens-after-junk-car-pickup'],
+  ['/blog/how-much-is-my-junk-car-worth-minnesota-2026', '/guides/what-affects-a-junk-car-offer'],
+  ['/blog/running-vs-non-running-junk-car-prices', '/guides/what-affects-a-junk-car-offer'],
+  ['/blog/scrap-value-by-weight-minnesota-guide', '/guides/what-affects-a-junk-car-offer'],
+  ['/blog/minnesota-junk-car-title-requirements', '/guides/minnesota-junk-car-documents'],
+  ['/blog/mn-license-plates-before-junking', '/guides/minnesota-junk-car-documents'],
+  ['/blog/free-junk-car-removal-minneapolis-mn', '/junk-car-removal'],
+  ['/blog/junk-vs-tradein-vs-private-sale', '/guides'],
+  ['/blog/top-10-most-junked-cars-minnesota', '/guides'],
+]);
+for (const [source, destination] of cleanBlogRedirects) {
+  if (redirects.get(source) !== destination) {
+    fail(`${source} is missing its clean-URL migration redirect.`);
+  }
+  if (redirects.has(`${source}.html`)) {
+    fail(`${source}.html must be extensionless when Vercel cleanUrls is enabled.`);
   }
 }
 

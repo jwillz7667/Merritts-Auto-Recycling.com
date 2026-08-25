@@ -2,13 +2,7 @@
 
 ## Current production state
 
-The live domain is intentionally serving a site-maintenance page with:
-
-- “This website is down for maintenance.”
-- call number 763-533-2775
-- daily hours 8:00 AM–8:00 PM
-
-Do not replace it automatically. The full rebuild requires explicit owner approval after the gates below.
+The full rebuild is live at `https://merritts-auto-recycling.com`. The former maintenance page is now a rollback artifact only; it should not replace the live site during routine updates. Future releases must pass the gates below in a Vercel Preview before the production branch is changed.
 
 ## Release gates
 

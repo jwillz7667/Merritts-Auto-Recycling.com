@@ -2,6 +2,8 @@
 
 Vercel uses `permanent: true`, which emits a method-preserving permanent redirect. Rules are ordered from specific to general. The two retained service-area pages must appear before the placemark fallback.
 
+Because `cleanUrls` is enabled, Vercel first redirects an incoming `.html` URL to its extensionless form. Vercel's configuration rules require extensionless redirect sources in this mode, so each normalized legacy blog path is mapped below. Do not add the `.html` form as a second source; that creates a normalized route conflict.
+
 ## Primary pages
 
 | Legacy source            | Destination           | Reason                      |
@@ -26,20 +28,20 @@ Vercel uses `permanent: true`, which emits a method-preserving permanent redirec
 
 ## Blog migration
 
-| Legacy source                                                | Destination                                  |
-| ------------------------------------------------------------ | -------------------------------------------- |
-| `/blog/index.html`                                           | `/guides`                                    |
-| `/blog`                                                      | `/guides`                                    |
-| `/blog/auto-recycling-environmental-impact-twin-cities.html` | `/guides/what-happens-after-junk-car-pickup` |
-| `/blog/what-happens-to-car-after-pickup.html`                | `/guides/what-happens-after-junk-car-pickup` |
-| `/blog/how-much-is-my-junk-car-worth-minnesota-2026.html`    | `/guides/what-affects-a-junk-car-offer`      |
-| `/blog/running-vs-non-running-junk-car-prices.html`          | `/guides/what-affects-a-junk-car-offer`      |
-| `/blog/scrap-value-by-weight-minnesota-guide.html`           | `/guides/what-affects-a-junk-car-offer`      |
-| `/blog/minnesota-junk-car-title-requirements.html`           | `/guides/minnesota-junk-car-documents`       |
-| `/blog/mn-license-plates-before-junking.html`                | `/guides/minnesota-junk-car-documents`       |
-| `/blog/free-junk-car-removal-minneapolis-mn.html`            | `/junk-car-removal`                          |
-| `/blog/junk-vs-tradein-vs-private-sale.html`                 | `/guides`                                    |
-| `/blog/top-10-most-junked-cars-minnesota.html`               | `/guides`                                    |
+| Configured normalized source                            | Destination                                  |
+| ------------------------------------------------------- | -------------------------------------------- |
+| `/blog/index.html`                                      | `/guides`                                    |
+| `/blog`                                                 | `/guides`                                    |
+| `/blog/auto-recycling-environmental-impact-twin-cities` | `/guides/what-happens-after-junk-car-pickup` |
+| `/blog/what-happens-to-car-after-pickup`                | `/guides/what-happens-after-junk-car-pickup` |
+| `/blog/how-much-is-my-junk-car-worth-minnesota-2026`    | `/guides/what-affects-a-junk-car-offer`      |
+| `/blog/running-vs-non-running-junk-car-prices`          | `/guides/what-affects-a-junk-car-offer`      |
+| `/blog/scrap-value-by-weight-minnesota-guide`           | `/guides/what-affects-a-junk-car-offer`      |
+| `/blog/minnesota-junk-car-title-requirements`           | `/guides/minnesota-junk-car-documents`       |
+| `/blog/mn-license-plates-before-junking`                | `/guides/minnesota-junk-car-documents`       |
+| `/blog/free-junk-car-removal-minneapolis-mn`            | `/junk-car-removal`                          |
+| `/blog/junk-vs-tradein-vs-private-sale`                 | `/guides`                                    |
+| `/blog/top-10-most-junked-cars-minnesota`               | `/guides`                                    |
 
 ## Placemark migration
 
@@ -121,7 +123,7 @@ All requests to `www.merritts-auto-recycling.com` permanently redirect to the eq
 
 ## Validation sampling
 
-Before production launch, test at least:
+For every production release that changes routes, test at least:
 
 - one primary page
 - one retained service-area page

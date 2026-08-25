@@ -43,12 +43,15 @@ This checklist includes work outside the codebase. None of these actions guarant
 
 ## Search engine tooling
 
-- [ ] Verify the canonical domain in Google Search Console.
-- [ ] Submit `https://merritts-auto-recycling.com/sitemap.xml` after launch.
+- [ ] Verify a Google Search Console **Domain property** through DNS using a business-controlled Google account.
+- [ ] Give ongoing Search Console access through the Users and permissions screen; do not share passwords or commit verification values.
+- [ ] Submit `https://merritts-auto-recycling.com/sitemap.xml` once in the Sitemaps report and confirm a successful read.
 - [ ] Inspect home, core service, Brooklyn Center, Minneapolis, and one guide URL.
-- [ ] Review coverage for legacy placemarks and confirm they settle on the service-area hub.
+- [ ] Request indexing for the home page and a small set of materially updated canonical pages; do not repeatedly submit unchanged URLs.
+- [ ] Review Page Indexing for legacy blog and placemark URLs and confirm they settle on the intended canonical destinations.
 - [ ] Verify the domain in Bing Webmaster Tools and submit the same sitemap.
-- [ ] Monitor crawl errors, canonical selection, and rich-result eligibility.
+- [ ] Monitor crawl errors, canonical selection, Core Web Vitals, security issues, manual actions, and supported enhancement reports.
+- [ ] Compare submitted versus indexed sitemap URLs after Google has had time to recrawl; investigate patterns rather than isolated delays.
 
 ## Local landing-page governance
 
