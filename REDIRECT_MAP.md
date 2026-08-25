@@ -28,20 +28,20 @@ Because `cleanUrls` is enabled, Vercel first redirects an incoming `.html` URL t
 
 ## Blog migration
 
-| Configured normalized source                                | Destination                                  |
-| ------------------------------------------------------------ | -------------------------------------------- |
-| `/blog/index.html`                                           | `/guides`                                    |
-| `/blog`                                                      | `/guides`                                    |
-| `/blog/auto-recycling-environmental-impact-twin-cities`      | `/guides/what-happens-after-junk-car-pickup` |
-| `/blog/what-happens-to-car-after-pickup`                     | `/guides/what-happens-after-junk-car-pickup` |
-| `/blog/how-much-is-my-junk-car-worth-minnesota-2026`         | `/guides/what-affects-a-junk-car-offer`      |
-| `/blog/running-vs-non-running-junk-car-prices`               | `/guides/what-affects-a-junk-car-offer`      |
-| `/blog/scrap-value-by-weight-minnesota-guide`                | `/guides/what-affects-a-junk-car-offer`      |
-| `/blog/minnesota-junk-car-title-requirements`                | `/guides/minnesota-junk-car-documents`       |
-| `/blog/mn-license-plates-before-junking`                     | `/guides/minnesota-junk-car-documents`       |
-| `/blog/free-junk-car-removal-minneapolis-mn`                 | `/junk-car-removal`                          |
-| `/blog/junk-vs-tradein-vs-private-sale`                      | `/guides`                                    |
-| `/blog/top-10-most-junked-cars-minnesota`                    | `/guides`                                    |
+| Configured normalized source                            | Destination                                  |
+| ------------------------------------------------------- | -------------------------------------------- |
+| `/blog/index.html`                                      | `/guides`                                    |
+| `/blog`                                                 | `/guides`                                    |
+| `/blog/auto-recycling-environmental-impact-twin-cities` | `/guides/what-happens-after-junk-car-pickup` |
+| `/blog/what-happens-to-car-after-pickup`                | `/guides/what-happens-after-junk-car-pickup` |
+| `/blog/how-much-is-my-junk-car-worth-minnesota-2026`    | `/guides/what-affects-a-junk-car-offer`      |
+| `/blog/running-vs-non-running-junk-car-prices`          | `/guides/what-affects-a-junk-car-offer`      |
+| `/blog/scrap-value-by-weight-minnesota-guide`           | `/guides/what-affects-a-junk-car-offer`      |
+| `/blog/minnesota-junk-car-title-requirements`           | `/guides/minnesota-junk-car-documents`       |
+| `/blog/mn-license-plates-before-junking`                | `/guides/minnesota-junk-car-documents`       |
+| `/blog/free-junk-car-removal-minneapolis-mn`            | `/junk-car-removal`                          |
+| `/blog/junk-vs-tradein-vs-private-sale`                 | `/guides`                                    |
+| `/blog/top-10-most-junked-cars-minnesota`               | `/guides`                                    |
 
 ## Placemark migration
 

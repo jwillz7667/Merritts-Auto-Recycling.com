@@ -19,6 +19,15 @@ function count(haystack, pattern) {
   return [...haystack.matchAll(pattern)].length;
 }
 
+function decodeHtmlText(value) {
+  return value
+    .replaceAll('&amp;', '&')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#39;', "'")
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>');
+}
+
 function routeFile(pathname) {
   if (pathname === '/') return join(rootPath, 'index.html');
   if (extname(pathname)) return join(rootPath, pathname.slice(1));
@@ -169,10 +178,12 @@ for (const file of htmlFiles) {
 
 for (const signal of primaryPageSignals) {
   const html = readFileSync(routeFile(signal.path), 'utf8');
-  if (!html.includes(`<title>${signal.title}</title>`)) {
+  const builtTitle = decodeHtmlText(html.match(/<title>([^<]+)<\/title>/i)?.[1] ?? '');
+  if (builtTitle !== signal.title) {
     fail(`${signal.path} does not use the approved search title.`);
   }
-  if (!html.includes(`>${signal.h1}</h1>`)) {
+  const builtH1 = decodeHtmlText(html.match(/<h1(?:\s[^>]*)?>([^<]+)<\/h1>/i)?.[1] ?? '');
+  if (builtH1 !== signal.h1) {
     fail(`${signal.path} does not use the approved visible H1.`);
   }
 }

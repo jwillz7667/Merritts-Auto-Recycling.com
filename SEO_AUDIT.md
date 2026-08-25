@@ -115,15 +115,15 @@ The implementation-to-guidance mapping is maintained in `SEO_2026_COMPLIANCE.md`
 
 ## Remaining account-side actions
 
-| Priority | Action                                                       | Owner or account administrator step                                     |
-| -------- | ------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| P0       | Confirm Google Search Console ownership                      | Verify the domain property and submit the production sitemap            |
-| P0       | Confirm Google Business Profile details                      | Match phone, website, address, category, and 8 AM–8 PM daily hours      |
-| P1       | Confirm production contact-form delivery                     | Send a safe test inquiry and confirm internal delivery                  |
-| P1       | Decide on analytics                                          | Supply an approved GTM container ID or intentionally remain analytics-free |
-| P1       | Confirm Bing Webmaster Tools ownership                       | Verify the domain and submit the same production sitemap                |
-| P2       | Monitor field performance after enough traffic exists        | Review Page Indexing and Core Web Vitals; field data cannot be prebuilt |
-| P2       | Add service areas only when operations and unique facts exist | Require owner confirmation and genuinely useful local content          |
+| Priority | Action                                                        | Owner or account administrator step                                        |
+| -------- | ------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| P0       | Confirm Google Search Console ownership                       | Verify the domain property and submit the production sitemap               |
+| P0       | Confirm Google Business Profile details                       | Match phone, website, address, category, and 8 AM–8 PM daily hours         |
+| P1       | Confirm production contact-form delivery                      | Send a safe test inquiry and confirm internal delivery                     |
+| P1       | Decide on analytics                                           | Supply an approved GTM container ID or intentionally remain analytics-free |
+| P1       | Confirm Bing Webmaster Tools ownership                        | Verify the domain and submit the same production sitemap                   |
+| P2       | Monitor field performance after enough traffic exists         | Review Page Indexing and Core Web Vitals; field data cannot be prebuilt    |
+| P2       | Add service areas only when operations and unique facts exist | Require owner confirmation and genuinely useful local content              |
 
 ## Expected outcome
 
