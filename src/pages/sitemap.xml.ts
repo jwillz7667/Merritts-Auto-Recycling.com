@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { guides } from '@/data/guides';
 import { business, publishedRoutes } from '@/data/site';
 
-const updated = '2026-08-23';
+const updated = '2026-08-25';
 const routes = [...publishedRoutes, ...guides.map((guide) => `/guides/${guide.slug}`)];
 
 export const GET: APIRoute = () => {

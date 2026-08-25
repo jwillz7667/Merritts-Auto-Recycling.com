@@ -1,8 +1,6 @@
 # Merritt's Auto Recycling website
 
-Production-grade, static-first rebuild of [merritts-auto-recycling.com](https://merritts-auto-recycling.com) for Vercel.
-
-The production domain currently remains on a dedicated maintenance page. This refactor must be reviewed and explicitly approved before it replaces that page.
+Production-grade, static-first rebuild of [merritts-auto-recycling.com](https://merritts-auto-recycling.com) for Vercel. The rebuilt site is live on the canonical production domain.
 
 ## What is included
 
@@ -86,6 +84,8 @@ The build validator checks:
 - internal link integrity
 - content-image provenance paths
 - sitemap and robots behavior
+- absence of retired FAQ rich-result markup
+- clean-URL parity for legacy blog redirects
 - CSS and JavaScript file budgets
 
 ## Architecture
@@ -130,13 +130,6 @@ No generated imagery or third-party stock was added. The SVG logo and icons are 
 
 ## Deployment safety
 
-Do not merge this rebuild into the production branch or remove the maintenance page until all of the following are true:
+Production changes move through a review branch and Vercel Preview before merging to the production branch. Each release must pass the credential scan, automated checks, remote build, metadata validation, and representative redirect checks. Keep environment values in Vercel rather than Git, and see `LAUNCH_HANDOFF.md` for release and rollback guidance.
 
-1. `CONTENT_VERIFICATION_REQUIRED.md` is reviewed by the owner.
-2. Resend and Turnstile variables are verified in a Vercel Preview deployment.
-3. General contact submissions reach the intended inbox.
-4. Analytics and consent decisions are approved.
-5. Redirects are sampled in Preview.
-6. The owner explicitly approves production launch.
-
-See `LAUNCH_HANDOFF.md` for the complete sequence.
+Search Console and analytics configuration are account-side tasks. See `SEARCH_CONSOLE_HANDOFF.md` for the exact post-launch workflow; do not commit Google or Vercel account credentials to this repository.

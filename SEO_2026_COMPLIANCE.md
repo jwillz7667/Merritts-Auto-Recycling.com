@@ -1,6 +1,6 @@
 # 2026 SEO compliance record
 
-Review date: August 23, 2026  
+Review date: August 25, 2026  
 Canonical origin: `https://merritts-auto-recycling.com`
 
 This record maps the rebuilt site to current official Google Search guidance. It documents technical eligibility and quality controls; it does not promise rankings, rich results, AI citations, calls, or revenue.
@@ -15,6 +15,7 @@ This record maps the rebuilt site to current official Google Search guidance. It
 - `/thank-you` and the custom 404 remain crawlable but carry page-level `noindex`, allowing crawlers to see the directive.
 - The canonical host is HTTPS without `www`; the alternate host permanently redirects in one hop.
 - Removed legacy pages permanently redirect to the closest useful replacement instead of a generic home-page redirect.
+- Legacy blog routes include both `.html` and extensionless variants so Vercel clean-URL normalization cannot bypass migration redirects.
 
 Official basis: [Google's developer SEO guide](https://developers.google.com/search/docs/fundamentals/get-started-developers) and [robots meta specifications](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag).
 
@@ -30,14 +31,15 @@ Official basis: [title-link guidance](https://developers.google.com/search/docs/
 
 ## Entity and structured-data controls
 
-- One canonical `LocalBusiness` entity uses the public name, address, phone, email, founder, founding year, map, profiles, and 8:00 AM–8:00 PM daily hours.
+- One canonical `LocalBusiness` + `AutomotiveBusiness` entity uses the public name, address, phone, email, founder, founding year, map, profiles, and 8:00 AM–8:00 PM daily hours.
 - One `WebSite` entity references the same business.
-- Page-specific `Service`, `ContactPage`, `AboutPage`, `CollectionPage`, `Article`, `FAQPage`, and `BreadcrumbList` objects describe visible content only.
+- Page-specific `Service`, `ContactPage`, `AboutPage`, `CollectionPage`, `Article`, and `BreadcrumbList` objects describe visible content only.
 - Breadcrumb markup is present on nested and top-level interior routes.
 - There is no fabricated `aggregateRating`, review markup, price range, geographic office, or unsupported service claim.
 - Structured data never introduces facts that are absent from the rendered page.
+- Customer-facing FAQs remain visible, but `FAQPage` markup is intentionally absent because Google retired the FAQ rich-result feature and removed its documentation in 2026.
 
-Official basis: [LocalBusiness structured-data guidance](https://developers.google.com/search/docs/appearance/structured-data/local-business) and [business-details guidance](https://developers.google.com/search/docs/appearance/establish-business-details).
+Official basis: [LocalBusiness structured-data guidance](https://developers.google.com/search/docs/appearance/structured-data/local-business), [business-details guidance](https://developers.google.com/search/docs/appearance/establish-business-details), and [Google Search documentation updates](https://developers.google.com/search/updates).
 
 ## Local SEO controls
 
@@ -87,3 +89,4 @@ Official basis: [Google Core Web Vitals guidance](https://developers.google.com/
 6. Review Search Console's Search and generative-AI performance reporting when available to the property.
 7. Evaluate field Core Web Vitals after enough production traffic exists; laboratory scores are not field data.
 8. Add new city pages only when service is confirmed and genuinely unique local information is available.
+9. Keep Search Console ownership in a business-controlled Google account and never commit account credentials or verification secrets.

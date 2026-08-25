@@ -88,6 +88,7 @@ export type Service = {
   slug: string;
   name: string;
   eyebrow: string;
+  seoTitle: string;
   title: string;
   description: string;
   summary: string;
@@ -106,7 +107,8 @@ export const services: Service[] = [
     slug: 'cash-for-junk-cars',
     name: 'Cash for junk cars',
     eyebrow: 'Call with the vehicle details',
-    title: 'Get a straightforward cash offer for an unwanted vehicle',
+    seoTitle: "Cash for Junk Cars in Brooklyn Center | Merritt's",
+    title: 'Cash for junk cars in Brooklyn Center and Minneapolis',
     description:
       "Call Merritt's Auto Recycling about an unwanted car, truck, van, or SUV and discuss a cash offer in the Twin Cities area.",
     summary:
@@ -150,9 +152,10 @@ export const services: Service[] = [
     slug: 'junk-car-removal',
     name: 'Junk car removal',
     eyebrow: 'Plan a safe, accessible pickup',
-    title: 'Vehicle removal connected to a confirmed purchase',
+    seoTitle: "Junk Car Removal in Minneapolis | Merritt's",
+    title: 'Junk car removal in Brooklyn Center and Minneapolis',
     description:
-      "Learn how Merritt's coordinates removal for an unwanted or non-running vehicle after the vehicle, location, terms, and schedule are confirmed.",
+      "Learn how Merritt's coordinates junk car removal in Brooklyn Center and Minneapolis after the vehicle, terms, access, and schedule are confirmed.",
     summary:
       'Merritt’s discusses access, condition, location, and timing before scheduling. Removal information on this site applies only to vehicles Merritt’s is considering for purchase or recycling.',
     image: '/images/legacy/junk-car-removal.jpg',
@@ -193,9 +196,10 @@ export const services: Service[] = [
     slug: 'auto-recycling',
     name: 'Auto recycling',
     eyebrow: 'A practical next step for an end-of-life vehicle',
-    title: 'Ask Merritt’s about recycling an unwanted vehicle',
+    seoTitle: "Auto Recycling in Brooklyn Center, MN | Merritt's",
+    title: 'Auto recycling in Brooklyn Center, Minnesota',
     description:
-      "Contact Merritt's Auto Recycling about an end-of-life vehicle and learn what information is needed before purchase or removal is confirmed.",
+      "Contact Merritt's Auto Recycling in Brooklyn Center about an end-of-life vehicle and learn what is needed before purchase or removal is confirmed.",
     summary:
       'Vehicles contain reusable materials as well as fluids and components that require careful handling. Merritt’s can discuss whether it can accept your vehicle and how removal would be arranged.',
     image: '/images/legacy/auto-recycling-yard.jpg',
@@ -231,9 +235,10 @@ export const services: Service[] = [
     slug: 'junk-car-towing',
     name: 'Junk vehicle towing',
     eyebrow: 'Removal, not mechanical service',
-    title: 'Towing for vehicles Merritt’s agrees to acquire',
+    seoTitle: "Junk Car Towing in Minneapolis | Merritt's",
+    title: 'Junk car towing for vehicles Merritt’s agrees to acquire',
     description:
-      "Merritt's towing information covers vehicle removal connected to a confirmed purchase—not roadside repair, routine transport, or general breakdown towing.",
+      "Junk car towing in Brooklyn Center and Minneapolis for vehicles Merritt's agrees to acquire—not roadside repair, routine transport, or breakdown towing.",
     summary:
       'If Merritt’s agrees to acquire a vehicle, it will discuss the pickup setting and confirm the removal terms. Call a roadside-assistance or general towing provider for breakdown recovery or mechanical transport.',
     image: '/images/legacy/junk-car-removal.jpg',

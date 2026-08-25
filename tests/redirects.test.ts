@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 type Redirect = { source: string; destination: string; permanent: boolean };
-type VercelConfig = { redirects: Redirect[] };
+type VercelConfig = { cleanUrls: boolean; redirects: Redirect[] };
 
 const config = JSON.parse(
   readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'),
@@ -37,5 +37,29 @@ describe('legacy redirect map', () => {
 
   it('uses permanent redirects for every migration route', () => {
     expect(config.redirects.every((redirect) => redirect.permanent)).toBe(true);
+  });
+
+  it('preserves blog migrations after Vercel clean-URL normalization', () => {
+    expect(config.cleanUrls).toBe(true);
+    const redirects = new Map(
+      config.redirects.map((redirect) => [redirect.source, redirect.destination]),
+    );
+    const blogHtmlRedirects = config.redirects.filter(
+      (redirect) =>
+        redirect.source.startsWith('/blog/') &&
+        redirect.source.endsWith('.html') &&
+        redirect.source !== '/blog/index.html',
+    );
+
+    expect(blogHtmlRedirects).toHaveLength(10);
+    for (const redirect of blogHtmlRedirects) {
+      const cleanSource = redirect.source.slice(0, -'.html'.length);
+      expect(redirects.get(cleanSource)).toBe(redirect.destination);
+    }
+  });
+
+  it('does not contain duplicate redirect sources', () => {
+    const sources = config.redirects.map((redirect) => redirect.source);
+    expect(new Set(sources).size).toBe(sources.length);
   });
 });

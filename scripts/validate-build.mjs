@@ -51,10 +51,39 @@ const forbiddenText = [
   'paid cash on the spot',
   'Most junk cars in the Twin Cities range',
   'aggregateRating',
+  'FAQPage',
   '/get-cash-offer',
 ];
 const titles = new Map();
 const descriptions = new Map();
+
+const primaryPageSignals = [
+  {
+    path: '/',
+    title: "Cash for Junk Cars in Minneapolis | Merritt's Auto Recycling",
+    h1: 'Cash for junk cars in Minneapolis and Brooklyn Center',
+  },
+  {
+    path: '/cash-for-junk-cars',
+    title: "Cash for Junk Cars in Brooklyn Center | Merritt's",
+    h1: 'Cash for junk cars in Brooklyn Center and Minneapolis',
+  },
+  {
+    path: '/junk-car-removal',
+    title: "Junk Car Removal in Minneapolis | Merritt's",
+    h1: 'Junk car removal in Brooklyn Center and Minneapolis',
+  },
+  {
+    path: '/auto-recycling',
+    title: "Auto Recycling in Brooklyn Center, MN | Merritt's",
+    h1: 'Auto recycling in Brooklyn Center, Minnesota',
+  },
+  {
+    path: '/junk-car-towing',
+    title: "Junk Car Towing in Minneapolis | Merritt's",
+    h1: 'Junk car towing for vehicles Merritt’s agrees to acquire',
+  },
+];
 
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8');
@@ -135,6 +164,32 @@ for (const file of htmlFiles) {
     }
     const pathname = new URL(href, 'https://merritts-auto-recycling.com').pathname;
     if (!existsSync(routeFile(pathname))) fail(`${label} has a broken internal link to ${href}.`);
+  }
+}
+
+for (const signal of primaryPageSignals) {
+  const html = readFileSync(routeFile(signal.path), 'utf8');
+  if (!html.includes(`<title>${signal.title}</title>`)) {
+    fail(`${signal.path} does not use the approved search title.`);
+  }
+  if (!html.includes(`>${signal.h1}</h1>`)) {
+    fail(`${signal.path} does not use the approved visible H1.`);
+  }
+}
+
+const vercelConfig = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
+const redirects = new Map(
+  vercelConfig.redirects.map((redirect) => [redirect.source, redirect.destination]),
+);
+for (const redirect of vercelConfig.redirects.filter(
+  (item) =>
+    item.source.startsWith('/blog/') &&
+    item.source.endsWith('.html') &&
+    item.source !== '/blog/index.html',
+)) {
+  const cleanSource = redirect.source.slice(0, -'.html'.length);
+  if (redirects.get(cleanSource) !== redirect.destination) {
+    fail(`${redirect.source} is missing its clean-URL redirect equivalent.`);
   }
 }
 

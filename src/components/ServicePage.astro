@@ -35,19 +35,11 @@ const schema = [
       { '@type': 'ListItem', position: 2, name: service.name, item: `${business.siteUrl}${path}` },
     ],
   },
-  {
-    '@type': 'FAQPage',
-    mainEntity: service.faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-    })),
-  },
 ];
 ---
 
 <BaseLayout
-  title={`${service.title} | Merritt's Auto Recycling`}
+  title={service.seoTitle}
   description={service.description}
   path={path}
   schema={schema}

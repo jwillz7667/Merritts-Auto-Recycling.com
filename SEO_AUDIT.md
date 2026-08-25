@@ -1,6 +1,6 @@
 # SEO and site-quality audit
 
-Audit date: August 23, 2026  
+Audit date: August 25, 2026  
 Canonical site: `https://merritts-auto-recycling.com`  
 Legacy baseline commit: `94010ccf1dd88c5bb8d0b4145a5767fe84f80958`
 
@@ -8,7 +8,7 @@ Legacy baseline commit: `94010ccf1dd88c5bb8d0b4145a5767fe84f80958`
 
 The legacy site had useful entity information and a working static deployment model, but its acquisition strategy depended on duplicated location pages, repeated high-risk claims, and a brittle generated-HTML workflow. The rebuild moves to a typed Astro content system, keeps one canonical local entity, reduces the service-area footprint to pages supported by current facts, and places direct call and text actions at the center of the cash-for-cars journey.
 
-The production domain should stay on its maintenance page until the owner has completed the verification queue and a Vercel Preview has passed form-delivery testing.
+The rebuilt site is live on the production domain. Post-launch validation confirms the canonical host, sitemap, robots controls, indexability, metadata, and structured-data syntax across all public routes. The remaining work is account-side monitoring and ownership configuration in Google Search Console, Google Business Profile, analytics, and Bing Webmaster Tools.
 
 ## Legacy baseline
 
@@ -36,6 +36,7 @@ The production domain should stay on its maintenance page until the owner has co
 - one canonical origin with a permanent `www` redirect
 - clean URLs and no trailing slash
 - permanent mappings for primary legacy pages, blog posts, forms, and placemarks
+- `.html` and extensionless mappings for migrated blog routes, preventing Vercel clean-URL normalization from producing 404s
 - `robots.txt` permits crawling; `/thank-you` and 404 use page-level `noindex`
 
 ## On-page system
@@ -54,7 +55,7 @@ Every indexable page includes:
 Page-specific structured data is limited to content visible on the page:
 
 - `Service` for core service and area pages
-- `FAQPage` for rendered FAQs
+- `CollectionPage` for the visible FAQ collection; no retired `FAQPage` rich-result markup
 - `Article` for guides
 - `BreadcrumbList` for nested routes
 - no `aggregateRating`, fabricated review, or hidden city entities
@@ -104,6 +105,7 @@ Implemented:
 - internal-link and metadata build validation
 - XML sitemap generated from the typed route set
 - preserved 308 redirects for legacy value transfer
+- clean-URL redirect parity checks for every migrated legacy blog article
 - one canonical local entity and consistent IDs
 - explicit indexable-page robots controls with large image previews and unrestricted eligible snippets
 - automatic breadcrumb structured data for interior pages that do not already define it
@@ -111,17 +113,17 @@ Implemented:
 
 The implementation-to-guidance mapping is maintained in `SEO_2026_COMPLIANCE.md`.
 
-## Remaining launch blockers
+## Remaining account-side actions
 
-| Priority | Blocker                                                                    | Owner action                                                |
-| -------- | -------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| P0       | Operational claims are not yet evidenced                                   | Review `CONTENT_VERIFICATION_REQUIRED.md`                   |
-| P0       | Contact form has not been tested with production Vercel environment values | Complete a Preview contact submission                       |
-| P0       | Photo rights have not been documented                                      | Approve the five selected legacy derivatives                |
-| P1       | Google Business Profile hours may still differ                             | Update GBP to 8 AM–8 PM daily before launch                 |
-| P1       | Analytics container and consent decision are unconfirmed                   | Approve measurement setup or launch without analytics       |
-| P1       | Search Console/Bing access is unconfirmed                                  | Verify properties and submit sitemap after launch           |
-| P2       | Additional service areas may be valid but lack proof                       | Add only after owner confirmation and unique local evidence |
+| Priority | Action                                                       | Owner or account administrator step                                     |
+| -------- | ------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| P0       | Confirm Google Search Console ownership                      | Verify the domain property and submit the production sitemap            |
+| P0       | Confirm Google Business Profile details                      | Match phone, website, address, category, and 8 AM–8 PM daily hours      |
+| P1       | Confirm production contact-form delivery                     | Send a safe test inquiry and confirm internal delivery                  |
+| P1       | Decide on analytics                                          | Supply an approved GTM container ID or intentionally remain analytics-free |
+| P1       | Confirm Bing Webmaster Tools ownership                       | Verify the domain and submit the same production sitemap                |
+| P2       | Monitor field performance after enough traffic exists        | Review Page Indexing and Core Web Vitals; field data cannot be prebuilt |
+| P2       | Add service areas only when operations and unique facts exist | Require owner confirmation and genuinely useful local content          |
 
 ## Expected outcome
 

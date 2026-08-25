@@ -6,26 +6,16 @@ import Icon from '@/components/Icon.astro';
 import Picture from '@/components/Picture.astro';
 import { business, globalFaqs, serviceAreas, services } from '@/data/site';
 
-const schema = [
-  {
-    '@type': 'WebPage',
-    '@id': `${business.siteUrl}/#webpage`,
-    url: `${business.siteUrl}/`,
-    name: "Cash for Junk Cars in Minneapolis | Merritt's Auto Recycling",
-    description:
-      "Call Merritt's Auto Recycling to discuss cash for an unwanted vehicle in Brooklyn Center or Minneapolis. Open daily from 8 AM to 8 PM.",
-    isPartOf: { '@id': `${business.siteUrl}/#website` },
-    about: { '@id': `${business.siteUrl}/#business` },
-  },
-  {
-    '@type': 'FAQPage',
-    mainEntity: globalFaqs.slice(0, 6).map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-    })),
-  },
-];
+const schema = {
+  '@type': 'WebPage',
+  '@id': `${business.siteUrl}/#webpage`,
+  url: `${business.siteUrl}/`,
+  name: "Cash for Junk Cars in Minneapolis | Merritt's Auto Recycling",
+  description:
+    "Call Merritt's Auto Recycling to discuss cash for an unwanted vehicle in Brooklyn Center or Minneapolis. Open daily from 8 AM to 8 PM.",
+  isPartOf: { '@id': `${business.siteUrl}/#website` },
+  about: { '@id': `${business.siteUrl}/#business` },
+};
 ---
 
 <BaseLayout
@@ -38,7 +28,7 @@ const schema = [
     <div class="hero-grid">
       <div class="hero-copy">
         <p class="eyebrow eyebrow--light">Brooklyn Center · Serving vehicle owners since 1988</p>
-        <h1 id="home-heading">Cash for your unwanted vehicle—without the guesswork.</h1>
+        <h1 id="home-heading">Cash for junk cars in Minneapolis and Brooklyn Center</h1>
         <p class="lede lede--light">
           Call with the year, make, model, condition, and location. Merritt’s reviews the details,
           explains the process, and confirms every offer and pickup term directly.
