@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import CtaBand from '@/components/CtaBand.astro';
+import RelatedResources from '@/components/RelatedResources.astro';
 import PageHero from '@/components/PageHero.astro';
 import { guides, type Guide } from '@/data/guides';
 import { business } from '@/data/site';
@@ -47,12 +48,7 @@ const schema = [
 ];
 ---
 
-<BaseLayout
-  title={`${guide.title} | Merritt's Auto Recycling`}
-  description={guide.description}
-  path={path}
-  schema={schema}
->
+<BaseLayout title={guide.seoTitle} description={guide.description} path={path} schema={schema}>
   <PageHero
     eyebrow="Merritt’s guide"
     title={guide.title}
@@ -66,7 +62,7 @@ const schema = [
     <ul class="guide-meta" aria-label="Article information">
       <li>Updated {guide.updated}</li>
       <li>{guide.readingTime}</li>
-      <li>Reviewed for unsupported claims</li>
+      <li>By Merritt’s Auto Recycling</li>
     </ul>
   </PageHero>
 
@@ -105,7 +101,7 @@ const schema = [
               ))}
             </ul>
           ) : (
-            <p>This operational checklist does not make a state-law claim.</p>
+            <p>Use this checklist to prepare for a conversation about your vehicle.</p>
           )
         }
         <p style="margin-top: 1rem;">
@@ -116,5 +112,6 @@ const schema = [
     </div>
   </article>
 
+  <RelatedResources guideSlug={guide.slug} />
   <CtaBand />
 </BaseLayout>

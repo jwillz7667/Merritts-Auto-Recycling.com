@@ -20,7 +20,7 @@ const primaryRoutes = [
 test('home page presents the correct primary conversion path', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-    'Turn an unwanted vehicle into a clear next step.',
+    'Cash for junk cars in Minneapolis and Brooklyn Center',
   );
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.getByRole('link', { name: /Call 763-533-2775/ }).first()).toHaveAttribute(
@@ -43,7 +43,7 @@ test('mobile navigation and sticky actions remain usable', async ({ page }) => {
     'tel:+1-763-533-2775',
   );
 
-  const toggle = page.getByRole('button', { name: 'Open navigation menu' });
+  const toggle = page.locator('button[aria-controls="mobile-navigation"]');
   await toggle.click();
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator('#mobile-navigation')).toHaveAttribute('data-open', 'true');

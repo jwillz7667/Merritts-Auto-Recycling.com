@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import CtaBand from '@/components/CtaBand.astro';
+import RelatedResources from '@/components/RelatedResources.astro';
 import Icon from '@/components/Icon.astro';
 import PageHero from '@/components/PageHero.astro';
 import { business, serviceAreas, type ServiceArea } from '@/data/site';
@@ -45,7 +46,7 @@ const schema = [
 ---
 
 <BaseLayout
-  title={`${area.title} | Merritt's Auto Recycling`}
+  title={`Cash for Junk Cars in ${area.city}, MN | Merritt's`}
   description={area.description}
   path={path}
   schema={schema}
@@ -74,7 +75,7 @@ const schema = [
     <div class="container split">
       <div class="flow">
         <p class="eyebrow">Local context</p>
-        <h2>What this page can confirm</h2>
+        <h2>Junk car pickup in {area.city}</h2>
         <p class="lede">{area.proof}</p>
         <ul class="check-list">
           {area.details.map((detail) => <li>{detail}</li>)}
@@ -90,8 +91,7 @@ const schema = [
           <li>Title, lien, and key status</li>
         </ul>
         <p class="notice">
-          A published area page does not guarantee vehicle acceptance, a specific offer, or a pickup
-          time.
+          Call with these details to confirm your offer, removal terms, and available pickup times.
         </p>
       </div>
     </div>
@@ -112,5 +112,6 @@ const schema = [
     </div>
   </section>
 
+  <RelatedResources />
   <CtaBand title={`Ask about a vehicle in ${area.city}`} />
 </BaseLayout>

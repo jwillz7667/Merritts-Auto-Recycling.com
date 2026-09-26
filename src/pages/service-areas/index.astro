@@ -5,26 +5,44 @@ import Icon from '@/components/Icon.astro';
 import PageHero from '@/components/PageHero.astro';
 import { business, serviceAreas } from '@/data/site';
 
+const metroExamples = [
+  {
+    region: 'Minneapolis and nearby suburbs',
+    cities: 'Minneapolis, Brooklyn Center, Brooklyn Park, Crystal, Robbinsdale, and Golden Valley',
+  },
+  {
+    region: 'Saint Paul and east metro',
+    cities: 'Saint Paul, Roseville, Maplewood, Oakdale, Woodbury, and Cottage Grove',
+  },
+  {
+    region: 'North and northwest metro',
+    cities: 'Maple Grove, Plymouth, Champlin, Anoka, Coon Rapids, and Blaine',
+  },
+  {
+    region: 'South and southwest metro',
+    cities: 'Bloomington, Richfield, Edina, Eden Prairie, Burnsville, and Eagan',
+  },
+];
 const path = '/service-areas';
 const schema = {
   '@type': 'CollectionPage',
   '@id': `${business.siteUrl}${path}#webpage`,
   url: `${business.siteUrl}${path}`,
-  name: "Service Areas | Merritt's Auto Recycling",
+  name: "Twin Cities Junk Car Removal Service Areas | Merritt's",
   about: { '@id': `${business.siteUrl}/#business` },
 };
 ---
 
 <BaseLayout
-  title="Service Areas | Merritt's Auto Recycling"
-  description="Merritt's is based in Brooklyn Center and publishes vehicle-offer information for Brooklyn Center and Minneapolis. Call to confirm other locations."
+  title="Twin Cities Junk Car Removal Service Areas | Merritt's"
+  description="Junk car removal throughout Minneapolis, Saint Paul, the Twin Cities metro, and surrounding suburbs. Contact Merritt's in Brooklyn Center to arrange pickup."
   path={path}
   schema={schema}
 >
   <PageHero
-    eyebrow="Focused local coverage"
-    title="Junk car service areas: Brooklyn Center and Minneapolis"
-    description="Merritt’s publishes only the locations supported by current information. Availability for every vehicle still depends on the exact address, condition, and access."
+    eyebrow="Twin Cities metro and surrounding suburbs"
+    title="Junk car removal across the Twin Cities metro"
+    description="Merritt’s serves all cities in the Twin Cities metro area and surrounding suburbs, including Minneapolis and Saint Paul. Our business is based in Brooklyn Center. Share your vehicle address and access details to arrange removal."
     crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas' }]}
   />
 
@@ -35,7 +53,7 @@ const schema = {
           serviceAreas.map((area) => (
             <article class="card area-card">
               <div class="area-card-content">
-                <span class="area-tag">Verified page</span>
+                <span class="area-tag">Local pickup information</span>
                 <h2>{area.city}, Minnesota</h2>
                 <p>{area.intro}</p>
                 <p>
@@ -52,26 +70,52 @@ const schema = {
     </div>
   </section>
 
+  <section class="section section--soft" aria-labelledby="metro-coverage-heading">
+    <div class="container flow">
+      <h2 id="metro-coverage-heading">Minneapolis, Saint Paul, and surrounding suburbs</h2>
+      <p>
+        These are examples within our service region. Merritt’s serves all Twin Cities metro cities
+        and surrounding suburbs; call even if your city is not listed.
+      </p>
+      <div class="area-grid">
+        {
+          metroExamples.map((group) => (
+            <article class="card">
+              <h3>{group.region}</h3>
+              <p>{group.cities}.</p>
+            </article>
+          ))
+        }
+      </div>
+      <p>
+        All service is coordinated from our Brooklyn Center business. Contact us with the exact
+        vehicle address to confirm access, removal terms, and timing.
+      </p>
+    </div>
+  </section>
+
   <section class="section section--soft">
     <div class="container--narrow flow">
-      <p class="eyebrow">A city page is not a pickup promise</p>
+      <p class="eyebrow">Plan your pickup</p>
       <h2>Call with the exact vehicle location</h2>
       <p class="lede">
-        Merritt’s confirms current availability case by case. If the vehicle is outside Brooklyn
-        Center or Minneapolis, call {business.phone} with the city, ZIP code, vehicle condition, and access
-        details.
+        For a vehicle anywhere in the Twin Cities metro or surrounding suburbs, call {
+          business.phone
+        }
+        with the city, ZIP code, vehicle condition, and access details. Merritt’s confirms the offer,
+        removal terms, and available pickup window before scheduling.
       </p>
       <div class="notice">
         <p>
-          The location list stays focused so a city name never implies guaranteed acceptance or a
-          guaranteed pickup time. Merritt’s confirms every vehicle directly.
+          Tell us whether the vehicle is in a driveway, garage, alley, or managed parking area.
+          Mention locked wheels, missing tires, low clearances, and property access requirements.
         </p>
       </div>
     </div>
   </section>
 
   <CtaBand
-    title="Need to check another location?"
-    text="Call with the vehicle city and ZIP code. Merritt’s will confirm whether the location can be considered."
+    title="Arrange pickup in your city"
+    text="Call with your vehicle details and Twin Cities pickup address to discuss an offer and removal."
   />
 </BaseLayout>

@@ -232,6 +232,31 @@ if (
 ) {
   fail('sitemap is missing a published service area.');
 }
+// Every submitted URL must resolve to its own indexable canonical page, and every
+// indexable HTML page must be discoverable in the sitemap.
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+if (new Set(sitemapUrls).size !== sitemapUrls.length) fail('sitemap contains duplicate URLs.');
+for (const url of sitemapUrls) {
+  const parsed = new URL(url);
+  if (parsed.origin !== 'https://merritts-auto-recycling.com' || parsed.search || parsed.hash) {
+    fail(`sitemap contains a noncanonical URL: ${url}`);
+  }
+  const file = routeFile(parsed.pathname);
+  if (!existsSync(file)) fail(`sitemap URL has no built page: ${url}`);
+  const html = readFileSync(file, 'utf8');
+  if (/<meta name="robots" content="[^"]*noindex/i.test(html)) {
+    fail(`sitemap includes a noindex page: ${url}`);
+  }
+  if (!html.includes(`<link rel="canonical" href="${url}"`)) {
+    fail(`sitemap URL disagrees with page canonical: ${url}`);
+  }
+}
+for (const file of htmlFiles) {
+  const html = readFileSync(file, 'utf8');
+  if (/<meta name="robots" content="[^"]*noindex/i.test(html)) continue;
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
+  if (!sitemapUrls.includes(canonical)) fail(`indexable page missing from sitemap: ${file}`);
+}
 if (!existsSync(join(rootPath, 'robots.txt'))) fail('robots.txt is missing.');
 const robotsText = readFileSync(join(rootPath, 'robots.txt'), 'utf8');
 if (!robotsText.includes('Allow: /')) fail('robots.txt does not allow public crawling.');
