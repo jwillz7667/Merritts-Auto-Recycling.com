@@ -7,6 +7,7 @@ export type GuideSection = {
 export type Guide = {
   slug: string;
   title: string;
+  seoTitle: string;
   shortTitle: string;
   description: string;
   summary: string;
@@ -19,6 +20,7 @@ export type Guide = {
 export const guides: Guide[] = [
   {
     slug: 'prepare-an-unwanted-car-for-pickup',
+    seoTitle: "Junk Car Pickup Preparation | Merritt's",
     title: 'How to prepare an unwanted vehicle for pickup',
     shortTitle: 'Prepare a vehicle for pickup',
     description:
@@ -72,6 +74,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'minnesota-junk-car-documents',
+    seoTitle: "Minnesota Junk Car Documents | Merritt's",
     title: 'Minnesota documents to discuss before selling a junk car',
     shortTitle: 'Minnesota vehicle documents',
     description:
@@ -125,6 +128,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'what-affects-a-junk-car-offer',
+    seoTitle: "What Affects Junk Car Value? | Merritt's",
     title: 'What affects a cash offer for a junk car?',
     shortTitle: 'What affects an offer',
     description:
@@ -169,6 +173,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'what-happens-after-junk-car-pickup',
+    seoTitle: "Junk Car Recycling Process | Merritt's",
     title: 'What can happen after an end-of-life vehicle is picked up?',
     shortTitle: 'After vehicle pickup',
     description:
@@ -222,6 +227,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'non-running-car-removal-checklist',
+    seoTitle: "Non-Running Car Removal Checklist | Merritt's",
     title: 'Non-running car removal: details to share before pickup',
     shortTitle: 'Non-running vehicle checklist',
     description:

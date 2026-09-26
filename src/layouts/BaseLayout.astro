@@ -2,7 +2,7 @@
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import MobileCta from '@/components/MobileCta.astro';
-import { business } from '@/data/site';
+import { business, coverage } from '@/data/site';
 import '@/styles/global.css';
 
 interface Props {
@@ -78,7 +78,7 @@ const localBusinessSchema = {
   logo: `${business.siteUrl}/brand/mark.svg`,
   image: `${business.siteUrl}/images/legacy/merritts-tow-truck.jpg`,
   description:
-    'Brooklyn Center auto recycling business discussing cash offers and acquisition-related removal for unwanted vehicles.',
+    'Brooklyn Center auto recycling business offering cash for junk cars and vehicle removal throughout the Twin Cities metro area and surrounding suburbs.',
   telephone: '+1-763-533-2775',
   email: business.email,
   contactPoint: [
@@ -113,6 +113,7 @@ const localBusinessSchema = {
   areaServed: [
     { '@type': 'City', name: 'Brooklyn Center, Minnesota' },
     { '@type': 'City', name: 'Minneapolis, Minnesota' },
+    coverage.schema,
   ],
   sameAs: [business.googleBusinessProfile, business.facebook],
   hasMap: business.googleMaps,

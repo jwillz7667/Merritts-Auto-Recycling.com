@@ -1,5 +1,11 @@
 # Content verification required before production launch
 
+## September 25, 2026 owner update
+
+The owner confirmed service in **all cities in the Twin Cities metro area and surrounding suburbs**. Public coverage text and service-region structured data now reflect that confirmation, including Saint Paul and representative suburbs. There is still one business location in Brooklyn Center. Free pickup, same-day pickup, payment timing, and no-title acceptance were not confirmed.
+
+The historical launch checklist below is retained for context; its narrower coverage assumption is superseded by this owner update.
+
 This file separates confirmed facts from claims that require owner records or explicit approval. Unverified items are not stated unconditionally on the rebuilt public pages.
 
 ## Confirmed and implemented
@@ -68,7 +74,7 @@ Add a new city page only when all are true:
 4. The page does not imply a staffed location or office that does not exist.
 5. The redirect and keyword maps are updated.
 
-Saint Paul is not confirmed and has no dedicated page.
+Saint Paul is included in the owner-confirmed metro service region. It has no dedicated page; the service-area hub describes coverage.
 
 ## Owner sign-off
 

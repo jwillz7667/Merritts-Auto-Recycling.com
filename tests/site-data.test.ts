@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { guides } from '@/data/guides';
-import { business, publishedRoutes, serviceAreas, services } from '@/data/site';
+import { business, coverage, publishedRoutes, serviceAreas, services } from '@/data/site';
 
 describe('immutable business information', () => {
   it('uses the approved call and text numbers', () => {
@@ -30,9 +30,10 @@ describe('immutable business information', () => {
 });
 
 describe('content policy', () => {
-  it('publishes only the confirmed focused service-area set', () => {
+  it('keeps detailed local pages while describing owner-confirmed metro coverage', () => {
     expect(serviceAreas.map((area) => area.slug)).toEqual(['brooklyn-center', 'minneapolis']);
-    expect(JSON.stringify(serviceAreas)).not.toMatch(/saint paul/i);
+    expect(coverage.label).toBe('Twin Cities metro area and surrounding suburbs');
+    expect(coverage.schema['@type']).toBe('Place');
   });
 
   it('has unique published routes', () => {

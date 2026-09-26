@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { business, type Service } from '@/data/site';
+import { business, coverage, type Service } from '@/data/site';
 import CtaBand from './CtaBand.astro';
 import FaqList from './FaqList.astro';
 import Icon from './Icon.astro';
 import PageHero from './PageHero.astro';
 import Picture from './Picture.astro';
+import RelatedResources from './RelatedResources.astro';
 
 interface Props {
   service: Service;
@@ -26,6 +27,7 @@ const schema = [
     areaServed: [
       { '@type': 'City', name: 'Brooklyn Center, Minnesota' },
       { '@type': 'City', name: 'Minneapolis, Minnesota' },
+      coverage.schema,
     ],
   },
   {
@@ -121,5 +123,6 @@ const schema = [
     </div>
   </section>
 
+  <RelatedResources serviceSlug={service.slug} />
   <CtaBand />
 </BaseLayout>

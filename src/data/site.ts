@@ -28,6 +28,16 @@ export const business = {
   facebook: 'https://www.facebook.com/profile.php?id=61565403974405',
 } as const;
 
+// Service coverage confirmed by the owner on September 25, 2026.
+// This describes the service region, not additional staffed business locations.
+export const coverage = {
+  label: 'Twin Cities metro area and surrounding suburbs',
+  schema: {
+    '@type': 'Place',
+    name: 'Twin Cities metropolitan area and surrounding suburbs, Minnesota',
+  },
+} as const;
+
 export const primaryNavigation = [
   { label: 'Cash for cars', href: '/cash-for-junk-cars' },
   { label: 'Vehicle removal', href: '/junk-car-removal' },
@@ -71,12 +81,12 @@ export const globalFaqs: Faq[] = [
   {
     question: 'How quickly will my vehicle be picked up?',
     answer:
-      'Pickup timing depends on the vehicle, location, access, and current schedule. Merritt’s will provide a pickup window only after the details are confirmed; this website does not promise same-day service.',
+      'Pickup timing depends on the vehicle, location, access, and current schedule. Call with your vehicle details and preferred timing; Merritt’s will confirm the available pickup window directly.',
   },
   {
     question: 'Which areas does Merritt’s serve?',
     answer:
-      'Merritt’s is based in Brooklyn Center and publishes service information for Brooklyn Center and Minneapolis. Call with the exact vehicle location to confirm current availability elsewhere.',
+      'Merritt’s serves all cities in the Twin Cities metro area and surrounding suburbs from its Brooklyn Center base. Share the vehicle address, condition, and access details so Merritt’s can confirm removal terms and a pickup window.',
   },
   {
     question: 'When can I call?',
@@ -140,9 +150,9 @@ export const services: Service[] = [
         ],
       },
       {
-        heading: 'No pressure and no made-up web estimate',
+        heading: 'Get a cash offer for your vehicle',
         paragraphs: [
-          'The website does not display a made-up instant price. Merritt’s reviews the actual vehicle information and confirms an offer directly. You choose whether to proceed after the terms are clear.',
+          'Call or text with the year, make, model, condition, and pickup location. Merritt’s reviews those details and discusses a cash offer with you. Confirm the payment arrangements, any removal costs, and required documents before accepting.',
         ],
       },
     ],
@@ -155,7 +165,7 @@ export const services: Service[] = [
     seoTitle: "Junk Car Removal in Minneapolis | Merritt's",
     title: 'Junk car removal in Brooklyn Center and Minneapolis',
     description:
-      "Learn how Merritt's coordinates junk car removal in Brooklyn Center and Minneapolis after the vehicle, terms, access, and schedule are confirmed.",
+      "Arrange junk car removal in Minneapolis, Saint Paul, and Twin Cities suburbs. Call Merritt's to discuss your vehicle, pickup access, and terms.",
     summary:
       'Merritt’s discusses access, condition, location, and timing before scheduling. Removal information on this site applies only to vehicles Merritt’s is considering for purchase or recycling.',
     image: '/images/legacy/junk-car-removal.jpg',
@@ -217,9 +227,9 @@ export const services: Service[] = [
         ],
       },
       {
-        heading: 'Environmental claims are kept specific',
+        heading: 'Learn about vehicle recycling in Minnesota',
         paragraphs: [
-          'This site does not publish an unsupported percentage for how much of each vehicle is recycled. Minnesota regulates issues that can affect automotive salvage businesses, including hazardous waste and stormwater. The Minnesota Pollution Control Agency provides the authoritative compliance resources linked in the guides section.',
+          'End-of-life vehicles contain metal, reusable components, fluids, and other materials that need appropriate handling. Minnesota regulates issues that can affect automotive salvage businesses, including hazardous waste and stormwater. The Minnesota Pollution Control Agency provides the authoritative compliance resources linked in the guides section.',
         ],
       },
       {
@@ -246,7 +256,7 @@ export const services: Service[] = [
     highlights: [
       'Acquisition-related removal only',
       'Access and condition disclosed before dispatch',
-      'No repair or roadside-assistance claims',
+      'Pickup coordinated with your vehicle purchase',
     ],
     sections: [
       {
@@ -290,7 +300,7 @@ export const serviceAreas: ServiceArea[] = [
     description:
       "Merritt's Auto Recycling is based in Brooklyn Center. Call with your vehicle details to discuss a cash offer and pickup availability.",
     intro:
-      'Merritt’s real business address is in Brooklyn Center, making this the company’s home location—not a virtual office or doorway page.',
+      'Based at 3106 68th Ave N in Brooklyn Center, Merritt’s helps local vehicle owners discuss cash offers and arrange removal for unwanted cars, trucks, vans, and SUVs.',
     proof: 'Business address: 3106 68th Ave N, Brooklyn Center, MN 55429.',
     details: [
       'Call with the year, make, model, condition, and exact vehicle location.',

@@ -2,14 +2,14 @@ import type { APIRoute } from 'astro';
 import { guides } from '@/data/guides';
 import { business, publishedRoutes } from '@/data/site';
 
-const updated = '2026-08-25';
+// Omit optional lastmod until each page has a maintained content-modification date.
 const routes = [...publishedRoutes, ...guides.map((guide) => `/guides/${guide.slug}`)];
 
 export const GET: APIRoute = () => {
   const entries = routes
     .map((route) => {
       const url = new URL(route, business.siteUrl).toString();
-      return `<url><loc>${url}</loc><lastmod>${updated}</lastmod></url>`;
+      return `<url><loc>${url}</loc></url>`;
     })
     .join('');
 

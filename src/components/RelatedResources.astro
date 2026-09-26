@@ -1,0 +1,55 @@
+---
+import { guides } from '@/data/guides';
+import { serviceAreas, services } from '@/data/site';
+
+interface Props {
+  serviceSlug?: string;
+  guideSlug?: string;
+}
+
+const { serviceSlug, guideSlug } = Astro.props;
+const guideServices: Record<string, string[]> = {
+  'prepare-an-unwanted-car-for-pickup': ['junk-car-removal', 'junk-car-towing'],
+  'minnesota-junk-car-documents': ['cash-for-junk-cars', 'auto-recycling'],
+  'what-affects-a-junk-car-offer': ['cash-for-junk-cars'],
+  'what-happens-after-junk-car-pickup': ['auto-recycling'],
+  'non-running-car-removal-checklist': ['junk-car-removal', 'junk-car-towing'],
+};
+const relatedGuides = serviceSlug
+  ? guides.filter((guide) => guideServices[guide.slug]?.includes(serviceSlug))
+  : [];
+const relatedServices = guideSlug
+  ? services.filter((service) => guideServices[guideSlug]?.includes(service.slug))
+  : services.filter((service) => service.slug !== serviceSlug);
+---
+
+<section class="section section--soft" aria-labelledby="related-resources-heading">
+  <div class="container--narrow flow">
+    <h2 id="related-resources-heading">Plan your next step</h2>
+    <p>Explore vehicle services, pickup information, and practical guidance before you call.</p>
+    <ul class="source-list">
+      {
+        relatedServices.map((service) => (
+          <li>
+            <a href={`/${service.slug}`}>{service.name}</a>
+          </li>
+        ))
+      }
+      {
+        relatedGuides.map((guide) => (
+          <li>
+            <a href={`/guides/${guide.slug}`}>{guide.shortTitle}</a>
+          </li>
+        ))
+      }
+      {
+        serviceAreas.map((area) => (
+          <li>
+            <a href={`/service-areas/${area.slug}`}>Junk car pickup in {area.city}</a>
+          </li>
+        ))
+      }
+      <li><a href="/service-areas">Twin Cities metro and suburban service areas</a></li>
+    </ul>
+  </div>
+</section>
