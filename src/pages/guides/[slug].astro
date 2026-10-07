@@ -4,6 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import BuyerComparison from '@/components/BuyerComparison.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import PageHero from '@/components/PageHero.astro';
+import Picture from '@/components/Picture.astro';
 import Icon from '@/components/Icon.astro';
 import { guides, type Guide } from '@/data/guides';
 import { business } from '@/data/site';
@@ -11,10 +12,11 @@ export const getStaticPaths = (() => guides.map((guide) => ({ params: { slug: gu
 interface Props { guide: Guide }
 const { guide } = Astro.props;
 const path = `/guides/${guide.slug}`;
+const articleImage = `${business.siteUrl}/images/legacy/merritts-tow-truck.jpg`;
 const related = (guide.related ?? ['what-affects-a-junk-car-offer', 'minnesota-junk-car-documents']).filter((slug) => slug !== guide.slug).map((slug) => guides.find((item) => item.slug === slug)).filter((item): item is Guide => Boolean(item));
 const sectionId = (index: number) => `section-${index + 1}`;
 const schema = [
-  { '@type': 'Article', '@id': `${business.siteUrl}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${business.siteUrl}${path}`, dateModified: guide.updatedIso, datePublished: guide.publishedIso, author: { '@id': `${business.siteUrl}/#business` }, publisher: { '@id': `${business.siteUrl}/#business` }, inLanguage: 'en-US' },
+  { '@type': 'Article', '@id': `${business.siteUrl}${path}#article`, headline: guide.title, description: guide.description, image: [articleImage], mainEntityOfPage: `${business.siteUrl}${path}`, dateModified: guide.updatedIso, datePublished: guide.publishedIso, author: { '@id': `${business.siteUrl}/#business` }, publisher: { '@id': `${business.siteUrl}/#business` }, inLanguage: 'en-US' },
   { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${business.siteUrl}/` }, { '@type': 'ListItem', position: 2, name: 'Guides', item: `${business.siteUrl}/guides` }, { '@type': 'ListItem', position: 3, name: guide.shortTitle, item: `${business.siteUrl}${path}` }] },
 ];
 ---
@@ -27,6 +29,10 @@ const schema = [
     <div class="article-body">
       {guide.comparison && <BuyerComparison comparison={guide.comparison} />}
       {guide.sections.map((section, index) => <section aria-labelledby={sectionId(index)}><h2 id={sectionId(index)}>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.items && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}</section>)}
+      <figure class="guide-photo">
+        <Picture src="/images/legacy/merritts-tow-truck.jpg" avif="/images/legacy/merritts-tow-truck.avif" webp="/images/legacy/merritts-tow-truck.webp" alt="A Merritt's Auto Recycling truck carrying a vehicle" width={1600} height={1070} />
+        <figcaption>A Merritt’s Auto Recycling truck. Photo from Merritt’s existing website.</figcaption>
+      </figure>
     </div>
     <aside class="article-aside" aria-label="Guide navigation and sources"><h2>In this guide</h2><nav aria-label="Article contents"><ol>{guide.comparison && <li><a href="#comparison-heading">Compare published service information</a></li>}{guide.sections.map((section, index) => <li><a href={`#${sectionId(index)}`}>{section.heading}</a></li>)}</ol></nav>
       {guide.sources.length > 0 && <><h2>{guide.comparison ? 'Sources and published policies' : 'Official resources'}</h2><ul class="source-list">{guide.sources.map((source) => <li><a href={source.href} target={source.href.startsWith('https://') ? '_blank' : undefined} rel={source.href.startsWith('https://') ? 'noopener noreferrer' : undefined}>{source.label}</a></li>)}</ul></>}
@@ -39,4 +45,6 @@ const schema = [
 <style>
   .comparison-disclosure { max-width: 48rem; margin: 0 0 1.5rem; color: #d7e0e8; line-height: 1.65; }
   .article-body { min-width: 0; }
+  .guide-photo { margin: 2rem 0 0; }
+  .guide-photo figcaption { margin-top: 0.75rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 </style>
