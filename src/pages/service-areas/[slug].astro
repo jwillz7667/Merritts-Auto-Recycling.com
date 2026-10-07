@@ -31,4 +31,28 @@ const schema = {
   <section class="section section--soft"><div class="container flow"><h2>Plan your sale</h2><div class="related-links"><a href="/cash-for-junk-cars">How cash offers work</a><a href="/junk-car-removal">Vehicle removal</a><a href="/guides/minnesota-junk-car-documents">Minnesota documents</a><a href="/guides/non-running-car-removal-checklist">Non-running vehicle checklist</a></div><h3>Other communities we serve</h3><nav class="related-links" aria-label="Related pickup communities">{nearby.map((item) => <a href={`/service-areas/${item.slug}`}>{item.city}</a>)}<a href="/service-areas">Full metro coverage</a></nav></div></section>
   <CtaBand title={`Tell us about your vehicle in ${area.city}`} text="Call or text during business hours to discuss the car, the offer, and pickup options." />
 </BaseLayout>
-<style>.related-links { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }.related-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .2em; }</style>
+<style>
+  /* The shared step styles use light text for navy sections. City pages use a
+     light surface, so scope the readable colors here without changing dark sections. */
+  .section--soft .step {
+    border-top-color: var(--line);
+  }
+
+  .section--soft .step p {
+    color: var(--muted);
+  }
+
+  .related-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+  }
+
+  .related-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+</style>
