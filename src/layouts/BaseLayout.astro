@@ -2,9 +2,8 @@
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import MobileCta from '@/components/MobileCta.astro';
-import { business } from '@/data/site';
+import { areaServedSchema, business, serviceAreas } from '@/data/site';
 import '@/styles/global.css';
-
 interface Props {
   title: string;
   description: string;
@@ -14,130 +13,48 @@ interface Props {
   ogImage?: string;
   ogImageAlt?: string;
 }
-
-const {
-  title,
-  description,
-  path = Astro.url.pathname,
-  noindex = false,
-  schema = [],
-  ogImage = '/images/legacy/merritts-tow-truck.jpg',
-  ogImageAlt = "Merritt's Auto Recycling truck carrying a vehicle",
-} = Astro.props;
-
+const { title, description, path = Astro.url.pathname, noindex = false, schema = [], ogImage = '/images/legacy/merritts-tow-truck.jpg', ogImageAlt = "Merritt's Auto Recycling truck carrying a vehicle" } = Astro.props;
 const canonical = new URL(path, business.siteUrl).toString();
 const absoluteImage = new URL(ogImage, business.siteUrl).toString();
 const pageSchemas = Array.isArray(schema) ? schema : [schema];
 const breadcrumbLabels: Record<string, string> = {
-  about: 'About',
-  'auto-recycling': 'Auto recycling',
-  'cash-for-junk-cars': 'Cash for junk cars',
-  contact: 'Contact',
-  faq: 'FAQ',
-  guides: 'Guides',
-  'junk-car-removal': 'Junk car removal',
-  'junk-car-towing': 'Junk car towing',
-  privacy: 'Privacy',
-  reviews: 'Reviews',
-  'service-areas': 'Service areas',
+  about: 'About', 'auto-recycling': 'Auto recycling', 'cash-for-junk-cars': 'Cash for junk cars',
+  contact: 'Contact', faq: 'FAQ', guides: 'Guides', 'junk-car-removal': 'Junk car removal',
+  'junk-car-towing': 'Junk car towing', privacy: 'Privacy', reviews: 'Reviews', 'service-areas': 'Service areas',
+  ...Object.fromEntries(serviceAreas.map((area) => [area.slug, area.city])),
 };
 const pathSegments = path.split('/').filter(Boolean);
 const hasBreadcrumbSchema = pageSchemas.some((item) => item['@type'] === 'BreadcrumbList');
-const automaticBreadcrumb =
-  !noindex && path !== '/' && !hasBreadcrumbSchema
-    ? {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${business.siteUrl}/` },
-          ...pathSegments.map((segment, index) => {
-            const itemPath = `/${pathSegments.slice(0, index + 1).join('/')}`;
-            return {
-              '@type': 'ListItem',
-              position: index + 2,
-              name:
-                breadcrumbLabels[segment] ??
-                segment.replaceAll('-', ' ').replace(/^./, (letter) => letter.toUpperCase()),
-              item: new URL(itemPath, business.siteUrl).toString(),
-            };
-          }),
-        ],
-      }
-    : null;
+const automaticBreadcrumb = !noindex && path !== '/' && !hasBreadcrumbSchema ? {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${business.siteUrl}/` },
+    ...pathSegments.map((segment, index) => ({
+      '@type': 'ListItem', position: index + 2,
+      name: breadcrumbLabels[segment] ?? segment.replaceAll('-', ' ').replace(/^./, (letter) => letter.toUpperCase()),
+      item: new URL(`/${pathSegments.slice(0, index + 1).join('/')}`, business.siteUrl).toString(),
+    })),
+  ],
+} : null;
 const analyticsId = import.meta.env.PUBLIC_GTM_ID || '';
 const gtmId = /^GTM-[A-Z0-9]+$/.test(analyticsId) ? analyticsId : '';
-const gtmBootstrap = gtmId
-  ? `window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});const firstScript=document.getElementsByTagName('script')[0];const gtmScript=document.createElement('script');gtmScript.async=true;gtmScript.src='https://www.googletagmanager.com/gtm.js?id=${gtmId}';firstScript?.parentNode?.insertBefore(gtmScript,firstScript);`
-  : '';
-
+const gtmBootstrap = gtmId ? `window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});const firstScript=document.getElementsByTagName('script')[0];const gtmScript=document.createElement('script');gtmScript.async=true;gtmScript.src='https://www.googletagmanager.com/gtm.js?id=${gtmId}';firstScript?.parentNode?.insertBefore(gtmScript,firstScript);` : '';
 const localBusinessSchema = {
-  '@type': ['LocalBusiness', 'AutomotiveBusiness'],
-  '@id': `${business.siteUrl}/#business`,
-  name: business.name,
-  legalName: business.legalName,
-  url: `${business.siteUrl}/`,
-  logo: `${business.siteUrl}/brand/mark.svg`,
-  image: `${business.siteUrl}/images/legacy/merritts-tow-truck.jpg`,
-  description:
-    'Brooklyn Center auto recycling business discussing cash offers and acquisition-related removal for unwanted vehicles.',
-  telephone: '+1-763-533-2775',
-  email: business.email,
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      telephone: '+1-763-533-2775',
-      contactType: 'customer service',
-      availableLanguage: ['English'],
-    },
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: business.address.street,
-    addressLocality: business.address.city,
-    addressRegion: business.address.region,
-    postalCode: business.address.postalCode,
-    addressCountry: business.address.country,
-  },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: business.openingHours.days.map((day) => `https://schema.org/${day}`),
-      opens: business.openingHours.opens,
-      closes: business.openingHours.closes,
-    },
-  ],
-  founder: {
-    '@type': 'Person',
-    name: business.founder,
-  },
-  foundingDate: business.foundingDate,
-  areaServed: [
-    { '@type': 'City', name: 'Brooklyn Center, Minnesota' },
-    { '@type': 'City', name: 'Minneapolis, Minnesota' },
-  ],
-  sameAs: [business.googleBusinessProfile, business.facebook],
-  hasMap: business.googleMaps,
+  '@type': ['LocalBusiness', 'AutomotiveBusiness'], '@id': `${business.siteUrl}/#business`,
+  name: business.name, legalName: business.legalName, url: `${business.siteUrl}/`,
+  logo: `${business.siteUrl}/brand/mark.svg`, image: `${business.siteUrl}/images/legacy/merritts-tow-truck.jpg`,
+  description: 'Brooklyn Center vehicle buyer serving Minneapolis, St. Paul and surrounding Twin Cities communities with cash offers and pickup for unwanted vehicles.',
+  telephone: '+1-763-533-2775', email: business.email,
+  contactPoint: [{ '@type': 'ContactPoint', telephone: '+1-763-533-2775', contactType: 'customer service', availableLanguage: ['English'] }],
+  address: { '@type': 'PostalAddress', streetAddress: business.address.street, addressLocality: business.address.city, addressRegion: business.address.region, postalCode: business.address.postalCode, addressCountry: business.address.country },
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: business.openingHours.days.map((day) => `https://schema.org/${day}`), opens: business.openingHours.opens, closes: business.openingHours.closes }],
+  founder: { '@type': 'Person', name: business.founder }, foundingDate: business.foundingDate,
+  areaServed: areaServedSchema,
+  sameAs: [business.googleBusinessProfile, business.facebook], hasMap: business.googleMaps,
 };
-
-const webSiteSchema = {
-  '@type': 'WebSite',
-  '@id': `${business.siteUrl}/#website`,
-  url: `${business.siteUrl}/`,
-  name: business.name,
-  publisher: { '@id': `${business.siteUrl}/#business` },
-  inLanguage: 'en-US',
-};
-
-const jsonLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@graph': [
-    localBusinessSchema,
-    webSiteSchema,
-    ...pageSchemas,
-    ...(automaticBreadcrumb ? [automaticBreadcrumb] : []),
-  ],
-}).replaceAll('<', '\\u003c');
+const webSiteSchema = { '@type': 'WebSite', '@id': `${business.siteUrl}/#website`, url: `${business.siteUrl}/`, name: business.name, publisher: { '@id': `${business.siteUrl}/#business` }, inLanguage: 'en-US' };
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': [localBusinessSchema, webSiteSchema, ...pageSchemas, ...(automaticBreadcrumb ? [automaticBreadcrumb] : [])] }).replaceAll('<', '\\u003c');
 ---
-
 <!doctype html>
 <html lang="en-US">
   <head>
@@ -147,13 +64,7 @@ const jsonLd = JSON.stringify({
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta
-      name="robots"
-      content={noindex
-        ? 'noindex, nofollow'
-        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
-    />
-
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={business.name} />
     <meta property="og:locale" content="en_US" />
@@ -168,7 +79,6 @@ const jsonLd = JSON.stringify({
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteImage} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
-
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
     <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
     <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
@@ -183,33 +93,26 @@ const jsonLd = JSON.stringify({
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <Header currentPath={Astro.url.pathname} />
-    <main id="main-content" tabindex="-1">
-      <slot />
-    </main>
+    <main id="main-content" tabindex="-1"><slot /></main>
     <Footer />
     <MobileCta />
-
     <script>
       import '@/scripts/forms';
-
       type DataLayerWindow = Window & { dataLayer?: Array<Record<string, unknown>> };
       const analyticsWindow = window as DataLayerWindow;
       analyticsWindow.dataLayer ??= [];
-      analyticsWindow.dataLayer.push({
-        event: 'site_page_view',
-        page_path: window.location.pathname,
-      });
-
+      const pagePath = window.location.pathname;
+      const pageGroup = pagePath.startsWith('/service-areas/') ? 'city' : pagePath.startsWith('/guides/') ? 'guide' : pagePath === '/' ? 'home' : 'other';
+      analyticsWindow.dataLayer.push({ event: 'site_page_view', page_path: pagePath, page_group: pageGroup });
+      const trackedEvents = new Set(['call_click', 'text_click', 'review_profile_click']);
       document.addEventListener('click', (event) => {
-        const target =
-          event.target instanceof Element
-            ? event.target.closest<HTMLElement>('[data-track]')
-            : null;
-        if (!target) return;
+        const target = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-track]') : null;
+        if (!target || !trackedEvents.has(target.dataset.track ?? '')) return;
+        const placement = target.closest('header') ? 'header' : target.closest('footer') ? 'footer' : target.closest('.hero, .page-hero') ? 'hero' : target.closest('.cta-band') ? 'cta_band' : 'body';
         analyticsWindow.dataLayer?.push({
           event: target.dataset.track,
-          link_url: target instanceof HTMLAnchorElement ? target.href : undefined,
-          page_path: window.location.pathname,
+          link_url: target instanceof HTMLAnchorElement && /^(tel:|sms:)/.test(target.href) ? target.href : undefined,
+          page_path: pagePath, page_group: pageGroup, cta_location: placement,
         });
       });
     </script>

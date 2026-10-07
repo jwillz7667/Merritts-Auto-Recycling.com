@@ -1,17 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run security:scan && npm run lint && npm run test && npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.merritts-auto-recycling.com" }],
-      "destination": "https://merritts-auto-recycling.com/$1",
-      "permanent": true
-    },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.merritts-auto-recycling.com" }], "destination": "https://merritts-auto-recycling.com/$1", "permanent": true },
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/about-brad.html", "destination": "/about", "permanent": true },
     { "source": "/about-brad", "destination": "/about", "permanent": true },
@@ -19,134 +14,74 @@
     { "source": "/faq.html", "destination": "/faq", "permanent": true },
     { "source": "/testimonials.html", "destination": "/reviews", "permanent": true },
     { "source": "/testimonials", "destination": "/reviews", "permanent": true },
-    {
-      "source": "/quote-calculator.html",
-      "destination": "/cash-for-junk-cars",
-      "permanent": true
-    },
-    {
-      "source": "/quote-calculator",
-      "destination": "/cash-for-junk-cars",
-      "permanent": true
-    },
+    { "source": "/quote-calculator.html", "destination": "/cash-for-junk-cars", "permanent": true },
+    { "source": "/quote-calculator", "destination": "/cash-for-junk-cars", "permanent": true },
     { "source": "/blog/index.html", "destination": "/guides", "permanent": true },
     { "source": "/blog", "destination": "/guides", "permanent": true },
-    {
-      "source": "/blog/auto-recycling-environmental-impact-twin-cities",
-      "destination": "/guides/what-happens-after-junk-car-pickup",
-      "permanent": true
-    },
-    {
-      "source": "/blog/what-happens-to-car-after-pickup",
-      "destination": "/guides/what-happens-after-junk-car-pickup",
-      "permanent": true
-    },
-    {
-      "source": "/blog/how-much-is-my-junk-car-worth-minnesota-2026",
-      "destination": "/guides/what-affects-a-junk-car-offer",
-      "permanent": true
-    },
-    {
-      "source": "/blog/running-vs-non-running-junk-car-prices",
-      "destination": "/guides/what-affects-a-junk-car-offer",
-      "permanent": true
-    },
-    {
-      "source": "/blog/scrap-value-by-weight-minnesota-guide",
-      "destination": "/guides/what-affects-a-junk-car-offer",
-      "permanent": true
-    },
-    {
-      "source": "/blog/minnesota-junk-car-title-requirements",
-      "destination": "/guides/minnesota-junk-car-documents",
-      "permanent": true
-    },
-    {
-      "source": "/blog/mn-license-plates-before-junking",
-      "destination": "/guides/minnesota-junk-car-documents",
-      "permanent": true
-    },
-    {
-      "source": "/blog/free-junk-car-removal-minneapolis-mn",
-      "destination": "/junk-car-removal",
-      "permanent": true
-    },
-    {
-      "source": "/blog/junk-vs-tradein-vs-private-sale",
-      "destination": "/guides",
-      "permanent": true
-    },
-    {
-      "source": "/blog/top-10-most-junked-cars-minnesota",
-      "destination": "/guides",
-      "permanent": true
-    },
-    {
-      "source": "/placemarks/brooklyn-center-mn.html",
-      "destination": "/service-areas/brooklyn-center",
-      "permanent": true
-    },
-    {
-      "source": "/placemarks/brooklyn-center-mn",
-      "destination": "/service-areas/brooklyn-center",
-      "permanent": true
-    },
-    {
-      "source": "/placemarks/minneapolis-mn.html",
-      "destination": "/service-areas/minneapolis",
-      "permanent": true
-    },
-    {
-      "source": "/placemarks/minneapolis-mn",
-      "destination": "/service-areas/minneapolis",
-      "permanent": true
-    },
+    { "source": "/blog/auto-recycling-environmental-impact-twin-cities", "destination": "/guides/what-happens-after-junk-car-pickup", "permanent": true },
+    { "source": "/blog/what-happens-to-car-after-pickup", "destination": "/guides/what-happens-after-junk-car-pickup", "permanent": true },
+    { "source": "/blog/how-much-is-my-junk-car-worth-minnesota-2026", "destination": "/guides/what-affects-a-junk-car-offer", "permanent": true },
+    { "source": "/blog/running-vs-non-running-junk-car-prices", "destination": "/guides/what-affects-a-junk-car-offer", "permanent": true },
+    { "source": "/blog/scrap-value-by-weight-minnesota-guide", "destination": "/guides/scrap-car-value-by-weight", "permanent": true },
+    { "source": "/blog/minnesota-junk-car-title-requirements", "destination": "/guides/minnesota-junk-car-documents", "permanent": true },
+    { "source": "/blog/mn-license-plates-before-junking", "destination": "/guides/minnesota-junk-car-documents", "permanent": true },
+    { "source": "/blog/free-junk-car-removal-minneapolis-mn", "destination": "/junk-car-removal", "permanent": true },
+    { "source": "/blog/junk-vs-tradein-vs-private-sale", "destination": "/guides/repair-trade-in-or-sell-a-junk-car", "permanent": true },
+    { "source": "/blog/top-10-most-junked-cars-minnesota", "destination": "/guides", "permanent": true },
+    { "source": "/service-areas/saint-paul", "destination": "/service-areas/st-paul", "permanent": true },
+    { "source": "/placemarks/brooklyn-center-mn.html", "destination": "/service-areas/brooklyn-center", "permanent": true },
+    { "source": "/placemarks/brooklyn-center-mn", "destination": "/service-areas/brooklyn-center", "permanent": true },
+    { "source": "/placemarks/minneapolis-mn.html", "destination": "/service-areas/minneapolis", "permanent": true },
+    { "source": "/placemarks/minneapolis-mn", "destination": "/service-areas/minneapolis", "permanent": true },
+    { "source": "/placemarks/st-paul-mn.html", "destination": "/service-areas/st-paul", "permanent": true },
+    { "source": "/placemarks/st-paul-mn", "destination": "/service-areas/st-paul", "permanent": true },
+    { "source": "/placemarks/saint-paul-mn.html", "destination": "/service-areas/st-paul", "permanent": true },
+    { "source": "/placemarks/saint-paul-mn", "destination": "/service-areas/st-paul", "permanent": true },
+    { "source": "/placemarks/brooklyn-park-mn.html", "destination": "/service-areas/brooklyn-park", "permanent": true },
+    { "source": "/placemarks/brooklyn-park-mn", "destination": "/service-areas/brooklyn-park", "permanent": true },
+    { "source": "/placemarks/maple-grove-mn.html", "destination": "/service-areas/maple-grove", "permanent": true },
+    { "source": "/placemarks/maple-grove-mn", "destination": "/service-areas/maple-grove", "permanent": true },
+    { "source": "/placemarks/plymouth-mn.html", "destination": "/service-areas/plymouth", "permanent": true },
+    { "source": "/placemarks/plymouth-mn", "destination": "/service-areas/plymouth", "permanent": true },
+    { "source": "/placemarks/blaine-mn.html", "destination": "/service-areas/blaine", "permanent": true },
+    { "source": "/placemarks/blaine-mn", "destination": "/service-areas/blaine", "permanent": true },
+    { "source": "/placemarks/coon-rapids-mn.html", "destination": "/service-areas/coon-rapids", "permanent": true },
+    { "source": "/placemarks/coon-rapids-mn", "destination": "/service-areas/coon-rapids", "permanent": true },
+    { "source": "/placemarks/anoka-mn.html", "destination": "/service-areas/anoka", "permanent": true },
+    { "source": "/placemarks/anoka-mn", "destination": "/service-areas/anoka", "permanent": true },
+    { "source": "/placemarks/bloomington-mn.html", "destination": "/service-areas/bloomington", "permanent": true },
+    { "source": "/placemarks/bloomington-mn", "destination": "/service-areas/bloomington", "permanent": true },
+    { "source": "/placemarks/eagan-mn.html", "destination": "/service-areas/eagan", "permanent": true },
+    { "source": "/placemarks/eagan-mn", "destination": "/service-areas/eagan", "permanent": true },
+    { "source": "/placemarks/woodbury-mn.html", "destination": "/service-areas/woodbury", "permanent": true },
+    { "source": "/placemarks/woodbury-mn", "destination": "/service-areas/woodbury", "permanent": true },
+    { "source": "/placemarks/burnsville-mn.html", "destination": "/service-areas/burnsville", "permanent": true },
+    { "source": "/placemarks/burnsville-mn", "destination": "/service-areas/burnsville", "permanent": true },
+    { "source": "/placemarks/roseville-mn.html", "destination": "/service-areas/roseville", "permanent": true },
+    { "source": "/placemarks/roseville-mn", "destination": "/service-areas/roseville", "permanent": true },
+    { "source": "/placemarks/eden-prairie-mn.html", "destination": "/service-areas/eden-prairie", "permanent": true },
+    { "source": "/placemarks/eden-prairie-mn", "destination": "/service-areas/eden-prairie", "permanent": true },
+    { "source": "/placemarks/buffalo-mn.html", "destination": "/service-areas/buffalo", "permanent": true },
+    { "source": "/placemarks/buffalo-mn", "destination": "/service-areas/buffalo", "permanent": true },
     { "source": "/placemarks/:slug.html", "destination": "/service-areas", "permanent": true },
     { "source": "/placemarks/:slug", "destination": "/service-areas", "permanent": true },
     { "source": "/form/process-contact.php", "destination": "/api/contact", "permanent": true },
     { "source": "/form/process-quote.php", "destination": "/api/quote", "permanent": true },
-    {
-      "source": "/form/process-appointment.php",
-      "destination": "/api/appointment",
-      "permanent": true
-    }
+    { "source": "/form/process-appointment.php", "destination": "/api/appointment", "permanent": true }
   ],
   "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains; preload"
-        },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
-        },
-        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; font-src 'self'; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com https://www.google-analytics.com https://*.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
-        }
-      ]
-    },
-    {
-      "source": "/(brand|images|_astro)/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-    },
-    {
-      "source": "/(sitemap.xml|robots.txt)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=3600" }]
-    }
+    { "source": "/(.*)", "headers": [
+      { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "X-Frame-Options", "value": "DENY" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+      { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
+      { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
+      { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; font-src 'self'; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com https://www.google-analytics.com https://*.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" }
+    ] },
+    { "source": "/(brand|images|_astro)/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+    { "source": "/(sitemap.xml|robots.txt)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=3600" }] }
   ],
-  "functions": {
-    "api/*.ts": {
-      "maxDuration": 10,
-      "memory": 256
-    }
-  },
+  "functions": { "api/*.ts": { "maxDuration": 10, "memory": 256 } },
   "regions": ["iad1"]
 }

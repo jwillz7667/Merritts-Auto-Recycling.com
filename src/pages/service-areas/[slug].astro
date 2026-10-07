@@ -2,115 +2,33 @@
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import CtaBand from '@/components/CtaBand.astro';
+import FaqList from '@/components/FaqList.astro';
 import Icon from '@/components/Icon.astro';
 import PageHero from '@/components/PageHero.astro';
-import { business, serviceAreas, type ServiceArea } from '@/data/site';
-
-export const getStaticPaths = (() =>
-  serviceAreas.map((area) => ({
-    params: { slug: area.slug },
-    props: { area },
-  }))) satisfies GetStaticPaths;
-
-interface Props {
-  area: ServiceArea;
-}
-
+import { business, globalFaqs, serviceAreas, type ServiceArea } from '@/data/site';
+export const getStaticPaths = (() => serviceAreas.map((area) => ({ params: { slug: area.slug }, props: { area } }))) satisfies GetStaticPaths;
+interface Props { area: ServiceArea }
 const { area } = Astro.props;
 const path = `/service-areas/${area.slug}`;
-const schema = [
-  {
-    '@type': 'Service',
-    '@id': `${business.siteUrl}${path}#service`,
-    name: `Cash offers for unwanted vehicles in ${area.city}, MN`,
-    description: area.description,
-    url: `${business.siteUrl}${path}`,
-    provider: { '@id': `${business.siteUrl}/#business` },
-    areaServed: { '@type': 'City', name: `${area.city}, Minnesota` },
-  },
-  {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: `${business.siteUrl}/` },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Service areas',
-        item: `${business.siteUrl}/service-areas`,
-      },
-      { '@type': 'ListItem', position: 3, name: area.city, item: `${business.siteUrl}${path}` },
-    ],
-  },
-];
+const nearby = area.nearby.map((slug) => serviceAreas.find((item) => item.slug === slug)).filter((item): item is ServiceArea => Boolean(item));
+const schema = {
+  '@type': 'Service', '@id': `${business.siteUrl}${path}#service`,
+  name: `Cash for junk cars and pickup in ${area.city}, MN`, serviceType: 'Unwanted vehicle buying and removal',
+  description: area.description, url: `${business.siteUrl}${path}`, provider: { '@id': `${business.siteUrl}/#business` },
+  areaServed: { '@type': 'City', name: `${area.city === 'St. Paul' ? 'Saint Paul' : area.city}, Minnesota` },
+};
 ---
-
-<BaseLayout
-  title={`${area.title} | Merritt's Auto Recycling`}
-  description={area.description}
-  path={path}
-  schema={schema}
->
-  <PageHero
-    eyebrow={`${area.city}, Minnesota`}
-    title={area.title}
-    description={area.intro}
-    crumbs={[
-      { label: 'Home', href: '/' },
-      { label: 'Service areas', href: '/service-areas' },
-      { label: area.city },
-    ]}
-  >
-    <div class="button-row">
-      <a class="button" href={business.phoneUri} data-track="call_click"
-        ><Icon name="phone" /> Call {business.phone}</a
-      >
-      <a class="button button--outline-light" href={business.textUri} data-track="text_click"
-        ><Icon name="message" /> Text {business.textPhone}</a
-      >
-    </div>
+<BaseLayout title={`Cash for Junk Cars in ${area.city}, MN | Merritt's`} description={area.description} path={path} schema={schema}>
+  <PageHero eyebrow={`${area.city}, Minnesota`} title={area.title} description={area.intro} crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas', href: '/service-areas' }, { label: area.city }]}>
+    <div class="button-row"><a class="button" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call {business.phone}</a><a class="button button--outline-light" href={business.textUri} data-track="text_click"><Icon name="message" /> Text {business.textPhone}</a></div>
   </PageHero>
-
-  <section class="section section--paper">
-    <div class="container split">
-      <div class="flow">
-        <p class="eyebrow">Local context</p>
-        <h2>What this page can confirm</h2>
-        <p class="lede">{area.proof}</p>
-        <ul class="check-list">
-          {area.details.map((detail) => <li>{detail}</li>)}
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Have these details ready</h2>
-        <ul>
-          <li>Vehicle year, make, and model</li>
-          <li>Exact city and pickup setting</li>
-          <li>Whether it starts, rolls, and steers</li>
-          <li>Major damage or missing components</li>
-          <li>Title, lien, and key status</li>
-        </ul>
-        <p class="notice">
-          A published area page does not guarantee vehicle acceptance, a specific offer, or a pickup
-          time.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft">
-    <div class="container--narrow flow">
-      <p class="eyebrow">Three confirmations</p>
-      <h2>Vehicle, terms, and schedule</h2>
-      <p>
-        Merritt’s first confirms that it can consider the actual vehicle. Next, it confirms any
-        offer and removal terms. A pickup window is discussed only after those details are clear.
-      </p>
-      <p>
-        For title questions, use current guidance from Minnesota Driver and Vehicle Services. Do not
-        rely on a generic “no title needed” statement.
-      </p>
-    </div>
-  </section>
-
-  <CtaBand title={`Ask about a vehicle in ${area.city}`} />
+  <section class="section section--paper"><div class="container split">
+    <div class="flow">{area.sections.map((section) => <article class="flow"><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</article>)}<ul class="check-list">{area.details.map((detail) => <li>{detail}</li>)}</ul></div>
+    <aside class="card flow" aria-label="Vehicle details checklist"><p class="eyebrow">Start your call or text</p><h2>Have these details ready</h2><ul><li>Year, make, and model</li><li>Known damage or mechanical problems</li><li>Exact pickup setting and access</li><li>Whether the car rolls and steers</li><li>Title, lien, and key status</li></ul><p>{area.proof}</p><a class="text-link" href={business.googleBusinessProfile} target="_blank" rel="noopener noreferrer" data-track="review_profile_click">Read our Google reviews <Icon name="arrow" /></a></aside>
+  </div></section>
+  <section class="section section--soft"><div class="container"><p class="eyebrow">From offer to pickup</p><h2>Three decisions before the vehicle leaves</h2><ol class="steps"><li class="step"><h3>Vehicle and documents</h3><p>Share the condition, completeness, ownership information, and location. Explain missing paperwork before scheduling.</p></li><li class="step"><h3>Offer and removal terms</h3><p>Confirm what you would receive, any pickup charge, and payment arrangements. You choose whether to accept.</p></li><li class="step"><h3>Access and pickup window</h3><p>Coordinate keys, property authorization, and the agreed documents. Have belongings removed before pickup.</p></li></ol></div></section>
+  <section class="section section--paper"><div class="container--narrow flow"><h2>Questions about selling a car in {area.city}</h2><FaqList faqs={[...area.faqs, globalFaqs[1]!, globalFaqs[4]!, globalFaqs[5]!]} /></div></section>
+  <section class="section section--soft"><div class="container flow"><h2>Plan your sale</h2><div class="related-links"><a href="/cash-for-junk-cars">How cash offers work</a><a href="/junk-car-removal">Vehicle removal</a><a href="/guides/minnesota-junk-car-documents">Minnesota documents</a><a href="/guides/non-running-car-removal-checklist">Non-running vehicle checklist</a></div><h3>Other communities we serve</h3><nav class="related-links" aria-label="Related pickup communities">{nearby.map((item) => <a href={`/service-areas/${item.slug}`}>{item.city}</a>)}<a href="/service-areas">Full metro coverage</a></nav></div></section>
+  <CtaBand title={`Tell us about your vehicle in ${area.city}`} text="Call or text during business hours to discuss the car, the offer, and pickup options." />
 </BaseLayout>
+<style>.related-links { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }.related-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .2em; }</style>

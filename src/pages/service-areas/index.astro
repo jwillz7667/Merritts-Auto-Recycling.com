@@ -1,77 +1,28 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import CtaBand from '@/components/CtaBand.astro';
+import CoverageDirectory from '@/components/CoverageDirectory.astro';
 import Icon from '@/components/Icon.astro';
 import PageHero from '@/components/PageHero.astro';
 import { business, serviceAreas } from '@/data/site';
-
 const path = '/service-areas';
 const schema = {
-  '@type': 'CollectionPage',
-  '@id': `${business.siteUrl}${path}#webpage`,
-  url: `${business.siteUrl}${path}`,
-  name: "Service Areas | Merritt's Auto Recycling",
-  about: { '@id': `${business.siteUrl}/#business` },
+  '@type': 'CollectionPage', '@id': `${business.siteUrl}${path}#webpage`, url: `${business.siteUrl}${path}`,
+  name: 'Twin Cities junk car pickup service areas', about: { '@id': `${business.siteUrl}/#business` },
+  mainEntity: { '@type': 'ItemList', itemListElement: serviceAreas.map((area, index) => ({ '@type': 'ListItem', position: index + 1, name: area.city, url: `${business.siteUrl}/service-areas/${area.slug}` })) },
 };
 ---
-
-<BaseLayout
-  title="Service Areas | Merritt's Auto Recycling"
-  description="Merritt's is based in Brooklyn Center and publishes vehicle-offer information for Brooklyn Center and Minneapolis. Call to confirm other locations."
-  path={path}
-  schema={schema}
->
-  <PageHero
-    eyebrow="Focused local coverage"
-    title="Junk car service areas: Brooklyn Center and Minneapolis"
-    description="Merritt’s publishes only the locations supported by current information. Availability for every vehicle still depends on the exact address, condition, and access."
-    crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas' }]}
-  />
-
-  <section class="section section--paper">
-    <div class="container">
-      <div class="area-grid">
-        {
-          serviceAreas.map((area) => (
-            <article class="card area-card">
-              <div class="area-card-content">
-                <span class="area-tag">Verified page</span>
-                <h2>{area.city}, Minnesota</h2>
-                <p>{area.intro}</p>
-                <p>
-                  <strong>{area.proof}</strong>
-                </p>
-                <a class="button button--dark" href={`/service-areas/${area.slug}`}>
-                  View {area.city} details <Icon name="arrow" />
-                </a>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft">
-    <div class="container--narrow flow">
-      <p class="eyebrow">A city page is not a pickup promise</p>
-      <h2>Call with the exact vehicle location</h2>
-      <p class="lede">
-        Merritt’s confirms current availability case by case. If the vehicle is outside Brooklyn
-        Center or Minneapolis, call {business.phone} with the city, ZIP code, vehicle condition, and access
-        details.
-      </p>
-      <div class="notice">
-        <p>
-          The location list stays focused so a city name never implies guaranteed acceptance or a
-          guaranteed pickup time. Merritt’s confirms every vehicle directly.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <CtaBand
-    title="Need to check another location?"
-    text="Call with the vehicle city and ZIP code. Merritt’s will confirm whether the location can be considered."
-  />
+<BaseLayout title="Twin Cities Junk Car Pickup Service Areas | Merritt's" description="Find Merritt's junk car pickup information for Minneapolis, St. Paul and the Twin Cities suburbs. Explore local pages and discuss your vehicle's exact location." path={path} schema={schema}>
+  <PageHero eyebrow="Minneapolis, St. Paul and the suburbs" title="Junk car pickup across the Twin Cities metro" description="Based in Brooklyn Center, Merritt’s works with vehicle owners across the metro. Find your community, then call or text to discuss the car and pickup setting." crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas' }]}>
+    <div class="button-row"><a class="button" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call {business.phone}</a><a class="button button--outline-light" href={business.textUri} data-track="text_click"><Icon name="message" /> Text {business.textPhone}</a></div>
+  </PageHero>
+  <section class="section section--paper"><div class="container flow">
+    <p class="eyebrow">Find your part of the metro</p><p class="lede">Linked cities have dedicated pickup guides. For any other listed community, send the vehicle details and exact location to discuss availability. Each pickup is arranged individually.</p>
+    <CoverageDirectory />
+  </div></section>
+  <section class="section section--soft"><div class="container split">
+    <div class="flow"><p class="eyebrow">Make the first call useful</p><h2>Tell us where the car is, not just where you live</h2><p>The vehicle may be at a repair shop, a relative’s home, or a shared parking area. Send its present location, condition, and access details so we can review the offer and loading plan together.</p><p>Tell us about a deadline, locked gate, parking ramp, steep approach, missing wheels, or a car that cannot steer. For surrounding-community pickups, confirm service availability and any removal charges before accepting an offer.</p></div>
+    <div class="card flow"><h2>What to include</h2><ul><li>Year, make, model, and known condition</li><li>Pickup city and exact parking setting</li><li>Whether the car rolls, steers, and has all wheels</li><li>Title, lien, and key status</li><li>Any property access or timing restrictions</li></ul><a class="text-link" href="/guides/prepare-an-unwanted-car-for-pickup">Prepare for pickup <Icon name="arrow" /></a></div>
+  </div></section>
+  <CtaBand title="Ready to check your vehicle?" text="Call or text the pickup city and vehicle details. We will explain the offer, access requirements, and scheduling options." />
 </BaseLayout>

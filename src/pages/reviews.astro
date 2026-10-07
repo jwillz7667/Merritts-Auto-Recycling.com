@@ -4,50 +4,14 @@ import CtaBand from '@/components/CtaBand.astro';
 import Icon from '@/components/Icon.astro';
 import PageHero from '@/components/PageHero.astro';
 import { business } from '@/data/site';
-
-const path = '/reviews';
 ---
-
-<BaseLayout
-  title="Customer Reviews | Merritt's Auto Recycling"
-  description="Visit Merritt's verified Google Business Profile to read current customer feedback or leave a review after working with the business."
-  path={path}
->
-  <PageHero
-    eyebrow="Feedback from the source"
-    title="Read current reviews on Google"
-    description="This website does not republish unattributed or unverified testimonials. Use the linked Google Business Profile to see feedback in its original context."
-    crumbs={[{ label: 'Home', href: '/' }, { label: 'Reviews' }]}
-  />
-
-  <section class="section section--paper">
-    <div class="container--narrow flow">
-      <p class="eyebrow">Transparent review policy</p>
-      <h2>No copied quotes and no self-published rating score</h2>
-      <p class="lede">
-        Review counts and ratings can change. Merritt’s therefore links to the live business profile
-        instead of hard-coding an aggregate rating or placing unverified quotes into structured
-        data.
-      </p>
-      <div class="card">
-        <h3>Google Business Profile</h3>
-        <p>
-          Read the latest available customer feedback, check profile details, or leave a review.
-        </p>
-        <a
-          class="button button--dark"
-          href={business.googleBusinessProfile}
-          rel="noopener noreferrer"
-        >
-          Open the Google profile <Icon name="arrow" />
-        </a>
-      </div>
-      <p class="notice">
-        If owner-approved review excerpts are added later, each quote should retain source, date,
-        permission, and a link back to the original review when possible.
-      </p>
-    </div>
-  </section>
-
-  <CtaBand />
+<BaseLayout title="Customer Reviews | Merritt's Auto Recycling" description="Read Merritt's customer reviews on Google, learn what to ask before selling a vehicle, and share honest feedback after working with our Twin Cities business." path="/reviews">
+  <PageHero eyebrow="Hear from vehicle owners" title="Customer experiences with Merritt’s" description="Choosing a vehicle buyer is easier when you know what others experienced. Read customer feedback on our Google Business Profile, then call with your own questions." crumbs={[{ label: 'Home', href: '/' }, { label: 'Reviews' }]}>
+    <a class="button" href={business.googleBusinessProfile} target="_blank" rel="noopener noreferrer" data-track="review_profile_click">Read reviews on Google <Icon name="arrow" /></a>
+  </PageHero>
+  <section class="section section--paper"><div class="container split">
+    <div class="flow"><p class="eyebrow">Before you decide</p><h2>Ask about the complete experience</h2><p class="lede">Look for feedback about communication, clear offers, pickup arrangements, and how questions were handled. Ask us how those details would work for your vehicle.</p><p>We discuss condition, documents, removal charges, payment arrangements, and access before scheduling. That gives you a clear agreement to review rather than a number without the pickup details.</p><a class="text-link" href="/cash-for-junk-cars">Learn how selling works <Icon name="arrow" /></a></div>
+    <div class="card flow"><h2>Already worked with Merritt’s?</h2><p>Your honest feedback helps other local vehicle owners know what to expect. Visit our Google profile and choose the option to write a review.</p><p>Describe your own experience in your own words. Please leave vehicle identification numbers, addresses, and other private information out of public reviews and photos.</p><a class="button button--dark" href={business.googleBusinessProfile} target="_blank" rel="noopener noreferrer" data-track="review_profile_click">Visit our Google profile <Icon name="arrow" /></a></div>
+  </div></section>
+  <CtaBand title="Have a question before selling?" text="Call or text us about the vehicle, your location, and what you need to know before deciding." />
 </BaseLayout>

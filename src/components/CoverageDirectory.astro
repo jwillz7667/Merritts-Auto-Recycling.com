@@ -1,0 +1,39 @@
+---
+import { coverageRegions, serviceAreas } from '@/data/site';
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+const byCity = new Map(serviceAreas.map((area) => [area.city, area]));
+const featured = ['minneapolis', 'st-paul', 'brooklyn-center', 'maple-grove', 'plymouth', 'bloomington', 'woodbury', 'eagan'];
+---
+{compact ? (
+  <nav class="city-links" aria-label="Featured Twin Cities pickup areas">
+    {featured.map((slug) => {
+      const area = serviceAreas.find((item) => item.slug === slug);
+      return area && <a href={`/service-areas/${area.slug}`}>{area.city}</a>;
+    })}
+    <a href="/service-areas">All service areas</a>
+  </nav>
+) : (
+  <div class="coverage-directory">
+    {coverageRegions.map((region, index) => (
+      <section class="card" aria-labelledby={`region-${index}`}>
+        <h2 id={`region-${index}`}>{region.name}</h2>
+        <ul class="city-links" aria-label={`${region.name} pickup communities`}>
+          {region.cities.map((city) => {
+            const area = byCity.get(city);
+            return <li>{area ? <a href={`/service-areas/${area.slug}`}>{city}</a> : <span>{city}</span>}</li>;
+          })}
+        </ul>
+      </section>
+    ))}
+  </div>
+)}
+<style>
+  .coverage-directory { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1.25rem; }
+  .coverage-directory h2 { font-size: 1.35rem; }
+  .city-links { display: flex; flex-wrap: wrap; gap: .65rem; list-style: none; padding: 0; margin: 1.25rem 0 0; }
+  .city-links li { margin: 0; }
+  .city-links a, .city-links span { display: inline-flex; align-items: center; min-height: 44px; padding: .5rem .8rem; border: 1px solid currentColor; border-radius: .4rem; line-height: 1.4; }
+  .city-links a { font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+  .city-links span { border-style: dashed; }
+</style>
