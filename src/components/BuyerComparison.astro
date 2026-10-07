@@ -1,0 +1,44 @@
+---
+import type { BuyerComparison } from '@/data/buyer-comparison';
+interface Props { comparison: BuyerComparison }
+const { comparison } = Astro.props;
+---
+<section class="buyer-comparison" aria-labelledby="comparison-heading">
+  <h2 id="comparison-heading">Compare published service information</h2>
+  <p class="comparison-date">Sources checked <time datetime={comparison.checkedIso}>{comparison.checkedDisplay}</time>. Confirm current terms directly with each business.</p>
+  <div class="comparison-rows">
+    {comparison.rows.map((row, index) => (
+      <section class="comparison-row" aria-labelledby={`comparison-topic-${index + 1}`}>
+        <h3 id={`comparison-topic-${index + 1}`}>{row.topic}</h3>
+        <dl class="comparison-pair">
+          <div>
+            <dt>Merritt’s Auto Recycling</dt>
+            <dd><p>{row.merritts}</p><a href={row.merrittsSource.href}>{row.merrittsSource.label}</a></dd>
+          </div>
+          <div>
+            <dt>{comparison.competitor}</dt>
+            <dd><p>{row.competitor}</p><a href={row.competitorSource.href} target="_blank" rel="noopener noreferrer">{row.competitorSource.label}</a></dd>
+          </div>
+        </dl>
+        <p class="comparison-question"><strong>Ask both buyers:</strong> {row.question}</p>
+      </section>
+    ))}
+  </div>
+</section>
+<style>
+  .buyer-comparison { color: var(--graphite); }
+  .comparison-date { color: var(--muted); }
+  .comparison-rows { display: grid; gap: 1.25rem; }
+  .comparison-row { min-width: 0; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); }
+  .comparison-row h3 { margin-bottom: 1.25rem; color: var(--navy); }
+  .comparison-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin: 0; }
+  .comparison-pair > div { min-width: 0; }
+  .comparison-pair dt { margin-bottom: 0.65rem; color: var(--navy); font-weight: 800; line-height: 1.4; }
+  .comparison-pair dd { margin: 0; }
+  .comparison-pair p { margin-bottom: 0.75rem; color: var(--muted); }
+  .comparison-pair a { display: inline-block; min-height: 44px; padding-block: 0.35rem; color: var(--navy); overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 0.2em; }
+  .comparison-pair a:hover { color: var(--orange-dark); }
+  .comparison-question { margin: 1rem 0 0; border-top: 1px solid var(--line); padding-top: 1rem; color: var(--muted); }
+  .comparison-question strong { color: var(--navy); }
+  @media (max-width: 700px) { .comparison-pair { grid-template-columns: minmax(0, 1fr); } .comparison-pair > div + div { border-top: 1px solid var(--line); padding-top: 1rem; } }
+</style>
