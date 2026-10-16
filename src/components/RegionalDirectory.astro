@@ -1,0 +1,7 @@
+---
+import { serviceRegions } from '@/data/service-regions';
+---
+<nav class="regional-directory" aria-label="Regional pickup and vehicle-selling information">
+  {serviceRegions.map((region) => <a href={`/service-regions/${region.slug}`}>{region.name}</a>)}
+</nav>
+<style>.regional-directory { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }.regional-directory a { display: inline-flex; align-items: center; min-height: 44px; color: var(--navy); text-decoration: underline; text-underline-offset: 0.2em; }</style>

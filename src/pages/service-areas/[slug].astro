@@ -11,48 +11,26 @@ interface Props { area: ServiceArea }
 const { area } = Astro.props;
 const path = `/service-areas/${area.slug}`;
 const nearby = area.nearby.map((slug) => serviceAreas.find((item) => item.slug === slug)).filter((item): item is ServiceArea => Boolean(item));
-const schema = {
-  '@type': 'Service', '@id': `${business.siteUrl}${path}#service`,
-  name: `Cash for junk cars and pickup in ${area.city}, MN`, serviceType: 'Unwanted vehicle buying and removal',
-  description: area.description, url: `${business.siteUrl}${path}`, provider: { '@id': `${business.siteUrl}/#business` },
-  areaServed: { '@type': 'City', name: `${area.city === 'St. Paul' ? 'Saint Paul' : area.city}, Minnesota` },
-};
+const schema = { '@type': 'Service', '@id': `${business.siteUrl}${path}#service`, name: `Cash for junk cars and pickup in ${area.city}, MN`, serviceType: 'Unwanted vehicle buying and removal', description: area.description, url: `${business.siteUrl}${path}`, provider: { '@id': `${business.siteUrl}/#business` }, areaServed: { '@type': 'City', name: `${area.city === 'St. Paul' ? 'Saint Paul' : area.city}, Minnesota` } };
 ---
 <BaseLayout title={`Cash for Junk Cars in ${area.city}, MN | Merritt's`} description={area.description} path={path} schema={schema}>
   <PageHero eyebrow={`${area.city}, Minnesota`} title={area.title} description={area.intro} crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas', href: '/service-areas' }, { label: area.city }]}>
     <div class="button-row"><a class="button" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call {business.phone}</a><a class="button button--outline-light" href={business.textUri} data-track="text_click"><Icon name="message" /> Text {business.textPhone}</a></div>
   </PageHero>
   <section class="section section--paper"><div class="container split">
-    <div class="flow">{area.sections.map((section) => <article class="flow"><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</article>)}<ul class="check-list">{area.details.map((detail) => <li>{detail}</li>)}</ul></div>
-    <aside class="card flow" aria-label="Vehicle details checklist"><p class="eyebrow">Start your call or text</p><h2>Have these details ready</h2><ul><li>Year, make, and model</li><li>Known damage or mechanical problems</li><li>Exact pickup setting and access</li><li>Whether the car rolls and steers</li><li>Title, lien, and key status</li></ul><p>{area.proof}</p><a class="text-link" href={business.googleBusinessProfile} target="_blank" rel="noopener noreferrer" data-track="review_profile_click">Read our Google reviews <Icon name="arrow" /></a></aside>
+    <div class="flow">{area.sections.map((section) => <article class="flow"><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</article>)}<ul class="check-list">{area.details.map((detail) => <li>{detail}</li>)}</ul>{area.slug === 'new-brighton' && <p><a href="https://www.newbrightonmn.gov/293/License-Bureau-FAQs" target="_blank" rel="noopener noreferrer">New Brighton License Bureau: official vehicle-sale and specialty-plate information</a></p>}</div>
+    <aside class="card flow" aria-label="Vehicle details checklist"><p class="eyebrow">Start your call or text</p><h2>Have these details ready</h2><ul><li>Year, make, and model</li><li>Known damage or mechanical problems</li><li>Exact pickup setting and access</li><li>Whether the car rolls and steers</li><li>Title, lien, and key status</li></ul><p>{area.proof}</p><a class="text-link" href="/contact#vehicle-inquiry">Send vehicle details online <Icon name="arrow" /></a><a class="text-link" href={business.googleBusinessProfile} target="_blank" rel="noopener noreferrer" data-track="review_profile_click">Read our Google reviews <Icon name="arrow" /></a></aside>
   </div></section>
   <section class="section section--soft"><div class="container"><p class="eyebrow">From offer to pickup</p><h2>Three decisions before the vehicle leaves</h2><ol class="steps"><li class="step"><h3>Vehicle and documents</h3><p>Share the condition, completeness, ownership information, and location. Explain missing paperwork before scheduling.</p></li><li class="step"><h3>Offer and removal terms</h3><p>Confirm what you would receive, any pickup charge, and payment arrangements. You choose whether to accept.</p></li><li class="step"><h3>Access and pickup window</h3><p>Coordinate keys, property authorization, and the agreed documents. Have belongings removed before pickup.</p></li></ol></div></section>
   <section class="section section--paper"><div class="container--narrow flow"><h2>Questions about selling a car in {area.city}</h2><FaqList faqs={[...area.faqs, globalFaqs[1]!, globalFaqs[4]!, globalFaqs[5]!]} /></div></section>
-  <section class="section section--soft"><div class="container flow"><h2>Plan your sale</h2><div class="related-links"><a href="/cash-for-junk-cars">How cash offers work</a><a href="/junk-car-removal">Vehicle removal</a><a href="/guides/minnesota-junk-car-documents">Minnesota documents</a><a href="/guides/non-running-car-removal-checklist">Non-running vehicle checklist</a></div><h3>Other communities we serve</h3><nav class="related-links" aria-label="Related pickup communities">{nearby.map((item) => <a href={`/service-areas/${item.slug}`}>{item.city}</a>)}<a href="/service-areas">Full metro coverage</a></nav></div></section>
+  <section class="section section--soft"><div class="container flow"><h2>Plan your sale</h2><div class="related-links"><a href="/cash-for-junk-cars">How cash offers work</a><a href="/junk-car-removal">Vehicle removal</a><a href="/guides/minnesota-junk-car-documents">Minnesota title requirements</a><a href="/guides/minnesota-license-plates-before-junking">Plates before pickup</a><a href="/guides/non-running-car-removal-checklist">Non-running vehicle checklist</a></div><h3>Other communities we serve</h3><nav class="related-links" aria-label="Related pickup communities">{nearby.map((item) => <a href={`/service-areas/${item.slug}`}>Junk car pickup in {item.city}</a>)}<a href="/service-areas">Full metro coverage</a><a href="/service-regions">Regional pickup guidance</a></nav></div></section>
   <CtaBand title={`Tell us about your vehicle in ${area.city}`} text="Call or text during business hours to discuss the car, the offer, and pickup options." />
 </BaseLayout>
 <style>
-  /* The shared step styles use light text for navy sections. City pages use a
-     light surface, so scope the readable colors here without changing dark sections. */
-  .section--soft .step {
-    border-top-color: var(--line);
-  }
-
-  .section--soft .step p {
-    color: var(--muted);
-  }
-
-  .related-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1.5rem;
-  }
-
-  .related-links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-  }
+  .section--soft .step { border-top-color: var(--line); }
+  .section--soft .step p { color: var(--muted); }
+  .related-links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+  .related-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 0.2em; }
+  .split > * { min-width: 0; }
+  aside .text-link { margin-top: 1rem; }
 </style>

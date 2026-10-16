@@ -2,61 +2,60 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { guides } from '@/data/guides';
 import { publishedRoutes, serviceAreas } from '@/data/site';
+import { serviceRegions } from '@/data/service-regions';
 type Redirect = { source: string; destination: string; permanent: boolean; has?: unknown[] };
 const config = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8')) as { cleanUrls: boolean; redirects: Redirect[]; buildCommand: string };
+const manifest = JSON.parse(readFileSync(new URL('../src/data/legacy-routes.json', import.meta.url), 'utf8')) as { areas: Record<string, string>; blogs: Record<string, string> };
 const redirects = new Map(config.redirects.map((item) => [item.source, item.destination]));
 
-describe('legacy redirects', () => {
-  it('preserves the existing primary page destinations', () => {
+describe('legacy URL recovery', () => {
+  it('preserves primary destinations', () => {
     expect(redirects.get('/about-brad.html')).toBe('/about');
     expect(redirects.get('/testimonials.html')).toBe('/reviews');
     expect(redirects.get('/quote-calculator.html')).toBe('/cash-for-junk-cars');
     expect(redirects.get('/blog/index.html')).toBe('/guides');
   });
-  it('maps every published city before either catch-all', () => {
-    const fallback = config.redirects.findIndex((item) => item.source === '/placemarks/:slug.html');
-    expect(fallback).toBeGreaterThan(-1);
-    for (const area of serviceAreas) {
-      for (const suffix of ['', '.html']) {
-        const source = `/placemarks/${area.slug}-mn${suffix}`;
-        expect(redirects.get(source)).toBe(`/service-areas/${area.slug}`);
-        const index = config.redirects.findIndex((item) => item.source === source);
-        expect(index).toBeGreaterThan(-1);
-        expect(index).toBeLessThan(fallback);
+  it('accounts for every historical area, including state and county routes', () => {
+    expect(Object.keys(manifest.areas)).toHaveLength(53);
+    for (const [legacy, destination] of Object.entries(manifest.areas)) {
+      expect(destination).not.toBe('/service-areas');
+      for (const extension of ['', '.html']) expect(redirects.get(`/placemarks/${legacy}${extension}`)).toBe(destination);
+      if (destination.startsWith('/service-regions/')) {
+        const region = serviceRegions.find((item) => `/service-regions/${item.slug}` === destination);
+        expect(region, legacy).toBeDefined();
       }
+    }
+    expect(config.redirects.some((item) => item.source === '/placemarks/:slug' || item.source === '/placemarks/:slug.html')).toBe(false);
+  });
+  it('maps aliases for every published city', () => {
+    for (const area of serviceAreas) {
+      for (const suffix of ['', '.html']) expect(redirects.get(`/placemarks/${area.slug}-mn${suffix}`)).toBe(`/service-areas/${area.slug}`);
     }
     expect(redirects.get('/service-areas/saint-paul')).toBe('/service-areas/st-paul');
     expect(redirects.get('/placemarks/saint-paul-mn')).toBe('/service-areas/st-paul');
   });
-  it('retains useful blog intent with normalized clean URLs', () => {
+  it('preserves all ten legacy article topics with clean-URL sources', () => {
     expect(config.cleanUrls).toBe(true);
-    const expected = new Map([
-      ['/blog/auto-recycling-environmental-impact-twin-cities', '/guides/what-happens-after-junk-car-pickup'],
-      ['/blog/what-happens-to-car-after-pickup', '/guides/what-happens-after-junk-car-pickup'],
-      ['/blog/how-much-is-my-junk-car-worth-minnesota-2026', '/guides/what-affects-a-junk-car-offer'],
-      ['/blog/running-vs-non-running-junk-car-prices', '/guides/what-affects-a-junk-car-offer'],
-      ['/blog/scrap-value-by-weight-minnesota-guide', '/guides/scrap-car-value-by-weight'],
-      ['/blog/minnesota-junk-car-title-requirements', '/guides/minnesota-junk-car-documents'],
-      ['/blog/mn-license-plates-before-junking', '/guides/minnesota-junk-car-documents'],
-      ['/blog/free-junk-car-removal-minneapolis-mn', '/junk-car-removal'],
-      ['/blog/junk-vs-tradein-vs-private-sale', '/guides/repair-trade-in-or-sell-a-junk-car'],
-      ['/blog/top-10-most-junked-cars-minnesota', '/guides'],
-    ]);
-    for (const [source, destination] of expected) {
-      expect(redirects.get(source)).toBe(destination);
-      expect(redirects.has(`${source}.html`)).toBe(false);
+    expect(Object.keys(manifest.blogs)).toHaveLength(10);
+    for (const [legacy, destination] of Object.entries(manifest.blogs)) {
+      expect(redirects.get(`/blog/${legacy}`)).toBe(destination);
+      expect(redirects.has(`/blog/${legacy}.html`)).toBe(false);
+      expect(destination).not.toBe('/guides');
     }
   });
-  it('has unique permanent sources and real destinations', () => {
+  it('uses unique permanent sources and existing final destinations without chains', () => {
     expect(redirects.size).toBe(config.redirects.length);
     const routes = new Set<string>([...publishedRoutes, ...guides.map((guide) => `/guides/${guide.slug}`)]);
     for (const redirect of config.redirects) {
       expect(redirect.permanent).toBe(true);
-      if (redirect.destination.startsWith('/') && !redirect.destination.startsWith('/api/')) expect(routes.has(redirect.destination)).toBe(true);
+      if (redirect.destination.startsWith('/') && !redirect.destination.startsWith('/api/')) {
+        expect(routes.has(redirect.destination), redirect.source).toBe(true);
+        expect(redirects.has(redirect.destination), redirect.source).toBe(false);
+      }
       expect(redirect.source).not.toBe(redirect.destination);
     }
   });
-  it('runs security, lint, and unit checks before the production build', () => {
+  it('keeps the complete production validation gate', () => {
     for (const command of ['security:scan', 'lint', 'test', 'build']) expect(config.buildCommand).toContain(`npm run ${command}`);
   });
 });

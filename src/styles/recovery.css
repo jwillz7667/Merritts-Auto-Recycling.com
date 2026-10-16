@@ -1,0 +1,14 @@
+/* Keep the visual rebuild; let long content shrink inside its existing grids.
+   Use component-qualified selectors so bundler import order cannot restore
+   the old pale card numerals on a white surface. */
+.card.service-card .card-number { color: var(--muted); }
+.hero-grid > *, .split > *, .footer-grid > *, .contact-grid > *, .card-grid > *, .section-heading > *, .cta-band-inner > * { min-width: 0; }
+.site-footer a, .contact-list a, .article-aside a, .text-link { overflow-wrap: anywhere; }
+.media-frame::before { right: 0; }
+.cta-band-inner { flex-wrap: wrap; }
+.cta-band-inner > :first-child { flex: 1 1 24rem; }
+.cta-band-inner > .button-row { flex: 0 1 30rem; }
+@media (max-width: 48rem) {
+  .cta-band-inner > :first-child, .cta-band-inner > .button-row { flex: 0 1 auto; }
+  .site-footer a { word-break: normal; }
+}

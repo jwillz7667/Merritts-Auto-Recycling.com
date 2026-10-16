@@ -1,15 +1,17 @@
 import type { APIRoute } from 'astro';
 import { guides } from '@/data/guides';
 import { business, publishedRoutes, serviceAreas, services } from '@/data/site';
+import { serviceRegions, regionalRoutes } from '@/data/service-regions';
 
-const releaseDate = '2026-10-07';
 const modified = new Map<string, string>([
-  ['/', releaseDate], ['/service-areas', releaseDate], ['/about', releaseDate], ['/reviews', releaseDate], ['/faq', releaseDate], ['/guides', releaseDate],
-  ...services.map((service): [string, string] => [`/${service.slug}`, releaseDate]),
-  ...serviceAreas.map((area): [string, string] => [`/service-areas/${area.slug}`, releaseDate]),
+  ['/', '2026-10-16'], ['/service-areas', '2026-10-16'], ['/service-regions', '2026-10-16'],
+  ['/about', '2026-10-07'], ['/reviews', '2026-10-07'], ['/faq', '2026-10-07'], ['/guides', '2026-10-16'], ['/contact', '2026-10-16'],
+  ...services.map((service): [string, string] => [`/${service.slug}`, '2026-10-16']),
+  ...serviceAreas.map((area): [string, string] => [`/service-areas/${area.slug}`, '2026-10-16']),
+  ...serviceRegions.map((region): [string, string] => [`/service-regions/${region.slug}`, region.updated]),
   ...guides.map((guide): [string, string] => [`/guides/${guide.slug}`, guide.updatedIso ?? '2026-08-23']),
 ]);
-const routes = [...new Set([...publishedRoutes, ...guides.map((guide) => `/guides/${guide.slug}`)])];
+const routes = [...new Set([...publishedRoutes, '/service-regions', ...regionalRoutes, ...guides.map((guide) => `/guides/${guide.slug}`)])];
 const escapeXml = (value: string) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
 export const GET: APIRoute = () => {
   const entries = routes.map((route) => {

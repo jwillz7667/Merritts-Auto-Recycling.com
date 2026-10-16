@@ -2,6 +2,7 @@
 import { business } from '@/data/site';
 import Icon from './Icon.astro';
 interface Props { title?: string; text?: string }
-const { title = 'Ready to sell an unwanted vehicle?', text = 'Call or text the year, make, model, condition, and pickup city. Open daily, 8:00 AM–8:00 PM.' } = Astro.props;
+const { title = 'Ready to sell your unwanted vehicle?', text = 'Call or text the vehicle details during daily business hours. Prefer a form? Send a secure vehicle inquiry online.' } = Astro.props;
 ---
-<section class="cta-band" aria-labelledby="cta-heading"><div class="container cta-band-inner"><div><h2 id="cta-heading">{title}</h2><p>{text}</p></div><div class="button-row"><a class="button button--dark" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call {business.phone}</a><a class="button button--light" href={business.textUri} data-track="text_click"><Icon name="message" /> Text {business.textPhone}</a></div></div></section>
+<section class="cta-band" aria-labelledby="cta-heading"><div class="container cta-band-inner"><div><h2 id="cta-heading">{title}</h2><p>{text}</p><a class="inquiry-link" href="/contact#vehicle-inquiry">Send vehicle details online</a></div><div class="button-row"><a class="button button--dark" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call {business.phone}</a><a class="button button--light" href={business.textUri} data-track="text_click"><Icon name="message" /> Text {business.textPhone}</a></div></div></section>
+<style>.inquiry-link { display: inline-flex; min-height: 44px; align-items: center; color: #0a1c2d; font-weight: 800; text-decoration: underline; text-underline-offset: 0.2em; }.inquiry-link:hover { color: #101923; }</style>
