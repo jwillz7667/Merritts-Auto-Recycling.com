@@ -42,7 +42,7 @@ test('mobile hero loads a smaller encoding of the approved photograph', async ({
 });
 
 test('service and location landing pages retain prominent call and text actions', async ({ page }) => {
-  for (const route of ['/cash-for-junk-cars', '/junk-car-removal', '/auto-recycling', '/junk-car-towing', '/service-areas', '/service-regions', '/service-areas/ramsey', '/service-regions/sherburne-county', '/contact']) {
+  for (const route of ['/cash-for-junk-cars', '/junk-car-removal', '/auto-recycling', '/junk-car-towing', '/get-a-quote', '/service-areas', '/service-regions', '/service-areas/ramsey', '/service-regions/sherburne-county', '/contact']) {
     await page.goto(route);
     const hero = page.locator('.page-hero');
     await expect(hero.getByRole('link', { name: /Call 763-533-2775/ })).toHaveAttribute('href', 'tel:+1-763-533-2775');
@@ -99,7 +99,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
   test(`key restored destinations are accessible at ${viewport.width}px`, async ({ page }, testInfo) => {
     test.setTimeout(180000);
     await page.setViewportSize(viewport);
-    for (const route of ['/', '/contact', '/service-areas/ramsey', '/service-regions/sherburne-county', '/guides/minnesota-license-plates-before-junking', '/guides/cash-for-junkers-mn-vs-merritts']) {
+    for (const route of ['/', '/contact', '/get-a-quote', '/service-areas', '/service-areas/ramsey', '/service-areas/white-bear-lake', '/service-areas/st-cloud', '/service-regions/sherburne-county', '/guides/minnesota-license-plates-before-junking', '/guides/minneapolis-junk-car-removal-costs-and-pickup', '/guides/cash-for-junkers-mn-vs-merritts']) {
       await page.goto(route);
       const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
       const blocking = results.violations.filter((item) => item.impact === 'serious' || item.impact === 'critical');
@@ -111,18 +111,22 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
 }
 
 test('unknown current and legacy routes remain real 404 responses', async ({ page }) => {
-  for (const route of ['/this-page-does-not-exist', '/placemarks/never-existed-mn']) {
+  for (const route of ['/this-page-does-not-exist', '/placemarks/never-existed-mn', '/service-areas/a-very-long-unknown-city-name.html']) {
     const response = await page.goto(route);
     expect(response?.status()).toBe(404);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('That page is not here.');
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+    if (route.endsWith('.html')) {
+      const events = await page.evaluate(() => (window as Window & { dataLayer?: Array<Record<string, unknown>> }).dataLayer);
+      expect(events?.find((event) => event.event === 'site_page_view')).toMatchObject({ page_path: '/unknown' });
+    }
   }
 });
 
 for (const viewport of [{ width: 320, height: 720 }, { width: 768, height: 1024 }]) {
   test(`contact paths remain usable at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
-    for (const route of ['/', '/contact', '/service-areas/ramsey', '/service-regions/sherburne-county', '/guides/minnesota-license-plates-before-junking']) {
+    for (const route of ['/', '/contact', '/get-a-quote', '/service-areas', '/service-areas/white-bear-lake', '/service-areas/st-cloud', '/service-areas/ramsey', '/service-regions/sherburne-county', '/guides/minnesota-license-plates-before-junking']) {
       await page.goto(route);
       await expectNoOverflow(page, route);
       const sticky = page.locator('.mobile-cta');

@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { guides } from '@/data/guides';
 import { publishedRoutes, serviceAreas } from '@/data/site';
@@ -12,7 +12,7 @@ describe('legacy URL recovery', () => {
   it('preserves primary destinations', () => {
     expect(redirects.get('/about-brad.html')).toBe('/about');
     expect(redirects.get('/testimonials.html')).toBe('/reviews');
-    expect(redirects.get('/quote-calculator.html')).toBe('/cash-for-junk-cars');
+    expect(redirects.get('/quote-calculator.html')).toBe('/get-a-quote');
     expect(redirects.get('/blog/index.html')).toBe('/guides');
   });
   it('accounts for every historical area, including state and county routes', () => {
@@ -49,7 +49,8 @@ describe('legacy URL recovery', () => {
     for (const redirect of config.redirects) {
       expect(redirect.permanent).toBe(true);
       if (redirect.destination.startsWith('/') && !redirect.destination.startsWith('/api/')) {
-        expect(routes.has(redirect.destination), redirect.source).toBe(true);
+        const retainedImage = redirect.destination.startsWith('/images/') && existsSync(new URL(`../public${redirect.destination}`, import.meta.url));
+        expect(routes.has(redirect.destination) || retainedImage, redirect.source).toBe(true);
         expect(redirects.has(redirect.destination), redirect.source).toBe(false);
       }
       expect(redirect.source).not.toBe(redirect.destination);

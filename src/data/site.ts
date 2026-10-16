@@ -2,4 +2,4 @@
 import { publishedRoutes as establishedRoutes } from './business-content';
 import { regionalRoutes } from './service-regions';
 export * from './business-content';
-export const publishedRoutes = [...establishedRoutes, '/service-regions', ...regionalRoutes] as const;
+export const publishedRoutes = [...establishedRoutes, '/get-a-quote', '/service-regions', ...regionalRoutes] as const;

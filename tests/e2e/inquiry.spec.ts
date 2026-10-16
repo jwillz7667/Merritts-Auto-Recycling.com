@@ -70,6 +70,23 @@ test('a malformed successful HTTP response never masquerades as delivery', async
   const data = await page.evaluate(() => JSON.stringify((window as Window & { dataLayer?: unknown[] }).dataLayer));
   expect(data).not.toContain('lead_form_success');
 });
+test('the restored offer page sends vehicle details through the protected contact flow', async ({ page }) => {
+  await page.route('**/api/contact', async (route) => {
+    const payload = route.request().postDataJSON();
+    expect(payload.subject).toBe('vehicle-question');
+    expect(payload.message).toContain('non-running vehicle');
+    expect(payload.contactConsent).toBe('true');
+    expect(route.request().headers()['idempotency-key']).toBeTruthy();
+    await route.fulfill({ status: 200, json: { ok: true } });
+  });
+  await page.goto('/get-a-quote');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Get a cash offer for your junk car');
+  await expect(page.locator('form')).toHaveAttribute('action', '/api/contact');
+  await fillInquiry(page);
+  await page.getByRole('button', { name: 'Request an offer' }).click();
+  await expect(page.locator('[data-form-status]')).toContainText('Message sent');
+  await page.waitForURL('**/thank-you?form=contact');
+});
 test('retries retain an idempotency key unless the inquiry changes', async ({ page }) => {
   const keys: string[] = [];
   await page.route('**/api/contact', async (route) => {

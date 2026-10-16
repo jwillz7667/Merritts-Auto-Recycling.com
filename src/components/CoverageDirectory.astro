@@ -1,8 +1,14 @@
 ---
-import { coverageRegions, serviceAreas } from '@/data/site';
+import { serviceAreas } from '@/data/site';
+import cityDirectory from '@/data/city-directory.json';
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props;
 const byCity = new Map(serviceAreas.map((area) => [area.city, area]));
+for (const region of cityDirectory) {
+  for (const city of region.cities) {
+    if (byCity.get(city.city)?.slug !== city.slug) throw new Error(`Missing dedicated city page: ${city.city}.`);
+  }
+}
 const featured = ['minneapolis', 'st-paul', 'brooklyn-center', 'maple-grove', 'plymouth', 'bloomington', 'woodbury', 'eagan'];
 ---
 {compact ? (
@@ -15,14 +21,12 @@ const featured = ['minneapolis', 'st-paul', 'brooklyn-center', 'maple-grove', 'p
   </nav>
 ) : (
   <div class="coverage-directory">
-    {coverageRegions.map((region, index) => (
+    {cityDirectory.map((region, index) => (
       <section class="card" aria-labelledby={`region-${index}`}>
         <h2 id={`region-${index}`}>{region.name}</h2>
+        {region.note && <p>{region.note}</p>}
         <ul class="city-links" aria-label={`${region.name} pickup communities`}>
-          {region.cities.map((city) => {
-            const area = byCity.get(city);
-            return <li>{area ? <a href={`/service-areas/${area.slug}`}>{city}</a> : <span>{city}</span>}</li>;
-          })}
+          {region.cities.map((city) => <li><a href={`/service-areas/${city.slug}`}>{city.city}</a></li>)}
         </ul>
       </section>
     ))}
@@ -33,7 +37,6 @@ const featured = ['minneapolis', 'st-paul', 'brooklyn-center', 'maple-grove', 'p
   .coverage-directory h2 { font-size: 1.35rem; }
   .city-links { display: flex; flex-wrap: wrap; gap: .65rem; list-style: none; padding: 0; margin: 1.25rem 0 0; }
   .city-links li { margin: 0; }
-  .city-links a, .city-links span { display: inline-flex; align-items: center; min-height: 44px; padding: .5rem .8rem; border: 1px solid currentColor; border-radius: .4rem; line-height: 1.4; }
+  .city-links a { display: inline-flex; align-items: center; min-height: 44px; padding: .5rem .8rem; border: 1px solid currentColor; border-radius: .4rem; line-height: 1.4; }
   .city-links a { font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
-  .city-links span { border-style: dashed; }
 </style>

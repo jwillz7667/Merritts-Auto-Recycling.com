@@ -4,13 +4,14 @@ import { serviceRegions } from '@/data/service-regions';
 import { recoveryGuides } from '@/data/recovery-guides';
 import { guides } from '@/data/guides';
 import productionRoutesBeforeRecovery from './fixtures/production-routes-before-recovery.json';
+import productionRoutesBeforeCityCompletion from './fixtures/production-routes-before-city-completion.json';
 describe('recovery inventory', () => {
   it('preserves every destination in the pre-recovery production sitemap', () => {
     const routes = new Set([...publishedRoutes, ...guides.map((guide) => `/guides/${guide.slug}`)]);
-    for (const route of productionRoutesBeforeRecovery) expect(routes.has(route), route).toBe(true);
+    for (const route of [...productionRoutesBeforeRecovery, ...productionRoutesBeforeCityCompletion]) expect(routes.has(route), route).toBe(true);
   });
-  it('restores eighteen approved cities without removing the sixteen existing destinations', () => {
-    expect(serviceAreas).toHaveLength(34);
+  it('preserves the earlier city destinations while completing the full directory', () => {
+    expect(serviceAreas).toHaveLength(coverageCities.length);
     for (const city of ['Ramsey', 'Rogers', 'Ham Lake', 'Andover', 'Champlin', 'Albertville', 'St. Michael']) expect(serviceAreas.some((area) => area.city === city)).toBe(true);
     for (const area of serviceAreas) expect(coverageCities).toContain(area.city);
   });

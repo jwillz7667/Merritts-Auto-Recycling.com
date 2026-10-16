@@ -1,0 +1,414 @@
+[
+  {
+    "name": "Minneapolis and St. Paul",
+    "cities": [
+      {
+        "city": "Minneapolis",
+        "slug": "minneapolis"
+      },
+      {
+        "city": "St. Paul",
+        "slug": "st-paul"
+      },
+      {
+        "city": "Brooklyn Center",
+        "slug": "brooklyn-center"
+      }
+    ]
+  },
+  {
+    "name": "Northwest metro",
+    "cities": [
+      {
+        "city": "Brooklyn Park",
+        "slug": "brooklyn-park"
+      },
+      {
+        "city": "Maple Grove",
+        "slug": "maple-grove"
+      },
+      {
+        "city": "Osseo",
+        "slug": "osseo"
+      },
+      {
+        "city": "Plymouth",
+        "slug": "plymouth"
+      },
+      {
+        "city": "Crystal",
+        "slug": "crystal"
+      },
+      {
+        "city": "New Hope",
+        "slug": "new-hope"
+      },
+      {
+        "city": "Robbinsdale",
+        "slug": "robbinsdale"
+      },
+      {
+        "city": "Champlin",
+        "slug": "champlin"
+      },
+      {
+        "city": "Dayton",
+        "slug": "dayton"
+      },
+      {
+        "city": "Rogers",
+        "slug": "rogers"
+      }
+    ]
+  },
+  {
+    "name": "North and northeast metro",
+    "cities": [
+      {
+        "city": "Blaine",
+        "slug": "blaine"
+      },
+      {
+        "city": "Coon Rapids",
+        "slug": "coon-rapids"
+      },
+      {
+        "city": "Anoka",
+        "slug": "anoka"
+      },
+      {
+        "city": "Andover",
+        "slug": "andover"
+      },
+      {
+        "city": "Ramsey",
+        "slug": "ramsey"
+      },
+      {
+        "city": "Ham Lake",
+        "slug": "ham-lake"
+      },
+      {
+        "city": "Fridley",
+        "slug": "fridley"
+      },
+      {
+        "city": "Columbia Heights",
+        "slug": "columbia-heights"
+      },
+      {
+        "city": "New Brighton",
+        "slug": "new-brighton"
+      },
+      {
+        "city": "Mounds View",
+        "slug": "mounds-view"
+      },
+      {
+        "city": "Shoreview",
+        "slug": "shoreview"
+      },
+      {
+        "city": "Lino Lakes",
+        "slug": "lino-lakes"
+      }
+    ]
+  },
+  {
+    "name": "West and southwest metro",
+    "cities": [
+      {
+        "city": "Golden Valley",
+        "slug": "golden-valley"
+      },
+      {
+        "city": "St. Louis Park",
+        "slug": "st-louis-park"
+      },
+      {
+        "city": "Hopkins",
+        "slug": "hopkins"
+      },
+      {
+        "city": "Minnetonka",
+        "slug": "minnetonka"
+      },
+      {
+        "city": "Edina",
+        "slug": "edina"
+      },
+      {
+        "city": "Eden Prairie",
+        "slug": "eden-prairie"
+      },
+      {
+        "city": "Wayzata",
+        "slug": "wayzata"
+      },
+      {
+        "city": "Medina",
+        "slug": "medina"
+      },
+      {
+        "city": "Chanhassen",
+        "slug": "chanhassen"
+      },
+      {
+        "city": "Chaska",
+        "slug": "chaska"
+      },
+      {
+        "city": "Victoria",
+        "slug": "victoria"
+      },
+      {
+        "city": "Waconia",
+        "slug": "waconia"
+      }
+    ]
+  },
+  {
+    "name": "South metro",
+    "cities": [
+      {
+        "city": "Bloomington",
+        "slug": "bloomington"
+      },
+      {
+        "city": "Richfield",
+        "slug": "richfield"
+      },
+      {
+        "city": "Burnsville",
+        "slug": "burnsville"
+      },
+      {
+        "city": "Eagan",
+        "slug": "eagan"
+      },
+      {
+        "city": "Apple Valley",
+        "slug": "apple-valley"
+      },
+      {
+        "city": "Lakeville",
+        "slug": "lakeville"
+      },
+      {
+        "city": "Rosemount",
+        "slug": "rosemount"
+      },
+      {
+        "city": "Farmington",
+        "slug": "farmington"
+      },
+      {
+        "city": "Savage",
+        "slug": "savage"
+      },
+      {
+        "city": "Shakopee",
+        "slug": "shakopee"
+      },
+      {
+        "city": "Prior Lake",
+        "slug": "prior-lake"
+      }
+    ]
+  },
+  {
+    "name": "East metro",
+    "cities": [
+      {
+        "city": "Roseville",
+        "slug": "roseville"
+      },
+      {
+        "city": "Maplewood",
+        "slug": "maplewood"
+      },
+      {
+        "city": "Oakdale",
+        "slug": "oakdale"
+      },
+      {
+        "city": "Woodbury",
+        "slug": "woodbury"
+      },
+      {
+        "city": "Cottage Grove",
+        "slug": "cottage-grove"
+      },
+      {
+        "city": "White Bear Lake",
+        "slug": "white-bear-lake"
+      },
+      {
+        "city": "Stillwater",
+        "slug": "stillwater"
+      },
+      {
+        "city": "Forest Lake",
+        "slug": "forest-lake"
+      },
+      {
+        "city": "Inver Grove Heights",
+        "slug": "inver-grove-heights"
+      },
+      {
+        "city": "West St. Paul",
+        "slug": "west-st-paul"
+      },
+      {
+        "city": "South St. Paul",
+        "slug": "south-st-paul"
+      },
+      {
+        "city": "North St. Paul",
+        "slug": "north-st-paul"
+      }
+    ]
+  },
+  {
+    "name": "Surrounding communities",
+    "cities": [
+      {
+        "city": "Elk River",
+        "slug": "elk-river"
+      },
+      {
+        "city": "Otsego",
+        "slug": "otsego"
+      },
+      {
+        "city": "St. Michael",
+        "slug": "st-michael"
+      },
+      {
+        "city": "Albertville",
+        "slug": "albertville"
+      },
+      {
+        "city": "Buffalo",
+        "slug": "buffalo"
+      },
+      {
+        "city": "Monticello",
+        "slug": "monticello"
+      }
+    ]
+  },
+  {
+    "name": "Additional northwest and west communities",
+    "note": "Call or text with the exact vehicle address to confirm availability, pickup terms and scheduling before making a removal plan.",
+    "cities": [
+      {
+        "city": "Corcoran",
+        "slug": "corcoran"
+      },
+      {
+        "city": "Hanover",
+        "slug": "hanover"
+      },
+      {
+        "city": "Rockford",
+        "slug": "rockford"
+      },
+      {
+        "city": "Maple Lake",
+        "slug": "maple-lake"
+      }
+    ]
+  },
+  {
+    "name": "Sherburne County and nearby communities",
+    "note": "Call or text with the exact vehicle address to confirm availability, pickup terms and scheduling before making a removal plan.",
+    "cities": [
+      {
+        "city": "Becker",
+        "slug": "becker"
+      },
+      {
+        "city": "Big Lake",
+        "slug": "big-lake"
+      },
+      {
+        "city": "Clear Lake",
+        "slug": "clear-lake"
+      },
+      {
+        "city": "Orrock",
+        "slug": "orrock",
+        "schemaType": "Place"
+      },
+      {
+        "city": "Zimmerman",
+        "slug": "zimmerman"
+      }
+    ]
+  },
+  {
+    "name": "Additional north metro communities",
+    "note": "Call or text with the exact vehicle address to confirm availability, pickup terms and scheduling before making a removal plan.",
+    "cities": [
+      {
+        "city": "Nowthen",
+        "slug": "nowthen"
+      },
+      {
+        "city": "Oak Grove",
+        "slug": "oak-grove"
+      },
+      {
+        "city": "St. Francis",
+        "slug": "st-francis"
+      },
+      {
+        "city": "Spring Lake Park",
+        "slug": "spring-lake-park"
+      }
+    ]
+  },
+  {
+    "name": "Central Minnesota inquiries",
+    "note": "Call or text with the exact vehicle address to confirm availability, pickup terms and scheduling before making a removal plan.",
+    "cities": [
+      {
+        "city": "Clearwater",
+        "slug": "clearwater"
+      },
+      {
+        "city": "Foley",
+        "slug": "foley"
+      },
+      {
+        "city": "Foreston",
+        "slug": "foreston"
+      },
+      {
+        "city": "Milaca",
+        "slug": "milaca"
+      },
+      {
+        "city": "Princeton",
+        "slug": "princeton"
+      },
+      {
+        "city": "Sartell",
+        "slug": "sartell"
+      },
+      {
+        "city": "Sauk Rapids",
+        "slug": "sauk-rapids"
+      },
+      {
+        "city": "St. Cloud",
+        "slug": "st-cloud"
+      },
+      {
+        "city": "Waite Park",
+        "slug": "waite-park"
+      }
+    ]
+  }
+]

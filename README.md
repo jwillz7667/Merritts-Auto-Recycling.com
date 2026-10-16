@@ -1,13 +1,13 @@
 # Merritt's Auto Recycling
 
-The current Astro visual rebuild is preserved. SEO recovery work restores useful landing destinations, direct vehicle inquiries, source-backed guides and validation without reverting the old theme.
+The current Astro visual rebuild is preserved. SEO recovery restores all listed and historical community destinations, direct vehicle inquiries, source-backed guides and complete migration validation. See [the August-to-current audit](docs/dev/AUGUST_MIGRATION_AUDIT_2026-10-16.md) for the evidence and original URL inventory.
 
 ## Current content inventory
 
-- 34 city pages: the 16 October launch pages plus 18 restored destinations within the existing metro coverage list.
+- 88 dedicated city/community pages: all 66 previously listed metro cities plus all 22 additional historical community destinations. Every directory entry links to its own page.
 - Six regional guides and one regional directory. Wider or unconfirmed pickup areas are described as inquiries, not invented offices or blanket service promises.
-- 12 selling guides, including four recovered subject areas and the existing attributed competitor comparison.
-- 65 indexable URLs; the sitemap is generated from content and checked against built pages. The thank-you and custom 404 pages remain noindex.
+- 13 selling guides, including restored article answers, a dedicated Minneapolis pickup/cost guide, and the attributed competitor comparison.
+- 121 indexable URLs; the sitemap is generated from content and checked against built pages. The thank-you and custom 404 pages remain noindex.
 - Explicit mappings for all 53 historical regional URLs and all ten legacy blog topics. Each regional URL has clean and .html aliases; unknown legacy URLs now return a genuine 404 instead of an irrelevant catch-all redirect.
 
 ## Business information
@@ -32,11 +32,11 @@ The recovery GitHub Actions workflow builds with public test identifiers and moc
 
 ## Content architecture
 
-`src/data/business-content.ts` holds established business/service data. `site.ts` publishes the complete route inventory. `metro-existing.ts` retains the existing visual-rebuild city content and coverage list; `recovery-areas.ts` adds recovered cities; `metro.ts` exposes the combined catalog. `service-regions.ts` defines regional inquiries. `legacy-routes.json` is the regression inventory for historical paths; corresponding Vercel rules are tested against it.
+`src/data/business-content.ts` holds established business/service data. `site.ts` publishes the complete route inventory. `metro-existing.ts` retains the existing visual-rebuild city content and coverage list; `recovery-areas.ts` adds recovered cities; `metro.ts` exposes the combined catalog. `city-directory.json` is the complete city/link inventory; `directory-*.ts` supplies the remaining metro and historical community pages. `service-regions.ts` defines regional inquiries. `legacy-routes.json` is the regression inventory for historical paths; corresponding Vercel rules are tested against it.
 
-`guide-library.ts`, `guide-base.ts` and `search-guides.ts` retain earlier article versions and revisions. `recovery-guides.ts` supplies recovered topics; `guides.ts` exposes the reviewed publication catalog while preserving established URLs and original publication dates. Page templates use this catalog, not an independent route list.
+`guide-library.ts`, `guide-base.ts` and `search-guides.ts` retain earlier article versions and revisions. `recovery-guides.ts` supplies recovered topics; `legacy-guide-restoration.ts` restores detailed historical answers and original article dates. `guides.ts` exposes the reviewed publication catalog while preserving established URLs. Page templates use this catalog, not an independent route list.
 
-The contact form submits to the existing protected `/api/contact` backend. Retired quote-calculator and appointment endpoints remain retired. There is no automated price calculator, public document upload or automatic pickup booking.
+The contact form and dedicated `/get-a-quote` vehicle-offer page submit to the existing protected `/api/contact` backend. Old calculator links lead to the manual offer request. Retired quote-calculator and appointment endpoints remain retired. There is no automated price calculator, public document upload or automatic pickup booking.
 
 ## Account configuration and honest status
 
@@ -50,6 +50,6 @@ The available Vercel account connection did not authorize this project's scope d
 
 ## Release discipline
 
-Validate a staging branch, review browser evidence, then fast-forward master with an expected-head check. Confirm the production Vercel result and representative live URLs after deployment. Do not use force pushes. Keep the modern styles, contrast fix and approved imagery intact.
+Validate a staging branch, review browser evidence, then merge its pull request with an expected-head check. Confirm the production Vercel result and live URL checks after deployment. Do not use force pushes. Keep the modern styles, contrast fix and approved imagery intact.
 
 SEO_AUDIT.md, SEO_2026_COMPLIANCE.md and CONTENT_VERIFICATION_REQUIRED.md describe prior August decisions and are historical context, not authority to restore the obsolete two-city restriction. Current inventory and migration requirements are defined above and in RECOVERY_RELEASE.md.

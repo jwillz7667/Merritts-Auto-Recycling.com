@@ -1,73 +1,71 @@
-# 2026 SEO compliance record
+# 2026 SEO implementation and verification record
 
-Review date: August 25, 2026  
-Canonical origin: `https://merritts-auto-recycling.com`
+Updated October 16, 2026. Canonical origin: `https://merritts-auto-recycling.com`.
 
-This record maps the rebuilt site to current official Google Search guidance. It documents technical eligibility and quality controls; it does not promise rankings, rich results, AI citations, calls, or revenue.
+This record maps current source controls to official search guidance. It documents implementation requirements and verification limits, not a Google certification or a promise of rankings, rich results, calls or revenue. The final deployed revision and its validation evidence determine release status.
 
-## Crawl and index controls
+## Current authority and historical policy
 
-- Every public marketing page is emitted as complete static HTML.
-- Navigation and contextual links use crawlable `<a href>` elements.
-- Every indexable page is reachable through internal navigation, contextual links, or the footer.
-- `sitemap.xml` contains only canonical, indexable routes.
-- `robots.txt` allows crawling and points to the sitemap.
-- `/thank-you` and the custom 404 remain crawlable but carry page-level `noindex`, allowing crawlers to see the directive.
-- The canonical host is HTTPS without `www`; the alternate host permanently redirects in one hop.
-- Removed legacy pages permanently redirect to the closest useful replacement instead of a generic home-page redirect.
-- Legacy blog migration rules use extensionless sources, as Vercel requires when `cleanUrls` is enabled; incoming `.html` requests are normalized before the migration redirect is applied.
+The owner explicitly authorized complete listed-city pages and recovery of the historical destinations on October 16. The current implementation has 88 dedicated community pages, six regional guides, 13 selling guides and 121 indexable destinations including `/get-a-quote`. St. Paul has a dedicated page. Exact-address availability, loading access, terms and pickup timing are confirmed directly; the pages do not establish additional business locations.
 
-Official basis: [Google's developer SEO guide](https://developers.google.com/search/docs/fundamentals/get-started-developers) and [robots meta specifications](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag).
+The August recommendation to consolidate other cities into a two-city directory model is superseded. It removed relevant own-city destinations and article answers. Historical findings and the exact 70-to-19 sitemap reduction are recorded in [the migration audit](docs/dev/AUGUST_MIGRATION_AUDIT_2026-10-16.md). Current source inventories are `src/data/city-directory.json`, `src/data/legacy-routes.json` and the guide library. The independent historical fixture protects against omissions introduced by changing those inventories together.
 
-## Titles, snippets, and page structure
+## Crawl and migration controls
 
-- Every route has one descriptive, visible H1.
-- Titles and meta descriptions are unique, concise, human-readable, and aligned with the page's visible topic.
-- No `meta keywords` tag, keyword block, hidden text, or templated city swapping is used.
-- Indexable pages permit large image previews and unrestricted eligible snippets.
-- Important content is visible in the HTML and does not require JavaScript interaction.
+- Public marketing pages are emitted as complete static HTML.
+- Navigation and contextual links use crawlable anchors; every listed city links to its own actual page.
+- The sitemap contains the complete canonical indexable inventory, with modification dates tied to content changes.
+- Robots allows crawling and references the canonical sitemap.
+- `/thank-you` and the custom 404 remain crawlable with page-level noindex; unknown URLs return HTTP 404.
+- HTTPS non-www remains the canonical origin used before the overhaul; the alternate host preserves the requested path when redirecting.
+- Historical cities map to their corresponding community pages, and historical articles map to pages that answer their subjects. Counties/state map to relevant regional destinations.
+- Legacy `.html` and extensionless forms are verified against real final destinations; Vercel clean-URL normalization is included in testing.
+- Retained historical photos receive exact equivalent asset aliases where available; arbitrary missing assets do not redirect to service pages.
+- Invalid historical font-download HTML artifacts remain noindex 404s.
 
-Official basis: [title-link guidance](https://developers.google.com/search/docs/appearance/title-link) and [snippet guidance](https://developers.google.com/search/docs/appearance/snippet).
+A successful permanent response is insufficient when the destination loses the original subject. Broad city-to-directory fallbacks and article-to-index redirects are not the current preservation strategy.
 
-## Entity and structured-data controls
+Official basis: [Google developer SEO guidance](https://developers.google.com/search/docs/fundamentals/get-started-developers), [URL migrations](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes), [robots meta specifications](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag), and [sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview).
 
-- One canonical `LocalBusiness` + `AutomotiveBusiness` entity uses the public name, address, phone, email, founder, founding year, map, profiles, and 8:00 AM–8:00 PM daily hours.
-- One `WebSite` entity references the same business.
-- Page-specific `Service`, `ContactPage`, `AboutPage`, `CollectionPage`, `Article`, and `BreadcrumbList` objects describe visible content only.
-- Breadcrumb markup is present on nested and top-level interior routes.
-- There is no fabricated `aggregateRating`, review markup, price range, geographic office, or unsupported service claim.
-- Structured data never introduces facts that are absent from the rendered page.
-- Customer-facing FAQs remain visible, but `FAQPage` markup is intentionally absent because Google retired the FAQ rich-result feature and removed its documentation in 2026.
+## Titles, snippets and page structure
 
-Official basis: [LocalBusiness structured-data guidance](https://developers.google.com/search/docs/appearance/structured-data/local-business), [business-details guidance](https://developers.google.com/search/docs/appearance/establish-business-details), and [Google Search documentation updates](https://developers.google.com/search/updates).
+- Each indexable page has a descriptive visible H1, unique title and meta description, and absolute canonical URL.
+- Metadata and headings describe the rendered subject instead of introducing unsupported prices or guarantees.
+- Main content is visible in HTML and does not require JavaScript interaction.
+- Community pages use shared layout components with individual geographic and practical pickup context.
+- No hidden keyword block or fabricated local proof is introduced.
+- Indexable pages permit eligible snippets and large image previews; Google decides the actual presentation.
 
-## Local SEO controls
+Official basis: [title links](https://developers.google.com/search/docs/appearance/title-link) and [snippets](https://developers.google.com/search/docs/appearance/snippet).
 
-- Name, address, phone, hours, and canonical URL are consistent across the site.
-- The site links directly to the current Google Business Profile and Google Maps entity.
-- Brooklyn Center is presented as the real business location.
-- Minneapolis is a service-area page, not a claimed storefront.
-- Additional legacy city pages consolidate into the service-area hub to avoid doorway-page and duplicate-content risk.
-- Operational claims and any future location expansion require owner evidence before publication.
+## Business identity and structured data
 
-## Helpful content and AI-search eligibility
+- One canonical LocalBusiness/AutomotiveBusiness identity uses the actual business name, address, phone, email, founder, founding year, map/profile links and daily 8 AM–8 PM hours.
+- WebSite and page-specific service, contact, about, collection, article and breadcrumb data reference the same business identity where appropriate.
+- Brooklyn Center is the real business location. Other communities, including Minneapolis and St. Paul, are service inquiry areas.
+- Schema describes visible content without adding a fabricated office, review, aggregate rating, fixed price or unsupported operational promise.
+- Article subjects retain established guide URLs and the corresponding legacy publication dates. Modification metadata reflects the revised content.
+- Customer-facing FAQ answers remain visible; FAQPage rich-result markup is not emitted.
 
-- Service pages answer distinct customer questions instead of repeating keyword variants.
-- Guides identify practical decision factors and link to Minnesota authorities for legal or environmental topics.
-- Content distinguishes verified facts from conditions that must be confirmed by phone.
-- The site does not add an `llms.txt` file, AI-specific schema, or other unsupported machine-readable layer.
-- Eligibility for Google AI Overviews and AI Mode relies on the same crawlability, snippet eligibility, internal linking, page experience, visible text, useful imagery, and accurate structured data used for standard Search.
+Official basis: [LocalBusiness structured data](https://developers.google.com/search/docs/appearance/structured-data/local-business), [business details](https://developers.google.com/search/docs/appearance/establish-business-details), and [structured-data policies](https://developers.google.com/search/docs/appearance/structured-data/sd-policies).
 
-Official basis: [people-first content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) and [AI features and website guidance](https://developers.google.com/search/docs/appearance/ai-features).
+## Local and helpful-content controls
 
-## Page experience and Core Web Vitals
+Business name, address, contact details, hours and canonical origin remain consistent across templates. Direct Google Business Profile and Maps links identify the real entity. A city page cannot create physical proximity; its purpose is to answer the local vehicle-sale and pickup questions accurately.
 
-- Static rendering and no client-framework runtime minimize JavaScript execution.
-- The LCP hero uses a local AVIF with WebP and JPEG fallbacks, explicit dimensions, eager loading, and high fetch priority.
-- Below-the-fold images use native lazy loading with dimensions reserved to prevent layout shift.
-- No external fonts, autoplay media, carousel, map embed, or chat widget is loaded.
-- Reduced-motion preferences are honored.
-- Build budgets fail when CSS exceeds 90 KB or JavaScript exceeds 60 KB.
+All ten historical article subjects have useful destinations. The restored material includes condition and completeness, running versus non-running cases, curb weight and weight units, model-specific inquiry details, repair/private-sale/trade comparisons, Minneapolis access and removal costs, ownership documents, plate handling and environmental/process questions. Unsupported legacy rankings, volatile price charts, blanket legal instructions, fixed pickup promises and invented business procedures are not republished as facts.
+
+Operational claims remain qualified where they depend on the vehicle, exact location, schedule or current policy. Minnesota DVS, statutes and MPCA resources support the legal and environmental explanations. Review quotations require actual source evidence. [The content verification register](CONTENT_VERIFICATION_REQUIRED.md) records those distinctions without reviving the superseded two-city restriction.
+
+No AI-only file or schema layer guarantees Google AI visibility. Crawlability, snippet eligibility, internal links, page experience, useful text/images and accurate structured data remain the applicable foundation.
+
+Official basis: [people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content), [local ranking](https://support.google.com/business/answer/7091), and [AI features](https://developers.google.com/search/docs/appearance/ai-features).
+
+## Inquiry and page experience
+
+The dedicated quote page requests a human-reviewed offer through the protected contact form and `/api/contact`. It preserves phone/text alternatives and does not advertise automatic pricing or dispatch. Deprecated quote/appointment APIs remain retired. Validation, Turnstile, consent, duplicate-submit handling, retry behavior and response checks need exact-revision tests; provider acceptance and delivered email are separate evidence.
+
+Static rendering and limited client code reduce execution work. Responsive local image variants, dimensions reserved for images, eager/high-priority hero loading, lazy loading below the fold, local fonts and reduced-motion support help page experience. Build budgets remain technical gates; scores and screenshots do not prove customer outcomes.
 
 Field targets at the 75th percentile:
 
@@ -77,16 +75,12 @@ Field targets at the 75th percentile:
 | Interaction to Next Paint | 200 milliseconds or less |
 | Cumulative Layout Shift   |              0.1 or less |
 
-Official basis: [Google Core Web Vitals guidance](https://developers.google.com/search/docs/appearance/core-web-vitals).
+Official basis: [Core Web Vitals](https://developers.google.com/search/docs/appearance/core-web-vitals).
 
-## Required post-launch validation
+## Verification evidence and account follow-through
 
-1. Test representative production URLs in Google Rich Results Test and Schema.org Validator.
-2. Verify the domain in Google Search Console and Bing Webmaster Tools.
-3. Submit the canonical sitemap and inspect the home, core service, service-area, and guide templates.
-4. Confirm the Google Business Profile hours, phone, website, category, and address match the site.
-5. Monitor Page Indexing, Core Web Vitals, structured-data, manual-action, and security reports.
-6. Review Search Console's Search and generative-AI performance reporting when available to the property.
-7. Evaluate field Core Web Vitals after enough production traffic exists; laboratory scores are not field data.
-8. Add new city pages only when service is confirmed and genuinely unique local information is available.
-9. Keep Search Console ownership in a business-controlled Google account and never commit account credentials or verification secrets.
+Required code checks cover historical URL preservation, directory/page/sitemap parity, unique metadata, canonical and schema consistency, internal reachability, proper error responses, mobile accessibility and protected inquiry behavior. Production checks must identify the final deployed SHA and inspect actual redirects, assets, crawl files and representative rendered templates. Mocked browser form or analytics requests are not live delivery or collection evidence.
+
+The owner confirms the loss in Search Console. Removing GTM/GA4 cannot explain a GSC clicks/impressions decline because Search Console collection is independent of those scripts. Fresh page/query/indexing exports remain unavailable through the blocked connector; do not claim that their detailed performance was verified.
+
+With account access, compare old and new URL groups under consistent property/search/device/country/date filters; inspect indexing, soft-404 status, selected canonicals, last crawl and lost queries; submit the sitemap and inspect representative restored pages. Confirm profile details, real inquiry delivery and any owner-approved Analytics ingestion. Monitor actual qualified calls and purchases separately from call-link clicks and form acceptance. Google recrawling and ranking recovery are measured outcomes, not facts established by this record.

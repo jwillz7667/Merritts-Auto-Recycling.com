@@ -7,7 +7,10 @@ const placements = new Set(['header', 'footer', 'hero', 'cta_band', 'body', 'mob
 export function track(event: string, details: Record<string, unknown> = {}): void {
   if (!events.has(event)) return;
   const pathname = window.location.pathname;
-  const pagePath = /^\/(?:[a-z0-9-]+\/?)*$/.test(pathname) ? pathname : '/unknown';
+  // Require the separator inside the repeated group. An optional separator
+  // makes a long rejected path (such as a .html alias) backtrack exponentially
+  // and can freeze the page before navigation finishes.
+  const pagePath = /^\/(?:[a-z0-9-]+\/)*[a-z0-9-]*$/.test(pathname) ? pathname : '/unknown';
   const pageGroup = pagePath.startsWith('/service-areas/') ? 'city' : pagePath.startsWith('/service-regions/') ? 'region' : pagePath.startsWith('/guides/') ? 'guide' : pagePath === '/' ? 'home' : 'other';
   const payload: Record<string, unknown> = { event, page_path: pagePath, page_group: pageGroup };
   if (details.form_type === 'contact') payload.form_type = 'contact';

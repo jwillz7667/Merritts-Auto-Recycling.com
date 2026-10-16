@@ -1,0 +1,27 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ContactForm from '@/components/ContactForm.astro';
+import Icon from '@/components/Icon.astro';
+import PageHero from '@/components/PageHero.astro';
+import { business } from '@/data/site';
+const path = '/get-a-quote';
+const schema = { '@type': 'WebPage', '@id': `${business.siteUrl}${path}#webpage`, url: `${business.siteUrl}${path}`, name: 'Request a junk car cash offer', about: { '@id': `${business.siteUrl}/#business` } };
+---
+<BaseLayout title="Get a Junk Car Cash Offer | Merritt's Auto Recycling, MN" description="Request a vehicle-specific junk car offer from Merritt’s Auto Recycling. Share condition, pickup city and title status online, or call 763-533-2775." path={path} schema={schema}>
+  <PageHero eyebrow="Tell us about your vehicle" title="Get a cash offer for your junk car" description="Selling an unwanted car, truck, van or SUV? Send its details for a personal review, or call or text during daily hours, 8 AM–8 PM. We discuss the vehicle, offer and pickup terms with you directly." crumbs={[{ label: 'Home', href: '/' }, { label: 'Get a quote' }]}>
+    <div class="button-row"><a class="button" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call {business.phone}</a><a class="button button--outline-light" href={business.textUri} data-track="text_click"><Icon name="message" /> Text {business.textPhone}</a></div>
+  </PageHero>
+  <section class="section section--soft"><div class="container contact-grid">
+    <aside class="flow" aria-labelledby="offer-details-heading">
+      <p class="eyebrow">A vehicle-specific review</p><h2 id="offer-details-heading">What helps us review your car?</h2>
+      <p>The same model can have a different value depending on condition, completeness and removal work. A useful request describes the actual vehicle where it is parked.</p>
+      <ul class="check-list"><li>Year, make, model and known mechanical or collision damage.</li><li>Missing parts, flat tires, and whether it rolls and steers.</li><li>Pickup city, driveway or garage access, and any storage deadline.</li><li>Whether the title and keys are available, and any lien or ownership question.</li></ul>
+      <p>Keep identity documents and a full VIN out of this form. If you prefer to share current vehicle photos, text them to <a href={business.textUri} data-track="text_click">{business.textPhone}</a>.</p>
+      <h3>Review the complete offer before accepting</h3>
+      <p>Ask what you would receive after any removal charge, what could change the amount, how payment works, and which documents are needed. We agree on pickup access and scheduling separately; sending this request does not book a truck.</p>
+      <p>Merritt’s has served vehicle owners since 1988 from Brooklyn Center. <a href="/service-areas">Find your city’s pickup information</a> and confirm exact-address availability, especially outside the core metro.</p>
+      <p><a href="/guides/what-affects-a-junk-car-offer">Read what affects a junk car offer</a> or <a href="/guides/minnesota-junk-car-documents">prepare your document questions</a>.</p>
+    </aside>
+    <ContactForm offer />
+  </div></section>
+</BaseLayout>

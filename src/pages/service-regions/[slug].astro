@@ -10,14 +10,18 @@ export const getStaticPaths = (() => serviceRegions.map((region) => ({ params: {
 interface Props { region: ServiceRegion }
 const { region } = Astro.props;
 const path = `/service-regions/${region.slug}`;
-const cities = serviceAreas.filter((area) => region.citySlugs.includes(area.slug));
+const cities = serviceAreas.filter((area) => region.citySlugs.includes(area.slug) || region.towns.includes(area.city));
+const cityByName = new Map(serviceAreas.map((area) => [area.city, area]));
 const schema = { '@type': 'WebPage', '@id': `${business.siteUrl}${path}#webpage`, url: `${business.siteUrl}${path}`, name: region.title, description: region.description, about: { '@id': `${business.siteUrl}/#business` }, dateModified: region.updated };
 ---
 <BaseLayout title={`${region.title} | Merritt's`} description={region.description} path={path} schema={schema}>
   <PageHero eyebrow={region.name} title={region.title} description={region.intro} crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas', href: '/service-areas' }, { label: region.name }]}>
     <div class="button-row"><a class="button" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call {business.phone}</a><a class="button button--outline-light" href={business.textUri} data-track="text_click"><Icon name="message" /> Text {business.textPhone}</a></div>
   </PageHero>
-  <section class="section section--paper"><div class="container--narrow flow"><h2>Communities covered in this information</h2><p>{region.towns.join(', ')}.</p>{region.sections.map((section) => <article class="flow"><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</article>)}</div></section>
+  <section class="section section--paper"><div class="container--narrow flow"><h2>Communities covered in this information</h2><ul>{region.towns.map((town) => {
+    const city = cityByName.get(town);
+    return <li>{city ? <a href={`/service-areas/${city.slug}`}>{town}</a> : town}</li>;
+  })}</ul>{region.sections.map((section) => <article class="flow"><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</article>)}</div></section>
   <section class="section section--soft"><div class="container flow"><h2>Detailed local pickup information</h2><div class="card-grid">{cities.map((area) => <article class="card"><h3>{area.city}</h3><p>{area.intro}</p><a class="text-link" href={`/service-areas/${area.slug}`}>Junk car pickup in {area.city}<Icon name="arrow" /></a></article>)}</div><p><a href="/service-areas">See the complete Twin Cities service-area directory</a></p></div></section>
   <section class="section section--paper"><div class="container--narrow flow"><h2>Prepare the sale</h2><ul><li><a href="/guides/minnesota-junk-car-documents">Minnesota title and ownership checklist</a></li><li><a href="/guides/minnesota-license-plates-before-junking">Minnesota plates before selling or junking</a></li><li><a href="/guides/what-affects-a-junk-car-offer">What affects the amount you receive</a></li><li><a href="/contact#vehicle-inquiry">Send Merritt’s your vehicle details</a></li></ul><h3>Official document resources</h3><p><a href="https://dps.mn.gov/divisions/dvs/vehicle/vehicle-titles" target="_blank" rel="noopener noreferrer">Minnesota DVS vehicle-title information</a> explains the state process. Merritt’s is a separate business, not a licensing agency.</p></div></section>
   <CtaBand title="Ask about your vehicle and address" />

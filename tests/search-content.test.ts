@@ -5,6 +5,7 @@ import { guides } from '@/data/guides';
 import { recoveryGuides } from '@/data/recovery-guides';
 import { buyerComparisonGuide } from '@/data/buyer-comparison';
 import { publishedRoutes } from '@/data/site';
+import legacyPublicationDates from './fixtures/legacy-article-publication-dates.json';
 const getGuide = (slug: string) => {
   const guide = guides.find((item) => item.slug === slug);
   if (!guide) throw new Error(`Missing guide: ${slug}`);
@@ -12,8 +13,10 @@ const getGuide = (slug: string) => {
 };
 describe('search-language content and recovered subjects', () => {
   it('preserves established URLs and publication dates while adding recovered subjects', () => {
-    expect(guides).toHaveLength(previousGuides.length + 1 + recoveryGuides.length);
-    for (const oldGuide of previousGuides) expect(getGuide(oldGuide.slug).publishedIso).toBe(oldGuide.publishedIso);
+    expect(guides).toHaveLength(previousGuides.length + 2 + recoveryGuides.length);
+    const originalDates = legacyPublicationDates as Record<string, string>;
+    for (const oldGuide of previousGuides) expect(getGuide(oldGuide.slug).publishedIso).toBe(originalDates[oldGuide.slug] ?? oldGuide.publishedIso);
+    for (const [slug, publishedIso] of Object.entries(originalDates)) expect(getGuide(slug).publishedIso, slug).toBe(publishedIso);
     expect(new Set(guides.map((guide) => guide.slug)).size).toBe(guides.length);
   });
   it('preserves engine and transmission answers on the established non-running guide', () => {

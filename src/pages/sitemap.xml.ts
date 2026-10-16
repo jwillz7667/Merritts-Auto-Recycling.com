@@ -4,7 +4,7 @@ import { business, publishedRoutes, serviceAreas, services } from '@/data/site';
 import { serviceRegions, regionalRoutes } from '@/data/service-regions';
 
 const modified = new Map<string, string>([
-  ['/', '2026-10-16'], ['/service-areas', '2026-10-16'], ['/service-regions', '2026-10-16'],
+  ['/', '2026-10-16'], ['/get-a-quote', '2026-10-16'], ['/service-areas', '2026-10-16'], ['/service-regions', '2026-10-16'],
   ['/about', '2026-10-07'], ['/reviews', '2026-10-07'], ['/faq', '2026-10-07'], ['/guides', '2026-10-16'], ['/contact', '2026-10-16'],
   ...services.map((service): [string, string] => [`/${service.slug}`, '2026-10-16']),
   ...serviceAreas.map((area): [string, string] => [`/service-areas/${area.slug}`, '2026-10-16']),

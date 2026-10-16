@@ -19,12 +19,18 @@ const titles = new Map();
 const descriptions = new Map();
 const indexable = new Set();
 const internalLinks = new Map();
+const fragmentTargets = new Map();
+const fragmentLinks = [];
 const forbidden = ['$1', 'Rated #1', 'top dollar', 'paid cash on the spot', 'Most junk cars in the Twin Cities range', 'aggregateRating', 'FAQPage', '/get-cash-offer'];
 for (const file of pages) {
   const html = readFileSync(file, 'utf8');
   const route = routeOf(file);
   const meta = tags(html, 'meta');
   const links = tags(html, 'link');
+  fragmentTargets.set(route, new Set([
+    ...tags(html, '[a-z][\\w:-]*').map((item) => item.id),
+    ...tags(html, 'a').map((item) => item.name),
+  ].filter(Boolean)));
   const title = decode(html.match(/<title>([^<]+)<\/title>/i)?.[1] ?? '');
   const description = meta.find((item) => item.name === 'description')?.content ?? '';
   if ((html.match(/<h1(?:\s|>)/gi) ?? []).length !== 1) fail(`${route} must have one H1.`);
@@ -61,12 +67,26 @@ for (const file of pages) {
   const destinations = [];
   for (const link of tags(html, 'a')) {
     const href = link.href ?? '';
-    if (!href || /^(?:#|tel:|sms:|mailto:|https:\/\/)/.test(href)) continue;
-    const pathname = new URL(href, origin).pathname;
+    if (!href) continue;
+    let destination;
+    try { destination = new URL(href, new URL(route, origin)); } catch { fail(`${route} has an invalid link: ${href}.`); }
+    if (destination.origin !== origin) continue;
+    const pathname = destination.pathname;
     if (!existsSync(fileFor(pathname))) fail(`${route} links to missing destination ${href}.`);
     destinations.push(pathname);
+    // A fragment can fail even when the page exists. Resolve these after every
+    // page has been read, including absolute links to this site's own origin.
+    const fragment = destination.hash.slice(1).split(':~:')[0];
+    if (fragment) {
+      let target;
+      try { target = decodeURIComponent(fragment); } catch { fail(`${route} has an invalid fragment: ${href}.`); }
+      fragmentLinks.push({ route, href, pathname, target });
+    }
   }
   internalLinks.set(route, destinations);
+}
+for (const { route, href, pathname, target } of fragmentLinks) {
+  if (fragmentTargets.has(pathname) && !fragmentTargets.get(pathname).has(target)) fail(`${route} links to missing fragment ${href}.`);
 }
 const reachable = new Set(['/']);
 const queue = ['/'];
@@ -77,6 +97,28 @@ const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) =>
 if (new Set(sitemapUrls).size !== sitemapUrls.length || sitemapUrls.length !== indexable.size) fail('sitemap does not match the unique indexable URLs.');
 for (const route of indexable) if (!sitemapUrls.includes(new URL(route, origin).href)) fail(`sitemap omits ${route}.`);
 for (const url of sitemapUrls) if (new URL(url).origin !== origin || !indexable.has(new URL(url).pathname)) fail(`invalid sitemap destination: ${url}.`);
+// The public city directory is the independent coverage inventory. A city must
+// have its own indexable page and a direct directory link; an unlinked label or
+// a county-level substitute must never satisfy the city-page release check.
+const cityDirectory = JSON.parse(readFileSync(new URL('../src/data/city-directory.json', import.meta.url), 'utf8'));
+const directoryLinks = new Set(tags(readFileSync(fileFor('/service-areas'), 'utf8'), 'a')
+  .filter((link) => link.href)
+  .map((link) => new URL(link.href, origin))
+  .filter((url) => url.origin === origin && !url.search && !url.hash)
+  .map((url) => url.pathname));
+const directorySlugs = new Set();
+for (const region of cityDirectory) {
+  if (!region.name || !Array.isArray(region.cities) || !region.cities.length) fail('city directory contains an empty or invalid region.');
+  for (const city of region.cities) {
+    if (!city.city || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(city.slug ?? '')) fail('city directory contains an invalid city name or slug.');
+    if (directorySlugs.has(city.slug)) fail(`city directory duplicates ${city.slug}.`);
+    directorySlugs.add(city.slug);
+    const route = `/service-areas/${city.slug}`;
+    if (!existsSync(fileFor(route)) || !indexable.has(route)) fail(`directory city lacks its own indexable page: ${city.city}.`);
+    if (!directoryLinks.has(route)) fail(`directory city lacks a direct link to its own page: ${city.city}.`);
+    if (!sitemapUrls.includes(new URL(route, origin).href)) fail(`sitemap omits directory city: ${city.city}.`);
+  }
+}
 const config = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
 const sourceSet = new Set();
 for (const rule of config.redirects) {
@@ -93,4 +135,4 @@ for (const [key, destination] of Object.entries(manifest.blogs)) if (!config.red
 for (const file of files.filter((entry) => /\.(css|js)$/.test(entry))) if (statSync(file).size > (file.endsWith('.css') ? 90000 : 60000)) fail(`asset exceeds its size budget: ${relative(root, file)}.`);
 const robots = readFileSync(join(root, 'robots.txt'), 'utf8');
 if (!robots.includes('Allow: /') || robots.includes('Disallow: /thank-you')) fail('robots.txt has incorrect crawl controls.');
-console.log(`Validated ${pages.length} HTML pages, ${indexable.size} indexable URLs, ${Object.keys(manifest.areas).length} historical areas, ${Object.keys(manifest.blogs).length} legacy article topics, metadata, schema, sitemap parity, internal reachability, image paths and asset budgets.`);
+console.log(`Validated ${pages.length} HTML pages, ${indexable.size} indexable URLs, ${directorySlugs.size} directly linked city pages, ${Object.keys(manifest.areas).length} historical areas, ${Object.keys(manifest.blogs).length} legacy article topics, metadata, schema, sitemap parity, internal links and fragments, image paths and asset budgets.`);
