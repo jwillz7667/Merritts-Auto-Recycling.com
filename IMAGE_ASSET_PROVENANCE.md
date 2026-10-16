@@ -24,3 +24,14 @@ The rebuild may use image content from the old Merritt's Auto Recycling site and
 - Confirm the truck photo accurately represents Merritt's current or historical operation and is approved for prominent use.
 - Confirm no visible person, plate, address, or third-party mark creates a privacy or licensing issue.
 - Preserve this manifest if filenames are optimized or moved.
+
+## Responsive hero derivatives — October 16, 2026
+
+These smaller encodings come only from the approved 1600 × 1070 `merritts-tow-truck.jpg` above, using Sharp 0.35.5. They preserve the full frame and aspect ratio; no content, crop or retouching was added. Widths are 640 and 960 pixels, AVIF quality 60 and WebP quality 80. The existing originals and social preview remain available.
+
+| Path | SHA-256 | Bytes |
+| --- | --- | --- |
+| `/images/legacy/merritts-tow-truck-640.avif` | e161d318d29ae9428a9445fa664463b8773623cb86197dce4f2fde829eaae841 | 41195 |
+| `/images/legacy/merritts-tow-truck-640.webp` | 8bb4967f0c5665d6666b6d65cdc4d0166f09978c0f0f5f5978fe07c427a2b918 | 59696 |
+| `/images/legacy/merritts-tow-truck-960.avif` | 19b29bbd077bdb1c34603ca79d1e0df93f1fa2f21bb9d78fc805a32d80950c9c | 83982 |
+| `/images/legacy/merritts-tow-truck-960.webp` | 3c6b135199c511cf63c8e64e0f2adfa6a1e0ca276100c2c6f34e118bcbd4c68f | 120530 |

@@ -22,8 +22,7 @@
     "test:all": "npm run security:scan && npm run lint && npm run test && npm run build && npm run test:e2e"
   },
   "dependencies": {
-    "@vercel/node": "^5.5.27",
-    "astro": "^7.2.4",
+    "astro": "^7.4.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {

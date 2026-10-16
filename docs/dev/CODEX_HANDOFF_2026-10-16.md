@@ -53,3 +53,7 @@ Install Playwright browsers with `PLAYWRIGHT_BROWSERS_PATH=.sites-runtime/playwr
 
 ## Expected completion report
 State precise branch/commit SHA, CI and local checks passed/failed, whether merged/deployed, live URLs checked, remaining external account prerequisites, and any unresolved risks. Do not call the task complete without evidence.
+
+## Codex follow-through
+
+The candidate review, missing HTTP types, dependency audit, repeat-run lint failure, CI branch coverage, delivery deadline and stronger migration smoke checks are addressed in the follow-through changes. See [the recovery review](RECOVERY_REVIEW_2026-10-16.md) and the final exact-commit CI/deployment evidence. The one-off candidate-preparation workflow has been removed after applying a narrower, audit-clean update; its earlier unreviewed-candidate status above records the state at handoff.

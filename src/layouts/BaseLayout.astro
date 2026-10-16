@@ -105,7 +105,7 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': [loc
       document.addEventListener('click', (event) => {
         const target = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-track]') : null;
         if (!target || !trackedEvents.has(target.dataset.track ?? '')) return;
-        const placement = target.closest('.mobile-cta') ? 'mobile' : target.closest('header') ? 'header' : target.closest('footer') ? 'footer' : target.closest('.hero, .page-hero') ? 'hero' : target.closest('.cta-band') ? 'cta_band' : 'body';
+        const placement = target.closest('.mobile-cta') ? 'mobile' : target.closest('.hero, .page-hero') ? 'hero' : target.closest('header') ? 'header' : target.closest('footer') ? 'footer' : target.closest('.cta-band') ? 'cta_band' : 'body';
         track(target.dataset.track!, { link_url: target instanceof HTMLAnchorElement ? target.href : undefined, cta_location: placement });
       });
     </script>

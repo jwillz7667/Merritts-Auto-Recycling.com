@@ -4,12 +4,15 @@ import PageHero from '@/components/PageHero.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import CoverageDirectory from '@/components/CoverageDirectory.astro';
 import RegionalDirectory from '@/components/RegionalDirectory.astro';
-import { business } from '@/data/site';
+import Icon from '@/components/Icon.astro';
+import { business, serviceAreas } from '@/data/site';
 const path = '/service-areas';
-const schema = { '@type': 'CollectionPage', '@id': `${business.siteUrl}${path}#webpage`, url: `${business.siteUrl}${path}`, name: 'Twin Cities junk car pickup service areas', about: { '@id': `${business.siteUrl}/#business` } };
+const schema = { '@type': 'CollectionPage', '@id': `${business.siteUrl}${path}#webpage`, url: `${business.siteUrl}${path}`, name: 'Twin Cities junk car pickup service areas', about: { '@id': `${business.siteUrl}/#business` }, mainEntity: { '@type': 'ItemList', itemListElement: serviceAreas.map((area, index) => ({ '@type': 'ListItem', position: index + 1, name: area.city, url: `${business.siteUrl}/service-areas/${area.slug}` })) } };
 ---
 <BaseLayout title="Twin Cities Junk Car Pickup Service Areas | Merritt's" description="Find Merritt’s junk-car pickup information for Minneapolis, St. Paul and the surrounding suburbs. Explore local pages and confirm your vehicle’s pickup details." path={path} schema={schema}>
-  <PageHero eyebrow="Minneapolis, St. Paul and the suburbs" title="Junk car pickup across the Twin Cities" description="Find your community below, then call or text with the car’s condition and location. We discuss the offer, any removal charge and a pickup window before you decide." crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas' }]} />
+  <PageHero eyebrow="Minneapolis, St. Paul and the suburbs" title="Junk car pickup across the Twin Cities" description="Find your community below, then call or text with the car’s condition and location. We discuss the offer, any removal charge and a pickup window before you decide." crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas' }]}>
+    <div class="button-row"><a class="button" href={business.phoneUri} data-track="call_click"><Icon name="phone" /> Call {business.phone}</a><a class="button button--outline-light" href={business.textUri} data-track="text_click"><Icon name="message" /> Text {business.textPhone}</a></div>
+  </PageHero>
   <section class="section section--paper"><div class="container flow"><h2>Find your pickup community</h2><p>Linked cities have detailed local pages. For other listed communities, send the exact pickup setting so we can review access and availability.</p><CoverageDirectory /></div></section>
   <section class="section section--soft"><div class="container flow"><h2>County and surrounding-area information</h2><p>These regional guides explain related communities, document preparation and extended-area enquiries. They do not represent additional business locations or guaranteed statewide coverage.</p><RegionalDirectory /><p><a href="/service-regions">Explore regional pickup guidance</a></p></div></section>
   <section class="section section--paper"><div class="container--narrow flow"><h2>Send the details that affect your pickup</h2><p>Include the vehicle’s year, make, model, condition, exact city and whether it is in a driveway, garage, ramp, shop or shared lot. Tell us about missing keys, wheels, documents or blocked access before scheduling.</p><p><a href="/contact#vehicle-inquiry">Send vehicle details online</a> or call <a href={business.phoneUri} data-track="call_click">{business.phone}</a>. A request starts the conversation; the vehicle and transaction details are confirmed directly.</p></div></section>

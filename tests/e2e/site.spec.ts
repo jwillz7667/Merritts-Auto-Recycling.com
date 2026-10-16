@@ -33,6 +33,30 @@ test('homepage preserves current design, message, and contact actions', async ({
   await expectNoOverflow(page, 'homepage');
 });
 
+test('mobile hero loads a smaller encoding of the approved photograph', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  const image = page.locator('.hero-media img');
+  await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.currentSrc)).toMatch(/merritts-tow-truck-(640|960)\.avif$/);
+  await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0)).toBe(true);
+});
+
+test('service and location landing pages retain prominent call and text actions', async ({ page }) => {
+  for (const route of ['/cash-for-junk-cars', '/junk-car-removal', '/auto-recycling', '/junk-car-towing', '/service-areas', '/service-regions', '/service-areas/ramsey', '/service-regions/sherburne-county', '/contact']) {
+    await page.goto(route);
+    const hero = page.locator('.page-hero');
+    await expect(hero.getByRole('link', { name: /Call 763-533-2775/ })).toHaveAttribute('href', 'tel:+1-763-533-2775');
+    await expect(hero.getByRole('link', { name: /Text 763-438-2116/ })).toHaveAttribute('href', 'sms:+1-763-438-2116');
+  }
+  await page.evaluate(() => document.addEventListener('click', (event) => {
+    const link = event.target instanceof Element ? event.target.closest('a') : null;
+    if (link?.protocol === 'tel:') event.preventDefault();
+  }, { capture: true }));
+  await page.locator('.page-hero').getByRole('link', { name: /Call 763-533-2775/ }).click();
+  const events = await page.evaluate(() => (window as Window & { dataLayer?: Array<Record<string, unknown>> }).dataLayer);
+  expect(events?.filter((event) => event.event === 'call_click').at(-1)).toMatchObject({ cta_location: 'hero', page_path: '/contact' });
+});
+
 test('mobile navigation and sticky contact actions work', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
@@ -94,3 +118,28 @@ test('unknown current and legacy routes remain real 404 responses', async ({ pag
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
   }
 });
+
+for (const viewport of [{ width: 320, height: 720 }, { width: 768, height: 1024 }]) {
+  test(`contact paths remain usable at ${viewport.width}px`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    for (const route of ['/', '/contact', '/service-areas/ramsey', '/service-regions/sherburne-county', '/guides/minnesota-license-plates-before-junking']) {
+      await page.goto(route);
+      await expectNoOverflow(page, route);
+      const sticky = page.locator('.mobile-cta');
+      await expect(sticky).toBeVisible();
+      for (const link of await sticky.getByRole('link').all()) {
+        const box = await link.boundingBox();
+        expect(box?.height).toBeGreaterThanOrEqual(44);
+        await expect(link).toBeInViewport();
+      }
+    }
+    await page.goto('/contact');
+    const name = page.locator('#contact-name');
+    await name.focus();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#contact-phone')).toBeFocused();
+    await page.getByRole('button', { name: 'Send vehicle inquiry' }).click();
+    await expect(page.locator('[data-form-status]')).toContainText('required fields');
+    await expect(name).toBeFocused();
+  });
+}

@@ -6,6 +6,9 @@ interface Props {
   height: number;
   avif?: string;
   webp?: string;
+  avifSrcset?: string;
+  webpSrcset?: string;
+  sizes?: string;
   loading?: 'eager' | 'lazy';
   fetchpriority?: 'high' | 'low' | 'auto';
   class?: string;
@@ -18,6 +21,9 @@ const {
   height,
   avif,
   webp,
+  avifSrcset,
+  webpSrcset,
+  sizes,
   loading = 'lazy',
   fetchpriority = 'auto',
   class: className,
@@ -25,8 +31,8 @@ const {
 ---
 
 <picture class={className}>
-  {avif && <source srcset={avif} type="image/avif" />}
-  {webp && <source srcset={webp} type="image/webp" />}
+  {avif && <source srcset={avifSrcset ?? avif} sizes={sizes} type="image/avif" />}
+  {webp && <source srcset={webpSrcset ?? webp} sizes={sizes} type="image/webp" />}
   <img
     src={src}
     alt={alt}

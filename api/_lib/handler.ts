@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from './node-http.js';
 import type { ZodType } from 'zod';
 import { ZodError } from 'zod';
 

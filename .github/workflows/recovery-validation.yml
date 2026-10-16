@@ -1,7 +1,7 @@
 name: Recovery validation
 on:
   push:
-    branches: [master, 'fix/seo-recovery-*']
+    branches: [master, 'fix/seo-recovery-*', 'fix/dependency-patch-review-*']
   pull_request:
     branches: [master]
 permissions:
@@ -30,6 +30,8 @@ jobs:
       - run: npm ci
       - name: Report existing dependency advisories
         run: node scripts/dependency-report.mjs
+      - name: Reject dependency vulnerabilities
+        run: npm audit --audit-level=low
       - name: Security, lint, units, and production output
         run: npm run security:scan && npm run lint && npm run test && npm run build
       - run: npx playwright install --with-deps chromium
