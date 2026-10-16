@@ -1,0 +1,82 @@
+---
+// The prior public container is restored as a fallback, not a claim that its
+// account-side tags are configured. GA4 can instead be supplied explicitly.
+const mode = import.meta.env.PUBLIC_ANALYTICS_MODE || 'gtm';
+const requestedGa4 = import.meta.env.PUBLIC_GA4_ID || '';
+const requestedGtm = import.meta.env.PUBLIC_GTM_ID || 'GTM-WDZ8L9TN';
+if (requestedGa4 && !/^G-[A-Z0-9]+$/.test(requestedGa4)) throw new Error('PUBLIC_GA4_ID must be a valid public measurement ID.');
+if (requestedGtm && !/^GTM-[A-Z0-9]+$/.test(requestedGtm)) throw new Error('PUBLIC_GTM_ID must be a valid public container ID.');
+const ga4Id = mode !== 'off' ? requestedGa4 : '';
+const gtmId = mode !== 'off' && !ga4Id ? requestedGtm : '';
+---
+{(gtmId || ga4Id) && <div data-analytics-settings data-gtm-id={gtmId} data-ga4-id={ga4Id}>
+  <div class="container preference-row"><button class="preference-link" type="button" data-open-analytics>Analytics preferences</button></div>
+  <section class="analytics-choice" role="dialog" aria-label="Optional analytics" hidden data-analytics-choice>
+    <h2>Optional analytics</h2><p>Allow Google analytics tools to help us understand page visits and contact-button use? Calling, texting and the inquiry form work without analytics. <a href="/privacy">Privacy information</a></p>
+    <div class="button-row"><button class="button button--dark" type="button" data-analytics-accept>Allow analytics</button><button class="button button--outline" type="button" data-analytics-decline>Only necessary</button></div>
+  </section>
+</div>}
+<script>
+  type AnalyticsWindow = Window & { dataLayer?: unknown[]; gtag?: (...values: unknown[]) => void };
+  const root = document.querySelector<HTMLElement>('[data-analytics-settings]');
+  if (root) {
+    const choice = root.querySelector<HTMLElement>('[data-analytics-choice]');
+    const accept = root.querySelector<HTMLButtonElement>('[data-analytics-accept]');
+    const decline = root.querySelector<HTMLButtonElement>('[data-analytics-decline]');
+    const storageKey = 'merritts.analytics-consent.v1';
+    const globalOptOut = (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true || navigator.doNotTrack === '1';
+    const target = window as AnalyticsWindow;
+    let loaded = false;
+    const remember = (value: string) => { try { localStorage.setItem(storageKey, value); } catch { /* Choice still applies for this page. */ } };
+    let saved: string | null = null;
+    try { saved = localStorage.getItem(storageKey); } catch { /* No storage access; request consent for this page. */ }
+    function loadAnalytics(): void {
+      if (loaded || globalOptOut || !root) return;
+      loaded = true;
+      target.dataLayer ??= [];
+      const ga4Id = root.dataset.ga4Id;
+      const gtmId = root.dataset.gtmId;
+      const script = document.createElement('script');
+      script.async = true;
+      if (ga4Id) {
+        target.gtag = function (..._values: unknown[]) { target.dataLayer?.push(arguments); };
+        target.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+        target.gtag('js', new Date());
+        target.gtag('config', ga4Id, { send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false });
+        let referrer = '';
+        try { const ref = new URL(document.referrer); referrer = ref.origin + ref.pathname; } catch { /* Empty or invalid referrer. */ }
+        target.gtag('event', 'page_view', { page_location: window.location.origin + window.location.pathname, page_referrer: referrer, page_title: document.title });
+        window.addEventListener('merritts:analytics', (event) => {
+          const detail = (event as CustomEvent<Record<string, unknown>>).detail;
+          if (!detail || detail.event === 'site_page_view') return;
+          const allowed = new Set(['call_click', 'text_click', 'review_profile_click', 'lead_form_start', 'lead_form_validation_error', 'lead_form_success', 'lead_form_error']);
+          if (typeof detail.event !== 'string' || !allowed.has(detail.event)) return;
+          const parameters: Record<string, unknown> = { page_location: window.location.origin + window.location.pathname };
+          for (const key of ['page_path', 'page_group', 'form_type', 'cta_location']) if (typeof detail[key] === 'string') parameters[key] = detail[key];
+          target.gtag?.('event', detail.event, parameters);
+        });
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4Id)}`;
+      } else if (gtmId) {
+        target.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+        script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`;
+      } else return;
+      document.head.append(script);
+    }
+    if (globalOptOut) { remember('denied'); if (accept) accept.disabled = true; }
+    else if (saved === 'granted') loadAnalytics();
+    else if (saved !== 'denied' && choice) choice.hidden = false;
+    root.querySelector('[data-open-analytics]')?.addEventListener('click', () => { if (choice) choice.hidden = false; decline?.focus(); });
+    accept?.addEventListener('click', () => { if (globalOptOut) return; remember('granted'); if (choice) choice.hidden = true; loadAnalytics(); });
+    decline?.addEventListener('click', () => { remember('denied'); if (choice) choice.hidden = true; if (loaded) window.location.reload(); });
+  }
+</script>
+<style>
+  .preference-row { padding: 0.5rem 0 1rem; }
+  .preference-link { min-height: 44px; border: 0; background: transparent; color: #0a1c2d; text-decoration: underline; cursor: pointer; }
+  .analytics-choice[hidden] { display: none; }
+  .analytics-choice { position: fixed; z-index: 150; right: 1rem; bottom: 1rem; width: min(34rem, calc(100% - 2rem)); max-height: calc(100dvh - 10rem); overflow: auto; border: 2px solid #0a1c2d; border-radius: 1rem; padding: 1.25rem; background: #fff; color: #101923; box-shadow: 0 8px 32px rgba(0,0,0,.2); }
+  .analytics-choice h2 { color: #0a1c2d; font-size: 1.25rem; line-height: 1.2; margin-bottom: .5rem; }
+  .analytics-choice p { font-size: .95rem; line-height: 1.55; }
+  .analytics-choice a { color: #0a1c2d; }
+  @media (max-width: 64rem) { .analytics-choice { bottom: calc(5.5rem + env(safe-area-inset-bottom)); } }
+</style>
