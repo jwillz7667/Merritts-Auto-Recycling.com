@@ -18,8 +18,10 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22'
-      - name: Refresh only within existing package ranges without lifecycle scripts
-        run: npm update --package-lock-only --ignore-scripts --no-audit
+      - name: Resolve unchanged package ranges without lifecycle scripts
+        run: |
+          rm package-lock.json
+          npm install --package-lock-only --ignore-scripts --no-audit
       - name: Record versions and audit the candidate lock
         run: |
           mkdir -p .sites-runtime
