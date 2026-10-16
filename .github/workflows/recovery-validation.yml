@@ -35,12 +35,38 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Browser and accessibility regression tests
         run: npm run test:e2e
-      - name: Preserve browser test evidence
+      - name: Preserve test evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: recovery-browser-evidence
+          include-hidden-files: true
           retention-days: 7
           path: |
             playwright-report/
             test-results/
+            .sites-runtime/dependency-audit.json
+  verify-production:
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Verify the exact production revision, pages, and legacy migrations
+        run: node scripts/verify-production.mjs
+        env:
+          EXPECTED_REVISION: ${{ github.sha }}
+      - name: Preserve production verification
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: recovery-production-evidence
+          include-hidden-files: true
+          retention-days: 7
+          path: .sites-runtime/production-verification.json
