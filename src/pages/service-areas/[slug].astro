@@ -6,12 +6,14 @@ import FaqList from '@/components/FaqList.astro';
 import Icon from '@/components/Icon.astro';
 import PageHero from '@/components/PageHero.astro';
 import { business, globalFaqs, serviceAreas, type ServiceArea } from '@/data/site';
+import cityDirectory from '@/data/city-directory.json';
 export const getStaticPaths = (() => serviceAreas.map((area) => ({ params: { slug: area.slug }, props: { area } }))) satisfies GetStaticPaths;
 interface Props { area: ServiceArea }
 const { area } = Astro.props;
 const path = `/service-areas/${area.slug}`;
 const nearby = area.nearby.map((slug) => serviceAreas.find((item) => item.slug === slug)).filter((item): item is ServiceArea => Boolean(item));
-const schema = { '@type': 'Service', '@id': `${business.siteUrl}${path}#service`, name: `Cash for junk cars and pickup in ${area.city}, MN`, serviceType: 'Unwanted vehicle buying and removal', description: area.description, url: `${business.siteUrl}${path}`, provider: { '@id': `${business.siteUrl}/#business` }, areaServed: { '@type': 'City', name: `${area.city === 'St. Paul' ? 'Saint Paul' : area.city}, Minnesota` } };
+const place = cityDirectory.flatMap((region) => region.cities).find((item) => item.slug === area.slug);
+const schema = { '@type': 'Service', '@id': `${business.siteUrl}${path}#service`, name: `Cash for junk cars and pickup in ${area.city}, MN`, serviceType: 'Unwanted vehicle buying and removal', description: area.description, url: `${business.siteUrl}${path}`, provider: { '@id': `${business.siteUrl}/#business` }, areaServed: { '@type': place && 'schemaType' in place ? place.schemaType : 'City', name: `${area.city === 'St. Paul' ? 'Saint Paul' : area.city}, Minnesota` } };
 ---
 <BaseLayout title={`Cash for Junk Cars in ${area.city}, MN | Merritt's`} description={area.description} path={path} schema={schema}>
   <PageHero eyebrow={`${area.city}, Minnesota`} title={area.title} description={area.intro} crumbs={[{ label: 'Home', href: '/' }, { label: 'Service areas', href: '/service-areas' }, { label: area.city }]}>

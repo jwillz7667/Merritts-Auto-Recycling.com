@@ -1,5 +1,6 @@
 import { guides as searchGuides, type Guide } from './search-guides';
 import { recoveryGuideUpdates, recoveryGuides } from './recovery-guides';
+import { legacyGuideUpdates, restoredMinneapolisGuide } from './legacy-guide-restoration';
 export type { Guide, GuideSection } from './search-guides';
 
 // Final publication review uses the primary plate statute rather than extending
@@ -16,7 +17,11 @@ const reviewedRecoveryGuides = recoveryGuides.map((guide): Guide => guide.slug !
   sources: guide.sources.filter((source) => !source.href.includes('mncourts.gov')),
 });
 // Preserve established URLs and original publication dates.
-export const guides: Guide[] = [
+const currentGuides: Guide[] = [
   ...searchGuides.map((guide) => ({ ...guide, ...recoveryGuideUpdates[guide.slug] })),
   ...reviewedRecoveryGuides,
+];
+export const guides: Guide[] = [
+  ...currentGuides.map((guide) => ({ ...guide, ...legacyGuideUpdates[guide.slug] })),
+  restoredMinneapolisGuide,
 ];

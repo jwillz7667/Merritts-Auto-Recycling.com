@@ -1,0 +1,385 @@
+{
+  "baseline": "94010ccf1dd88c5bb8d0b4145a5767fe84f80958",
+  "routes": [
+    {
+      "source": "/about-brad.html",
+      "kind": "primary",
+      "destination": "/about"
+    },
+    {
+      "source": "/blog/auto-recycling-environmental-impact-twin-cities.html",
+      "kind": "article",
+      "destination": "/guides/auto-recycling-environmental-considerations"
+    },
+    {
+      "source": "/blog/free-junk-car-removal-minneapolis-mn.html",
+      "kind": "article",
+      "destination": "/guides/minneapolis-junk-car-removal-costs-and-pickup"
+    },
+    {
+      "source": "/blog/how-much-is-my-junk-car-worth-minnesota-2026.html",
+      "kind": "article",
+      "destination": "/guides/what-affects-a-junk-car-offer"
+    },
+    {
+      "source": "/blog/index.html",
+      "kind": "article-directory",
+      "destination": "/guides"
+    },
+    {
+      "source": "/blog/junk-vs-tradein-vs-private-sale.html",
+      "kind": "article",
+      "destination": "/guides/repair-trade-in-or-sell-a-junk-car"
+    },
+    {
+      "source": "/blog/minnesota-junk-car-title-requirements.html",
+      "kind": "article",
+      "destination": "/guides/minnesota-junk-car-documents"
+    },
+    {
+      "source": "/blog/mn-license-plates-before-junking.html",
+      "kind": "article",
+      "destination": "/guides/minnesota-license-plates-before-junking"
+    },
+    {
+      "source": "/blog/running-vs-non-running-junk-car-prices.html",
+      "kind": "article",
+      "destination": "/guides/running-vs-non-running-car-value"
+    },
+    {
+      "source": "/blog/scrap-value-by-weight-minnesota-guide.html",
+      "kind": "article",
+      "destination": "/guides/scrap-car-value-by-weight"
+    },
+    {
+      "source": "/blog/top-10-most-junked-cars-minnesota.html",
+      "kind": "article",
+      "destination": "/guides/vehicles-considered-for-recycling"
+    },
+    {
+      "source": "/blog/what-happens-to-car-after-pickup.html",
+      "kind": "article",
+      "destination": "/guides/what-happens-after-junk-car-pickup"
+    },
+    {
+      "source": "/contact.html",
+      "kind": "primary",
+      "destination": "/contact"
+    },
+    {
+      "source": "/css/fonts/glyphicons-halflings-regular-2.html",
+      "kind": "invalid-font-artifact",
+      "destination": null
+    },
+    {
+      "source": "/css/fonts/glyphicons-halflings-regular-3.html",
+      "kind": "invalid-font-artifact",
+      "destination": null
+    },
+    {
+      "source": "/css/fonts/glyphicons-halflings-regular-4.html",
+      "kind": "invalid-font-artifact",
+      "destination": null
+    },
+    {
+      "source": "/css/fonts/glyphicons-halflings-regular-5.html",
+      "kind": "invalid-font-artifact",
+      "destination": null
+    },
+    {
+      "source": "/css/fonts/glyphicons-halflings-regular.html",
+      "kind": "invalid-font-artifact",
+      "destination": null
+    },
+    {
+      "source": "/css/fonts/glyphicons-halflings-regulard41d.html",
+      "kind": "invalid-font-artifact",
+      "destination": null
+    },
+    {
+      "source": "/faq.html",
+      "kind": "primary",
+      "destination": "/faq"
+    },
+    {
+      "source": "/index.html",
+      "kind": "primary",
+      "destination": "/"
+    },
+    {
+      "source": "/placemarks/albertville-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/albertville"
+    },
+    {
+      "source": "/placemarks/andover-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/andover"
+    },
+    {
+      "source": "/placemarks/anoka-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/anoka"
+    },
+    {
+      "source": "/placemarks/becker-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/becker"
+    },
+    {
+      "source": "/placemarks/big-lake-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/big-lake"
+    },
+    {
+      "source": "/placemarks/blaine-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/blaine"
+    },
+    {
+      "source": "/placemarks/brooklyn-center-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/brooklyn-center"
+    },
+    {
+      "source": "/placemarks/brooklyn-park-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/brooklyn-park"
+    },
+    {
+      "source": "/placemarks/buffalo-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/buffalo"
+    },
+    {
+      "source": "/placemarks/champlin-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/champlin"
+    },
+    {
+      "source": "/placemarks/clear-lake-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/clear-lake"
+    },
+    {
+      "source": "/placemarks/clearwater-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/clearwater"
+    },
+    {
+      "source": "/placemarks/columbia-heights-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/columbia-heights"
+    },
+    {
+      "source": "/placemarks/coon-rapids-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/coon-rapids"
+    },
+    {
+      "source": "/placemarks/corcoran-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/corcoran"
+    },
+    {
+      "source": "/placemarks/crystal-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/crystal"
+    },
+    {
+      "source": "/placemarks/dayton-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/dayton"
+    },
+    {
+      "source": "/placemarks/elk-river-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/elk-river"
+    },
+    {
+      "source": "/placemarks/foley-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/foley"
+    },
+    {
+      "source": "/placemarks/foreston-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/foreston"
+    },
+    {
+      "source": "/placemarks/fridley-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/fridley"
+    },
+    {
+      "source": "/placemarks/ham-lake-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/ham-lake"
+    },
+    {
+      "source": "/placemarks/hanover-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/hanover"
+    },
+    {
+      "source": "/placemarks/hennepin-county-mn.html",
+      "kind": "regional-landing",
+      "destination": "/service-regions/hennepin-county"
+    },
+    {
+      "source": "/placemarks/maple-grove-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/maple-grove"
+    },
+    {
+      "source": "/placemarks/maple-lake-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/maple-lake"
+    },
+    {
+      "source": "/placemarks/milaca-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/milaca"
+    },
+    {
+      "source": "/placemarks/minneapolis-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/minneapolis"
+    },
+    {
+      "source": "/placemarks/minnesota.html",
+      "kind": "regional-landing",
+      "destination": "/service-regions/minnesota"
+    },
+    {
+      "source": "/placemarks/monticello-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/monticello"
+    },
+    {
+      "source": "/placemarks/new-brighton-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/new-brighton"
+    },
+    {
+      "source": "/placemarks/new-hope-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/new-hope"
+    },
+    {
+      "source": "/placemarks/nowthen-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/nowthen"
+    },
+    {
+      "source": "/placemarks/oak-grove-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/oak-grove"
+    },
+    {
+      "source": "/placemarks/orrock-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/orrock"
+    },
+    {
+      "source": "/placemarks/osseo-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/osseo"
+    },
+    {
+      "source": "/placemarks/otsego-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/otsego"
+    },
+    {
+      "source": "/placemarks/plymouth-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/plymouth"
+    },
+    {
+      "source": "/placemarks/princeton-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/princeton"
+    },
+    {
+      "source": "/placemarks/ramsey-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/ramsey"
+    },
+    {
+      "source": "/placemarks/robbinsdale-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/robbinsdale"
+    },
+    {
+      "source": "/placemarks/rockford-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/rockford"
+    },
+    {
+      "source": "/placemarks/rogers-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/rogers"
+    },
+    {
+      "source": "/placemarks/sartell-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/sartell"
+    },
+    {
+      "source": "/placemarks/sauk-rapids-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/sauk-rapids"
+    },
+    {
+      "source": "/placemarks/sherburne-county-mn.html",
+      "kind": "regional-landing",
+      "destination": "/service-regions/sherburne-county"
+    },
+    {
+      "source": "/placemarks/spring-lake-park-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/spring-lake-park"
+    },
+    {
+      "source": "/placemarks/st-cloud-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/st-cloud"
+    },
+    {
+      "source": "/placemarks/st-francis-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/st-francis"
+    },
+    {
+      "source": "/placemarks/st-michael-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/st-michael"
+    },
+    {
+      "source": "/placemarks/waite-park-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/waite-park"
+    },
+    {
+      "source": "/placemarks/wright-county-mn.html",
+      "kind": "regional-landing",
+      "destination": "/service-regions/wright-county"
+    },
+    {
+      "source": "/placemarks/zimmerman-mn.html",
+      "kind": "city-landing",
+      "destination": "/service-areas/zimmerman"
+    },
+    {
+      "source": "/quote-calculator.html",
+      "kind": "primary",
+      "destination": "/get-a-quote"
+    },
+    {
+      "source": "/testimonials.html",
+      "kind": "primary",
+      "destination": "/reviews"
+    }
+  ]
+}

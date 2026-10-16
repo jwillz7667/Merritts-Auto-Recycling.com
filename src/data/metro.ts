@@ -1,7 +1,12 @@
 import { coverageRegions, serviceAreas as existingAreas } from './metro-existing';
 import { recoveredAreas } from './recovery-areas';
+import { northWestAreas } from './directory-north-west';
+import { southAreas } from './directory-south';
+import { eastAreas } from './directory-east';
+import { historicalAreas } from './directory-historical';
+import cityDirectory from './city-directory.json' with { type: 'json' };
 export { coverageRegions } from './metro-existing';
 export type { ServiceArea } from './metro-existing';
 export const coverageCities = [...new Set(coverageRegions.flatMap((region) => [...region.cities]))];
-export const serviceAreas = [...existingAreas, ...recoveredAreas];
-export const areaServedSchema = coverageCities.map((city) => ({ '@type': 'City', name: `${city === 'St. Paul' ? 'Saint Paul' : city}, Minnesota` }));
+export const serviceAreas = [...existingAreas, ...recoveredAreas, ...northWestAreas, ...southAreas, ...eastAreas, ...historicalAreas];
+export const areaServedSchema = cityDirectory.flatMap((region) => region.cities.map((place) => ({ '@type': 'schemaType' in place ? place.schemaType : 'City', name: `${place.city === 'St. Paul' ? 'Saint Paul' : place.city}, Minnesota` })));

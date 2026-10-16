@@ -5,9 +5,13 @@ const origin = 'https://merritts-auto-recycling.com';
 const expected = process.env.EXPECTED_REVISION;
 if (!expected || !/^[a-f0-9]{40}$/.test(expected)) throw new Error('EXPECTED_REVISION must be the reviewed commit.');
 const manifest = JSON.parse(readFileSync('src/data/legacy-routes.json', 'utf8'));
-const baselineRoutes = JSON.parse(readFileSync('tests/fixtures/production-routes-before-recovery.json', 'utf8'));
-const expectedUrls = new Set([...baselineRoutes, ...Object.values(manifest.areas), ...Object.values(manifest.blogs), '/service-regions'].map((path) => new URL(path, origin).href));
-const result = { expectedRevision: expected, observedRevision: null, checkedAt: new Date().toISOString(), pages: [], redirects: [], controls: [], errors: [] };
+const retainedImageMigrations = JSON.parse(readFileSync('tests/fixtures/retained-image-migrations.json', 'utf8'));
+const baselineRoutes = JSON.parse(readFileSync('tests/fixtures/production-routes-before-city-completion.json', 'utf8'));
+const cityDirectory = JSON.parse(readFileSync('src/data/city-directory.json', 'utf8'));
+const cityRoutes = cityDirectory.flatMap((region) => region.cities.map((city) => `/service-areas/${city.slug}`));
+const preOverhaulInventory = JSON.parse(readFileSync('tests/fixtures/pre-overhaul-url-inventory.json', 'utf8')).routes;
+const expectedUrls = new Set([...baselineRoutes, ...cityRoutes, ...Object.values(manifest.areas), ...Object.values(manifest.blogs), '/get-a-quote', '/service-regions'].map((path) => new URL(path, origin).href));
+const result = { expectedRevision: expected, observedRevision: null, checkedAt: new Date().toISOString(), pages: [], redirects: [], assets: [], controls: [], errors: [] };
 const request = (url, options = {}) => fetch(url, { ...options, signal: AbortSignal.timeout(20000), headers: { 'User-Agent': 'Merritts-Release-Verification/1.0', ...options.headers } });
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 async function run() {
@@ -40,14 +44,21 @@ async function run() {
     const graph = JSON.parse(html.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i)?.[1] ?? '{}')['@graph'];
     const businesses = graph?.filter((entity) => entity['@id'] === `${origin}/#business`) ?? [];
     if (businesses.length !== 1 || businesses[0].address?.addressLocality !== 'Brooklyn Center' || businesses[0].telephone !== '+1-763-533-2775' || html.includes('aggregateRating')) throw new Error(`Business identity/schema regression: ${url}.`);
-    if (url === `${origin}/contact` && (!/<form\b[^>]*action="\/api\/contact"/.test(html) || !html.includes('data-sitekey=') || /<button\b[^>]*type="submit"[^>]*\bdisabled(?:[\s=>])/.test(html))) throw new Error('Production inquiry form is disabled or misconfigured.');
+    if ([`${origin}/contact`, `${origin}/get-a-quote`].includes(url) && (!/<form\b[^>]*action="\/api\/contact"/.test(html) || !html.includes('data-sitekey=') || /<button\b[^>]*type="submit"[^>]*\bdisabled(?:[\s=>])/.test(html))) throw new Error(`Production inquiry form is disabled or misconfigured: ${url}.`);
+    if (url === `${origin}/service-areas`) {
+      const cityLinks = new Set([...html.matchAll(/<a\b[^>]*href="(\/service-areas\/[^"#?]+)"/g)].map((match) => match[1]));
+      for (const path of cityRoutes) if (!cityLinks.has(path)) throw new Error(`City directory has no direct link to ${path}.`);
+      result.controls.push(`all-${cityRoutes.length}-city-links`);
+    }
     for (const header of ['strict-transport-security', 'content-security-policy', 'x-content-type-options']) if (!page.headers.has(header)) throw new Error(`Missing ${header} on ${url}.`);
     result.pages.push({ url, status: page.status, canonical });
   });
-  const migrations = [
+  const migrations = [...new Map([
     ...Object.entries(manifest.areas).flatMap(([slug, destination]) => ['', '.html'].map((suffix) => [`/placemarks/${slug}${suffix}`, destination])),
+    ...cityDirectory.flatMap((region) => region.cities.flatMap((city) => ['', '.html'].map((suffix) => [`/placemarks/${city.slug}-mn${suffix}`, `/service-areas/${city.slug}`]))),
     ...Object.entries(manifest.blogs).flatMap(([slug, destination]) => ['', '.html'].map((suffix) => [`/blog/${slug}${suffix}`, destination])),
-  ];
+    ...preOverhaulInventory.filter((route) => route.destination && !['city-landing', 'regional-landing', 'article'].includes(route.kind)).map((route) => [route.source, route.destination]),
+  ]).entries()];
   for (const [source, destination] of migrations) checks.push(async () => {
     let current = new URL(source, origin).href;
     const chain = [];
@@ -70,13 +81,45 @@ async function run() {
     }
     throw new Error(`Too many redirect hops: ${source}.`);
   });
+  for (const { source, destination } of retainedImageMigrations) checks.push(async () => {
+    let current = new URL(source, origin).href;
+    const chain = [];
+    for (let hops = 0; hops < 5; hops++) {
+      const asset = await request(current, { redirect: 'manual' });
+      if (asset.status >= 300 && asset.status < 400) {
+        const location = asset.headers.get('location');
+        if (![301, 308].includes(asset.status) || !location) throw new Error(`Invalid image migration response: ${current} (${asset.status}).`);
+        const next = new URL(location, current);
+        if (next.origin !== origin) throw new Error(`Image migration leaves the canonical origin: ${current}.`);
+        chain.push({ url: current, status: asset.status, destination: next.href });
+        await asset.body?.cancel();
+        current = next.href;
+      } else {
+        const contentType = (asset.headers.get('content-type') ?? '').split(';')[0].trim().toLowerCase();
+        const expectedType = destination.endsWith('.jpg') ? 'image/jpeg' : destination.endsWith('.avif') ? 'image/avif' : 'image/webp';
+        await asset.body?.cancel();
+        if (asset.status !== 200 || current !== new URL(destination, origin).href || !chain.length || contentType !== expectedType) throw new Error(`Wrong image migration destination: ${source} -> ${current} (${asset.status}, ${contentType}).`);
+        result.assets.push({ source, destination, contentType, chain });
+        return;
+      }
+    }
+    throw new Error(`Too many image redirect hops: ${source}.`);
+  });
   checks.push(async () => {
     const response = await request('https://www.merritts-auto-recycling.com/service-areas/ramsey', { redirect: 'manual' });
     if (![301, 308].includes(response.status) || new URL(response.headers.get('location') ?? '', 'https://www.merritts-auto-recycling.com').href !== `${origin}/service-areas/ramsey`) throw new Error('WWW canonical redirect failed.');
     await response.body?.cancel();
   });
-  for (const path of ['/recovery-unknown-page', '/placemarks/recovery-unknown-mn']) checks.push(async () => {
-    const response = await request(origin + path, { redirect: 'manual' });
+  for (const path of ['/recovery-unknown-page', '/placemarks/recovery-unknown-mn', ...preOverhaulInventory.filter((route) => !route.destination).map((route) => route.source)]) checks.push(async () => {
+    let response = await request(origin + path, { redirect: 'manual' });
+    // Vercel normalizes .html before resolving even an unknown route. Permit
+    // that exact permanent normalization, never a redirect to unrelated content.
+    if (path.endsWith('.html') && [301, 308].includes(response.status)) {
+      const normalized = new URL(response.headers.get('location') ?? '', origin + path);
+      if (normalized.href !== origin + path.slice(0, -5)) throw new Error(`Invalid unknown-route normalization: ${path}.`);
+      await response.body?.cancel();
+      response = await request(normalized, { redirect: 'manual' });
+    }
     const html = await response.text();
     if (response.status !== 404 || !html.includes('noindex')) throw new Error(`Unknown route is not a real noindex 404: ${path}.`);
   });
@@ -110,5 +153,5 @@ async function run() {
 try { await run(); } catch (error) { result.errors.push(error instanceof Error ? error.message : String(error)); }
 mkdirSync('.sites-runtime', { recursive: true });
 writeFileSync('.sites-runtime/production-verification.json', JSON.stringify(result, null, 2));
-console.log(JSON.stringify({ expectedRevision: expected, observedRevision: result.observedRevision, pagesChecked: result.pages.length, migrationsChecked: result.redirects.length, controls: result.controls, errors: result.errors }, null, 2));
+console.log(JSON.stringify({ expectedRevision: expected, observedRevision: result.observedRevision, pagesChecked: result.pages.length, migrationsChecked: result.redirects.length, assetsChecked: result.assets.length, controls: result.controls, errors: result.errors }, null, 2));
 if (result.errors.length) process.exitCode = 1;

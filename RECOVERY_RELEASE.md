@@ -1,18 +1,18 @@
 # SEO recovery in the current visual rebuild
 
-Release prepared October 16, 2026. Baseline production commit: d3ff39392159749fb7700553f2d4ab46f41e96ad.
+Release prepared October 16, 2026. Current follow-through baseline: 7c836a0a55eef0f468352f7cd91e092572e35de6. The earlier first recovery began at d3ff39392159749fb7700553f2d4ab46f41e96ad.
 
 ## Implemented scope
 
-Preserve the modern Astro theme, brand assets, business details, existing 16 city destinations, comparison disclosures, contact backend and city-page contrast correction. Add 18 substantial city pages within the previously published coverage list, six regional inquiry guides and a regional directory. Account for all 53 historical regional URLs with relevant explicit destinations rather than a generic two-city hub.
+Preserve the modern Astro theme, brand assets, business details, comparison disclosures, contact backend and city-page contrast correction. Publish 88 dedicated community pages: every one of the 66 listed metro cities plus 22 additional historical communities. Strengthen the earlier 34 pages with distinct descriptions, two substantive sections and two local FAQs. All 49 historical city URLs map to their own city; the four historical county/state URLs use relevant regional guides. Every directory entry is a direct link to its real page.
 
-Recover four separate article subjects, expand the existing Minnesota document guide using official DVS and statute sources, and map all ten old blog subjects to relevant final content. Preserve established guide URLs and publication dates; modification dates reflect the new content. The resulting catalog has 34 city pages, six regional guides, 12 selling guides and 65 indexable URLs.
+Restore detailed answers for all ten historical article subjects, retain the current DVS/statute-based document and plate guidance, and restore original article publication dates from the pre-overhaul source. Keep established guide URLs and add a dedicated Minneapolis removal/cost guide. Modification dates reflect the revised content. The catalog has 88 community pages, six regional guides, 13 selling guides and 121 indexable URLs.
 
-Make the existing protected contact form usable for vehicle-sale inquiries without reintroducing a price calculator, file uploads, false pickup bookings or retired appointment APIs. Retain validation, consent, Turnstile and existing provider delivery. Improve retries, duplicate-submit protection and explicit success-response checking.
+Restore the dedicated manual offer-request destination at `/get-a-quote`, with homepage/shared inquiry links and historical calculator redirects. Reuse the existing protected contact form and provider delivery, including validation, consent, Turnstile, retries, duplicate-submit protection and explicit success-response checking. The retired quote/appointment APIs remain retired; no automatic valuation or pickup booking is asserted.
 
 Add consent-aware configurable analytics with a fixed event allowlist. An empty historical GTM container is not treated as active collection. No GA4 measurement ID or live account configuration is invented. Production collection remains a separate account-side verification requirement.
 
-Restore production and browser validation through a pinned, read-only GitHub Actions workflow. Validate all rendered URLs, canonical metadata, unique descriptions/titles, article schema, sitemap parity, internal reachability, historical mapping coverage, working contact controls, malformed API responses, retries, analytics choices and mobile/desktop contrast.
+Validate all rendered URLs, canonical metadata, unique descriptions/titles, article schema, sitemap parity, internal reachability, all 88 directory city links, contact controls, malformed API responses, retries, analytics choices and mobile/desktop contrast through the pinned GitHub Actions workflow. Verify the expected live SHA, all 121 destinations, 211 content aliases and 12 retained-photo aliases. Repair the analytics path expression that caused exponential backtracking on long rejected `.html` paths, and check actual browser completion of that case.
 
 ## Validation evidence and limits
 
@@ -27,3 +27,9 @@ Dependency advisories are reported separately from the sensitive-data scan. Do n
 The available Vercel connection returned forbidden for the existing project scope. Search Console access was blocked by the separate connector's subscription, and the alternative browser had no saved Google sign-in. This release cannot itself fix account authorization, publish GTM tags, verify live mailbox receipt, force Google indexing, or guarantee traffic recovery.
 
 Do not restore unverified customer testimonials, fixed offers, free-pickup guarantees, same-day promises, false business locations, or old legal claims just because they appeared on the prior website. Verify real operational terms with the business and publish accurate details when established.
+
+## Complete August migration restoration
+
+The follow-through expands coverage to 88 dedicated community pages (all 66 previously listed metro cities plus 22 additional historical communities), with direct links and own-city historical redirects. The ten historical article subjects regain detailed answers and original publication dates, including a dedicated Minneapolis removal/cost guide. The catalog now has 13 guides and 121 indexable destinations. `tests/fixtures/pre-overhaul-url-inventory.json` accounts for all 76 old HTML files: 70 real content URLs and six invalid font artifacts that remain noindex 404s. The exhaustive audit is `docs/dev/AUGUST_MIGRATION_AUDIT_2026-10-16.md`.
+
+The completed local gate passed sensitive-data scanning, ESLint, all 59 unit tests, Astro diagnostics with zero errors/warnings/hints, the 123-HTML-page build, and all 195 browser checks without retries. The build independently validates 121 indexable destinations and all 88 directly linked city pages. Both complete and production dependency audits reported zero advisories. Production results must still be read from the final master deployment's Actions evidence rather than inferred from this local result.

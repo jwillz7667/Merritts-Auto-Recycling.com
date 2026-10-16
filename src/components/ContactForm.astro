@@ -1,8 +1,10 @@
 ---
+interface Props { offer?: boolean }
+const { offer = false } = Astro.props;
 const siteKey = import.meta.env.TURNSTILE_SITE_KEY || import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 ---
 <div class="form-shell" id="vehicle-inquiry" data-form-shell>
-  <h2>Send vehicle details or a question</h2>
+  <h2>{offer ? 'Request a vehicle-specific cash offer' : 'Send vehicle details or a question'}</h2>
   <p class="form-intro">Tell us what you have and where it is parked. Include the year, make, model, known condition, pickup city and title status in your message. Merritt’s will respond to discuss the next step; submitting does not book a pickup.</p>
   <form class="lead-form" method="post" action="/api/contact" data-lead-form="contact" data-success-url="/thank-you?form=contact" novalidate>
     <div class="form-grid">
@@ -15,7 +17,7 @@ const siteKey = import.meta.env.TURNSTILE_SITE_KEY || import.meta.env.PUBLIC_TUR
       <div class="field field--full checkbox"><input id="contact-consent" name="contactConsent" type="checkbox" value="true" required /><label for="contact-consent">I agree Merritt’s may use this information to respond by phone, text or email. Message and data rates may apply.</label></div>
     </div>
     {siteKey ? <div class="turnstile-wrap"><div class="cf-turnstile" data-sitekey={siteKey} data-theme="light" data-size="compact" /></div> : <p class="form-unavailable">The secure form is temporarily unavailable. Please call or text using the contact links on this page.</p>}
-    <div class="form-actions"><button class="button button--dark" type="submit" disabled={!siteKey}>Send vehicle inquiry</button><span class="field-hint">Required fields are marked with an asterisk.</span></div>
+    <div class="form-actions"><button class="button button--dark" type="submit" disabled={!siteKey}>{offer ? 'Request an offer' : 'Send vehicle inquiry'}</button><span class="field-hint">Required fields are marked with an asterisk.</span></div>
     <p class="form-status" role="status" aria-live="polite" tabindex="-1" data-form-status></p>
   </form>
 </div>

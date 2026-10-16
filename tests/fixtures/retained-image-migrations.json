@@ -1,0 +1,14 @@
+[
+  { "source": "/images/footer-tow-truck.jpg", "destination": "/images/legacy/merritts-tow-truck.jpg" },
+  { "source": "/images/optimized/footer-tow-truck.jpg", "destination": "/images/legacy/merritts-tow-truck.jpg" },
+  { "source": "/images/optimized/footer-tow-truck.avif", "destination": "/images/legacy/merritts-tow-truck.avif" },
+  { "source": "/images/optimized/footer-tow-truck.webp", "destination": "/images/legacy/merritts-tow-truck.webp" },
+  { "source": "/images/slider/slide2.jpg", "destination": "/images/legacy/junk-car-removal.jpg" },
+  { "source": "/images/optimized/slider/slide2.jpg", "destination": "/images/legacy/junk-car-removal.jpg" },
+  { "source": "/images/optimized/slider/slide2.avif", "destination": "/images/legacy/junk-car-removal.jpg" },
+  { "source": "/images/optimized/slider/slide2.webp", "destination": "/images/legacy/junk-car-removal.jpg" },
+  { "source": "/images/slider/slide3.jpg", "destination": "/images/legacy/auto-recycling-yard.jpg" },
+  { "source": "/images/optimized/slider/slide3.jpg", "destination": "/images/legacy/auto-recycling-yard.jpg" },
+  { "source": "/images/optimized/slider/slide3.avif", "destination": "/images/legacy/auto-recycling-yard.jpg" },
+  { "source": "/images/optimized/slider/slide3.webp", "destination": "/images/legacy/auto-recycling-yard.jpg" }
+]
