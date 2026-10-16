@@ -10,6 +10,33 @@ test.beforeEach(async ({ context }) => {
   await context.addInitScript(() => localStorage.setItem('merritts.analytics-consent.v1', 'denied'));
   await context.route('https://challenges.cloudflare.com/**', (route) => route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }));
 });
+test('the verification widget fits inside the form on a 320px phone', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  // Model Cloudflare's documented dimensions. Flexible widgets have a 300px
+  // minimum width; compact widgets are 150 x 140px. An empty script mock would
+  // hide the real clipping found during production browser verification.
+  await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js', (route) => route.fulfill({
+    status: 200, contentType: 'application/javascript', body: `
+      const widget = document.querySelector('.cf-turnstile');
+      const frame = document.createElement('iframe');
+      const compact = widget.dataset.size === 'compact';
+      frame.title = 'Security verification';
+      frame.style.cssText = 'border:0;width:' + (compact ? 150 : 300) + 'px;height:' + (compact ? 140 : 65) + 'px';
+      widget.append(frame);
+    `,
+  }));
+  await page.goto('/contact');
+  const frame = page.locator('.cf-turnstile iframe');
+  await frame.scrollIntoViewIfNeeded();
+  const box = await frame.boundingBox();
+  const form = await page.locator('.form-shell').boundingBox();
+  expect(box).not.toBeNull(); expect(form).not.toBeNull();
+  expect(box!.x).toBeGreaterThanOrEqual(form!.x);
+  expect(box!.x + box!.width).toBeLessThanOrEqual(form!.x + form!.width);
+  expect(box!.height).toBe(140);
+  const reserved = await page.locator('.turnstile-wrap').boundingBox();
+  expect(reserved!.height).toBeGreaterThanOrEqual(box!.height);
+});
 test('success requires a positive delivery response and emits no form values', async ({ page }) => {
   let calls = 0;
   await page.route('**/api/contact', async (route) => {

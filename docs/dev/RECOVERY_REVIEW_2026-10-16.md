@@ -52,3 +52,9 @@ Lighthouse 13.3.0, Chromium, default simulated mobile throttling, local static p
 | Minnesota plates guide | 100 | 100 | 100 | 100 | 1.5 s | 0 |
 
 The first home run scored 90 with LCP 2.6 seconds; its image-delivery finding prompted the responsive asset change. Raw machine-specific reports remain in the ignored `.sites-runtime/lighthouse` directory. Later edits to hero event placement and directory actions do not change these five pages' visual layout.
+
+## Live release verification and small-phone follow-up
+
+PR #24 deployed as `6abcf48e32630a7c06412169ca508a4025dc5c74`. The live revision endpoint matched; the production verifier passed all 65 sitemap URLs, 126 historical migrations, robots, noindex utility pages, business identity, contact links, security headers and the GET-only API guard. A live browser checked home, contact, Ramsey and Sherburne County at 320/390/768/1440px without horizontal overflow and verified the mobile menu.
+
+A deeper check of the actual Cloudflare iframe found a 300px flexible widget inside a 258px form content area at 320px. The form's rounded overflow clipping hid part of the widget even though document-width tests passed. The follow-up uses Cloudflare's supported 150 × 140px compact widget, reserves its height, and adds a browser regression that models the vendor's real minimum dimensions instead of an empty verification-script mock. No live inquiry was submitted.

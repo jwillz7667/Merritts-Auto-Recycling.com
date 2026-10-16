@@ -14,7 +14,7 @@ const siteKey = import.meta.env.TURNSTILE_SITE_KEY || import.meta.env.PUBLIC_TUR
       <div class="field field--full honeypot" aria-hidden="true"><label for="contact-company">Company website</label><input id="contact-company" name="companyWebsite" type="text" tabindex="-1" autocomplete="off" /></div>
       <div class="field field--full checkbox"><input id="contact-consent" name="contactConsent" type="checkbox" value="true" required /><label for="contact-consent">I agree Merritt’s may use this information to respond by phone, text or email. Message and data rates may apply.</label></div>
     </div>
-    {siteKey ? <div class="turnstile-wrap"><div class="cf-turnstile" data-sitekey={siteKey} data-theme="light" data-size="flexible" /></div> : <p class="form-unavailable">The secure form is temporarily unavailable. Please call or text using the contact links on this page.</p>}
+    {siteKey ? <div class="turnstile-wrap"><div class="cf-turnstile" data-sitekey={siteKey} data-theme="light" data-size="compact" /></div> : <p class="form-unavailable">The secure form is temporarily unavailable. Please call or text using the contact links on this page.</p>}
     <div class="form-actions"><button class="button button--dark" type="submit" disabled={!siteKey}>Send vehicle inquiry</button><span class="field-hint">Required fields are marked with an asterisk.</span></div>
     <p class="form-status" role="status" aria-live="polite" tabindex="-1" data-form-status></p>
   </form>
