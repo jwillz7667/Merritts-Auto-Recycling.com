@@ -62,7 +62,7 @@ The legacy repository contains eight testimonials and a 5.0/8 aggregate-rating r
 - confirmation that wording is unedited or that edits are disclosed
 - a current check that the review still exists
 
-Until then, `/reviews` links to the live Google profile and no Review or aggregateRating schema is emitted.
+The homepage now publishes four short, attributed excerpts verified against Google's public listing on October 16, 2026, plus the explicitly dated 4.9/54 rating snapshot. Exact text, authors, original dates and direct Google review links are recorded in `src/data/google-reviews.ts`; the source method and evidence are documented in [the Google review provenance record](docs/dev/GOOGLE_REVIEWS_PROVENANCE_2026-10-16.md). The eight legacy testimonials and 5.0/8 record were not used. `/reviews` continues to link to the live profile. No Review or aggregateRating schema is emitted.
 
 ## Current community-page requirements
 

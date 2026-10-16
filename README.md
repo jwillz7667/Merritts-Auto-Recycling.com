@@ -36,6 +36,8 @@ The recovery GitHub Actions workflow builds with public test identifiers and moc
 
 `guide-library.ts`, `guide-base.ts` and `search-guides.ts` retain earlier article versions and revisions. `recovery-guides.ts` supplies recovered topics; `legacy-guide-restoration.ts` restores detailed historical answers and original article dates. `guides.ts` exposes the reviewed publication catalog while preserving established URLs. Page templates use this catalog, not an independent route list.
 
+The homepage's `GoogleReviews.astro` section uses four short, attributed Google review excerpts and an explicitly dated rating snapshot from `src/data/google-reviews.ts`. See [review provenance and refresh instructions](docs/dev/GOOGLE_REVIEWS_PROVENANCE_2026-10-16.md). This is a verified snapshot with original review links, not a live widget; refresh the source evidence and displayed check date together. The corrected Maps CID identifies the actual listing rather than its Business Profile management ID.
+
 The contact form and dedicated `/get-a-quote` vehicle-offer page submit to the existing protected `/api/contact` backend. Old calculator links lead to the manual offer request. Retired quote-calculator and appointment endpoints remain retired. There is no automated price calculator, public document upload or automatic pickup booking.
 
 ## Account configuration and honest status

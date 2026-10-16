@@ -1,0 +1,209 @@
+---
+import Icon from './Icon.astro';
+import { business } from '@/data/site';
+import { googleReviews, googleReviewSnapshot } from '@/data/google-reviews';
+---
+
+<section
+  class="section section--soft google-reviews"
+  id="google-reviews"
+  aria-labelledby="google-reviews-heading"
+>
+  <div class="container reviews-layout">
+    <div class="flow reviews-intro">
+      <p class="eyebrow">Google customer reviews</p>
+      <h2 id="google-reviews-heading">What customers say about Merritt’s</h2>
+      <p class="lede">
+        Selected excerpts from customer reviews on our Google Business Profile. Read their
+        experiences in their own words.
+      </p>
+      <div
+        class="google-rating"
+        aria-label={`${googleReviewSnapshot.rating} out of 5 on Google, based on ${googleReviewSnapshot.reviewCount} reviews`}
+      >
+        <strong>{googleReviewSnapshot.rating}<span> / 5</span></strong>
+        <span>on Google · {googleReviewSnapshot.reviewCount} reviews</span>
+      </div>
+      <a
+        class="text-link"
+        href={business.googleBusinessProfile}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-track="review_profile_click">Read all reviews on Google <Icon name="arrow" /></a
+      >
+      <p class="reviews-checked">
+        Rating and excerpts checked <time datetime={googleReviewSnapshot.verifiedOn}
+          >{googleReviewSnapshot.verifiedLabel}</time
+        >.
+      </p>
+    </div>
+    <div class="reviews-grid">
+      {
+        googleReviews.map((review) => (
+          <figure class="card review-card">
+            <figcaption>
+              <a
+                class="review-author"
+                href={review.authorProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${review.author}'s Google reviewer profile`}
+              >
+                {review.author}
+              </a>
+              <span class="review-stars" role="img" aria-label={`${review.rating} out of 5 stars`}>
+                <span aria-hidden="true">{'★'.repeat(review.rating)}</span>
+              </span>
+            </figcaption>
+            <blockquote cite={review.sourceUrl}>
+              <p>“{review.excerpt}”</p>
+            </blockquote>
+            <div class="review-footer">
+              <>
+                <span>
+                  Google review excerpt
+                  <>
+                    <br />
+                    <time datetime={review.publishedOn}>{review.publishedLabel}</time>
+                  </>
+                </span>
+                <a
+                  href={review.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="review_profile_click"
+                  aria-label={`Read ${review.author}'s full review on Google`}
+                >
+                  Read on Google <Icon name="arrow" class="review-arrow" />
+                </a>
+              </>
+            </div>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+<style>
+  .reviews-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+  }
+  .reviews-intro,
+  .reviews-grid,
+  .review-card {
+    min-width: 0;
+  }
+  .reviews-intro h2 {
+    font-size: clamp(2rem, 3.4vw, 3.25rem);
+  }
+  .google-rating {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    color: var(--navy);
+  }
+  .google-rating strong {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .google-rating strong span {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  .google-rating > span {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .reviews-checked {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .review-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 0;
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+  }
+  .review-card figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .review-author {
+    color: var(--navy);
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .review-stars {
+    color: #974000;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+  }
+  .review-card blockquote {
+    margin: 0;
+  }
+  .review-card blockquote p {
+    margin: 0;
+    color: var(--navy);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .review-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+  }
+  .review-footer > span {
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  .review-footer a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 44px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .review-footer :global(.review-arrow) {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+  }
+  @media (max-width: 67rem) {
+    .reviews-layout {
+      grid-template-columns: 1fr;
+    }
+    .reviews-intro {
+      max-width: 45rem;
+    }
+  }
+  @media (max-width: 40rem) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -18,7 +18,7 @@ export const business = {
   hoursShort: 'Daily 8 AM–8 PM',
   openingHours: { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '08:00', closes: '20:00' },
   googleBusinessProfile: 'https://share.google/V9RTL8Y2wxrYL6PS8',
-  googleMaps: 'https://www.google.com/maps?cid=10346311406139911893',
+  googleMaps: 'https://www.google.com/maps?cid=6884769659263131387',
   facebook: 'https://www.facebook.com/profile.php?id=61565403974405',
 } as const;
 
