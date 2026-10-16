@@ -2,7 +2,9 @@
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import MobileCta from '@/components/MobileCta.astro';
+import Analytics from '@/components/Analytics.astro';
 import { areaServedSchema, business, serviceAreas } from '@/data/site';
+import { serviceRegions } from '@/data/service-regions';
 import '@/styles/global.css';
 interface Props {
   title: string;
@@ -21,7 +23,9 @@ const breadcrumbLabels: Record<string, string> = {
   about: 'About', 'auto-recycling': 'Auto recycling', 'cash-for-junk-cars': 'Cash for junk cars',
   contact: 'Contact', faq: 'FAQ', guides: 'Guides', 'junk-car-removal': 'Junk car removal',
   'junk-car-towing': 'Junk car towing', privacy: 'Privacy', reviews: 'Reviews', 'service-areas': 'Service areas',
+  'service-regions': 'Regional pickup information',
   ...Object.fromEntries(serviceAreas.map((area) => [area.slug, area.city])),
+  ...Object.fromEntries(serviceRegions.map((region) => [region.slug, region.name])),
 };
 const pathSegments = path.split('/').filter(Boolean);
 const hasBreadcrumbSchema = pageSchemas.some((item) => item['@type'] === 'BreadcrumbList');
@@ -36,9 +40,6 @@ const automaticBreadcrumb = !noindex && path !== '/' && !hasBreadcrumbSchema ? {
     })),
   ],
 } : null;
-const analyticsId = import.meta.env.PUBLIC_GTM_ID || '';
-const gtmId = /^GTM-[A-Z0-9]+$/.test(analyticsId) ? analyticsId : '';
-const gtmBootstrap = gtmId ? `window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});const firstScript=document.getElementsByTagName('script')[0];const gtmScript=document.createElement('script');gtmScript.async=true;gtmScript.src='https://www.googletagmanager.com/gtm.js?id=${gtmId}';firstScript?.parentNode?.insertBefore(gtmScript,firstScript);` : '';
 const localBusinessSchema = {
   '@type': ['LocalBusiness', 'AutomotiveBusiness'], '@id': `${business.siteUrl}/#business`,
   name: business.name, legalName: business.legalName, url: `${business.siteUrl}/`,
@@ -83,11 +84,10 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': [loc
     <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
     <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0A1C2D" />
     <script is:inline type="application/ld+json" set:html={jsonLd} />
-    {gtmBootstrap && <script is:inline set:html={gtmBootstrap} />}
     <slot name="head" />
   </head>
   <body>
@@ -96,24 +96,17 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': [loc
     <main id="main-content" tabindex="-1"><slot /></main>
     <Footer />
     <MobileCta />
+    <Analytics />
     <script>
       import '@/scripts/forms';
-      type DataLayerWindow = Window & { dataLayer?: Array<Record<string, unknown>> };
-      const analyticsWindow = window as DataLayerWindow;
-      analyticsWindow.dataLayer ??= [];
-      const pagePath = window.location.pathname;
-      const pageGroup = pagePath.startsWith('/service-areas/') ? 'city' : pagePath.startsWith('/guides/') ? 'guide' : pagePath === '/' ? 'home' : 'other';
-      analyticsWindow.dataLayer.push({ event: 'site_page_view', page_path: pagePath, page_group: pageGroup });
+      import { track } from '@/scripts/tracking';
+      track('site_page_view');
       const trackedEvents = new Set(['call_click', 'text_click', 'review_profile_click']);
       document.addEventListener('click', (event) => {
         const target = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-track]') : null;
         if (!target || !trackedEvents.has(target.dataset.track ?? '')) return;
-        const placement = target.closest('header') ? 'header' : target.closest('footer') ? 'footer' : target.closest('.hero, .page-hero') ? 'hero' : target.closest('.cta-band') ? 'cta_band' : 'body';
-        analyticsWindow.dataLayer?.push({
-          event: target.dataset.track,
-          link_url: target instanceof HTMLAnchorElement && /^(tel:|sms:)/.test(target.href) ? target.href : undefined,
-          page_path: pagePath, page_group: pageGroup, cta_location: placement,
-        });
+        const placement = target.closest('.mobile-cta') ? 'mobile' : target.closest('header') ? 'header' : target.closest('footer') ? 'footer' : target.closest('.hero, .page-hero') ? 'hero' : target.closest('.cta-band') ? 'cta_band' : 'body';
+        track(target.dataset.track!, { link_url: target instanceof HTMLAnchorElement ? target.href : undefined, cta_location: placement });
       });
     </script>
   </body>

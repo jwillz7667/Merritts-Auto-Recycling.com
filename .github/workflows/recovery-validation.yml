@@ -1,0 +1,42 @@
+name: Recovery validation
+on:
+  push:
+    branches: [master, 'fix/seo-recovery-*']
+  pull_request:
+    branches: [master]
+permissions:
+  contents: read
+concurrency:
+  group: recovery-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      PLAYWRIGHT_BROWSERS_PATH: .sites-runtime/playwright
+      TURNSTILE_SITE_KEY: 1x00000000000000000000AA
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Security, lint, units, and production output
+        run: npm run security:scan && npm run lint && npm run test && npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Browser and accessibility regression tests
+        run: npm run test:e2e
+      - name: Preserve browser test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: recovery-browser-evidence
+          retention-days: 7
+          path: |
+            playwright-report/
+            test-results/

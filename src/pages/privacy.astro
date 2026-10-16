@@ -2,69 +2,19 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/PageHero.astro';
 import { business } from '@/data/site';
-
-const path = '/privacy';
 ---
-
-<BaseLayout
-  title="Privacy Notice | Merritt's Auto Recycling"
-  description="How Merritt's Auto Recycling handles information submitted through its contact form and direct contact links."
-  path={path}
->
-  <PageHero
-    eyebrow="Privacy notice"
-    title="How website information is handled"
-    description="This notice covers information sent through this website. It does not replace the terms of third-party services you choose to use."
-    crumbs={[{ label: 'Home', href: '/' }, { label: 'Privacy' }]}
-  />
-
-  <section class="section section--paper">
-    <div class="container--narrow content-sections">
-      <section class="content-section">
-        <h2>Information you provide</h2>
-        <p>
-          The contact form can collect your name, phone number, email address, selected subject, and
-          the message you enter. Do not submit Social Security numbers, payment-card numbers, photo
-          IDs, or other unnecessary sensitive data.
-        </p>
-      </section>
-      <section class="content-section">
-        <h2>How the information is used</h2>
-        <p>
-          Merritt’s uses form information to respond to your inquiry, discuss a possible vehicle
-          transaction when relevant, prevent abuse, troubleshoot delivery, and maintain ordinary
-          business records. Submission does not create a sale or pickup appointment.
-        </p>
-      </section>
-      <section class="content-section">
-        <h2>Service providers</h2>
-        <p>
-          The website is hosted on Vercel. Cloudflare Turnstile helps detect automated abuse. Resend
-          delivers the form email. Those providers may process technical data needed to provide
-          their services under their own terms and privacy policies.
-        </p>
-      </section>
-      <section class="content-section">
-        <h2>Retention and sharing</h2>
-        <p>
-          Inquiry records are retained only as reasonably needed for follow-up, fraud prevention,
-          legal obligations, and ordinary business records. Merritt’s does not state that it sells
-          website lead information. Information may be disclosed when required by law or needed to
-          protect rights and systems.
-        </p>
-      </section>
-      <section class="content-section">
-        <h2>Your choices</h2>
-        <p>
-          You can call or text instead of using the form. To ask about a website submission, email
-          <a href={`mailto:${business.email}`}>{business.email}</a> or call
-          <a href={business.phoneUri} data-track="call_click">{business.phone}</a>.
-        </p>
-      </section>
-      <section class="content-section">
-        <h2>Updates</h2>
-        <p>Effective and last updated August 23, 2026. Material changes should update this date.</p>
-      </section>
-    </div>
-  </section>
+<BaseLayout title="Privacy and Analytics Choices | Merritt's Auto Recycling" description="How Merritt’s handles vehicle inquiries, security verification and optional analytics, with contact details and information about changing analytics preferences." path="/privacy">
+  <PageHero eyebrow="Your information" title="Privacy and analytics choices" description="This page explains information collected through this website and how to contact Merritt’s about it." crumbs={[{ label: 'Home', href: '/' }, { label: 'Privacy' }]} />
+  <section class="section section--paper"><div class="container--narrow flow">
+    <p>Updated October 16, 2026.</p>
+    <h2>Vehicle inquiries</h2><p>The contact form asks for your name, phone, email, subject and message, with consent to respond. Information is sent to Merritt’s through its email delivery provider, Resend, to answer the inquiry and discuss a possible transaction. Sending an inquiry does not book a pickup or complete a vehicle sale.</p>
+    <p>Do not include payment-card details, Social Security numbers, identity documents or a full VIN in the website form. Describe ownership-document status only. Any originals required for a transaction are handled separately.</p>
+    <h2>Security and necessary technical data</h2><p>The site is hosted on Vercel and uses Cloudflare Turnstile for form verification. Hosting, security and delivery systems may process technical information such as IP addresses, browser information, request times and referral information to provide the service, prevent abuse and troubleshoot delivery. These necessary services are separate from optional analytics.</p>
+    <h2>Optional analytics</h2><p>When configured, Google Tag Manager or Google Analytics can be used to understand page visits and contact-button use. The site asks before loading optional analytics. Declining does not prevent calls, texts or form inquiries. A global privacy-control signal or browser Do Not Track setting is treated as an opt-out by this integration.</p>
+    <p>The website’s own event code uses page paths, fixed event names and button placement. It does not copy inquiry text, customer contact fields, titles or documents into those events. Google Tag Manager is a container whose separately configured tags require their own review; the presence of a container is not proof that a reporting tag is active. Direct Analytics configuration disables advertising signals and sends path-only page locations.</p>
+    <h2>Changing your choice</h2><p>Use the Analytics preferences button near the bottom of the page when analytics is configured. The choice is stored in this browser. Withdrawing consent stops loading optional analytics on subsequent page loads; it does not delete information already received by a provider. Clearing browser storage removes the saved choice. Contact Merritt’s about access or deletion requests.</p>
+    <h2>Calls, texts, and external links</h2><p>Calling or texting uses your device and communications provider; message and data rates may apply. Google Maps, Google reviews and other linked websites apply their own policies when you open them. External links do not send your inquiry form contents.</p>
+    <h2>Retention and questions</h2><p>Merritt’s keeps inquiry and transaction information as needed to respond, administer the business and meet applicable recordkeeping requirements. Contact the business to discuss the information it holds and any applicable limitations on deletion.</p>
+    <p>Email <a href={`mailto:${business.email}`}>{business.email}</a> or call <a href={business.phoneUri} data-track="call_click">{business.phone}</a>. Please do not send sensitive identity documents in an initial privacy inquiry.</p>
+  </div></section>
 </BaseLayout>
