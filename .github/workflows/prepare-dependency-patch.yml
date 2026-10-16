@@ -21,7 +21,7 @@ jobs:
       - name: Resolve unchanged package ranges without lifecycle scripts
         run: |
           rm package-lock.json
-          npm install --package-lock-only --ignore-scripts --no-audit
+          npx --yes --package=npm@11 npm install --package-lock-only --ignore-scripts --no-audit
       - name: Record versions and audit the candidate lock
         run: |
           mkdir -p .sites-runtime
