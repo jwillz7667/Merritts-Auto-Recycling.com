@@ -1,18 +1,22 @@
 ---
-// The prior public container is restored as a fallback, not a claim that its
-// account-side tags are configured. GA4 can instead be supplied explicitly.
-const mode = import.meta.env.PUBLIC_ANALYTICS_MODE || 'gtm';
+import '@/styles/recovery.css';
+// No tag or consent banner is silently enabled for an empty historical container.
+// Choose one reporting destination after verifying its ownership and published tags.
+const mode = import.meta.env.PUBLIC_ANALYTICS_MODE || 'auto';
+if (!['auto', 'gtm', 'ga4', 'legacy', 'off'].includes(mode)) throw new Error('Unknown PUBLIC_ANALYTICS_MODE.');
 const requestedGa4 = import.meta.env.PUBLIC_GA4_ID || '';
-const requestedGtm = import.meta.env.PUBLIC_GTM_ID || 'GTM-WDZ8L9TN';
+const requestedGtm = import.meta.env.PUBLIC_GTM_ID || (mode === 'legacy' ? 'GTM-WDZ8L9TN' : '');
 if (requestedGa4 && !/^G-[A-Z0-9]+$/.test(requestedGa4)) throw new Error('PUBLIC_GA4_ID must be a valid public measurement ID.');
 if (requestedGtm && !/^GTM-[A-Z0-9]+$/.test(requestedGtm)) throw new Error('PUBLIC_GTM_ID must be a valid public container ID.');
-const ga4Id = mode !== 'off' ? requestedGa4 : '';
-const gtmId = mode !== 'off' && !ga4Id ? requestedGtm : '';
+if (mode === 'ga4' && !requestedGa4) throw new Error('GA4 mode requires PUBLIC_GA4_ID.');
+if (mode === 'gtm' && !requestedGtm) throw new Error('GTM mode requires PUBLIC_GTM_ID.');
+const ga4Id = !['off', 'gtm', 'legacy'].includes(mode) ? requestedGa4 : '';
+const gtmId = mode !== 'off' && mode !== 'ga4' && !ga4Id ? requestedGtm : '';
 ---
 {(gtmId || ga4Id) && <div data-analytics-settings data-gtm-id={gtmId} data-ga4-id={ga4Id}>
   <div class="container preference-row"><button class="preference-link" type="button" data-open-analytics>Analytics preferences</button></div>
   <section class="analytics-choice" role="dialog" aria-label="Optional analytics" hidden data-analytics-choice>
-    <h2>Optional analytics</h2><p>Allow Google analytics tools to help us understand page visits and contact-button use? Calling, texting and the inquiry form work without analytics. <a href="/privacy">Privacy information</a></p>
+    <h2>Optional analytics</h2><p data-analytics-description>Allow Google analytics tools to help us understand page visits and contact-button use? Calling, texting and the inquiry form work without analytics. <a href="/privacy">Privacy information</a></p>
     <div class="button-row"><button class="button button--dark" type="button" data-analytics-accept>Allow analytics</button><button class="button button--outline" type="button" data-analytics-decline>Only necessary</button></div>
   </section>
 </div>}
@@ -27,24 +31,26 @@ const gtmId = mode !== 'off' && !ga4Id ? requestedGtm : '';
     const globalOptOut = (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true || navigator.doNotTrack === '1';
     const target = window as AnalyticsWindow;
     let loaded = false;
-    const remember = (value: string) => { try { localStorage.setItem(storageKey, value); } catch { /* Choice still applies for this page. */ } };
+    const remember = (value: string) => { try { localStorage.setItem(storageKey, value); } catch { /* Choice applies to this page even without storage. */ } };
     let saved: string | null = null;
-    try { saved = localStorage.getItem(storageKey); } catch { /* No storage access; request consent for this page. */ }
+    try { saved = localStorage.getItem(storageKey); } catch { /* Ask before loading on this page. */ }
     function loadAnalytics(): void {
       if (loaded || globalOptOut || !root) return;
-      loaded = true;
-      target.dataLayer ??= [];
       const ga4Id = root.dataset.ga4Id;
       const gtmId = root.dataset.gtmId;
+      if (!ga4Id && !gtmId) return;
+      loaded = true;
+      // Do not replay clicks or form events that happened before opt-in.
+      target.dataLayer = [];
+      target.gtag = function (..._values: unknown[]) { target.dataLayer?.push(arguments); };
+      target.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
       const script = document.createElement('script');
       script.async = true;
       if (ga4Id) {
-        target.gtag = function (..._values: unknown[]) { target.dataLayer?.push(arguments); };
-        target.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
         target.gtag('js', new Date());
         target.gtag('config', ga4Id, { send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false });
         let referrer = '';
-        try { const ref = new URL(document.referrer); referrer = ref.origin + ref.pathname; } catch { /* Empty or invalid referrer. */ }
+        try { referrer = new URL(document.referrer).origin; } catch { /* Empty or invalid referrer. */ }
         target.gtag('event', 'page_view', { page_location: window.location.origin + window.location.pathname, page_referrer: referrer, page_title: document.title });
         window.addEventListener('merritts:analytics', (event) => {
           const detail = (event as CustomEvent<Record<string, unknown>>).detail;
@@ -59,11 +65,15 @@ const gtmId = mode !== 'off' && !ga4Id ? requestedGtm : '';
       } else if (gtmId) {
         target.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
         script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`;
-      } else return;
+      }
       document.head.append(script);
     }
-    if (globalOptOut) { remember('denied'); if (accept) accept.disabled = true; }
-    else if (saved === 'granted') loadAnalytics();
+    if (globalOptOut) {
+      remember('denied');
+      if (accept) accept.disabled = true;
+      const description = root.querySelector('[data-analytics-description]');
+      if (description) description.textContent = 'Your browser’s privacy signal is respected. Optional analytics will not load. Calling, texting and the inquiry form remain available.';
+    } else if (saved === 'granted') loadAnalytics();
     else if (saved !== 'denied' && choice) choice.hidden = false;
     root.querySelector('[data-open-analytics]')?.addEventListener('click', () => { if (choice) choice.hidden = false; decline?.focus(); });
     accept?.addEventListener('click', () => { if (globalOptOut) return; remember('granted'); if (choice) choice.hidden = true; loadAnalytics(); });

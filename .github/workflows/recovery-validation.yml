@@ -17,6 +17,8 @@ jobs:
       ASTRO_TELEMETRY_DISABLED: '1'
       PLAYWRIGHT_BROWSERS_PATH: .sites-runtime/playwright
       TURNSTILE_SITE_KEY: 1x00000000000000000000AA
+      PUBLIC_ANALYTICS_MODE: ga4
+      PUBLIC_GA4_ID: G-TEST1234
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -26,6 +28,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - name: Report existing dependency advisories
+        run: node scripts/dependency-report.mjs
       - name: Security, lint, units, and production output
         run: npm run security:scan && npm run lint && npm run test && npm run build
       - run: npx playwright install --with-deps chromium

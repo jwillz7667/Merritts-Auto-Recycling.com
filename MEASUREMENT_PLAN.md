@@ -1,101 +1,41 @@
-# Conversion and measurement plan
+# Measurement setup and verification
 
-## Goal hierarchy
+Updated October 16, 2026.
 
-Primary business outcomes:
+## Separate three different facts
 
-1. qualified phone calls about an unwanted vehicle
-2. qualified text-message starts
-3. successfully delivered general inquiries
+1. Source emits a privacy-limited event.
+2. An approved measurement tag loads and receives it.
+3. The correct Analytics account reports it and associates it with a real business outcome.
 
-Secondary outcomes:
+Only the first is established by repository code. Browser mocks verify behavior without transmitting real events. Never call an empty Tag Manager container active Analytics.
 
-- general contact submissions
-- service-area and guide engagement that precedes a primary action
+The former public container GTM-WDZ8L9TN was found with an empty published tags array during recovery. The current integration does not silently load it. Explicit legacy mode remains available for a verified later configuration; merely selecting that mode does not add any account-side tags.
 
-Do not optimize to page views, form starts, or button clicks without confirming lead quality.
+## Configuration
 
-## Activation gate
+The default `PUBLIC_ANALYTICS_MODE=auto` chooses a valid `PUBLIC_GA4_ID` when supplied; otherwise a valid `PUBLIC_GTM_ID`. With neither, no optional tag or consent popup loads. Explicit `ga4` and `gtm` modes require their respective ID. `off` disables optional analytics. Never invent a measurement ID or copy another property's ID.
 
-The site runs without an analytics vendor by default. Browser events are pushed to `window.dataLayer`, but no data leaves the browser unless an owner-approved `PUBLIC_GTM_ID` is present at build time and the container is configured.
+For direct GA4, publish to the confirmed owner-controlled web stream, disable unwanted enhanced-measurement events and review data settings. The code sends one manual page_view, suppresses the configuration page view, disables advertising signals, strips query strings from page locations and reduces referrers to their origin.
 
-Before enabling Google Tag Manager:
+For GTM, inspect the container and publish a reviewed Google Analytics tag and fixed event triggers. Review automatic page variables separately because GTM tags can collect fields beyond the website's event helper. Keep advertising consent denied and honor consent in every third-party tag. Do not load direct GA4 and an equivalent GTM Analytics tag simultaneously.
 
-- approve the container owner and publish workflow
-- decide whether consent management is required for the chosen tags
-- prevent URL query strings and form values from entering analytics
-- test in Vercel Preview
-- document Google Analytics and advertising account access
+## Consent and event contract
 
-## Implemented data-layer events
+No optional script is fetched before consent. The local consent choice is separate from contact-form permission. Global Privacy Control and Do Not Track prevent loading. Rejecting optional analytics does not disable the form, phone or SMS actions. Withdrawing consent reloads the page without optional scripts; it does not erase data already held by providers.
 
-| Event                        | Trigger                               | Parameters               | Conversion role              |
-| ---------------------------- | ------------------------------------- | ------------------------ | ---------------------------- |
-| `site_page_view`             | Every rendered page                   | `page_path`              | Context only                 |
-| `call_click`                 | Any tracked `tel:` action             | `link_url`, `page_path`  | Primary click proxy          |
-| `text_click`                 | Any tracked `sms:` action             | `link_url`, `page_path`  | Secondary click proxy        |
-| `lead_form_start`            | First focus inside the contact form   | `form_type`, `page_path` | Funnel diagnostic            |
-| `lead_form_validation_error` | Browser validation blocks submission  | `form_type`, `page_path` | UX diagnostic                |
-| `lead_form_success`          | API confirms internal delivery        | `form_type`, `page_path` | Secondary contact conversion |
-| `lead_form_error`            | Submission fails after client attempt | `form_type`, `page_path` | Reliability alert/diagnostic |
+The helper permits fixed events: site_page_view, call_click, text_click, review_profile_click, lead_form_start, lead_form_validation_error, lead_form_success, lead_form_error. Permitted context is path-only page_path, a fixed page_group, contact form_type, a fixed cta_location and approved business phone links. No form values, customer addresses, document details, full VINs or URL query strings are copied into these events. Events queued before opting in are not replayed to a newly loaded tag.
 
-No customer name, email, phone, VIN, city, vehicle make/model, message, title status, or Turnstile token is placed in the data layer.
+A lead_form_success requires both successful HTTP status and an explicit ok:true response from the existing delivery API. It indicates the API's acceptance after provider submission, not that a mailbox recipient read the message. A tel or sms click does not establish an answered conversation or completed vehicle purchase.
 
-## Recommended GTM mapping
+## Required live verification
 
-| Data-layer event                          | GA4 event                                     | Google Ads use                           |
-| ----------------------------------------- | --------------------------------------------- | ---------------------------------------- |
-| `call_click`                              | `generate_lead` with `lead_type=phone_click`  | Secondary until call quality is verified |
-| `text_click`                              | `generate_lead` with `lead_type=text_click`   | Secondary                                |
-| `lead_form_success` + `form_type=contact` | `generate_lead` with `lead_type=contact_form` | Secondary                                |
-| validation/error events                   | custom diagnostic events                      | Never a conversion                       |
+- Confirm the Vercel project scope and approved public measurement ID.
+- Review the destination's actual published tags/settings.
+- Test consent rejection and acceptance in a real browser without an ad blocker.
+- Check GA4 DebugView/Realtime or GTM Preview for one event per action in the correct account.
+- Verify that query strings and inquiry values are absent from reporting payloads.
+- Test actual contact delivery only with authorization, an unmistakable test message and mailbox/provider confirmation.
+- Keep source/medium, city, qualified inquiry and completed purchase in an appropriate private lead log rather than sending customer details into analytics.
 
-Avoid sending `link_url` to third parties if the analytics policy treats a business phone URI as unnecessary. `page_path` should remain path-only.
-
-## Phone measurement
-
-A `tel:` click is not proof of a connected or qualified call. Preferred progression:
-
-1. launch with `call_click` as a directional metric
-2. compare click volume to call logs manually
-3. if call tracking is approved, use a provider that supports dynamic number insertion without replacing the canonical NAP in HTML, schema, GBP, or citations
-4. define a qualified-call duration only after reviewing real calls
-
-## Lead quality feedback
-
-Track outside analytics, in a privacy-appropriate lead log or CRM:
-
-- source/medium/campaign when legitimately available
-- phone, text, or contact form
-- serviceable location: yes/no
-- vehicle accepted for review: yes/no
-- reached owner: yes/no
-- transaction completed: yes/no
-- duplicate/spam: yes/no
-
-Never expose these fields publicly or use customer details in a data-layer event.
-
-## Campaign conventions
-
-Use lowercase UTM values and a controlled naming sheet:
-
-- `utm_source`: platform, e.g. `google`, `facebook`
-- `utm_medium`: channel, e.g. `cpc`, `organic_social`
-- `utm_campaign`: stable initiative name
-- `utm_content`: ad/creative differentiator only when needed
-
-Do not put customer, vehicle, location-address, or phone data in campaign parameters.
-
-## Validation
-
-Before launch:
-
-- verify the site has no network request to GTM when `PUBLIC_GTM_ID` is absent
-- verify the approved container loads only on intended environments
-- use GTM Preview and GA4 DebugView to confirm every event once
-- submit the contact form and confirm only successful internal delivery fires `lead_form_success`
-- verify form errors never fire a conversion
-- check mobile call and text actions
-- confirm no PII appears in dataLayer, network payloads, page URL, or analytics reports
-
-Review conversion quality after two and four weeks. Do not declare success based on traffic growth alone.
+The available account connection did not authorize the Vercel project during recovery. No live GA4 account or published measurement ID was available. Account-side publication and collection verification remain an explicit activation requirement; source-code tests must not be substituted for them.
