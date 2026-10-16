@@ -30,6 +30,18 @@ test('homepage preserves current design, message, and contact actions', async ({
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.getByRole('link', { name: /Call 763-533-2775/ }).first()).toHaveAttribute('href', 'tel:+1-763-533-2775');
   await expect(page.getByText('8:00 AM–8:00 PM', { exact: true }).first()).toBeVisible();
+  const reviews = page.getByRole('region', { name: 'What customers say about Merritt’s' });
+  await expect(reviews.locator('blockquote')).toHaveCount(4);
+  await expect(reviews.getByRole('img', { name: '5 out of 5 stars', exact: true })).toHaveCount(4);
+  const sources = await reviews.locator('blockquote').evaluateAll((quotes) => quotes.map((quote) => quote.getAttribute('cite')));
+  expect(new Set(sources).size).toBe(4);
+  for (const source of sources) {
+    const url = new URL(source!);
+    expect(url.hostname).toBe('www.google.com');
+    expect(url.pathname).toMatch(/^\/maps\/reviews\/data=/);
+  }
+  await expect(reviews.getByRole('link', { name: /Read .+'s full review on Google/ })).toHaveCount(4);
+  await expect(reviews.getByRole('link', { name: 'Read all reviews on Google' })).toHaveAttribute('href', 'https://share.google/V9RTL8Y2wxrYL6PS8');
   await expectNoOverflow(page, 'homepage');
 });
 
@@ -106,6 +118,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
       expect(blocking, `${route}: ${JSON.stringify(blocking)}`).toEqual([]);
       await expectNoOverflow(page, route);
       if (route === '/' || route === '/service-areas/ramsey') await page.screenshot({ path: testInfo.outputPath(`${route === '/' ? 'home' : 'ramsey'}-${viewport.width}.png`), fullPage: true });
+      if (route === '/') await page.locator('#google-reviews').screenshot({ path: testInfo.outputPath(`google-reviews-${viewport.width}.png`) });
     }
   });
 }

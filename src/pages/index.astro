@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import CoverageDirectory from '@/components/CoverageDirectory.astro';
 import FaqList from '@/components/FaqList.astro';
+import GoogleReviews from '@/components/GoogleReviews.astro';
 import Icon from '@/components/Icon.astro';
 import Picture from '@/components/Picture.astro';
 import { business, globalFaqs, homeSeo, services } from '@/data/site';
@@ -48,12 +49,14 @@ const schema = {
       </div>
       <div class="card flow">
         <h3>Hear from our customers</h3>
-        <p>Read customer experiences on our Google Business Profile before deciding who to contact.</p>
-        <a class="text-link" href={business.googleBusinessProfile} target="_blank" rel="noopener noreferrer" data-track="review_profile_click">Read reviews on Google <Icon name="arrow" /></a>
+        <p>See selected customer reviews from our Google Business Profile before deciding who to contact.</p>
+        <a class="text-link" href="#google-reviews">See customer reviews <Icon name="arrow" /></a>
         <a class="text-link" href="/about">Meet Merritt’s <Icon name="arrow" /></a>
       </div>
     </div>
   </section>
+
+  <GoogleReviews />
 
   <section class="section section--navy" aria-labelledby="steps-heading">
     <div class="container">
