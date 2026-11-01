@@ -1,6 +1,7 @@
 // Read-only verification of the canonical production deployment. This never
 // submits a form, requests indexing, or sends an analytics event.
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
+import { validateRobots, validateSitemapLastmod } from './search-controls.mjs';
 const origin = 'https://merritts-auto-recycling.com';
 const expected = process.env.EXPECTED_REVISION;
 if (!expected || !/^[a-f0-9]{40}$/.test(expected)) throw new Error('EXPECTED_REVISION must be the reviewed commit.');
@@ -30,6 +31,7 @@ async function run() {
   const response = await request(`${origin}/sitemap.xml?revision=${expected}`);
   if (!response.ok) throw new Error(`Sitemap returned ${response.status}.`);
   const xml = await response.text();
+  validateSitemapLastmod(xml);
   const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1].replaceAll('&amp;', '&'));
   if (urls.length !== expectedUrls.size || urls.length !== new Set(urls).size || urls.some((url) => !expectedUrls.has(url))) throw new Error('Sitemap differs from the preserved production routes and reviewed recovery destinations.');
   for (const url of urls) if (new URL(url).origin !== origin) throw new Error('Sitemap contains an unexpected origin.');
@@ -126,6 +128,7 @@ async function run() {
   checks.push(async () => {
     const response = await request(`${origin}/robots.txt`);
     const text = await response.text();
+    validateRobots(text, { origin, paths: urls.map((url) => new URL(url).pathname) });
     if (response.status !== 200 || !/^Allow: \/\s*$/m.test(text) || /^Disallow: \/\s*$/m.test(text) || !text.includes(`Sitemap: ${origin}/sitemap.xml`)) throw new Error('Production robots controls block crawling or omit the sitemap.');
     result.controls.push('robots');
   });

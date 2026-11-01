@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { validateRobots, validateSitemapLastmod } from './search-controls.mjs';
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const origin = 'https://merritts-auto-recycling.com';
 const fail = (message) => { throw new Error(`Build validation failed: ${message}`); };
@@ -93,6 +94,7 @@ const queue = ['/'];
 while (queue.length) for (const route of internalLinks.get(queue.shift()) ?? []) if (!reachable.has(route)) { reachable.add(route); queue.push(route); }
 for (const route of indexable) if (!reachable.has(route)) fail(`orphaned indexable page: ${route}.`);
 const sitemap = readFileSync(join(root, 'sitemap.xml'), 'utf8');
+validateSitemapLastmod(sitemap);
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => decode(match[1]));
 if (new Set(sitemapUrls).size !== sitemapUrls.length || sitemapUrls.length !== indexable.size) fail('sitemap does not match the unique indexable URLs.');
 for (const route of indexable) if (!sitemapUrls.includes(new URL(route, origin).href)) fail(`sitemap omits ${route}.`);
@@ -134,5 +136,6 @@ for (const [key, destination] of Object.entries(manifest.areas)) {
 for (const [key, destination] of Object.entries(manifest.blogs)) if (!config.redirects.some((rule) => rule.source === `/blog/${key}` && rule.destination === destination)) fail(`missing legacy blog mapping: ${key}.`);
 for (const file of files.filter((entry) => /\.(css|js)$/.test(entry))) if (statSync(file).size > (file.endsWith('.css') ? 90000 : 60000)) fail(`asset exceeds its size budget: ${relative(root, file)}.`);
 const robots = readFileSync(join(root, 'robots.txt'), 'utf8');
+validateRobots(robots, { origin, paths: [...indexable] });
 if (!robots.includes('Allow: /') || robots.includes('Disallow: /thank-you')) fail('robots.txt has incorrect crawl controls.');
 console.log(`Validated ${pages.length} HTML pages, ${indexable.size} indexable URLs, ${directorySlugs.size} directly linked city pages, ${Object.keys(manifest.areas).length} historical areas, ${Object.keys(manifest.blogs).length} legacy article topics, metadata, schema, sitemap parity, internal links and fragments, image paths and asset budgets.`);

@@ -24,6 +24,7 @@ Node 22.13 or newer and npm are required. Run `npm ci`, then `npm run dev`.
 - `npm run lint`: ESLint.
 - `npm run test`: unit and content/migration regression checks.
 - `npm run build`: Astro diagnostics, static build and output validation.
+- Build and production validation check effective Googlebot crawl access and the canonical sitemap declaration, and reject invalid or future sitemap modification dates. Preserve truthful content dates and stable replacement URLs.
 - `npm run test:e2e`: browser tests against an already built dist directory. Install Chromium using the same PLAYWRIGHT_BROWSERS_PATH used by the package script.
 - `npm run test:all`: source scan, lint, unit tests, build and browser tests.
 - `node scripts/dependency-report.mjs`: read-only dependency advisory report, including production-tree classification.
@@ -48,7 +49,7 @@ Optional analytics is disabled when no public destination is configured. Set `PU
 
 Analytics waits for consent; browser privacy opt-outs are respected. Review third-party tags separately before enabling a container. See MEASUREMENT_PLAN.md and /privacy.
 
-The available Vercel account connection did not authorize this project's scope during recovery, and Search Console access was blocked by the GSC connector subscription. Those account-side limitations are not solved by committing source code. Do not claim indexing, tag publication, production email receipt, or traffic recovery without actual evidence.
+During the October recovery, the available Vercel connection did not authorize this project's scope. On November 1, the connected Personal account exposed the existing project and its production deployment. Verify the exact reviewed revision for each release; do not infer a new deployment from that prior success. Search Console access remains blocked by the GSC connector subscription. Follow [the current Search Console recovery handoff](SEARCH_CONSOLE_HANDOFF.md) to distinguish current destination indexing from expected legacy-redirect exclusions and compare migrated URL groups. Do not claim indexing, tag publication, production email receipt, or traffic recovery without actual account evidence.
 
 ## Release discipline
 
