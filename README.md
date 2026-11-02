@@ -28,6 +28,7 @@ Node 22.13 or newer and npm are required. Run `npm ci`, then `npm run dev`.
 - `npm run test:e2e`: browser tests against an already built dist directory. Install Chromium using the same PLAYWRIGHT_BROWSERS_PATH used by the package script.
 - `npm run test:all`: source scan, lint, unit tests, build and browser tests.
 - `node scripts/dependency-report.mjs`: read-only dependency advisory report, including production-tree classification.
+- `node scripts/recovery-report.mjs input.json output.json`: offline comparison of real Search Console CSV exports, grouping old and replacement URLs and separating query intent. See [recovery measurement](docs/dev/RECOVERY_MEASUREMENT.md); keep raw exports and reports out of Git.
 
 The recovery GitHub Actions workflow builds with public test identifiers and mocks third-party analytics and form delivery. No production credentials are available to the workflow. It verifies routes, metadata, the sitemap, mobile/desktop contrast, keyboard navigation, privacy choices and inquiry response handling. Mocked delivery is not proof of production mailbox receipt.
 

@@ -111,12 +111,19 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
   test(`key restored destinations are accessible at ${viewport.width}px`, async ({ page }, testInfo) => {
     test.setTimeout(180000);
     await page.setViewportSize(viewport);
-    for (const route of ['/', '/contact', '/get-a-quote', '/service-areas', '/service-areas/ramsey', '/service-areas/white-bear-lake', '/service-areas/st-cloud', '/service-regions/sherburne-county', '/guides/minnesota-license-plates-before-junking', '/guides/minneapolis-junk-car-removal-costs-and-pickup', '/guides/cash-for-junkers-mn-vs-merritts']) {
+    for (const route of ['/', '/contact', '/get-a-quote', '/service-areas', '/service-areas/maple-grove', '/service-areas/st-paul', '/service-areas/buffalo', '/service-areas/princeton', '/service-areas/ramsey', '/service-areas/white-bear-lake', '/service-areas/st-cloud', '/service-regions/sherburne-county', '/guides/minnesota-license-plates-before-junking', '/guides/minneapolis-junk-car-removal-costs-and-pickup', '/guides/cash-for-junkers-mn-vs-merritts']) {
       await page.goto(route);
       const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
       const blocking = results.violations.filter((item) => item.impact === 'serious' || item.impact === 'critical');
       expect(blocking, `${route}: ${JSON.stringify(blocking)}`).toEqual([]);
       await expectNoOverflow(page, route);
+      if (['/service-areas/maple-grove', '/service-areas/st-paul', '/service-areas/buffalo', '/service-areas/princeton'].includes(route)) {
+        const evidence = page.getByRole('region', { name: 'A Brooklyn Center business serving vehicle owners since 1988' });
+        await expect(evidence.getByRole('img', { name: "Merritt's branded tow truck" })).toBeVisible();
+        await expect(evidence.locator('blockquote')).toHaveAttribute('cite', /^https:\/\/www\.google\.com\/maps\/reviews\/data=/);
+        await expect(page.getByRole('link', { name: /Request an offer for your .+ vehicle online/ })).toHaveAttribute('href', '/get-a-quote');
+        await evidence.screenshot({ path: testInfo.outputPath(`${route.split('/').at(-1)}-evidence-${viewport.width}.png`) });
+      }
       if (route === '/' || route === '/service-areas/ramsey') await page.screenshot({ path: testInfo.outputPath(`${route === '/' ? 'home' : 'ramsey'}-${viewport.width}.png`), fullPage: true });
       if (route === '/') await page.locator('#google-reviews').screenshot({ path: testInfo.outputPath(`google-reviews-${viewport.width}.png`) });
     }

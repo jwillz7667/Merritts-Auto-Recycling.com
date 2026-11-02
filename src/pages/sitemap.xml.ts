@@ -8,6 +8,8 @@ const modified = new Map<string, string>([
   ['/about', '2026-10-07'], ['/reviews', '2026-10-07'], ['/faq', '2026-10-07'], ['/guides', '2026-10-16'], ['/contact', '2026-10-16'],
   ...services.map((service): [string, string] => [`/${service.slug}`, '2026-10-16']),
   ...serviceAreas.map((area): [string, string] => [`/service-areas/${area.slug}`, '2026-10-16']),
+  ['/service-areas/maple-grove', '2026-11-01'], ['/service-areas/st-paul', '2026-11-01'],
+  ['/service-areas/buffalo', '2026-11-01'], ['/service-areas/princeton', '2026-11-01'],
   ...serviceRegions.map((region): [string, string] => [`/service-regions/${region.slug}`, region.updated]),
   ...guides.map((guide): [string, string] => [`/guides/${guide.slug}`, guide.updatedIso ?? '2026-08-23']),
 ]);
