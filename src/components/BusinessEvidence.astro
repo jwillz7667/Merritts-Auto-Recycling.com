@@ -1,0 +1,34 @@
+---
+import Picture from './Picture.astro';
+import Icon from './Icon.astro';
+import { googleReviews, googleReviewSnapshot } from '@/data/google-reviews';
+const review = googleReviews[3];
+---
+<section class="section section--soft" aria-labelledby="business-evidence-heading">
+  <div class="container split business-evidence">
+    <figure>
+      <Picture src="/images/legacy/merritts-tow-truck.jpg" avif="/images/legacy/merritts-tow-truck.avif" webp="/images/legacy/merritts-tow-truck.webp" avifSrcset="/images/legacy/merritts-tow-truck-640.avif 640w, /images/legacy/merritts-tow-truck-960.avif 960w, /images/legacy/merritts-tow-truck.avif 1600w" webpSrcset="/images/legacy/merritts-tow-truck-640.webp 640w, /images/legacy/merritts-tow-truck-960.webp 960w, /images/legacy/merritts-tow-truck.webp 1600w" sizes="(min-width: 64rem) 45vw, 100vw" alt="Merritt's branded tow truck" width={1600} height={1070} />
+      <figcaption>A Merritt’s truck, photographed for our existing website.</figcaption>
+    </figure>
+    <div class="flow">
+      <p class="eyebrow">Know who you are calling</p>
+      <h2 id="business-evidence-heading">A Brooklyn Center business serving vehicle owners since 1988</h2>
+      <p>Talk with Merritt’s about the vehicle you own, the documents available, and the actual pickup setting. Review the offer and any removal charges before deciding.</p>
+      <figure class="card flow customer-excerpt">
+        <blockquote cite={review.sourceUrl}><p>“{review.excerpt}”</p></blockquote>
+        <figcaption>{review.author} · Google review excerpt · <time datetime={review.publishedOn}>{review.publishedLabel}</time></figcaption>
+        <a class="text-link" href={review.sourceUrl} target="_blank" rel="noopener noreferrer" data-track="review_profile_click">Read {review.author}’s review on Google <Icon name="arrow" /></a>
+        <p class="evidence-note">Excerpt checked <time datetime={googleReviewSnapshot.verifiedOn}>{googleReviewSnapshot.verifiedLabel}</time>.</p>
+      </figure>
+      <a class="text-link" href="/about">Meet Merritt’s <Icon name="arrow" /></a>
+    </div>
+  </div>
+</section>
+<style>
+  .business-evidence { align-items: center; }
+  figure, blockquote, blockquote p { margin: 0; }
+  figure > :global(picture) { display: block; overflow: hidden; border-radius: 1rem; }
+  figure > figcaption { margin-top: 0.75rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+  .customer-excerpt figcaption { margin-top: 0; }
+  .evidence-note { font-size: 0.85rem; color: var(--muted); }
+</style>
