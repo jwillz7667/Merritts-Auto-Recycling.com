@@ -60,7 +60,7 @@ Optional analytics supports a reviewed `PUBLIC_GA4_ID` or `PUBLIC_GTM_ID` with c
 
 ## Verification boundaries
 
-The GSC Wizard connection was subscription-blocked during the investigation. Repository changes cannot repair account access. Use an authorized Search Console session or restore connector access before recording indexing, sitemap-submission, or performance results. Do not report account actions as completed merely because the website is deployable.
+The GSC Wizard connection remains subscription-blocked. The signed-in browser subsequently exposed the existing Domain property: complete-window performance exports, priority URL inspections, accepted indexing requests and the Links report were reviewed there. See [the November 1 follow-through](docs/dev/SEO_RECOVERY_FOLLOW_THROUGH_2026-11-01.md) for completed actions and pending approvals. Do not report an indexing request as an indexed URL or a pending Business Profile edit as published.
 
 The Vercel connection now exposes the existing Merritt's project. For each release, verify the intended project/team, exact source revision, deployment result, and live checks. The October release's success is not evidence for a newer commit.
 
