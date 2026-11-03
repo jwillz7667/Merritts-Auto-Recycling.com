@@ -1,6 +1,6 @@
 # Measurement setup and verification
 
-Updated October 16, 2026.
+Updated November 2, 2026.
 
 ## Separate three different facts
 
@@ -16,7 +16,7 @@ The former public container GTM-WDZ8L9TN was found with an empty published tags 
 
 The default `PUBLIC_ANALYTICS_MODE=auto` chooses a valid `PUBLIC_GA4_ID` when supplied; otherwise a valid `PUBLIC_GTM_ID`. With neither, no optional tag or consent popup loads. Explicit `ga4` and `gtm` modes require their respective ID. `off` disables optional analytics. Never invent a measurement ID or copy another property's ID.
 
-For direct GA4, publish to the confirmed owner-controlled web stream, disable unwanted enhanced-measurement events and review data settings. The code sends one manual page_view, suppresses the configuration page view, disables advertising signals, strips query strings from page locations and reduces referrers to their origin.
+For direct GA4, publish to the confirmed owner-controlled web stream, disable unwanted enhanced-measurement events and review data settings. The code sends one manual page_view, suppresses the configuration page view, disables advertising signals, strips query strings from page locations and reduces referrers to their origin. The same clean location/referrer defaults are supplied to the GA4 configuration so automatic session/engagement events inherit those privacy limits as well.
 
 For GTM, inspect the container and publish a reviewed Google Analytics tag and fixed event triggers. Review automatic page variables separately because GTM tags can collect fields beyond the website's event helper. Keep advertising consent denied and honor consent in every third-party tag. Do not load direct GA4 and an equivalent GTM Analytics tag simultaneously.
 
@@ -38,4 +38,6 @@ A lead_form_success requires both successful HTTP status and an explicit ok:true
 - Test actual contact delivery only with authorization, an unmistakable test message and mailbox/provider confirmation.
 - Keep source/medium, city, qualified inquiry and completed purchase in an appropriate private lead log rather than sending customer details into analytics.
 
-November 1 follow-through: the connected Personal Vercel account now exposes the existing production project. No GA4/GTM public destination is configured. The signed-in Analytics account has streams for other domains, with no confirmed stream for this canonical domain. A separate current-domain property was prepared, but automatic approval review blocked its creation pending explicit authorization for a new persistent Analytics property. Nothing was created or activated. Do not reuse another domain's ID. After authorization, finish the property/stream setup, review enhanced measurement and consent, configure Vercel, deploy, and verify actual account-side receipt. Source-code tests must not be substituted for collection evidence.
+November 2 follow-through: the user authorized continuing after the new-property approval request. A dedicated Merritt's Auto Recycling property and current-domain web stream were created in the signed-in owner-controlled account. The canonical stream is https://merritts-auto-recycling.com and its public measurement ID is G-Y784K6RM0V. Enhanced measurement is disabled to prevent automatic form, search, outbound and history events from bypassing the reviewed manual event contract. No advertising product or empty legacy GTM container was enabled.
+
+The verified ID and explicit ga4 mode are configured only for production in the existing Personal Vercel project. Preview and CI must retain synthetic destinations and intercepted requests. A deployment is required to activate changed build variables. Record actual deployed revision, consent rejection/acceptance, sanitized payloads and account-side receipt separately; this document and source tests alone do not certify collection. A test contact-button click does not establish an answered call, and a mocked form response does not establish real inquiry delivery.
