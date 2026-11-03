@@ -1,5 +1,9 @@
 # Recovery follow-through — November 1, 2026
 
+## November 2 measurement continuation
+
+The user authorized continuing after the Analytics approval request. The dedicated current-domain property and web stream now exist, with enhanced measurement disabled and the verified public ID configured for the production build only. The earlier property-creation blocker described below is historical and resolved. See MEASUREMENT_PLAN.md for the configuration and verification boundaries. Actual receipt must be verified in the account; it is not inferred from repository tests.
+
 ## Website changes
 
 Maple Grove, St. Paul, Buffalo and Princeton now show the approved existing truck photo, business identity and one short, attributed Google review excerpt. Its source, publication date and October 16 verification date are preserved. No local job, customer location, new rating, guarantee or testimonial is invented. These four pages have an early direct link to `/get-a-quote`, with instructions for condition, pickup location and documents. Only those four sitemap modification dates advance to November 1 for this visible addition.
@@ -18,7 +22,7 @@ Account actions and remaining verification:
 2. Follow the requested city URLs' recrawls and inspect other high-loss destinations. Evaluate content/canonicals for crawled-but-excluded pages before adding copy or requesting crawling again.
 3. Submitted Business Profile hours of daily 8 AM–8 PM, canonical website `https://merritts-auto-recycling.com/` and SMS number 763-438-2116. Google displayed these as pending review, not yet approved; its later status message allowed up to seven days for review. The verified name, main phone and address match. Existing categories were reviewed and retained; no new offices or keywords were added to the name.
 4. Reviewed services and submitted removal of unsupported emergency, roadside, repair, transport and vague duplicate labels. The three retained services are Cash For Junk Cars, Junk Cars Towing and Junk Car Removal Services. Google displayed the edit as pending review, with up to one day to publish. Existing original truck/vehicle photos were reviewed and retained. The current website logo was added to the empty logo slot; after reloading the owner editor, it showed Change logo. The PNG was re-encoded to meet Google's minimum file size with decoded pixels verified unchanged. Public logo appearance was not independently verified. `/reviews` already requests honest feedback from all prior customers. Keep it unbiased and without incentives. Review replies must concern actual reviews and exclude private customer details.
-5. Explicit authorization for new Analytics property creation is still required by automatic approval review. After authorization, create the isolated current-domain stream, review enhanced measurement, activate the confirmed destination, check consent choices and one event per action in the correct account, and verify inquiry collection. Keep qualified inquiries/purchases in a private business log.
+5. The November 2 continuation resolved the earlier authorization blocker and created the isolated current-domain stream. Production activation must include the clean location/referrer configuration, consent checks, one event per action and actual account-side receipt. Actual inquiry delivery still needs independent evidence. Keep qualified inquiries/purchases in a private business log.
 
 ## Page Indexing example audit
 

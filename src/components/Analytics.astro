@@ -47,11 +47,14 @@ const gtmId = mode !== 'off' && mode !== 'ga4' && !ga4Id ? requestedGtm : '';
       const script = document.createElement('script');
       script.async = true;
       if (ga4Id) {
-        target.gtag('js', new Date());
-        target.gtag('config', ga4Id, { send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false });
+        const pageLocation = window.location.origin + window.location.pathname;
         let referrer = '';
         try { referrer = new URL(document.referrer).origin; } catch { /* Empty or invalid referrer. */ }
-        target.gtag('event', 'page_view', { page_location: window.location.origin + window.location.pathname, page_referrer: referrer, page_title: document.title });
+        // Apply the same privacy limits to GA4's automatic session/engagement
+        // events, which inherit config defaults rather than this manual view.
+        target.gtag('js', new Date());
+        target.gtag('config', ga4Id, { send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false, page_location: pageLocation, page_referrer: referrer });
+        target.gtag('event', 'page_view', { page_location: pageLocation, page_referrer: referrer, page_title: document.title });
         window.addEventListener('merritts:analytics', (event) => {
           const detail = (event as CustomEvent<Record<string, unknown>>).detail;
           if (!detail || detail.event === 'site_page_view') return;
