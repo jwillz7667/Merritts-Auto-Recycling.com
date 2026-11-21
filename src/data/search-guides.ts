@@ -33,7 +33,7 @@ const updates: Record<string, Partial<Guide>> = {
         heading: 'How much is a non-running car worth?',
         paragraphs: [
           'The amount depends on the actual vehicle and transaction: its identity, condition, completeness, location, access, and current demand. A complete car with an engine problem is not necessarily evaluated like a partly dismantled shell.',
-          'Ask for the amount you would receive after any agreed removal charges. Compare offers using the same description, and ask whether an inspection or a change in the car’s condition could affect the offer.',
+          'Ask for the amount you would receive. Compare offers using the same description, and ask whether an inspection or a change in the car’s condition could affect the offer.',
         ],
       },
       {

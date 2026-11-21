@@ -100,9 +100,9 @@ export const guides: Guide[] = [
         ],
       },
       {
-        heading: 'Avoid “no title needed” promises',
+        heading: 'Selling without a title',
         paragraphs: [
-          'A missing-title situation is not automatically approved. Explain the facts and let the buyer and state requirements determine the next step. Merritt’s does not promise that every no-title vehicle can be purchased.',
+          'Merritt’s buys cars with or without a title. If the title is missing, tell us what paperwork you do have. Minnesota’s requirements depend on the vehicle and situation, and we walk you through what applies.',
         ],
       },
       {

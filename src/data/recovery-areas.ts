@@ -52,7 +52,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'Start with where the vehicle is actually parked in Ramsey, even if you live or work somewhere else. Identify who holds the keys and who can authorize access. The person opening a gate is not necessarily the person entitled to sign the vehicle documents, so coordinate both roles before an appointment.',
       'For a vehicle stored behind another car or beside a building, describe the approach and whether the wheels and steering move. Current photographs should show the car and the loading approach, not just an old picture taken when it was running. Do not attempt to tow it into a different position for the photographs.',
-      'When comparing offers, include any storage deadline and ask how long the proposed terms remain available. Confirm the amount you would receive after any agreed pickup charge. Once a sale is agreed, remove belongings, arrange the required signatures, and keep a way to reach you during the pickup window.',
+      'When comparing offers, include any storage deadline and ask how long the proposed terms remain available. Confirm the amount you would receive. Once a sale is agreed, remove belongings, arrange the required signatures, and keep a way to reach you during the pickup window.',
     ],
     secondHeading: 'Explain the Ramsey entrance beyond the highway corridor',
     secondParagraphs: [
@@ -145,7 +145,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'A vehicle kept as a spare can sit long enough that its condition changes. Before asking about your Andover car, note the last known problem, whether all major components remain, and whether tires or wheels are missing. Do not buy a battery or new tires solely to start an offer conversation.',
       'Check for personal items in the console, glove box, cargo area and storage bins. Tools, remotes, toll tags and documents often remain in a vehicle that is no longer used every day. Remove what belongs to you safely before an agreed pickup, not while the driver is loading.',
-      'Locate the title and explain any lien or name mismatch early. A vehicle may be physically ready to leave while its paperwork is not. We discuss the amount payable, any removal charge and the pickup window after reviewing both. You can compare those complete terms with repairing or privately selling the car.',
+      'Locate the title and explain any lien or name mismatch early. A vehicle may be physically ready to leave while its paperwork is not. We discuss the amount payable and the pickup window; tow-away is free after reviewing both. You can compare those complete terms with repairing or privately selling the car.',
     ],
     secondHeading: 'Tell us which Andover entrance reaches the stored vehicle',
     secondParagraphs: [
@@ -176,7 +176,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'If the Champlin vehicle is blocked by another car, a trailer or a locked gate, include that in the first message. Explain which entrance leads to it and whether the vehicle can roll and steer. The postal address alone may not identify a usable loading approach.',
       'Arrange permission with the person controlling shared access before agreeing on a pickup window. A neighbor or property manager should not be surprised by a truck needing room to load. Do not promise that another person’s vehicle will be moved until you have coordinated it with them.',
-      'Confirm the payment arrangements and any removal charges along with the vehicle offer. Have the agreed documents ready and keep people and pets away from the loading area. A direct conversation beforehand helps avoid an appointment that fails because keys, signatures or access are unavailable.',
+      'Confirm the payment arrangements along with the vehicle offer. Have the agreed documents ready and keep people and pets away from the loading area. A direct conversation beforehand helps avoid an appointment that fails because keys, signatures or access are unavailable.',
     ],
     secondHeading: 'Give the Champlin address rather than a river-crossing landmark',
     secondParagraphs: [
@@ -238,7 +238,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'If a Crystal vehicle needs to leave an apartment, business or other shared lot, tell us the deadline when you first contact us. Identify who controls access, where the car is parked, and whether another vehicle or gate blocks it. A message requesting pickup does not establish a booked appointment.',
       'Ask the property manager how a truck can enter and where loading is permitted. Share any clearance or check-in requirement before accepting a pickup window. Property permission and permission to sell the car are different matters, so have the ownership information available too.',
-      'Compare offers with the complete removal arrangement included. Ask about any charge, the payment method and what could change the amount if the car differs from its description. Once you accept, remove your belongings and arrange for keys and documents to be available when needed.',
+      'Compare offers with the complete removal arrangement included. Tow-away is free when we buy; ask about the payment method and what could change the amount if the car differs from its description. Once you accept, remove your belongings and arrange for keys and documents to be available when needed.',
     ],
     secondHeading: 'Review a Crystal vehicle in its present condition',
     secondParagraphs: [
@@ -252,7 +252,7 @@ export const recoveredAreas: ServiceArea[] = [
     ],
     question: 'Can you guarantee pickup before my Crystal parking deadline?',
     answer:
-      'We review the vehicle, access and available schedule before confirming a window. Tell us the deadline early; do not assume same-day dispatch from an inquiry.',
+      'We review the vehicle, access and available schedule before confirming a window. Tell us the deadline early; same-day pickup is often available.',
     secondQuestion: 'Should I move my Crystal car to another lot while waiting for an offer?',
     secondAnswer:
       'Describe its current location first. A separate move may create expense and requires property permission. We review the actual vehicle, address, and access before confirming whether pickup can be arranged.',
@@ -269,7 +269,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'When requesting an offer for a New Hope vehicle with collision damage, tell us about the wheels, suspension and steering as well as visible body damage. A car may start but still be unsuitable to drive or roll. Current photos from a safe distance help explain the condition without moving it.',
       'Mention leaking fluids, loose body panels or parts removed by a shop. Do not handle leaking materials or crawl beneath the vehicle to investigate. If the car is at a repair facility, arrange release with the shop before a buyer’s pickup appointment.',
-      'Disclose any insurer or lender involvement and confirm your authority to sell before accepting terms. We discuss the vehicle, documents, any removal charge and the pickup window directly. Keep the accepted agreement and completed transaction records privately after the sale.',
+      'Disclose any insurer or lender involvement and confirm your authority to sell before accepting terms. We discuss the vehicle, documents and the pickup window directly; tow-away is free when we buy. Keep the accepted agreement and completed transaction records privately after the sale.',
     ],
     secondHeading: 'Give the usable entrance for a New Hope pickup',
     secondParagraphs: [
@@ -300,7 +300,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'Before scheduling removal of a Robbinsdale car, separate the paperwork question from the key question. A missing key can affect door access, steering and loading; a missing title affects ownership documentation. Tell us about both rather than discovering either issue when the truck arrives.',
       'Check the actual parking setting, including a garage exit, alley entrance or vehicle blocking the approach. Report whether every wheel is present and whether the car rolls, if you already know. There is no need to test movement on a slope or enter an unsafe space to answer.',
-      'A review can begin with the year, make, model, condition and location. We then discuss what is needed to move forward, the amount payable after any removal charge, and a pickup window. Arrange signatures, keys and property access before the agreed time and remove personal items beforehand.',
+      'A review can begin with the year, make, model, condition and location. We then discuss what is needed to move forward, the amount payable, and a pickup window. Arrange signatures, keys and property access before the agreed time and remove personal items beforehand.',
     ],
     secondHeading: 'Make the Robbinsdale approach clear before the handoff',
     secondParagraphs: [
@@ -362,7 +362,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'A New Brighton vehicle can be ready to load while its ownership documents still need attention. Check the names on the title, disclose a lender’s interest and explain whether the title is missing. Do not sign blank documents or assume a registration card replaces an existing title.',
       'New Brighton’s municipal License Bureau publishes vehicle-sale and specialty-plate guidance. Use its official information or Minnesota DVS for the paperwork process, while Merritt’s confirms its own transaction requirements. Reporting a sale and completing a title transfer are not interchangeable tasks.',
-      'Once documents and authority are clear, coordinate access to the vehicle. Explain garages, ramps, gates and wheel condition before scheduling. Compare the amount payable, any pickup charge and payment timing before accepting an offer, and keep copies of completed transaction records.',
+      'Once documents and authority are clear, coordinate access to the vehicle. Explain garages, ramps, gates and wheel condition before scheduling. Compare the amount payable and payment timing before accepting an offer, and keep copies of completed transaction records.',
     ],
     secondHeading: 'Locate the New Brighton vehicle beyond the freeway landmark',
     secondParagraphs: [
@@ -386,14 +386,14 @@ export const recoveredAreas: ServiceArea[] = [
     slug: 'osseo',
     city: 'Osseo',
     description:
-      'Contact Merritt’s about an Osseo car at its actual storage address. Review shared-driveway access, missing parts, payment, and any pickup charges before agreeing.',
+      'Contact Merritt’s about an Osseo car at its actual storage address. Review shared-driveway access, missing parts, payment before agreeing.',
     intro:
       'Have an unwanted car in Osseo? Start with a call or text to Merritt’s. We review the condition and parking setting before discussing an offer and pickup.',
     heading: 'Use the vehicle location rather than an approximate meeting point',
     paragraphs: [
       'For an Osseo pickup, give the place where the vehicle is stored rather than proposing a nearby parking lot as a meeting point. Moving a disabled car can create extra expense or unsafe conditions. The offer and loading plan should be based on its present position.',
       'Tell us if the car is behind a building, blocked by another vehicle or accessed through a shared drive. A photo of the approach can clarify a narrow turn or garage entrance. Coordinate access with the property owner and keep private codes out of public photos.',
-      'Share current damage, missing parts, key status and the ownership documents you have. We discuss what you would receive after any agreed pickup charge and how payment will be handled. Do not remove components or relocate the car after accepting the terms without checking with the buyer.',
+      'Share current damage, missing parts, key status and the ownership documents you have. We discuss what you would receive and how payment will be handled. Do not remove components or relocate the car after accepting the terms without checking with the buyer.',
     ],
     secondHeading: 'Clarify the Osseo property and access contact',
     secondParagraphs: [
@@ -424,7 +424,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'When a Dayton property has multiple entrances, an outbuilding or a car stored away from the main drive, explain which approach reaches the vehicle. Tell us about gates, overhead obstacles, slopes and the ground surface. The driver needs the loading route, not only the nearest street.',
       'If the car cannot roll or steer, share that before scheduling. Do not release brakes, jack up the vehicle or attempt to drag it into a more visible position. Safe photographs and a clear account of what is blocked help the operator review appropriate equipment.',
-      'Confirm the title and key situation, the amount you would receive and any pickup charges in the same discussion. A property cleanout deadline should be raised at the start, but the appointment is agreed only after the vehicle and access have been reviewed.',
+      'Confirm the title and key situation, the amount you would receive in the same discussion. A property cleanout deadline should be raised at the start, but the appointment is agreed only after the vehicle and access have been reviewed.',
     ],
     secondHeading: 'Plan for Dayton’s river-area and residential locations',
     secondParagraphs: [
@@ -448,7 +448,7 @@ export const recoveredAreas: ServiceArea[] = [
     slug: 'elk-river',
     city: 'Elk River',
     description:
-      'Compare an Elk River junk-car offer using the actual pickup address, missing components, documents, and removal costs. Discuss the complete arrangement with Merritt’s.',
+      'Compare an Elk River junk-car offer using the actual pickup address, missing components and documents. Cash on the spot and free tow-away when Merritt’s buys.',
     intro:
       'Contact Merritt’s about an unwanted vehicle in Elk River. A vehicle-specific review covers the car’s condition, paperwork, loading access and pickup terms.',
     heading: 'Compare the complete offer for a surrounding-community pickup',
@@ -465,11 +465,11 @@ export const recoveredAreas: ServiceArea[] = [
     details: [
       'Compare offers using the same pickup address.',
       'Disclose missing mechanical components.',
-      'Ask about removal charges and payment timing.',
+      'Tow-away is free when we buy your car.',
     ],
     question: 'Does the pickup location affect an Elk River offer?',
     answer:
-      'Location and loading access are part of the review. Ask for the amount you would receive after any agreed charges rather than comparing headline amounts alone.',
+      'Location and loading access are part of the review. Ask for the amount you would receive rather than comparing headline amounts alone.',
     secondQuestion:
       'Can I ask about a vehicle outside Elk River with an Elk River mailing address?',
     secondAnswer:
@@ -487,7 +487,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'If your Otsego vehicle is stored at a property where you will not be present, discuss that before an appointment. Signatures, identification, key handoff and authority to sell still need to be arranged. Leaving keys inside the car is not a substitute for an agreed transaction.',
       'Tell us who can authorize access and whether a gate or another vehicle blocks the approach. Explain the surface, wheel condition and whether the vehicle can steer. Share gate codes privately only when needed rather than including them in photographs or public messages.',
-      'Confirm the offer, any removal charge, payment arrangements and pickup contact together. Remove belongings before the window and notify us if the car’s location or condition changes. An accurate plan reduces the chance of a truck arriving when essential documents or property access are unavailable.',
+      'Confirm the offer, payment arrangements and pickup contact together. Remove belongings before the window and notify us if the car’s location or condition changes. An accurate plan reduces the chance of a truck arriving when essential documents or property access are unavailable.',
     ],
     secondHeading: 'Use the Otsego storage location rather than a nearby city name',
     secondParagraphs: [
@@ -518,7 +518,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'For a Monticello car parked for a long period, report what has changed since it last ran. Tires may be flat, wheels may not move and parts may have been removed. Current photos and known symptoms are more helpful than assuming its old condition still applies.',
       'Describe any garage, gate, surface or slope affecting access. Seasonal ground conditions and a blocked approach should be raised before scheduling. Do not attempt a jump-start, fluid handling or improvised towing if the vehicle is unsafe; a review can begin from its current condition.',
-      'Locate ownership documents early and explain any lender or previous-owner issue. Ask about the complete offer and any removal charge for the actual address. Once accepted, agree on the pickup window and arrange for the keys, authorized person and property access to be available.',
+      'Locate ownership documents early and explain any lender or previous-owner issue. Ask about the complete offer for the actual address. Once accepted, agree on the pickup window and arrange for the keys, authorized person and property access to be available.',
     ],
     secondHeading: 'Distinguish the Monticello address from surrounding properties',
     secondParagraphs: [
@@ -549,7 +549,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'Before removing parts from your St. Michael vehicle, compare an offer for the car as it stands with the effort and expense of dismantling it. Missing wheels or drivetrain components can make loading more difficult. A higher separate part price does not automatically improve the total result.',
       'If a shop has already removed components, list them and explain where they are stored. Tell us whether the car rolls and steers and whether it remains on a lift, in a garage or in an accessible lot. The loading arrangement must reflect the actual setting.',
-      'After accepting an offer, tell the buyer before changing the car’s condition or location. Confirm any pickup charges, required documents and payment arrangements together. Coordinate access with the property holder and remove belongings before the agreed pickup window.',
+      'After accepting an offer, tell the buyer before changing the car’s condition or location. Confirm required documents and payment arrangements together. Coordinate access with the property holder and remove belongings before the agreed pickup window.',
     ],
     secondHeading: 'Identify the St. Michael property and actual loading position',
     secondParagraphs: [
@@ -580,7 +580,7 @@ export const recoveredAreas: ServiceArea[] = [
     paragraphs: [
       'For an Albertville car used by a family member or stored at someone else’s home, identify the titled owner and the person controlling property access. The person requesting an offer may need someone else to provide signatures or keys. Sort out those roles before committing to a pickup date.',
       'Describe the current condition directly, including damage, missing parts and whether the wheels and steering move. When another person supplies the photographs, make sure they show the current car and its actual loading approach rather than an older location.',
-      'Ask what would be paid after any removal charge, how payment is handled and which documents must be ready. Coordinate everyone’s availability with the pickup window. An inquiry is a chance to compare options; you decide whether to proceed when the vehicle and transaction details are clear.',
+      'Ask what would be paid, how payment is handled and which documents must be ready. Coordinate everyone’s availability with the pickup window. An inquiry is a chance to compare options; you decide whether to proceed when the vehicle and transaction details are clear.',
     ],
     secondHeading: 'Make an Albertville business or home pickup specific',
     secondParagraphs: [

@@ -4,12 +4,10 @@ import { business, publishedRoutes, serviceAreas, services } from '@/data/site';
 import { serviceRegions, regionalRoutes } from '@/data/service-regions';
 
 const modified = new Map<string, string>([
-  ['/', '2026-10-16'], ['/get-a-quote', '2026-10-16'], ['/service-areas', '2026-10-16'], ['/service-regions', '2026-10-16'],
-  ['/about', '2026-10-07'], ['/reviews', '2026-10-07'], ['/faq', '2026-10-07'], ['/guides', '2026-10-16'], ['/contact', '2026-10-16'],
-  ...services.map((service): [string, string] => [`/${service.slug}`, '2026-10-16']),
-  ...serviceAreas.map((area): [string, string] => [`/service-areas/${area.slug}`, '2026-10-16']),
-  ['/service-areas/maple-grove', '2026-11-01'], ['/service-areas/st-paul', '2026-11-01'],
-  ['/service-areas/buffalo', '2026-11-01'], ['/service-areas/princeton', '2026-11-01'],
+  ['/', '2026-11-21'], ['/get-a-quote', '2026-11-21'], ['/service-areas', '2026-10-16'], ['/service-regions', '2026-10-16'],
+  ['/about', '2026-10-07'], ['/reviews', '2026-10-07'], ['/faq', '2026-11-21'], ['/guides', '2026-10-16'], ['/contact', '2026-10-16'],
+  ...services.map((service): [string, string] => [`/${service.slug}`, '2026-11-21']),
+  ...serviceAreas.map((area): [string, string] => [`/service-areas/${area.slug}`, '2026-11-21']),
   ...serviceRegions.map((region): [string, string] => [`/service-regions/${region.slug}`, region.updated]),
   ...guides.map((guide): [string, string] => [`/guides/${guide.slug}`, guide.updatedIso ?? '2026-08-23']),
 ]);

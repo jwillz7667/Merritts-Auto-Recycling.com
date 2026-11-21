@@ -23,7 +23,7 @@ export const eastAreas: ServiceArea[] = [
         heading: 'Review the car before paying to make it move',
         paragraphs: [
           'A failed engine, slipping transmission, or collision can make keeping a car difficult to justify. Describe the problem you already know about, including removed parts or damaged wheels. You do not need a new diagnosis to start an inquiry. Tell us whether the car starts, rolls, and steers, but do not test an unsafe vehicle just to complete a checklist.',
-          'If the vehicle is at a Maplewood repair shop, confirm who holds the keys and what the shop requires to release it. Share any storage deadline early, then coordinate that deadline with an agreed appointment. Compare the amount you would receive after any agreed removal charges, and confirm the ownership paperwork before accepting an offer or arranging a separate tow.',
+          'If the vehicle is at a Maplewood repair shop, confirm who holds the keys and what the shop requires to release it. Share any storage deadline early, then coordinate that deadline with an agreed appointment. Compare the amount you would receive, and confirm the ownership paperwork before accepting an offer or arranging a separate tow.',
         ],
       },
     ],
@@ -69,7 +69,7 @@ export const eastAreas: ServiceArea[] = [
         heading: 'Separate a flat tire from a vehicle that cannot roll',
         paragraphs: [
           'When an Oakdale vehicle has been unused for months, a dead battery may be only part of the picture. Tell us about visibly flat tires, a missing wheel, or steering that you know is locked. Report what you can safely observe without lifting the vehicle or releasing brakes. Those details affect the loading review even if the engine problem seems straightforward.',
-          'Have the year, make, model, title status, and key availability ready for the first conversation. Include current photos and identify any parts already removed. Once the car and location are understood, ask about the full offer, any pickup charge, and the documents needed to complete the sale. Scheduling follows that agreement; an online inquiry alone does not reserve a truck.',
+          'Have the year, make, model, title status, and key availability ready for the first conversation. Include current photos and identify any parts already removed. Once the car and location are understood, ask about the full offer, and the documents needed to complete the sale. Scheduling follows that agreement; an online inquiry alone does not reserve a truck.',
         ],
       },
     ],
@@ -115,7 +115,7 @@ export const eastAreas: ServiceArea[] = [
         heading: 'Confirm a Cottage Grove pickup before making a deadline commitment',
         paragraphs: [
           'Whether the address is near Highway 61 or elsewhere in Cottage Grove, provide the full location instead of assuming proximity to a main road establishes availability. Mention gates, limited access hours, and any deadline for clearing the space. Those details belong in the initial discussion so the route and loading setting can be considered before an appointment is promised.',
-          'Before accepting, ask which documents are required, how keys will be handed over, and whether a removal charge applies to the agreed price. If another person owns the vehicle, explain that relationship rather than signing on their behalf without a confirmed basis. Remove personal items once a sale is arranged, and retain the transaction records you receive at completion.',
+          'Before accepting, ask which documents are required, how keys will be handed over,. If another person owns the vehicle, explain that relationship rather than signing on their behalf without a confirmed basis. Remove personal items once a sale is arranged, and retain the transaction records you receive at completion.',
         ],
       },
     ],
@@ -161,7 +161,7 @@ export const eastAreas: ServiceArea[] = [
         heading: 'Coordinate paperwork and access at the White Bear Lake address',
         paragraphs: [
           'Give the complete pickup address, including a separate driveway entrance if the street number leads to a different part of the property. In a shared building, confirm who can open the garage and authorize access. Explain any narrow approach, overhead restriction, or gate when you first contact us. A familiar neighborhood name does not replace those practical details.',
-          'Find the ownership documents and ask about anything that is missing or has a different name before scheduling. Keys and title documents answer different questions, so report the status of each. Confirm the offered amount, any pickup charges, and who needs to participate in the transaction. This preparation lets you make a decision with the complete terms in front of you.',
+          'Find the ownership documents and ask about anything that is missing or has a different name before scheduling. Keys and title documents answer different questions, so report the status of each. Confirm the offered amount, and who needs to participate in the transaction. This preparation lets you make a decision with the complete terms in front of you.',
         ],
       },
     ],
@@ -207,7 +207,7 @@ export const eastAreas: ServiceArea[] = [
         heading: 'Make the offer specific to your Stillwater vehicle',
         paragraphs: [
           'Tell us the year, make, model, major faults, and whether the engine and transmission are present. For collision damage, include pictures of the affected wheels and corners without approaching fluid spills or unstable panels. An old repair estimate can explain the reason for selling, but current condition and completeness are the information needed for a useful purchase discussion.',
-          'Share the exact address and any property access deadline at the start. Pickup from Stillwater is discussed directly rather than guaranteed by a general service-area listing. Before accepting, review the amount you would receive after any agreed removal charges and clarify the documents and key handoff. If the vehicle is at a shop, arrange its release independently with the business holding it.',
+          'Share the exact address and any property access deadline at the start. Pickup from Stillwater is discussed directly rather than guaranteed by a general service-area listing. Before accepting, review the amount you would receive and clarify the documents and key handoff. If the vehicle is at a shop, arrange its release independently with the business holding it.',
         ],
       },
     ],
@@ -225,7 +225,7 @@ export const eastAreas: ServiceArea[] = [
       {
         question: 'Is a Stillwater pickup automatically free?',
         answer:
-          'Ask about removal terms for the exact car and address. Any charge and the amount you would receive should be confirmed directly before you accept an offer.',
+          'Ask about removal terms for the exact car and address. When we buy your car, the tow-away is free. Confirm the amount you would receive before you accept.',
       },
     ],
     nearby: ['oakdale', 'woodbury', 'white-bear-lake', 'forest-lake'],
@@ -260,7 +260,7 @@ export const eastAreas: ServiceArea[] = [
     details: [
       'Provide the full address and a description of the correct driveway.',
       'Mention gates, turn-around limits, and soft ground.',
-      'Agree on availability and any removal charges before committing.',
+      'Agree on availability before committing.',
     ],
     faqs: [
       {
@@ -299,7 +299,7 @@ export const eastAreas: ServiceArea[] = [
         heading: 'Disclose the condition that affects loading and value',
         paragraphs: [
           'Tell us whether the car starts, rolls, and steers, along with any collision damage or removed components. A running engine does not make a damaged wheel or suspension safe to use. Send current pictures instead of attempting to demonstrate operation. If the vehicle sits in a gated area, explain how authorized access will be coordinated without sharing codes in public messages.',
-          'For a car at a repair shop in Inver Grove Heights, confirm its release process and who has the keys before scheduling. Discuss any deadline, offered amount, removal charge, and required documents with us as a complete set of terms. You can compare those details with your other options before accepting. Wait for an agreed pickup window before promising a property owner that the space will be cleared.',
+          'For a car at a repair shop in Inver Grove Heights, confirm its release process and who has the keys before scheduling. Discuss any deadline, offered amount, and required documents with us as a complete set of terms. You can compare those details with your other options before accepting. Wait for an agreed pickup window before promising a property owner that the space will be cleared.',
         ],
       },
     ],
@@ -345,7 +345,7 @@ export const eastAreas: ServiceArea[] = [
         heading: 'Keep vehicle condition and transaction details clear',
         paragraphs: [
           'If the vehicle failed inspection at a shop, stopped starting, or became too expensive to repair, describe the known problem in plain terms. Include the year, make, model, completeness, and current photos. Do not pay for a new diagnostic visit just to request an offer. Also report flat tires, locked steering, or damage that prevents normal rolling, since these affect pickup.',
-          'Review the title and key status before accepting a sale. If the paperwork is missing, lists someone else, or raises a lien question, explain that at the start so the next steps can be discussed. Ask for the offered amount and any removal charges together. Agree on the document handoff, contact person, and appointment window before coordinating access with a property manager or repair shop.',
+          'Review the title and key status before accepting a sale. If the paperwork is missing, lists someone else, or raises a lien question, explain that at the start so the next steps can be discussed. Ask for the offered amount together. Agree on the document handoff, contact person, and appointment window before coordinating access with a property manager or repair shop.',
         ],
       },
     ],
@@ -391,7 +391,7 @@ export const eastAreas: ServiceArea[] = [
         heading: 'Selling a damaged or long-unused South St. Paul car',
         paragraphs: [
           'Describe the vehicle as it is today rather than how it ran before a breakdown. Include the year, make, model, known faults, and any components already removed. An engine that will not start is different from a car with damaged suspension, and both details matter. You can request a review without repairing the car or attempting an unsafe test drive.',
-          'Check whose name appears on the ownership documents and whether keys are available. If the vehicle is part of an estate, a business, or another person’s belongings, explain the situation before planning removal. Once authority and access are clear, confirm the cash offer, any removal charge, and the pickup window. Keep your transaction records and arrange the agreed document handoff before the appointment.',
+          'Check whose name appears on the ownership documents and whether keys are available. If the vehicle is part of an estate, a business, or another person’s belongings, explain the situation before planning removal. Once authority and access are clear, confirm the cash offer, and the pickup window. Keep your transaction records and arrange the agreed document handoff before the appointment.',
         ],
       },
     ],
@@ -437,7 +437,7 @@ export const eastAreas: ServiceArea[] = [
         heading: 'Work through missing keys and a car that no longer starts',
         paragraphs: [
           'A dead battery, lost key, and locked steering are different issues, even when they all leave a car sitting in the same spot. For your North St. Paul vehicle, report the problems you know about and whether all wheels are present. Do not force the ignition, release brakes, or jack up the car to investigate. Describe uncertainty instead of risking damage or injury.',
-          'Ownership documents also need their own review. Tell us whether the title is available and whether the person selling is the named owner. If something is missing or unclear, discuss it before setting a deadline. Confirm the offered amount, any agreed pickup charge, required paperwork, and key handoff together. You can then decide whether the complete transaction makes sense for your vehicle.',
+          'Ownership documents also need their own review. Tell us whether the title is available and whether the person selling is the named owner. If something is missing or unclear, discuss it before setting a deadline. Confirm the offered amount, required paperwork, and key handoff together. You can then decide whether the complete transaction makes sense for your vehicle.',
         ],
       },
     ],

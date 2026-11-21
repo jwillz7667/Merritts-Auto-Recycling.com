@@ -25,14 +25,14 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Describe the vehicle before arranging a handoff',
         paragraphs: [
           'Tell us the year, make, model, known mechanical issue, and whether the engine, transmission, and wheels remain with the vehicle. A truck parked behind an outbuilding may need a different approach from a car in a paved driveway. Mention soft ground, a gate, or another vehicle blocking the way.',
-          'Have the title and key status ready for the conversation, and explain any lien or difference between the owner’s name and the person making the inquiry. Once the vehicle and location have been reviewed, confirm the purchase terms, any removal charges, and who will provide access before accepting a pickup window.',
+          'Have the title and key status ready for the conversation, and explain any lien or difference between the owner’s name and the person making the inquiry. Once the vehicle and location have been reviewed, confirm the purchase terms, and who will provide access before accepting a pickup window.',
         ],
       },
     ],
     details: [
       'Send the exact address and usable driveway entrance.',
       'Report gravel, soft ground, gates, and blocked access.',
-      'Confirm the offer and any removal charges before scheduling.',
+      'Confirm the offer before scheduling.',
     ],
     faqs: [
       {
@@ -163,7 +163,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Coordinate a stranded or shop-held vehicle carefully',
         paragraphs: [
           'After a breakdown, tell us whether the vehicle is still on a property where it may remain while arrangements are reviewed. A purchase inquiry does not replace emergency roadside assistance or permission to occupy a parking space. Explain any deadline at the outset, and wait for a confirmed window before notifying the property.',
-          'For a car already at a repair shop, clarify the release process, keys, and any disassembled components. Have the ownership documents available and disclose a lien or another named owner. Review the final purchase terms and any removal charges together, so you can compare the actual outcome before accepting the sale.',
+          'For a car already at a repair shop, clarify the release process, keys, and any disassembled components. Have the ownership documents available and disclose a lien or another named owner. Review the final purchase terms together, so you can compare the actual outcome before accepting the sale.',
         ],
       },
     ],
@@ -209,7 +209,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Review stored vehicles without dismantling them',
         paragraphs: [
           'An unused truck may have a dead battery or flat tires even if it ran when parked. Report the present condition and any parts already removed, rather than relying on its last running date. You do not need to buy a battery or start taking components apart to ask about an offer.',
-          'For several vehicles on one property, send separate details and ownership information for each. Different conditions or documents can lead to different decisions, and each loading position needs review. Confirm acceptance, the offer, any removal charges, and address-level pickup availability before planning a property cleanout around an appointment.',
+          'For several vehicles on one property, send separate details and ownership information for each. Different conditions or documents can lead to different decisions, and each loading position needs review. Confirm acceptance, the offer, and address-level pickup availability before planning a property cleanout around an appointment.',
         ],
       },
     ],
@@ -301,7 +301,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Give a realistic account of a stored car or truck',
         paragraphs: [
           'If the vehicle has been parked for years, describe its condition today. Note flat tires, locked wheels, body damage, and whether major parts remain installed. Photos of the vehicle and its surroundings are more useful than attempting to start it with improvised repairs or pulling it out with another vehicle.',
-          'Find the title and explain the key situation before accepting an offer. If the registered owner is unavailable or the vehicle belongs to an estate, disclose that early so the paperwork can be addressed properly. Confirm the accepted condition, any removal charges, and the access contact before a pickup window is agreed.',
+          'Find the title and explain the key situation before accepting an offer. If the registered owner is unavailable or the vehicle belongs to an estate, disclose that early so the paperwork can be addressed properly. Confirm the accepted condition, and the access contact before a pickup window is agreed.',
         ],
       },
     ],
@@ -347,7 +347,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Avoid turning a sale inquiry into an extra repair project',
         paragraphs: [
           'A non-running car can be described as it stands. Explain the known mechanical problem, whether the wheels turn, and whether the steering and transmission are locked. You do not need to buy replacement tires, charge a battery, or drive an unsafe car in order to ask about selling it.',
-          'Have the title and key details available, and identify who can authorize the sale and truck access. If the vehicle is in a shared driveway or managed parking area, coordinate permission with the responsible person. Confirm the final offer and any removal charges before accepting the proposed pickup arrangement.',
+          'Have the title and key details available, and identify who can authorize the sale and truck access. If the vehicle is in a shared driveway or managed parking area, coordinate permission with the responsible person. Confirm the final offer before accepting the proposed pickup arrangement.',
         ],
       },
     ],
@@ -439,7 +439,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Describe pickups from shops and rural storage',
         paragraphs: [
           'A car at a Milaca repair shop may have parts removed or be stored where loading is allowed only during certain hours. Ask the shop about release and where the vehicle sits. Share those details along with the known failure, completeness, and ability to roll and steer before discussing pickup.',
-          'For a truck stored on a rural property, describe the drive, gate, parking surface, and available approach. Do not dismantle it or drag it toward the road while waiting for a response. Once reviewed, confirm the offer, any removal charges, accepted condition, and access arrangements before agreeing to the sale.',
+          'For a truck stored on a rural property, describe the drive, gate, parking surface, and available approach. Do not dismantle it or drag it toward the road while waiting for a response. Once reviewed, confirm the offer, accepted condition, and access arrangements before agreeing to the sale.',
         ],
       },
     ],
@@ -485,7 +485,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Make a clear inventory for a property cleanout',
         paragraphs: [
           'If more than one vehicle needs attention, list the year, make, model, condition, and documents for each. A complete truck and a partially dismantled car are separate inquiries, even when stored together. Explain missing wheels, engines, or transmissions so the equipment and purchase discussion reflect what is actually present.',
-          'Identify the legal owner or authorized representative before agreeing to sell a vehicle found during a cleanout. Keep personal belongings separate and ask about title or lien questions early. Once the review is complete, confirm the individual offers, any removal charges, and the access contact before arranging the appointment.',
+          'Identify the legal owner or authorized representative before agreeing to sell a vehicle found during a cleanout. Keep personal belongings separate and ask about title or lien questions early. Once the review is complete, confirm the individual offers, and the access contact before arranging the appointment.',
         ],
       },
     ],
@@ -531,7 +531,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Know what is included in the vehicle sale',
         paragraphs: [
           'For an older truck or SUV, tell us whether the engine, transmission, catalytic converter, and wheels are present. Disclose existing damage and removed components before an offer is agreed. Photographs can clarify the condition, but they do not replace the ownership discussion or confirmation of the actual pickup terms.',
-          'Remove personal belongings when it is safe and explain if the cargo area contains stored materials that are not part of the vehicle. Have the title and key details ready, including any lien or owner-name issue. Confirm the net offer, any removal charges, and the person providing access before accepting an appointment.',
+          'Remove personal belongings when it is safe and explain if the cargo area contains stored materials that are not part of the vehicle. Have the title and key details ready, including any lien or owner-name issue. Confirm the net offer, and the person providing access before accepting an appointment.',
         ],
       },
     ],
@@ -623,7 +623,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Handle a high repair estimate or stored vehicle',
         paragraphs: [
           'If an engine or transmission failure led to the sale, tell us what is known and whether a shop has started taking the vehicle apart. An assembled vehicle and one with its drivetrain removed need different condition reviews. Include whether it rolls, steers, and has every wheel and the keys.',
-          'For a shop-held car, coordinate release and access with the shop before scheduling. For a vehicle at home, identify the legal seller and any title or lien question early. Confirm the accepted condition, actual offer, any removal charges, and appointment contact before relying on a pickup for a parking or storage deadline.',
+          'For a shop-held car, coordinate release and access with the shop before scheduling. For a vehicle at home, identify the legal seller and any title or lien question early. Confirm the accepted condition, actual offer, and appointment contact before relying on a pickup for a parking or storage deadline.',
         ],
       },
     ],
@@ -669,7 +669,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Arrange access for garages and shared parking',
         paragraphs: [
           'A car inside a garage may have a low opening, a narrow exit, or another vehicle behind it. Give the clearance and whether the car rolls and steers. For an apartment, business, or shared driveway, identify who can authorize entry and whether the loading area has restrictions.',
-          'Describe damage and missing parts before accepting an offer, and have the ownership documents available for review. If a family member is helping with the sale, clarify who is the legal owner and who will hand over keys. Confirm the purchase terms, any removal charges, and access arrangements before accepting a pickup window.',
+          'Describe damage and missing parts before accepting an offer, and have the ownership documents available for review. If a family member is helping with the sale, clarify who is the legal owner and who will hand over keys. Confirm the purchase terms, and access arrangements before accepting a pickup window.',
         ],
       },
     ],
@@ -715,7 +715,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Plan for a vehicle you no longer drive',
         paragraphs: [
           'An unused household vehicle can have a dead battery, expired tabs, or a mechanical problem without needing a test drive for an initial inquiry. Tell us what is known, whether the wheels and steering move, and whether all major components are present. Do not drive an unsafe vehicle to obtain an offer.',
-          'Check the title and identify any lien or additional owner before agreeing to sell. If someone else is coordinating access, explain their role and how keys and documents will be provided. Once reviewed, confirm the actual offer, any removal charges, and appointment details before arranging your day around pickup.',
+          'Check the title and identify any lien or additional owner before agreeing to sell. If someone else is coordinating access, explain their role and how keys and documents will be provided. Once reviewed, confirm the actual offer, and appointment details before arranging your day around pickup.',
         ],
       },
     ],
@@ -761,7 +761,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Coordinate a sale when the car is at a business',
         paragraphs: [
           'For a repair-shop vehicle, ask who can authorize release and when the keys and car will be accessible. Explain any parts removed during diagnosis and whether the vehicle is complete enough to roll and steer. A purchase inquiry does not settle a shop balance or authorize entry to its storage lot.',
-          'For a workplace or commercial lot, obtain the responsible person’s permission for pickup access and disclose any removal deadline. Have ownership paperwork ready and discuss any lien or another named owner. Confirm acceptance, the final offer, any removal charges, and a pickup window before promising the space will be cleared.',
+          'For a workplace or commercial lot, obtain the responsible person’s permission for pickup access and disclose any removal deadline. Have ownership paperwork ready and discuss any lien or another named owner. Confirm acceptance, the final offer, and a pickup window before promising the space will be cleared.',
         ],
       },
     ],
@@ -807,7 +807,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Keep key, title, and mechanical issues separate',
         paragraphs: [
           'A car with no working battery may still roll and steer, while a vehicle with missing keys may have locked steering or a locked transmission. Explain each issue rather than describing the vehicle only as non-running. Wheel condition, major damage, and missing components also matter to the pickup review.',
-          'Have the title available and identify any lien or additional owner. If a repair shop holds the car, arrange its release independently and coordinate the keys during opening hours. Confirm address-level availability, the purchase offer, any removal charges, and the pickup window before accepting the arrangement.',
+          'Have the title available and identify any lien or additional owner. If a repair shop holds the car, arrange its release independently and coordinate the keys during opening hours. Confirm address-level availability, the purchase offer, and the pickup window before accepting the arrangement.',
         ],
       },
     ],
@@ -853,7 +853,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Resolve documents and release before committing to pickup',
         paragraphs: [
           'A car left at a shop after a repair estimate needs a clear release plan. Tell us the mechanical issue, whether parts were removed, and when the shop can provide keys and access. Any shop balance or storage requirement remains something to resolve with that business before release.',
-          'If you are moving away or helping a family member, identify the legal seller and available title documents early. Do not leave a vehicle, keys, or paperwork unattended on the assumption that an inquiry created an appointment. Confirm vehicle acceptance, the offer, any removal charges, and the agreed handoff arrangements first.',
+          'If you are moving away or helping a family member, identify the legal seller and available title documents early. Do not leave a vehicle, keys, or paperwork unattended on the assumption that an inquiry created an appointment. Confirm vehicle acceptance, the offer, and the agreed handoff arrangements first.',
         ],
       },
     ],
@@ -899,7 +899,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Plan a cleanout or sale of a long-unused truck',
         paragraphs: [
           'An old truck can look complete while having locked brakes, damaged wheels, or removed drivetrain parts. Tell us its present condition, not only when it last ran. Mention anything missing and whether the bed contains personal belongings or materials that are not included in the vehicle sale.',
-          'Locate the title and identify the legal seller before setting a cleanout schedule. If the vehicle belongs to an estate or another family member, explain the authority and documents available. Confirm acceptance, the individual offer, any removal charges, and the person providing access before agreeing to a pickup window.',
+          'Locate the title and identify the legal seller before setting a cleanout schedule. If the vehicle belongs to an estate or another family member, explain the authority and documents available. Confirm acceptance, the individual offer, and the person providing access before agreeing to a pickup window.',
         ],
       },
     ],
@@ -945,7 +945,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Check the condition after a repair estimate',
         paragraphs: [
           'Tell us the known engine, transmission, electrical, or collision problem, and whether diagnostic work left any parts detached. A vehicle that cannot move under its own power may still roll and steer, while a dismantled one may not. Explain the wheel, key, and steering condition separately so loading can be reviewed.',
-          'Confirm who holds the title, who can sign as the seller, and whether a lien remains. Coordinate any shop balance and vehicle release directly with the shop. Once the car and address have been reviewed, ask about the actual offer, any removal charges, and the agreed pickup window before accepting the sale.',
+          'Confirm who holds the title, who can sign as the seller, and whether a lien remains. Coordinate any shop balance and vehicle release directly with the shop. Once the car and address have been reviewed, ask about the actual offer, and the agreed pickup window before accepting the sale.',
         ],
       },
     ],
@@ -991,7 +991,7 @@ export const historicalAreas: ServiceArea[] = [
         heading: 'Describe the whole vehicle, including long-storage problems',
         paragraphs: [
           'When an older car has sat unused, report flat tires, missing wheels, locked steering, and whether the major components remain installed. A remembered running condition does not show how it can be loaded today. You do not need to buy parts or attempt a makeshift tow just to request a review.',
-          'Have the title and key information available, and explain any lien, estate, or owner-name issue before agreeing to a sale. For multiple vehicles, provide separate condition and ownership details for each. Confirm acceptance, the offer, any removal charges, and the person giving access before relying on a pickup appointment.',
+          'Have the title and key information available, and explain any lien, estate, or owner-name issue before agreeing to a sale. For multiple vehicles, provide separate condition and ownership details for each. Confirm acceptance, the offer, and the person giving access before relying on a pickup appointment.',
         ],
       },
     ],

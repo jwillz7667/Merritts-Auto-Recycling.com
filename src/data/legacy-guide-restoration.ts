@@ -278,9 +278,9 @@ export const restoredMinneapolisGuide: Guide = {
   shortTitle: 'Minneapolis removal and pickup costs',
   seoTitle: "Minneapolis Junk Car Removal: Costs and Pickup | Merritt's",
   description:
-    'Plan junk car removal in Minneapolis. Ask about free pickup, the net offer, apartment and alley access, paperwork, non-running vehicles, and scheduling.',
+    'Junk car removal in Minneapolis is free when you sell to Merritt’s. Cash on the spot, same-day pickup, plus apartment and alley access, paperwork, non-running vehicles, and scheduling.',
   summary:
-    'For a car in a Minneapolis driveway, alley, apartment garage, or repair-shop lot, start with its condition and exact pickup setting. Ask what you would receive and whether removal has a charge before accepting the offer.',
+    'For a car in a Minneapolis driveway, alley, apartment garage, or repair-shop lot, start with its condition and exact pickup setting. Ask what you would receive before accepting the offer. When Merritt’s buys the car, the tow-away is free.',
   publishedIso: '2026-04-08',
   ...updated,
   readingTime: '6 min read',
@@ -288,8 +288,8 @@ export const restoredMinneapolisGuide: Guide = {
     {
       heading: 'Is junk car removal in Minneapolis free?',
       paragraphs: [
-        'Ask whether the offer for your specific car includes pickup and whether any removal or handling charge will be deducted. “Free removal” should be clarified alongside the amount you would receive, the vehicle description, and any conditions. A large advertised amount tells you less than an agreed net offer.',
-        'Merritt’s discusses removal terms after reviewing the vehicle, location, and loading access. Free pickup is not guaranteed for every vehicle or setting. Ask for the complete terms before arranging release from a shop or telling a property manager that collection is scheduled.',
+        'Yes, when you sell the car to Merritt’s. We pay cash on the spot and tow it away free, and same-day pickup is often available. If you only need a car towed and are not selling it, towing-only jobs are charged. With any buyer, compare the amount you actually receive, not a large advertised number.',
+        'Tell us the vehicle, location, and loading access so we can plan the pickup. Confirm the agreed terms before arranging release from a shop or telling a property manager that collection is scheduled.',
       ],
     },
     {
@@ -347,7 +347,7 @@ export const restoredMinneapolisGuide: Guide = {
         'Remove belongings, toll tags, remotes, personal paperwork, and stored keys when safe. Have the agreed documents ready, coordinate gate access, and keep people and pets clear of loading. Keep a receipt and your completed records after handoff.',
       ],
       items: [
-        'Offer, any charges, payment, and documents confirmed',
+        'Offer, payment, and documents confirmed',
         'Pickup window agreed directly with the buyer',
         'Vehicle owner and property access coordinated',
         'Personal items removed safely',

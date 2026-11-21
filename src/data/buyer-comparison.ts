@@ -48,7 +48,7 @@ export const buyerComparisonGuide: BaseGuide & { comparison: BuyerComparison } =
       },
       {
         topic: 'Pickup charges',
-        merritts: 'We explain any removal charge with the offer. Free pickup is not guaranteed for every vehicle or location.',
+        merritts: 'When we buy your car, the tow-away is free. Towing-only jobs, when you are not selling, are charged.',
         merrittsSource: removal,
         competitor: 'Its website advertises free towing and no hidden charges.',
         competitorSource: competitorHome,
@@ -72,7 +72,7 @@ export const buyerComparisonGuide: BaseGuide & { comparison: BuyerComparison } =
       },
       {
         topic: 'Pickup scheduling',
-        merritts: 'We agree on a pickup window after reviewing the vehicle, documents, access, and schedule. Same-day service is not guaranteed.',
+        merritts: 'We agree on a pickup window after reviewing the vehicle, documents, access, and schedule. Same-day pickup is often available.',
         merrittsSource: removal,
         competitor: 'Its website advertises fast pickup and says it works with the customer’s schedule.',
         competitorSource: competitorHome,
