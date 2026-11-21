@@ -23,7 +23,7 @@ export const southAreas: ServiceArea[] = [
         heading: 'Decide what to sell before agreeing to an offer',
         paragraphs: [
           'Start with the year, make, model, mileage if known, and the reason you are selling. A car that overheats, has collision damage, or no longer starts needs a different description from a usable vehicle you simply no longer need. Mention missing parts, wheel problems, and whether the steering works. Accurate information helps the conversation reflect the actual car instead of a generic scrap-price estimate.',
-          'Keep ownership and pickup questions together. Tell us whose name appears on the title, whether a lien is recorded, and whether keys are available. Ask what documents are needed and confirm the amount you would receive, any removal charges, and the pickup window before accepting. After that agreement, remove personal belongings and arrange access to the documents without leaving them in an unattended vehicle.',
+          'Keep ownership and pickup questions together. Tell us whose name appears on the title, whether a lien is recorded, and whether keys are available. Ask what documents are needed and confirm the amount you would receive, and the pickup window before accepting. After that agreement, remove personal belongings and arrange access to the documents without leaving them in an unattended vehicle.',
         ],
       },
     ],
@@ -69,7 +69,7 @@ export const southAreas: ServiceArea[] = [
         heading: 'Compare keeping the vehicle with selling it as it stands',
         paragraphs: [
           'If a repair estimate started the conversation, share the diagnosed problem and whether the vehicle remains complete. You do not need to authorize an engine repair or buy a battery just to ask about selling it. Tell us about accident damage, missing components, and anything the repair shop removed. These details matter more than guessing what another car of the same model sold for online.',
-          'When the car is near Cedar Avenue or elsewhere in Apple Valley, send its precise parking location rather than just the nearest major road. Have title, lien, and key information ready so we can discuss ownership requirements alongside the offer. Before scheduling, confirm what you will receive, any pickup charges, who must be present, and how you will exchange the agreed documents and payment.',
+          'When the car is near Cedar Avenue or elsewhere in Apple Valley, send its precise parking location rather than just the nearest major road. Have title, lien, and key information ready so we can discuss ownership requirements alongside the offer. Before scheduling, confirm what you will receive, who must be present, and how you will exchange the agreed documents and payment.',
         ],
       },
     ],
@@ -115,7 +115,7 @@ export const southAreas: ServiceArea[] = [
         heading: 'Give the details that matter for a truck or larger vehicle',
         paragraphs: [
           'If you are selling a pickup, van, or SUV, include its body style and whether it has a loaded bed or cargo area. Explain damage, removed parts, flat tires, or wheels that may be locked. Personal property and loose materials need their own plan; do not assume everything stored in the vehicle is part of the purchase. Clarify what is included before an offer and removal terms are agreed.',
-          'Lakeville locations near I-35 and those farther from the freeway still require an exact pickup address and a reliable contact. State any deadline early, but keep alternate arrangements open until a window is confirmed. We will discuss title and lien status, keys, the amount offered, and any removal charges with you. Avoid paying for a separate tow to Brooklyn Center before speaking with us about the vehicle where it sits.',
+          'Lakeville locations near I-35 and those farther from the freeway still require an exact pickup address and a reliable contact. State any deadline early, but keep alternate arrangements open until a window is confirmed. We will discuss title and lien status, keys, the amount offered with you. Avoid paying for a separate tow to Brooklyn Center before speaking with us about the vehicle where it sits.',
         ],
       },
     ],
@@ -161,7 +161,7 @@ export const southAreas: ServiceArea[] = [
         heading: 'Treat each vehicle and parking location individually',
         paragraphs: [
           'For two or more unwanted vehicles, send a separate description and photos for each one. One might run while another has missing wheels, a different owner, or incomplete paperwork. Those differences affect the review and loading plan. Listing several vehicles does not establish that they can all be purchased or removed together, so confirm the accepted vehicles and terms individually before preparing the property.',
-          'A location near Highway 52 is still only the beginning of the access instructions. Explain whether the car is at a residence, workplace, repair shop, or storage property, and identify the authorized entrance. Third-party parking may require release arrangements or someone on site. Ask us to clarify the offer, any pickup charges, and payment arrangements before handing over keys or committing to a property-clearance deadline.',
+          'A location near Highway 52 is still only the beginning of the access instructions. Explain whether the car is at a residence, workplace, repair shop, or storage property, and identify the authorized entrance. Third-party parking may require release arrangements or someone on site. Ask us to clarify the offer, and payment arrangements before handing over keys or committing to a property-clearance deadline.',
         ],
       },
     ],
@@ -207,7 +207,7 @@ export const southAreas: ServiceArea[] = [
         heading: 'Explain the property and paperwork before arranging removal',
         paragraphs: [
           'Farmington is in Dakota County, and a mailing address alone may not identify a vehicle parked behind a building or reached from a side entrance. Send directions to its precise position and describe pavement, gravel, grass, gates, or a narrow driveway. If the vehicle is on a business or storage property, confirm who can authorize access and when the entrance will be available to the operator.',
-          'Ownership deserves the same attention as access. A truck used for work may be titled to a business, another family member, or someone who no longer uses the property. Explain that before scheduling and ask which documents are required for the circumstances. Once acceptance is confirmed, review the payment amount, any removal charges, and pickup arrangements together. Do not assume that owning the land gives you authority to sell every vehicle on it.',
+          'Ownership deserves the same attention as access. A truck used for work may be titled to a business, another family member, or someone who no longer uses the property. Explain that before scheduling and ask which documents are required for the circumstances. Once acceptance is confirmed, review the payment amount, and pickup arrangements together. Do not assume that owning the land gives you authority to sell every vehicle on it.',
         ],
       },
     ],
@@ -253,7 +253,7 @@ export const southAreas: ServiceArea[] = [
         heading: 'Make the sale clear before freeing up the parking space',
         paragraphs: [
           'For a vehicle you no longer need, include more than the reason you want the space back. Tell us the year, make, model, mileage if known, and whether the engine, transmission, battery, and wheels are present. Describe collision damage and mechanical failures without guessing at repairs. Changes to the vehicle after an offer, such as removing parts, should be discussed before the agreed appointment.',
-          'Highway 13 is a useful Savage landmark, but pickup instructions should name the exact property and entrance. Keep a phone available during the confirmed window and arrange for agreed keys and documents to be accessible. Discuss title and lien status before accepting, then confirm payment and any removal charges together. If the parking space has a deadline, state it early so timing can be reviewed without assuming immediate availability.',
+          'Highway 13 is a useful Savage landmark, but pickup instructions should name the exact property and entrance. Keep a phone available during the confirmed window and arrange for agreed keys and documents to be accessible. Discuss title and lien status before accepting, then confirm payment together. If the parking space has a deadline, state it early so timing can be reviewed without assuming immediate availability.',
         ],
       },
     ],
@@ -299,7 +299,7 @@ export const southAreas: ServiceArea[] = [
         heading: 'Give useful directions and know the agreed sale terms',
         paragraphs: [
           'For a location near Highway 169 or elsewhere in Shakopee, identify the particular lot entrance and parking area. A business address may lead to a customer entrance that is different from the vehicle storage yard. Include gates, loading restrictions, wheel condition, and whether the car rolls and steers. A photo can clarify the setting without requiring you or shop staff to move a disabled vehicle beforehand.',
-          'Before accepting an offer, discuss who owns the car, title and lien status, and the documents needed for the sale. Ask how payment will be handled, whether removal has any charge, and who needs to be available during pickup. Remove your belongings when the shop permits access, including items in the trunk and glove compartment. Keep the agreed paperwork with the person responsible for completing the transaction.',
+          'Before accepting an offer, discuss who owns the car, title and lien status, and the documents needed for the sale. Ask how payment will be handled, and who needs to be available during pickup. Remove your belongings when the shop permits access, including items in the trunk and glove compartment. Keep the agreed paperwork with the person responsible for completing the transaction.',
         ],
       },
     ],
@@ -345,7 +345,7 @@ export const southAreas: ServiceArea[] = [
         heading: 'Keep the vehicle, contents, and ownership details separate',
         paragraphs: [
           'Long-stored cars often become extra storage. Check for personal belongings, paperwork, tools, or other items you want to keep before the agreed collection. Describe removed vehicle components separately from loose possessions, because the car’s completeness affects its review. If you are helping a relative sell, explain whose name is on the title and who can complete the transaction. Having keys alone does not establish authority to sell.',
-          'When giving directions from Highway 13 or another route through Prior Lake, finish with the precise driveway or parking entrance. Tell us if weather or other vehicles could change access, and mention any deadline before agreeing on a window. Confirm the offer, payment arrangements, any removal charges, and required documents together. You can discuss all of this from the vehicle’s current location without booking an unconfirmed delivery to our Brooklyn Center business.',
+          'When giving directions from Highway 13 or another route through Prior Lake, finish with the precise driveway or parking entrance. Tell us if weather or other vehicles could change access, and mention any deadline before agreeing on a window. Confirm the offer, payment arrangements, and required documents together. You can discuss all of this from the vehicle’s current location without booking an unconfirmed delivery to our Brooklyn Center business.',
         ],
       },
     ],

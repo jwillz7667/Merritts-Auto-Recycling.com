@@ -88,14 +88,14 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Work through the sale with the business based in Brooklyn Center',
     secondParagraphs: [
       'A nearby vehicle still needs a clear description before we can discuss a purchase. Send its year, make, model, known faults, and current photos. Identify missing components, collision damage, and tires that will not hold air. If you are close to Highway 100 or I-694, finish your directions with the actual driveway or parking entrance rather than only naming the highway.',
-      'Before accepting, ask how the vehicle’s condition affects the offer and whether any removal charge applies. Explain whose name is on the title, any recorded lien, and whether keys are available. We can then discuss the required documents, payment arrangements, and who should be present. Keep your belongings and personal paperwork separate from the vehicle until the agreed transaction is completed.',
+      'Before accepting, ask how the vehicle’s condition affects the offer and that tow-away is free when we buy the car. Explain whose name is on the title, any recorded lien, and whether keys are available. We can then discuss the required documents, payment arrangements, and who should be present. Keep your belongings and personal paperwork separate from the vehicle until the agreed transaction is completed.',
     ],
     question: 'Should I bring the car to your Brooklyn Center address?',
     answer:
       'Call first. We can review the vehicle by phone or text and discuss pickup. Do not arrange an unconfirmed drop-off or drive an unsafe vehicle to the business.',
     secondQuestion: 'What should I send before discussing a Brooklyn Center cash offer?',
     secondAnswer:
-      'Send the year, make, model, present condition, current photos, title and key status, and exact parking location. We will review those details and discuss the offer, any removal charges, and the documents needed before scheduling.',
+      'Send the year, make, model, present condition, current photos, title and key status, and exact parking location. We will review those details and discuss the offer, and the documents needed before scheduling.',
     nearby: ['minneapolis', 'brooklyn-park', 'maple-grove'],
   }),
   area({
@@ -109,7 +109,7 @@ export const serviceAreas: ServiceArea[] = [
     paragraphs: [
       'A Minneapolis pickup may start in a driveway, alley, garage, street space, or managed parking area. Explain which entrance reaches the vehicle rather than relying only on its mailing address. A photo of the approach can help explain a tight turn or an obstruction.',
       'For an underground garage or parking ramp, share the posted clearance and whether the vehicle can roll and steer. Do not push it onto a public street or attempt makeshift towing. The loading plan needs to fit the setting and the vehicle.',
-      'If a property manager or another resident controls a gate or shared driveway, arrange authorization before the appointment. We will discuss the offer, any removal charges, and the pickup window together so you know what to expect.',
+      'If a property manager or another resident controls a gate or shared driveway, arrange authorization before the appointment. We will discuss the offer, and the pickup window together so you know what to expect.',
     ],
     details: [
       'Identify the driveway, alley, or garage entrance.',
@@ -119,7 +119,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Keep a disabled Minneapolis vehicle in its current safe position',
     secondParagraphs: [
       'When a Minneapolis car is parked at the curb, explain its location, surrounding traffic, and any signs that affect access. A residential street and an alley behind the same building may require different approaches. Share a deadline or parking concern at the start, but do not move the car into traffic, block an alley, or promise a collection time before we confirm the plan.',
-      'For the offer discussion, describe both the mechanical fault and the vehicle’s completeness. A running engine does not establish that damaged wheels or steering will let the car move normally. Tell us about title and lien status separately from lost keys. Agree on payment, any removal charges, and required paperwork before the appointment, then remove belongings from the cabin, trunk, and storage compartments.',
+      'For the offer discussion, describe both the mechanical fault and the vehicle’s completeness. A running engine does not establish that damaged wheels or steering will let the car move normally. Tell us about title and lien status separately from lost keys. Agree on payment, and required paperwork before the appointment, then remove belongings from the cabin, trunk, and storage compartments.',
     ],
     question: 'Can you pick up a non-running car from a Minneapolis garage?',
     answer:
@@ -150,7 +150,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Bring repair-shop and ownership details into the same conversation',
     secondParagraphs: [
       'If a Saint Paul repair estimate changed your plans for the car, use the diagnosis you already have when contacting us. State what parts are still installed and whether the shop has disassembled anything. Ask the shop about key storage, its release process, and available loading hours. Any outstanding shop balance remains something to resolve with that business before an agreed pickup can proceed.',
-      'Directions from I-94 or I-35E should end at the specific lot or driveway entrance, especially when the vehicle is behind a building. Arrange for an authorized contact to answer access questions during the confirmed window. Before accepting, clarify the amount offered, any removal charge, title and lien status, and documents required. A car being accessible on a property does not establish who can authorize its sale.',
+      'Directions from I-94 or I-35E should end at the specific lot or driveway entrance, especially when the vehicle is behind a building. Arrange for an authorized contact to answer access questions during the confirmed window. Before accepting, clarify the amount offered, title and lien status, and documents required. A car being accessible on a property does not establish who can authorize its sale.',
     ],
     question: 'Do I need to tow my St. Paul car to Brooklyn Center first?',
     answer:
@@ -181,7 +181,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Separate the vehicle from the things stored around it',
     secondParagraphs: [
       'A car beside a garage or behind a fence may have become a place to keep tools or household items. Explain what needs to be removed and whether belongings outside it block the approach. For a Brooklyn Park location near Highway 252 or Highway 169, identify the actual residential or business entrance. A map pin does not show a locked gate, a narrow side yard, or another car in the way.',
-      'Use recent photos rather than pictures from when the vehicle was driven regularly. Tell us if the engine, transmission, battery, or wheels have been removed since then. If someone else is named on the title, explain their involvement before scheduling. We will discuss the vehicle’s accepted condition, payment, paperwork, and any removal charges together; let us know if the car changes after you agree to the offer.',
+      'Use recent photos rather than pictures from when the vehicle was driven regularly. Tell us if the engine, transmission, battery, or wheels have been removed since then. If someone else is named on the title, explain their involvement before scheduling. We will discuss the vehicle’s accepted condition, payment, paperwork together; let us know if the car changes after you agree to the offer.',
     ],
     question: 'Does my Brooklyn Park car need a working battery?',
     answer:
@@ -233,7 +233,7 @@ export const serviceAreas: ServiceArea[] = [
     paragraphs: [
       'If your Plymouth vehicle is inside a garage, report the doorway or ramp clearance and whether the car is facing toward the exit. Also tell us whether it has all its wheels, rolls, and steers. These details help determine whether a pickup can be arranged safely.',
       'At an apartment, condominium, or workplace, the address may not identify the correct loading location. Share the parking area and ask who can authorize access. A locked gate or a requirement to collect keys from an office needs to be coordinated in advance.',
-      'An offer should account for the vehicle as it stands. Mention a failed transmission, engine problem, collision damage, or missing components before deciding. Ask us to clarify the removal terms and any charges before agreeing to the sale.',
+      'An offer should account for the vehicle as it stands. Mention a failed transmission, engine problem, collision damage, or missing components before deciding. When we buy it, tow-away is free; confirm the offer before agreeing to the sale.',
     ],
     details: [
       'Describe the garage exit, ramp, and vehicle orientation.',
@@ -243,7 +243,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Know what the garage photos need to show',
     secondParagraphs: [
       'A close-up of the car alone may not explain how it can leave a Plymouth garage. Show the door or ramp, the space around the vehicle, and any turn between it and the exit. Include posted clearance where available. Explain whether the car faces inward or outward and whether another resident’s vehicle blocks it. You do not need to reposition the car to take useful access photographs.',
-      'For a property reached from Highway 55 or I-494, provide the exact entrance and parking level rather than relying on a nearby interchange. If keys are held in a management office, coordinate its availability before agreeing on timing. Keep ownership documents with the authorized seller, and discuss liens, signatures, payment, and any removal charge in advance. Building access and authority to sell the vehicle are separate parts of the arrangement.',
+      'For a property reached from Highway 55 or I-494, provide the exact entrance and parking level rather than relying on a nearby interchange. If keys are held in a management office, coordinate its availability before agreeing on timing. Keep ownership documents with the authorized seller, and discuss liens, signatures, payment in advance. Building access and authority to sell the vehicle are separate parts of the arrangement.',
     ],
     question: 'What should I send about a Plymouth vehicle in a parking ramp?',
     answer:
@@ -274,7 +274,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Prepare an accurate truck description before discussing value',
     secondParagraphs: [
       'For a Blaine pickup truck, tell us whether it has a regular, extended, or crew cab if known, and describe the bed and any major body damage. For a van, explain whether seats or cargo equipment remain inside. Describe what you intend to keep before an offer is agreed. Loose tools, household storage, or materials in the cargo area should not be assumed to be part of a vehicle purchase.',
-      'Highway 65 may help describe the general area, but loading requires the exact driveway or lot entrance. Explain whether the vehicle is on firm ground and whether its wheels turn, even if the engine runs. Have title, lien, and key information ready, and mention a business-owned truck at the start. Confirm payment, any removal charge, and access preparations before committing to the sale or clearing a work schedule for pickup.',
+      'Highway 65 may help describe the general area, but loading requires the exact driveway or lot entrance. Explain whether the vehicle is on firm ground and whether its wheels turn, even if the engine runs. Have title, lien, and key information ready, and mention a business-owned truck at the start. Confirm payment, and access preparations before committing to the sale or clearing a work schedule for pickup.',
     ],
     question: 'Will you consider a non-running truck in Blaine?',
     answer:
@@ -305,7 +305,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Explain missing keys without guessing about the paperwork',
     secondParagraphs: [
       'A missing ignition key may affect steering or transmission access even when the doors open normally. Describe which keys you have and what remains locked; do not force a shifter or try to defeat a steering lock. For a Coon Rapids vehicle with flat or missing tires, photograph it from a safe standing position. There is no need to lift the car or place yourself underneath it for an initial review.',
-      'Give the precise parking location and entrance, including whether it is near Highway 10 but reached from another road. Tell us if access depends on another household member or a management office. Title, lien, and authority-to-sell questions must be discussed separately from how the car will load. Once those issues are clear, confirm the offer, any removal charges, payment arrangements, and what must be available during the agreed pickup window.',
+      'Give the precise parking location and entrance, including whether it is near Highway 10 but reached from another road. Tell us if access depends on another household member or a management office. Title, lien, and authority-to-sell questions must be discussed separately from how the car will load. Once those issues are clear, confirm the offer, payment arrangements, and what must be available during the agreed pickup window.',
     ],
     question: 'Can I ask about selling a Coon Rapids car without keys?',
     answer:
@@ -336,7 +336,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Document what you know before an Anoka property changes hands',
     secondParagraphs: [
       'For a vehicle included in a family or business cleanout, start by collecting its identity and the paperwork already available. Note the title owner, year, make, model, and whether the keys are present. Explain your relationship to the owner without assuming that permission to enter the property also permits a sale. If ownership documents are incomplete, ask about the next step before arranging a removal deadline.',
-      'An Anoka address near Highway 10 can still lead to a car behind a garage, in a side yard, or at a separate storage property. Describe the exact position, ground surface, and any fence or locked entrance. Use current photos and disclose removed parts or missing wheels. We can then discuss acceptance, the offer, any removal charges, and a realistic pickup window while the required authority and documents are being established.',
+      'An Anoka address near Highway 10 can still lead to a car behind a garage, in a side yard, or at a separate storage property. Describe the exact position, ground surface, and any fence or locked entrance. Use current photos and disclose removed parts or missing wheels. We can then discuss acceptance, the offer, and a realistic pickup window while the required authority and documents are being established.',
     ],
     question: 'Can I arrange pickup of a car left on an Anoka property?',
     answer:
@@ -367,7 +367,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Describe collision damage before moving a Bloomington car',
     secondParagraphs: [
       'After a collision, a vehicle that starts may still have damaged suspension, a wheel turned out of position, or bodywork interfering with a tire. Explain these conditions and send current photos from a safe place. Do not drive it simply to make pickup easier or approach leaking fluids. Tell us where the keys are and whether a shop, property manager, or another business currently controls release of the vehicle.',
-      'For parking near I-494 or I-35W, identify the actual lot entrance, level, or reserved space rather than the nearest large building. Workplaces and managed garages may require a contact to meet the truck or permit loading during certain hours. Arrange that access in advance, then discuss title and lien status, the amount offered, payment, and any removal charges. Coordinate your belongings and documents before the agreed appointment.',
+      'For parking near I-494 or I-35W, identify the actual lot entrance, level, or reserved space rather than the nearest large building. Workplaces and managed garages may require a contact to meet the truck or permit loading during certain hours. Arrange that access in advance, then discuss title and lien status, the amount offered, payment. Coordinate your belongings and documents before the agreed appointment.',
     ],
     question: 'Can you collect a Bloomington car from my workplace?',
     answer:
@@ -398,7 +398,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Coordinate an Eagan sale when your schedule is limited',
     secondParagraphs: [
       'If work or travel makes it difficult to meet at the vehicle, describe your availability in the first conversation. Tell us who owns the car, who holds the keys, and whether someone else controls the parking area. We can discuss the required signatures and contact arrangements before a window is agreed. Leaving keys in the car or asking a coworker to meet the truck does not by itself complete those arrangements.',
-      'For a property reached from I-35E or Highway 77, provide the specific driveway, gate, or parking level. Explain any office hours that affect key collection or permission to enter. Send recent vehicle photos, known mechanical problems, and missing-component details so the offer reflects its present state. Confirm payment and any removal charges before accepting, then keep the agreed contact reachable while the operator locates the vehicle.',
+      'For a property reached from I-35E or Highway 77, provide the specific driveway, gate, or parking level. Explain any office hours that affect key collection or permission to enter. Send recent vehicle photos, known mechanical problems, and missing-component details so the offer reflects its present state. Confirm payment before accepting, then keep the agreed contact reachable while the operator locates the vehicle.',
     ],
     question: 'Do I have to be present for an Eagan pickup?',
     answer:
@@ -419,21 +419,21 @@ export const serviceAreas: ServiceArea[] = [
     paragraphs: [
       'Send the actual Woodbury pickup location rather than assuming a route or time based on the city name. A driveway pickup and a vehicle in a managed garage may need different arrangements. Location and access are reviewed along with the vehicle.',
       'For shared driveways and townhome parking, coordinate with the person who controls the loading area. Tell us if another vehicle needs to move or if access is limited to certain hours. Do not promise access that has not been arranged.',
-      'If you have a deadline for clearing the vehicle, mention it when you first call. Pickup timing is agreed after review, not guaranteed by an online page. Ask about any removal charges when discussing the offer so you can compare the complete terms.',
+      'If you have a deadline for clearing the vehicle, mention it when you first call. Same-day pickup is often available. Tow-away is free when we buy the car, so you can compare the complete terms.',
     ],
     details: [
       'Provide the exact location and driveway or garage setting.',
       'Arrange shared-property access in advance.',
-      'Discuss the full offer and any removal charges.',
+      'Discuss the full offer.',
     ],
     secondFocus: 'Evaluate the offer against the actual Woodbury pickup setting',
     secondParagraphs: [
       'Start with the year, make, model, present condition, and current photos, rather than a price listed for a different vehicle online. Tell us whether the engine and transmission are present and if the car rolls and steers. Major damage, missing wheels, or a locked garage affects the review. Ask us to explain what is included in the proposed purchase before you decide whether it meets your needs.',
-      'Woodbury locations near I-94 or I-494 still require specific entrance and parking instructions. For a townhome or managed property, coordinate any shared loading space and keep the responsible contact available during the agreed window. Title and lien status, payment arrangements, required documents, and any removal charge should be settled in the same discussion. If a deadline changes, contact us rather than assuming the original request has reserved a collection time.',
+      'Woodbury locations near I-94 or I-494 still require specific entrance and parking instructions. For a townhome or managed property, coordinate any shared loading space and keep the responsible contact available during the agreed window. Title and lien status, payment arrangements, required documents should be settled in the same discussion. If a deadline changes, contact us rather than assuming the original request has reserved a collection time.',
     ],
     question: 'Is pickup in Woodbury included automatically in an offer?',
     answer:
-      'We confirm removal terms directly for the specific vehicle and address. Ask whether any pickup charge applies and compare the amount you would actually receive before accepting.',
+      'We confirm removal terms directly for the specific vehicle and address. Tow-away is free when we buy your car. Compare the amount you would actually receive before accepting.',
     secondQuestion: 'Can a Woodbury townhome parking deadline be considered when scheduling?',
     secondAnswer:
       'Explain the deadline and the person who controls access when you first contact us. We review availability and loading conditions before confirming a window. Keep the property informed of the agreed appointment instead of treating a requested date as booked.',
@@ -443,24 +443,24 @@ export const serviceAreas: ServiceArea[] = [
     slug: 'burnsville',
     city: 'Burnsville',
     description:
-      'Compare repairing or selling your Burnsville car. Merritt’s reviews known faults, shop release or home access, a cash offer, and any agreed removal costs.',
+      'Compare repairing or selling your Burnsville car. Merritt’s reviews known faults, shop release or home access, a cash offer, and free tow-away when we buy.',
     intro:
       'Ready to sell an unwanted car in Burnsville? Merritt’s can review a non-running, damaged, or unused vehicle and explain its offer and removal options.',
     focus: 'When repair costs change the decision to keep a vehicle',
     paragraphs: [
       'An engine or transmission problem can lead you to compare repair, private sale, and recycling. For a Burnsville vehicle, send the known fault and what is still complete. A clear description is enough to start; do not spend money on repairs just to request a cash offer.',
       'Explain whether the car is at home or still at a shop. For a shop pickup, resolve its release requirements and confirm access to the keys. For a home pickup, mention a slope, blocked driveway, or garage before agreeing on a loading plan.',
-      'Compare the complete terms, including any pickup charges and documents needed, rather than the headline offer alone. You decide whether to proceed once those details are clear.',
+      'Compare the complete terms, including documents needed, rather than the headline offer alone. You decide whether to proceed once those details are clear.',
     ],
     details: [
       'Describe the known engine or transmission fault.',
       'Identify whether the vehicle is at a shop or at home.',
-      'Compare the net offer after any agreed removal costs.',
+      'Tow-away is free when Merritt’s buys the car.',
     ],
     secondFocus: 'Use the repair information you already have',
     secondParagraphs: [
       'A repair estimate can help explain the problem without becoming a requirement to buy more diagnostics. Share whether the engine starts, the transmission engages, and the vehicle can roll and steer, but only report what you already know safely. Tell us if a Burnsville shop has removed components or if parts are stored separately. Current photos and a clear description make the initial offer discussion more useful than an assumption about the car’s age.',
-      'If the vehicle is near the I-35W and I-35E junction, give the exact address and final approach rather than only naming the interstate. A shop lot may have release hours; a home driveway may have a slope or other parked cars. Before scheduling, review title and lien status, keys, payment, and any removal charges. Keep the shop’s release arrangements separate from accepting our offer so both sides know what needs to happen.',
+      'If the vehicle is near the I-35W and I-35E junction, give the exact address and final approach rather than only naming the interstate. A shop lot may have release hours; a home driveway may have a slope or other parked cars. Before scheduling, review title and lien status, keys, payment. Keep the shop’s release arrangements separate from accepting our offer so both sides know what needs to happen.',
     ],
     question: 'Should I repair my Burnsville car before asking for an offer?',
     answer:
@@ -491,7 +491,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Plan a Roseville transaction when the owner lives elsewhere',
     secondParagraphs: [
       'If you are helping a family member with a car stored in Roseville, explain who owns it, who has the title, and who can complete the sale. A neighbor or manager may help identify the space without having authority to transfer the vehicle. Discuss the paperwork and any presence requirements first. Avoid promising removal as part of a move or cleanout until ownership and pickup arrangements are confirmed.',
-      'For a lot reached from Highway 36 or I-35W, include the actual entrance, building, and parking-space location. Current photos should show both the car’s condition and the loading approach. Disclose missing parts, flat tires, and locked steering rather than trying to move it between spaces. Confirm the payment amount, any removal charge, keys, and contact arrangements before the appointment, and keep personal belongings out of the agreed vehicle sale.',
+      'For a lot reached from Highway 36 or I-35W, include the actual entrance, building, and parking-space location. Current photos should show both the car’s condition and the loading approach. Disclose missing parts, flat tires, and locked steering rather than trying to move it between spaces. Confirm the payment amount, keys, and contact arrangements before the appointment, and keep personal belongings out of the agreed vehicle sale.',
     ],
     question: 'Can a property manager sell a car in a Roseville parking lot?',
     answer:
@@ -522,7 +522,7 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Show what remains of an unfinished project vehicle',
     secondParagraphs: [
       'If an Eden Prairie project has stopped making progress, list the major components still installed and any parts kept separately. Explain whether the engine and transmission are present, whether all wheels are fitted, and if the steering can turn. Loose panels and parts should be identified before an offer, rather than assumed to be included. Do not reassemble or lift the vehicle simply to take photos for the initial review.',
-      'An address near Highway 212 or I-494 does not show the route out of a crowded garage. Send the doorway, available turning space, and car position, including anything blocking access. Tell us whose name is on the title and whether keys or liens need discussion. Once acceptance is confirmed, agree on the included vehicle and parts, payment, any removal charges, and pickup preparations so the appointment reflects the vehicle’s actual condition.',
+      'An address near Highway 212 or I-494 does not show the route out of a crowded garage. Send the doorway, available turning space, and car position, including anything blocking access. Tell us whose name is on the title and whether keys or liens need discussion. Once acceptance is confirmed, agree on the included vehicle and parts, payment, and pickup preparations so the appointment reflects the vehicle’s actual condition.',
     ],
     question: 'Can you review a partly dismantled car in Eden Prairie?',
     answer:
@@ -543,7 +543,7 @@ export const serviceAreas: ServiceArea[] = [
     paragraphs: [
       'For a Buffalo vehicle, send the actual address and explain whether it is reached from a paved driveway, gravel approach, or another setting. Do not assume that a city name alone is enough to confirm a route or equipment.',
       'A vehicle stored behind a building or on soft ground may need a different plan from one on pavement. Mention gates, slopes, long driveways, and any seasonal access problem. Do not move the car into a difficult position while waiting for a response.',
-      'Distance and access are part of the offer and pickup discussion. Confirm whether the location can be served, any removal charges, and the appointment window before committing to a sale. A call does not commit you to accepting the terms.',
+      'Distance and access are part of the offer and pickup discussion. Confirm whether the location can be served, and the appointment window before committing to a sale. A call does not commit you to accepting the terms.',
     ],
     details: [
       'Provide the full pickup location and approach.',
@@ -553,11 +553,11 @@ export const serviceAreas: ServiceArea[] = [
     secondFocus: 'Confirm the Buffalo address and current access before making plans',
     secondParagraphs: [
       'Highway 55 may identify the general route to Buffalo, but it cannot describe the final stretch to a vehicle behind a house or outbuilding. Tell us the actual parking surface, available turning room, and whether a gate or another vehicle blocks the path. Use a current photo of the approach, especially if snow, mud, or stored equipment changes the access from what an older image would show.',
-      'Include the car’s year, make, model, known faults, and completeness alongside the location. State title and lien status, keys, and whether another person must authorize the sale or property access. You can begin without paying to move the car closer to the metro. We will discuss whether the address and vehicle can be accommodated, the offer, any removal charges, payment, and an agreed window before you commit to a separate tow or sale.',
+      'Include the car’s year, make, model, known faults, and completeness alongside the location. State title and lien status, keys, and whether another person must authorize the sale or property access. You can begin without paying to move the car closer to the metro. We will discuss whether the address and vehicle can be accommodated, the offer, payment, and an agreed window before you commit to a separate tow or sale.',
     ],
     question: 'Is pickup always available for a Buffalo address?',
     answer:
-      'We review the exact address, vehicle, access, and schedule before confirming. Call or text those details to discuss availability and any removal charges.',
+      'We review the exact address, vehicle, access, and schedule before confirming. Call or text those details to discuss availability.',
     secondQuestion: 'Should I tow my Buffalo car toward the metro before requesting an offer?',
     secondAnswer:
       'Contact us from its current location first. Provide the address, vehicle condition, ownership details, and approach. We review availability and removal terms before you spend money on a separate tow or make plans to deliver it.',

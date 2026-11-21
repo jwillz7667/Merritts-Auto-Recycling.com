@@ -23,9 +23,9 @@ export const business = {
 } as const;
 
 export const homeSeo = {
-  title: "Cash for Junk Cars in the Twin Cities | Merritt's",
+  title: "Cash for Junk Cars Twin Cities | Same-Day Pickup | Merritt's",
   heading: 'Cash for junk cars across the Twin Cities',
-  description: "Sell an unwanted car in Minneapolis, St. Paul or the suburbs. Call or text Merritt's for a cash offer and pickup options. Open daily, 8 AM–8 PM.",
+  description: "We buy junk cars in Minneapolis, St. Paul & suburbs, running or not, with or without a title. Cash on the spot, free tow-away, same-day pickup.",
 };
 
 export const primaryNavigation = [
@@ -40,11 +40,11 @@ export const primaryNavigation = [
 export type Faq = { question: string; answer: string };
 export const globalFaqs: Faq[] = [
   { question: 'What should I send for a cash offer?', answer: 'Send the year, make, model, condition, pickup city, and whether you have the title and keys. Current photos help show damage, missing parts, and the approach to the vehicle. Call or text if you are unsure about a detail.' },
-  { question: 'How much will you pay for my junk car?', answer: 'The offer depends on the vehicle, its completeness and condition, the pickup location and access, and current demand. Merritt’s explains the offer and any removal charges directly so you can compare the full terms before accepting.' },
+  { question: 'How much will you pay for my junk car?', answer: 'The offer depends on the vehicle, its completeness and condition, and current demand. Call or text the details and we give you a cash offer. When you accept, we pay cash on the spot at pickup and tow the car away free.' },
   { question: 'Do you consider cars that do not run?', answer: 'Yes. Tell us what is wrong, whether all wheels are present, and whether the vehicle rolls and steers. We review non-running and damaged vehicles individually and discuss a suitable pickup plan.' },
-  { question: 'Do you offer emergency roadside towing?', answer: 'Our vehicle removal is for cars Merritt’s agrees to buy or recycle. For a breakdown, roadside repair, impound release, or transport to a repair shop, contact an appropriate towing or roadside-assistance provider.' },
-  { question: 'Can I sell a car without a title or keys?', answer: 'Tell us about missing documents or keys before scheduling. Ownership documents and loading access are separate questions. We explain what is needed for your situation; missing-title acceptance is not automatic. Use Minnesota Driver and Vehicle Services for official title guidance.' },
-  { question: 'Is pickup free, and how soon can it happen?', answer: 'Ask about removal costs when we discuss the offer. We confirm any charges and a pickup window for the actual vehicle, location, access, and schedule before you agree. Same-day availability and free pickup are not guaranteed for every job.' },
+  { question: 'Do you tow cars you are not buying?', answer: 'Yes. When you sell us your car, the tow-away is free. If you only need a vehicle towed and are not selling it, towing-only jobs are charged. Call for the price before we schedule it.' },
+  { question: 'Can I sell a car without a title or keys?', answer: 'Yes, in many cases. We buy cars with or without a title, and missing keys are fine. Tell us what paperwork you have when you call. Minnesota law sets the documents required for each situation, and we walk you through them. Minnesota Driver and Vehicle Services has official title guidance.' },
+  { question: 'Is pickup free, and how soon can it happen?', answer: 'Yes. When you sell us your car, the tow-away is free and we pay cash on the spot. Same-day pickup is often available; call early in the day for the best chance. Towing-only jobs, when you are not selling the vehicle, are charged.' },
   { question: 'Which Twin Cities areas do you serve?', answer: 'Merritt’s is based in Brooklyn Center and serves Minneapolis, St. Paul, and surrounding Twin Cities communities. Our service-area directory covers the north, south, east, and west metro. Send the exact pickup location so we can confirm availability, access, and terms for your vehicle.' },
   { question: 'When can I call?', answer: `Merritt’s is available by phone ${business.hoursDisplay.toLowerCase()}. You can also text the vehicle details to ${business.textPhone}.` },
 ];
@@ -69,14 +69,14 @@ export const services: Service[] = [
     slug: 'cash-for-junk-cars', name: 'Cash for junk cars', eyebrow: 'Your unwanted vehicle. A clear next step.',
     seoTitle: "Sell Your Junk Car in the Twin Cities | Merritt's",
     title: 'Sell your junk car in Minneapolis, St. Paul and the suburbs',
-    description: "Selling a junk car in the Twin Cities? Send Merritt's the vehicle details to discuss a cash offer, documents, and pickup. Call or text, daily 8 AM–8 PM.",
+    description: "Sell your junk car in the Twin Cities for cash on the spot. Running or not, with or without a title. Free tow-away and same-day pickup. Call 763-533-2775.",
     summary: 'Have a car you no longer drive, a truck with a costly repair, or an SUV taking up space? Talk directly with Merritt’s about selling it in its current condition and arranging pickup.',
     image: '/images/legacy/merritts-tow-truck.jpg', imageAlt: "A Merritt's Auto Recycling truck carrying a vehicle",
-    highlights: ['Cars, trucks, vans and SUVs', 'Running and non-running vehicles considered', 'Offer and pickup terms explained together'],
+    highlights: ['Cash on the spot at pickup', 'Free tow-away when we buy', 'Running or not, with or without a title'],
     sections: [
       { heading: 'A cash offer based on your actual vehicle', paragraphs: ['The year, make, model, condition, and completeness help us evaluate the vehicle. Tell us about collision damage, major mechanical problems, flat tires, removed components, or missing keys. A current photo can make those details easier to explain.', 'The pickup setting matters too. Include the city and whether the car is in a driveway, garage, ramp, repair-shop lot, or another location. We consider those details before confirming the offer.'] },
       { heading: 'What to send by phone or text', paragraphs: ['Start with the basics. You do not need to pay for repairs or new diagnostics just to ask about selling the car.'], items: ['Year, make, model, and known condition', 'Pickup city and parking setting', 'Whether it starts, rolls, and steers', 'Major damage or missing components', 'Title, lien, and key status'] },
-      { heading: 'Know what you would actually receive', paragraphs: ['Compare the full agreement, not just a headline number. Ask whether removal has a charge, what conditions could change the offer, how payment will be handled, and which documents are needed.', 'Once you accept the terms, we coordinate access and a pickup window. Remove personal belongings and have the agreed documents ready. You choose whether to proceed after the details are clear.'] },
+      { heading: 'Know what you would actually receive', paragraphs: ['Compare the full agreement, not just a headline number. When we buy your car, the tow-away is free. Ask what conditions could change the offer, how payment will be handled, and which documents are needed.', 'Once you accept the terms, we coordinate access and a pickup window. Remove personal belongings and have the agreed documents ready. You choose whether to proceed after the details are clear.'] },
     ],
     faqs: [globalFaqs[1]!, globalFaqs[2]!, globalFaqs[4]!, globalFaqs[5]!],
   },
@@ -84,14 +84,14 @@ export const services: Service[] = [
     slug: 'junk-car-removal', name: 'Junk car removal', eyebrow: 'Clear the space. Plan the pickup.',
     seoTitle: "Junk Car Removal Across the Twin Cities | Merritt's",
     title: 'Junk car removal across the Twin Cities metro',
-    description: "Arrange junk car removal in Minneapolis, St. Paul and nearby suburbs with Merritt's. Discuss a non-running vehicle, access, pickup terms, and scheduling.",
+    description: "Free junk car removal when you sell to Merritt's. Same-day pickup in Minneapolis, St. Paul & suburbs, running or not. We pay cash on the spot.",
     summary: 'A disabled car does not need to become your towing project. Tell us where it is and what condition it is in. For vehicles we agree to buy or recycle, we work through the loading details with you.',
     image: '/images/legacy/junk-car-removal.jpg', imageAlt: 'A car secured on a flatbed tow truck',
-    highlights: ['Driveway, garage and lot pickups reviewed', 'Non-running vehicles considered', 'A pickup window agreed directly'],
+    highlights: ['Free tow-away when we buy your car', 'Same-day pickup often available', 'Non-running vehicles welcome'],
     sections: [
       { heading: 'Describe the pickup setting', paragraphs: ['Explain how the truck reaches the vehicle. Include gates, ramps, low clearances, tight turns, snow, soft ground, slopes, and blocked access. Say whether all wheels are present and whether the car rolls and steers.', 'At a repair shop, apartment, or business, coordinate authorization with whoever controls the property. Do not assume an address alone provides access to a shared garage or locked lot.'] },
       { heading: 'Prepare before the truck arrives', paragraphs: ['Once the pickup window is agreed, use this checklist.'], items: ['Remove belongings, documents, remotes, and toll tags', 'Arrange the agreed ownership paperwork and keys', 'Make sure any gate or property access is coordinated', 'Keep people and pets away from the loading area', 'Leave unsafe vehicle movement to the agreed pickup plan'] },
-      { heading: 'Pickup costs and timing', paragraphs: ['We discuss removal terms with the offer, including any charge. The vehicle, location, loading conditions, and available schedule determine the pickup plan.', 'Mention a deadline during the first conversation. Do not promise a property manager that a car will be removed at a particular time until that window has been confirmed with us.'] },
+      { heading: 'Pickup costs and timing', paragraphs: ['When we buy your car, removal is free. Same-day pickup is often available. The location, loading conditions, and schedule determine the exact window. Towing-only jobs, when you are not selling, are charged.', 'Mention a deadline during the first conversation. Do not promise a property manager that a car will be removed at a particular time until that window has been confirmed with us.'] },
     ],
     faqs: [globalFaqs[2]!, globalFaqs[5]!, globalFaqs[6]!, globalFaqs[3]!],
   },
@@ -114,14 +114,14 @@ export const services: Service[] = [
     slug: 'junk-car-towing', name: 'Junk vehicle towing', eyebrow: 'Pickup for vehicles we buy',
     seoTitle: "Junk Car Towing and Pickup | Twin Cities | Merritt's",
     title: 'Junk car towing for vehicles we agree to buy',
-    description: "Need a junk vehicle picked up in the Twin Cities? Merritt's coordinates towing for cars it agrees to acquire. Call to discuss condition, access, and terms.",
-    summary: 'When Merritt’s agrees to acquire your vehicle, towing is part of the pickup discussion. You do not need to arrange a separate tow just to ask about an offer.',
+    description: "Free junk car towing when you sell your car to Merritt's, plus paid towing-only service. Same-day pickup across the Twin Cities. Call 763-533-2775.",
+    summary: 'When you sell your vehicle to Merritt’s, the tow-away is free and we pay cash on the spot. Need a tow without selling? Towing-only jobs are available for a charge.',
     image: '/images/legacy/junk-car-removal.jpg', imageAlt: 'A vehicle being transported on a flatbed tow truck',
-    highlights: ['Pickup coordinated with the sale', 'Loading access reviewed first', 'Removal terms confirmed before dispatch'],
+    highlights: ['Free tow-away with a sale', 'Same-day pickup often available', 'Towing-only jobs quoted up front'],
     sections: [
-      { heading: 'How towing fits the sale', paragraphs: ['First we review the vehicle and its location. Then we discuss the offer, any removal charges, ownership documents, and the loading arrangement. A pickup window follows once the terms and access are clear.'] },
+      { heading: 'How towing fits the sale', paragraphs: ['First we review the vehicle and its location. Then we discuss the offer, ownership documents, and the loading arrangement. A pickup window follows once the terms and access are clear.'] },
       { heading: 'Details the driver needs', paragraphs: ['Describe the surface, slope, clearance, wheel and tire condition, and whether the car rolls and steers. Tell us about locked garages, gates, removed parts, and another vehicle blocking access.', 'For a car at a shop or managed property, arrange release and access with the appropriate person before scheduling. Do not attempt improvised towing to move the car into a different position.'] },
-      { heading: 'Need roadside help instead?', paragraphs: ['Our removal service is connected to vehicles we buy or recycle. It is not emergency roadside dispatch, mechanical repair, impound release, or transport between repair shops. Contact an appropriate roadside-assistance provider for those situations.'] },
+      { heading: 'Need a tow without selling?', paragraphs: ['If you are keeping the vehicle and only need it towed, call us. Towing-only jobs are charged, and we tell you the price before we schedule it. The tow-away is free only when you sell us the vehicle.'] },
     ],
     faqs: [globalFaqs[2]!, globalFaqs[3]!, globalFaqs[5]!, globalFaqs[6]!],
   },

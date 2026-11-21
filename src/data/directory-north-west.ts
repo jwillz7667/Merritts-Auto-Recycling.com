@@ -24,7 +24,7 @@ export const northWestAreas: ServiceArea[] = [
         heading: 'Prepare a shared lot or driveway for an agreed pickup',
         paragraphs: [
           'At an apartment or workplace, confirm that the person managing the property permits access to the vehicle. Mention assigned spaces, a gate, or a lot that fills during business hours. Report flat tires or locked steering without trying to drag the car into a wider space. The loading arrangement should reflect its current position and condition.',
-          'Have the ownership documents and key status ready when you call. Ask what paperwork is needed for your situation and confirm the amount you would receive after any agreed removal charges. Once the terms and pickup window are settled, remove your belongings, arrange access, and keep a working contact number available for the appointment.',
+          'Have the ownership documents and key status ready when you call. Ask what paperwork is needed for your situation and confirm the amount you would receive. Once the terms and pickup window are settled, remove your belongings, arrange access, and keep a working contact number available for the appointment.',
         ],
       },
     ],
@@ -70,7 +70,7 @@ export const northWestAreas: ServiceArea[] = [
         heading: 'Coordinate ownership, keys, and the person meeting the driver',
         paragraphs: [
           'If a family member has been keeping the car at a Shoreview home, clarify whose name appears on the documents and who is authorized to sell it. Access to a garage is separate from authority to sell its contents. Explain an estate, business ownership, or missing paperwork early so the next steps can be discussed before scheduling.',
-          'Share a real deadline if you are moving or need the garage space for another vehicle. Timing depends on the car, access, and an agreed appointment. Confirm the offer and any removal costs together, then arrange the required signatures and key handoff. Remove personal items from the trunk, console, and garage path before the confirmed pickup.',
+          'Share a real deadline if you are moving or need the garage space for another vehicle. Timing depends on the car, access, and an agreed appointment. Confirm the offer (tow-away is free when we buy), then arrange the required signatures and key handoff. Remove personal items from the trunk, console, and garage path before the confirmed pickup.',
         ],
       },
     ],
@@ -116,7 +116,7 @@ export const northWestAreas: ServiceArea[] = [
         heading: 'Review a stored truck or second vehicle as it stands',
         paragraphs: [
           'A truck left unused may have a loaded bed, a missing battery, or tires that no longer hold air. Tell us about its body style, major components, and any known mechanical fault. Empty personal property from the cab and bed when safe. Materials stored in a vehicle are not automatically included in a purchase or removal arrangement.',
-          'Lino Lakes is served by more than one major highway corridor, so provide the actual pickup location rather than only an exit or general area. Discuss any time restriction, locked gate, ownership question, or missing key before accepting terms. Confirm the offer, any removal charges, and the appointment together so the property and vehicle are ready.',
+          'Lino Lakes is served by more than one major highway corridor, so provide the actual pickup location rather than only an exit or general area. Discuss any time restriction, locked gate, ownership question, or missing key before accepting terms. Confirm the offer, and the appointment together so the property and vehicle are ready.',
         ],
       },
     ],
@@ -162,7 +162,7 @@ export const northWestAreas: ServiceArea[] = [
         heading: 'Compare the full sale terms after a repair estimate',
         paragraphs: [
           'If an estimate at a Golden Valley repair shop changed your plans, share the diagnosis and explain whether the shop has removed any components. A description of the car as it currently sits is more useful than its condition when it arrived. Ask who holds the keys and what release arrangements the shop requires before proposing a pickup date.',
-          'Discuss ownership paperwork, any lien, and the amount you would receive after agreed removal costs. A phone or text inquiry does not release a vehicle from a shop or settle a separate balance. Once a purchase is agreed, coordinate the release contact, business access hours, and required documents so the driver can collect the correct vehicle.',
+          'Discuss ownership paperwork, any lien, and the amount you would receive. A phone or text inquiry does not release a vehicle from a shop or settle a separate balance. Once a purchase is agreed, coordinate the release contact, business access hours, and required documents so the driver can collect the correct vehicle.',
         ],
       },
     ],
@@ -208,7 +208,7 @@ export const northWestAreas: ServiceArea[] = [
         heading: 'Sell a disabled commuter car with clear condition information',
         paragraphs: [
           'A car used for daily travel along Highway 100 or Highway 7 may become uneconomical to repair even when most of it remains intact. Describe the year, make, model, known fault, and any collision damage. Tell us whether it still has its engine, transmission, wheels, and keys. You can begin the conversation without making the vehicle roadworthy.',
-          'Before agreeing to sell, discuss the title, owner’s name, and any unresolved lien. Confirm whether removal has a charge and what amount you would actually receive. If a lease ending or parking notice creates a deadline, mention it at the start. A pickup window must be confirmed directly; an online inquiry alone does not reserve one.',
+          'Before agreeing to sell, discuss the title, owner’s name, and any unresolved lien. Tow-away is free when we buy your car. Confirm what amount you would actually receive. If a lease ending or parking notice creates a deadline, mention it at the start. A pickup window must be confirmed directly; an online inquiry alone does not reserve one.',
         ],
       },
     ],
@@ -392,7 +392,7 @@ export const northWestAreas: ServiceArea[] = [
         heading: 'Plan a sale when a household has an extra car',
         paragraphs: [
           'A second vehicle that rarely moves may still have belongings in the trunk or paperwork kept by another household member. Check the owner’s name and locate the keys before arranging a sale. Explain if the car belongs to an estate, business, or person who will be away. Those details affect who can authorize the transaction and provide the agreed documents.',
-          'If you are coordinating a move, garage project, or property handover, share the requested deadline at the start. Ask about the complete offer and any removal costs rather than relying on an assumed pickup promise. After the appointment is confirmed, arrange the required signatures, keep the approach available, and tell us promptly if parking or access conditions change.',
+          'If you are coordinating a move, garage project, or property handover, share the requested deadline at the start. Ask about the complete offer; same-day pickup is often available. After the appointment is confirmed, arrange the required signatures, keep the approach available, and tell us promptly if parking or access conditions change.',
         ],
       },
     ],
@@ -484,7 +484,7 @@ export const northWestAreas: ServiceArea[] = [
         heading: 'Review the cost of keeping a vehicle against selling it',
         paragraphs: [
           'A failed transmission or engine can make another repair difficult to justify. Share any existing diagnosis, recent damage, and parts already removed rather than paying for new work just to request an offer. Include the year, make, model, and pickup address; a location somewhere along Highway 5 or US 212 is not enough to plan the actual collection.',
-          'Before deciding, discuss ownership documents, keys, and any lien or shop release requirement. Confirm the amount you would receive and whether removal has a charge. If your car is still at a repair facility, coordinate its access hours and release contact. Once a pickup is confirmed, remove belongings and keep the agreed garage or lot entrance accessible.',
+          'Before deciding, discuss ownership documents, keys, and any lien or shop release requirement. Confirm the amount you would receive. Tow-away is free when we buy the car. If your car is still at a repair facility, coordinate its access hours and release contact. Once a pickup is confirmed, remove belongings and keep the agreed garage or lot entrance accessible.',
         ],
       },
     ],
@@ -530,7 +530,7 @@ export const northWestAreas: ServiceArea[] = [
         heading: 'Get the release and transaction ready before removal',
         paragraphs: [
           'For a repair-shop vehicle, ask who can release it and when keys and access are available. A shop may have a separate balance or storage arrangement that you need to address directly. Tell us about any deadline during the first conversation, then coordinate a confirmed window rather than asking the shop to expect an unarranged collection.',
-          'For a car at home, check the ownership paperwork and who will complete the sale. Discuss a lien, missing document, or owner who is away before settling a date. Confirm the offer and any agreed removal charge together, then prepare the required documents and remove belongings. Keep a contact available if the driver needs help finding the correct Chaska entrance.',
+          'For a car at home, check the ownership paperwork and who will complete the sale. Discuss a lien, missing document, or owner who is away before settling a date. Confirm the offer together, then prepare the required documents and remove belongings. Keep a contact available if the driver needs help finding the correct Chaska entrance.',
         ],
       },
     ],
@@ -576,7 +576,7 @@ export const northWestAreas: ServiceArea[] = [
         heading: 'Prepare a vehicle that has become part of household storage',
         paragraphs: [
           'An older vehicle can become a place to keep tools, seasonal equipment, or boxes after it stops being used. Tell us what is inside and remove personal property when safe before the agreed pickup. Do not assume unrelated items are included in the purchase. Check the glove compartment, console, trunk, and other storage spaces for documents or belongings you want to retain.',
-          'Locate the ownership paperwork and keys, and mention anything missing in the first conversation. If another person owns the car, clarify who can authorize the sale. Review the offer, any removal costs, and your requested timing together. Once a window is confirmed, arrange access and required signatures, and let us know if conditions change before the appointment.',
+          'Locate the ownership paperwork and keys, and mention anything missing in the first conversation. If another person owns the car, clarify who can authorize the sale. Review the offer and your requested timing together. Once a window is confirmed, arrange access and required signatures, and let us know if conditions change before the appointment.',
         ],
       },
     ],
@@ -629,7 +629,7 @@ export const northWestAreas: ServiceArea[] = [
     details: [
       'Share the present location before paying for a separate tow.',
       'Describe vehicle completeness, cargo, and wheel or brake issues.',
-      'Confirm scheduling, any removal charge, and ownership requirements together.',
+      'Confirm scheduling, and ownership requirements together.',
     ],
     faqs: [
       {
